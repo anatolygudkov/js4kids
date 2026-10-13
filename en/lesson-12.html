@@ -37,6 +37,11 @@
     </table>
   </div>
 
+  <figure class="illus">
+    <img src="../assets/illustrations/l12-crash.svg" alt="A robot has crashed into a brick wall with stars around its head; next to it is a crossed-out stopwatch clearInterval(timer)">
+    <figcaption>Crashed into the wall? We call <code>endGame()</code>: <code>clearInterval(timer)</code> stops the timer and the snake freezes.</figcaption>
+  </figure>
+
   <h2>Stopping the timer</h2>
   <p>The snake is moved by the <code>setInterval</code> timer. To stop the game, the timer has to be switched off. For that we need to remember it in a variable. Change the last line of the program:</p>
   <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);

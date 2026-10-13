@@ -37,6 +37,11 @@
     </table>
   </div>
 
+  <figure class="illus">
+    <img src="../assets/illustrations/l12-crash.svg" alt="Робот врезался в кирпичную стену, вокруг головы звёздочки; рядом перечёркнутый секундомер clearInterval(timer)">
+    <figcaption>Врезались в стену — вызываем <code>endGame()</code>: <code>clearInterval(timer)</code> останавливает таймер, и змейка замирает.</figcaption>
+  </figure>
+
   <h2>Остановить таймер</h2>
   <p>Змейку двигает таймер <code>setInterval</code>. Чтобы игра остановилась, таймер надо выключить. Для этого его нужно запомнить в переменной. Измени последнюю строчку программы:</p>
   <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);

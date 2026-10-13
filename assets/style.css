@@ -398,3 +398,14 @@ figcaption { font-size: 0.85em; color: var(--muted); margin-top: 6px; }
   .top, .pager { display: none; }
   body { background: #fff; color: #000; }
 }
+
+/* ---------- Иллюстрации с роботами ---------- */
+figure.illus img {
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}

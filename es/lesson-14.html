@@ -35,6 +35,11 @@
     </table>
   </div>
 
+  <figure class="illus">
+    <img src="../assets/illustrations/l14-speed-record.svg" alt="Un cronómetro con la escala 200, 150, 100, 60; un robot apunta el récord snakeBest 25 en la libreta localStorage, con una copa al lado">
+    <figcaption>La pausa entre pasos se acorta: <code>speed = speed - 10</code>. Y el récord se apunta en la libreta del navegador, <code>localStorage</code>, donde no se pierde.</figcaption>
+  </figure>
+
   <h2>1. La velocidad aumenta</h2>
   <p>Ahora el temporizador salta siempre cada 200 milisegundos. Vamos a guardar ese número en una variable llamada <code>speed</code> («velocidad» en inglés). En realidad es la <b>pausa entre pasos</b>: cuanto más pequeño es el número, más rápida va la serpiente.</p>
   <p>Añade la variable arriba, con las demás:</p>
@@ -101,6 +106,11 @@ localStorage.getItem("snakeBest");             // leer</pre>
     <span class="title">💡 Cómo borrar el récord</span>
     En la consola escribe <code>localStorage.removeItem("snakeBest")</code> y recarga la página.
   </div>
+
+  <figure class="illus">
+    <img src="../assets/illustrations/l14-bug-hunt.svg" alt="Un robot atrapa un bicho con una red sobre las teclas ↑ y ←; un cartel dice nextDx, nextDy">
+    <figcaption>A la caza del bug: dos teclas rápidas, <kbd>↑</kbd> <kbd>←</kbd>, daban media vuelta a la serpiente. La red <code>nextDx</code>, <code>nextDy</code> atrapa al bicho.</figcaption>
+  </figure>
 
   <h2>3. A la caza del bug</h2>
   <p>Un <b>bug</b> («bicho» en inglés) es como se llama a un error en un programa. Haz un experimento: deja que la serpiente vaya a la derecha. Ahora, <b>muy rápido</b>, casi a la vez, pulsa <kbd>↑</kbd> y enseguida <kbd>←</kbd>. ¡A veces la serpiente pierde sin motivo! ¿Por qué?</p>

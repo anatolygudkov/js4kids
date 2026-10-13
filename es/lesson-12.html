@@ -37,6 +37,11 @@
     </table>
   </div>
 
+  <figure class="illus">
+    <img src="../assets/illustrations/l12-crash.svg" alt="Un robot ha chocado contra una pared de ladrillos y tiene estrellas alrededor de la cabeza; al lado hay un cronómetro tachado clearInterval(timer)">
+    <figcaption>¿Choque contra la pared? Llamamos a <code>endGame()</code>: <code>clearInterval(timer)</code> para el temporizador y la serpiente se queda quieta.</figcaption>
+  </figure>
+
   <h2>Parar el temporizador</h2>
   <p>A la serpiente la mueve el temporizador <code>setInterval</code>. Para que el juego se pare hay que apagarlo, y para eso tenemos que guardarlo en una variable. Cambia la última línea del programa:</p>
   <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);

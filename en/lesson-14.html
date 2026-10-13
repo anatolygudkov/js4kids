@@ -35,6 +35,11 @@
     </table>
   </div>
 
+  <figure class="illus">
+    <img src="../assets/illustrations/l14-speed-record.svg" alt="A stopwatch with a scale 200, 150, 100, 60; a robot writes the high score snakeBest 25 in a localStorage notebook, with a trophy beside it">
+    <figcaption>The pause between steps gets shorter: <code>speed = speed - 10</code>. And the high score goes into the browser's notebook, <code>localStorage</code>, where it stays.</figcaption>
+  </figure>
+
   <h2>1. The speed goes up</h2>
   <p>Right now the timer always fires every 200 milliseconds. Let's put that number in a variable called <code>speed</code>. Really it's the <b>pause between steps</b>: the smaller the number, the faster the snake.</p>
   <p>Add the variable at the top, with the others:</p>
@@ -101,6 +106,11 @@ localStorage.getItem("snakeBest");             // read</pre>
     <span class="title">💡 How to reset the high score</span>
     In the console type <code>localStorage.removeItem("snakeBest")</code> and refresh the page.
   </div>
+
+  <figure class="illus">
+    <img src="../assets/illustrations/l14-bug-hunt.svg" alt="A robot catches a bug with a net above the ↑ and ← keys; a sign reads nextDx, nextDy">
+    <figcaption>Bug hunt: two quick keys, <kbd>↑</kbd> <kbd>←</kbd>, used to turn the snake around. The <code>nextDx</code>, <code>nextDy</code> net catches the bug.</figcaption>
+  </figure>
 
   <h2>3. Bug hunt</h2>
   <p>Programmers call a mistake in a program a <b>bug</b>. Try this experiment: let the snake crawl right. Now <b>very quickly</b>, almost at the same moment, press <kbd>↑</kbd> and then <kbd>←</kbd>. Sometimes the snake dies out of nowhere! Why?</p>
