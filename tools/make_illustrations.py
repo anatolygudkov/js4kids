@@ -833,7 +833,65 @@ def publish():
     return scene(w, h, ("#1b2a5c", "#4b3b8f"), "".join(body))
 
 
+def hero():
+    w, h = 960, 400
+    floor = 372
+    body = [f'<rect x="3" y="{floor - 6}" width="{w - 6}" height="{h - floor + 3}" fill="#e0a23b" opacity="0.35"/>']
+    # big retro monitor with the game
+    mx, my, mw, mh = 330, 34, 320, 236
+    body.append(f'<rect x="{mx + mw / 2 - 40}" y="{my + mh - 4}" width="80" height="40" fill="url(#m-steel)" stroke="{INK}" stroke-width="2"/>'
+                f'<rect x="{mx + mw / 2 - 90}" y="{my + mh + 30}" width="180" height="14" rx="6" fill="url(#m-steel)" stroke="{INK}" stroke-width="2"/>'
+                f'<rect x="{mx}" y="{my}" width="{mw}" height="{mh}" rx="22" fill="url(#m-steel)" stroke="{INK}" stroke-width="3"/>'
+                f'<rect x="{mx + 20}" y="{my + 18}" width="{mw - 40}" height="{mh - 52}" rx="10" fill="#0b0f0b" stroke="{INK}" stroke-width="2.5"/>')
+    c = 20
+    gx, gy = mx + 30, my + 26
+    path = [(9, 3), (8, 3), (7, 3), (6, 3), (6, 4), (6, 5), (5, 5), (4, 5), (3, 5), (3, 4)]
+    for i, (cx, cy) in enumerate(path):
+        col = "#ffd43b" if i == 0 else "#32cd32"
+        body.append(f'<rect x="{gx + cx * c + 1}" y="{gy + cy * c + 1}" width="{c - 2}" height="{c - 2}" fill="{col}"/>')
+    body.append(f'<circle cx="{gx + 12 * c + c / 2}" cy="{gy + 3 * c + c / 2}" r="{c / 2 - 1}" fill="#ef3b3b"/>')
+    for k, col in enumerate(("#ff5d5d", "#ffd43b", "#5ce07a")):
+        body.append(f'<circle cx="{mx + mw - 40 + k * 0}" cy="{my + mh - 18}" r="0" fill="{col}"/>')
+    body.append(f'<circle cx="{mx + mw - 34}" cy="{my + mh - 17}" r="6" fill="#5ce07a" stroke="{INK}" stroke-width="1.5"/>'
+                f'<rect x="{mx + 24}" y="{my + mh - 24}" width="90" height="12" rx="4" fill="#4a5468" stroke="{INK}" stroke-width="1.5"/>')
+    # ladder against the monitor, a robot climbs with a code card
+    body.append(f'<path d="M232,{floor} L290,60 M282,{floor} L340,60" stroke="#9c5a10" stroke-width="10" stroke-linecap="round"/>'
+                f'<path d="M232,{floor} L290,60 M282,{floor} L340,60" stroke="#f0a92e" stroke-width="5" stroke-linecap="round"/>')
+    for k in range(1, 9):
+        t = k / 9
+        x1, y1 = 232 + 58 * t, floor - (floor - 60) * t
+        body.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x1 + 50:.1f}" y2="{y1:.1f}" stroke="#9c5a10" stroke-width="7" stroke-linecap="round"/>')
+    svg, world = robot(286, 238, 0.95, "steel", left=(-40, 30), right=(54, -18), look=1)
+    body.append(svg)
+    hx, hy = world.right
+    body.append(card(hx + 34, hy - 6, "step();", rot=-6, size=16))
+    # a robot typing on the left, behind its desk
+    svg, world = robot(112, floor - 10, 1.0, "purple", left=(-22, 2), right=(22, 2), look=1)
+    body.append(svg)
+    body.append(f'<rect x="30" y="{floor - 58}" width="170" height="16" rx="5" fill="url(#v-wood)" stroke="{INK}" stroke-width="2"/>'
+                f'<rect x="44" y="{floor - 42}" width="12" height="40" fill="url(#m-wood)" stroke="{INK}" stroke-width="2"/>'
+                f'<rect x="174" y="{floor - 42}" width="12" height="40" fill="url(#m-wood)" stroke="{INK}" stroke-width="2"/>')
+    for k, ch in enumerate(("{", ";", "}")):
+        body.append(keycap(52 + k * 44, floor - 86, 38, 28, ch, size=18))
+    body.append(bubble(132, 70, 170, 74, "draw();", tail=(-14, 46)))
+    # robots building the snake on the floor, heading for the apple
+    size = 46
+    sx, sy = 690, floor - size - 4
+    svg, world = robot(800, floor - 30, 0.75, "orange", left=(-50, -20), right=(40, 40), look=1)
+    body.append(svg)
+    for k in range(3):
+        body.append(block(sx + k * (size + 2), sy, size, "green"))
+    body.append(block(sx + 3 * (size + 2), sy, size, "yellow"))
+    body.append(apple(918, floor - 30, r=20))
+    svg, world = robot(636, floor - 2, 0.8, "green", left=(-22, -74), right=(22, -74), look=1)
+    body.append(svg)
+    tx, ty = world((0, -86))
+    body.append(block(tx - 22, ty - 22, 44, "green"))
+    return scene(w, h, ("#fff7b8", "#ffcf45"), "".join(body))
+
+
 SCENES = {
+    "hero.svg": hero,
     "l00-setup.svg": setup,
     "l01-save-refresh.svg": save_refresh,
     "l02-console-bug.svg": console_bug,

@@ -403,7 +403,7 @@ figcaption { font-size: 0.85em; color: var(--muted); margin-top: 6px; }
 figure.illus img {
   display: block;
   width: 100%;
-  max-width: 680px;
+  max-width: 960px;
   height: auto;
   margin: 0 auto;
   border-radius: 16px;
