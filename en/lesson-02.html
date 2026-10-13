@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Console and Errors</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 2 of 16 <span class="time">⏱ 40 minutes</span></p>
+  <h1>The console and errors</h1>
+  <p class="lead">Every programmer has a secret window where the program writes messages — the <b>console</b>. It's also where the computer tells you about errors. Today we'll make friends with it and stop being afraid of red messages.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>open the browser console;</li>
+      <li>learn to print text and numbers to it with <code>console.log</code>;</li>
+      <li>turn the computer into a calculator;</li>
+      <li>break the program on purpose and learn to read errors.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Recap of lesson 1: open <code>test.html</code></td></tr>
+      <tr><td>10 min</td><td>The console and <code>console.log</code></td></tr>
+      <tr><td>10 min</td><td>Numbers and arithmetic</td></tr>
+      <tr><td>15 min</td><td>Break it and fix it: reading errors</td></tr>
+    </table>
+  </div>
+
+  <h2>Opening the console</h2>
+  <ol class="steps">
+    <li>Open your file <code>test.html</code> in Geany: <b>File → Open</b> (<kbd>Ctrl</kbd> + <kbd>O</kbd>) → the <b>code</b> folder. Even easier: <b>File → Recent Files</b>.</li>
+    <li>Open the same file in the browser, like in the last lesson.</li>
+    <li>In the browser press <kbd>F12</kbd>. A panel with developer tools appears on the right or at the bottom.</li>
+    <li>At the top of the panel choose the <b>Console</b> tab.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Shortcut</span>
+    In Firefox you can open the console directly with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>. Press <kbd>F12</kbd> again to close the panel.
+  </div>
+
+  <h2>Writing to the console</h2>
+  <p>The <code>alert</code> window gets in the way: nothing happens until you click OK. That's why programmers write messages to the console with the command <code>console.log</code> (<i>log</i> means "write in the logbook"). Replace the line with <code>alert</code> with these:</p>
+  <pre class="code" data-file="test.html" data-new="10-12">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;My first program&lt;/h1&gt;
+  &lt;script&gt;
+    console.log("Hello from the console!");
+    console.log("I can count:");
+    console.log(2 + 2);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>The new lines are marked in green. Save (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and refresh the page (<kbd>F5</kbd>). Nothing new appears on the page itself, but the console shows:</p>
+  <pre class="console">Hello from the console!
+I can count:
+4</pre>
+  <p>Look closely at <code>console.log</code>: there's a <b>dot</b> between <code>console</code> and <code>log</code>. It means "console, write this down!".</p>
+
+  <h2>The calculator computer</h2>
+  <p>Computers are great at maths. Here are the operation signs:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Sign</th><th>Operation</th><th>Example</th><th>Answer</th></tr>
+      <tr><td><code>+</code></td><td>add</td><td><code>7 + 5</code></td><td>12</td></tr>
+      <tr><td><code>-</code></td><td>subtract</td><td><code>7 - 5</code></td><td>2</td></tr>
+      <tr><td><code>*</code></td><td>multiply (asterisk!)</td><td><code>7 * 5</code></td><td>35</td></tr>
+      <tr><td><code>/</code></td><td>divide (slash)</td><td><code>10 / 4</code></td><td>2.5</td></tr>
+    </table>
+  </div>
+  <p>Decimal numbers in programming are written with a <b>dot</b>: <code>2.5</code>.</p>
+  <p>Try the difference between a <b>number</b> and <b>text</b>. Add this to the program:</p>
+  <pre class="code nonum">console.log(2 + 2);
+console.log("2 + 2");</pre>
+  <p>The first line prints <code>4</code>, the second prints <code>2 + 2</code>. The computer doesn't calculate anything in quotes — it just shows it as it is. Programmers call text in quotes a <b>string</b>.</p>
+
+  <div class="box tip">
+    <span class="title">💡 The console can count too</span>
+    Click at the very bottom of the console, where the cursor blinks after the <code>&gt;&gt;</code> sign, type <code>7 * 8</code> and press <kbd>Enter</kbd>. The answer appears straight away. It's a handy way to try out small bits of code.
+  </div>
+
+  <h2>Break it and fix it</h2>
+  <p><b>All</b> programmers make mistakes, even the most experienced ones, many times a day. The main thing is learning to find them. Let's make a mistake on purpose.</p>
+
+  <h3>Error 1: a typo in a command</h3>
+  <p>Remove the letter <code>e</code> from one of the commands, so you get <code>consol.log("Hello from the console!");</code>. Save and refresh the page. A red message appears in the console:</p>
+  <pre class="console"><span class="err">❌ Uncaught ReferenceError: consol is not defined        test.html:10:5</span>
+</pre>
+  <p>Let's translate:</p>
+  <ul>
+    <li><b>ReferenceError: consol is not defined</b> — "Error: I don't know what <code>consol</code> is."</li>
+    <li><b>test.html:10:5</b> — the error is in the file <code>test.html</code> on <b>line 10</b> (and 5 is the character number in that line). Look at the line numbers in Geany: the typo is right there on line ten!</li>
+  </ul>
+  <p>Fix the typo, save and refresh: the error is gone.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Notice</span>
+    After the error the program <b>stopped</b>: the lines below it didn't run either. That's why one tiny typo can "break" everything. Don't worry — fix it, and everything works again.
+  </div>
+
+  <h3>Error 2: a missing quote</h3>
+  <p>Delete the closing quote: <code>console.log("Hello from the console!);</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: "" string literal contains an unescaped line break</span>
+</pre>
+  <p><b>SyntaxError</b> means "a writing mistake", like a grammar mistake in a sentence. The computer is saying: "the text in quotes didn't end before the end of the line" — it couldn't tell where the text finishes.</p>
+
+  <h3>Error 3: a missing bracket</h3>
+  <p>Delete the closing bracket: <code>console.log("Hello from the console!";</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: missing ) after argument list</span>
+</pre>
+  <p>Here the computer says it straight out: <i>missing )</i> — "a bracket <code>)</code> is missing".</p>
+
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>If you see…</th><th>It means…</th><th>Check</th></tr>
+      <tr><td><code>… is not defined</code></td><td>"I don't know that word"</td><td>typos, capital and small letters, quotes around text</td></tr>
+      <tr><td><code>SyntaxError</code></td><td>"I can't read this, it's written wrong"</td><td>matching brackets and quotes</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>"the text in quotes isn't closed"</td><td>the closing quote</td></tr>
+      <tr><td><code>missing )</code></td><td>"a bracket is missing"</td><td>every <code>(</code> needs its own <code>)</code></td></tr>
+      <tr><td><code>expected …, got …</code><br><code>unexpected token</code></td><td>"I expected one thing and found another" — an extra or odd symbol</td><td>the line named in the error and the line before it</td></tr>
+    </table>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Remember the task from lesson 1?</span>
+    <code>alert(Hello);</code> without quotes also gave an error: <code>Hello is not defined</code>. Without quotes the computer thinks <code>Hello</code> is the name of something it should know. With quotes it understands it's just text.
+  </div>
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 For grown-ups</span>
+    Sometimes the console shows messages that have nothing to do with the child's code (from browser extensions, for example). Only look at the ones that mention our file: <code>test.html</code>, and later <code>snake.html</code>.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>How many minutes are there in a day? Print <code>24 * 60</code> to the console.</li>
+      <li>How many seconds are there in a day? (Hint: you can multiply three numbers.)</li>
+      <li>Write <code>console.log(10 - 3 * 2);</code> and <code>console.log((10 - 3) * 2);</code>. Why are the answers different? (Just like in maths: brackets first, then multiplication.)</li>
+      <li>Ask a friend or a grown-up to make one mistake in your code while you're not looking. Find it using the message in the console!</li>
+      <li>⭐ What does <code>console.log("2" + "2");</code> print? Guess why.</li>
+    </ol>
+  </div>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I can open the console (<kbd>F12</kbd>).</li>
+    <li>I know the difference between <code>2 + 2</code> and <code>"2 + 2"</code>.</li>
+    <li>I can use an error message to find the right line in Geany.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-01.html"><small>← Lesson 1</small>Your first program</a>
+    <a class="next" href="lesson-03.html"><small>Lesson 3 →</small>Variables</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

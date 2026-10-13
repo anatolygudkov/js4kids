@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La consola y los errores</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 2 de 16 <span class="time">⏱ 40 minutos</span></p>
+  <h1>La consola y los errores</h1>
+  <p class="lead">Quien programa tiene una ventana secreta donde el programa escribe mensajes: la <b>consola</b>. Ahí también te cuenta el ordenador los errores. Hoy vamos a hacernos amigos de ella y a perder el miedo a los mensajes en rojo.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>abrir la consola del navegador;</li>
+      <li>aprender a escribir en ella texto y números con <code>console.log</code>;</li>
+      <li>convertir el ordenador en una calculadora;</li>
+      <li>romper el programa a propósito y aprender a leer los errores.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Repaso de la lección 1: abrimos <code>prueba.html</code></td></tr>
+      <tr><td>10 min</td><td>La consola y <code>console.log</code></td></tr>
+      <tr><td>10 min</td><td>Números y aritmética</td></tr>
+      <tr><td>15 min</td><td>Romper y arreglar: leemos los errores</td></tr>
+    </table>
+  </div>
+
+  <h2>Abrimos la consola</h2>
+  <ol class="steps">
+    <li>Abre en Geany tu archivo <code>prueba.html</code>: <b>Archivo → Abrir</b> (<kbd>Ctrl</kbd> + <kbd>O</kbd>) → carpeta <b>codigo</b>. Aún más fácil: <b>Archivo → Archivos recientes</b> (<i>Recent Files</i>).</li>
+    <li>Abre el mismo archivo en el navegador, como en la lección anterior.</li>
+    <li>En el navegador pulsa <kbd>F12</kbd>. A la derecha o abajo aparece un panel con herramientas para desarrolladores.</li>
+    <li>Arriba del panel elige la pestaña <b>Consola</b> (<i>Console</i>).</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Atajo de teclado</span>
+    En Firefox la consola se abre directamente con <kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>K</kbd>. Para cerrar el panel, vuelve a pulsar <kbd>F12</kbd>.
+  </div>
+
+  <h2>Escribimos en la consola</h2>
+  <p>La ventanita de <code>alert</code> molesta: hasta que no pulsas Aceptar, no pasa nada. Por eso quien programa escribe los mensajes en la consola con la orden <code>console.log</code> (<i>log</i> significa «anotar en el diario»). Cambia la línea de <code>alert</code> por estas:</p>
+  <pre class="code" data-file="prueba.html" data-new="10-12">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Mi primer programa&lt;/h1&gt;
+  &lt;script&gt;
+    console.log("¡Hola desde la consola!");
+    console.log("Sé contar:");
+    console.log(2 + 2);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>Las líneas nuevas están marcadas en verde. Guarda (<kbd>Ctrl</kbd> + <kbd>S</kbd>) y recarga la página (<kbd>F5</kbd>). En la página no aparece nada nuevo, pero en la consola sale:</p>
+  <pre class="console">¡Hola desde la consola!
+Sé contar:
+4</pre>
+  <p>Fíjate en <code>console.log</code>: entre <code>console</code> y <code>log</code> hay un <b>punto</b>. Es como decir «consola, ¡anota!».</p>
+
+  <h2>El ordenador calculadora</h2>
+  <p>El ordenador calcula de maravilla. Estos son los signos de las operaciones:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Signo</th><th>Operación</th><th>Ejemplo</th><th>Resultado</th></tr>
+      <tr><td><code>+</code></td><td>sumar</td><td><code>7 + 5</code></td><td>12</td></tr>
+      <tr><td><code>-</code></td><td>restar</td><td><code>7 - 5</code></td><td>2</td></tr>
+      <tr><td><code>*</code></td><td>multiplicar (¡asterisco!)</td><td><code>7 * 5</code></td><td>35</td></tr>
+      <tr><td><code>/</code></td><td>dividir (barra)</td><td><code>10 / 4</code></td><td>2.5</td></tr>
+    </table>
+  </div>
+  <p>En programación, los números con decimales se escriben con <b>punto</b>: <code>2.5</code>, no <code>2,5</code>.</p>
+  <p>Prueba la diferencia entre un <b>número</b> y un <b>texto</b>. Añade al programa:</p>
+  <pre class="code nonum">console.log(2 + 2);
+console.log("2 + 2");</pre>
+  <p>La primera línea muestra <code>4</code>, la segunda, <code>2 + 2</code>. El ordenador no calcula nada de lo que va entre comillas: lo muestra tal cual. El texto entre comillas se llama <b>cadena</b> (en inglés, <i>string</i>).</p>
+
+  <div class="box tip">
+    <span class="title">💡 La consola también sabe contar</span>
+    Haz clic abajo del todo en la consola, donde parpadea el cursor después del signo <code>&gt;&gt;</code>, escribe <code>7 * 8</code> y pulsa <kbd>Intro</kbd>. La respuesta sale al momento. Así es cómodo probar trocitos de código.
+  </div>
+
+  <h2>Romper y arreglar</h2>
+  <p><b>Todas</b> las personas que programan cometen errores, incluso las más expertas, y muchas veces al día. Lo importante es aprender a encontrarlos. Vamos a cometer un error a propósito.</p>
+  <div class="box tip">
+    <span class="title">💡 Los errores salen en inglés</span>
+    Firefox escribe los mensajes de error en inglés, aunque esté en español. No pasa nada: aquí los traducimos, y enseguida te acostumbrarás a las palabras más frecuentes.
+  </div>
+
+  <h3>Error 1: una errata en una orden</h3>
+  <p>Quita la letra <code>e</code> de una de las órdenes, para que quede <code>consol.log("¡Hola desde la consola!");</code>. Guarda y recarga la página. En la consola aparece un mensaje en rojo:</p>
+  <pre class="console"><span class="err">❌ Uncaught ReferenceError: consol is not defined        prueba.html:10:5</span>
+</pre>
+  <p>Vamos a traducirlo:</p>
+  <ul>
+    <li><b>ReferenceError: consol is not defined</b> — «Error: no sé qué es <code>consol</code>».</li>
+    <li><b>prueba.html:10:5</b> — el error está en el archivo <code>prueba.html</code>, en la <b>línea 10</b> (y 5 es el número de carácter dentro de la línea). Mira los números de línea en Geany: ¡la errata está justo en la línea diez!</li>
+  </ul>
+  <p>Corrige la errata, guarda y recarga: el error ha desaparecido.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Fíjate</span>
+    Después del error el programa <b>se paró</b>: las líneas de debajo tampoco se ejecutaron. Por eso una errata pequeñita puede «romperlo» todo. No pasa nada: la corriges y todo vuelve a funcionar.
+  </div>
+
+  <h3>Error 2: falta una comilla</h3>
+  <p>Borra la comilla de cierre: <code>console.log("¡Hola desde la consola!);</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: "" string literal contains an unescaped line break</span>
+</pre>
+  <p><b>SyntaxError</b> significa «error de escritura», como una falta de ortografía en una frase. El ordenador dice: «el texto entre comillas no se ha cerrado antes del final de la línea»; no ha entendido dónde termina el texto.</p>
+
+  <h3>Error 3: falta un paréntesis</h3>
+  <p>Borra el paréntesis de cierre: <code>console.log("¡Hola desde la consola!";</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: missing ) after argument list</span>
+</pre>
+  <p>Aquí el ordenador lo dice claramente: <i>missing )</i> — «falta un paréntesis <code>)</code>».</p>
+
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Si ves…</th><th>Significa…</th><th>Revisa</th></tr>
+      <tr><td><code>… is not defined</code></td><td>«no conozco esa palabra»</td><td>erratas, mayúsculas y minúsculas, comillas alrededor del texto</td></tr>
+      <tr><td><code>SyntaxError</code></td><td>«no lo puedo leer, está mal escrito»</td><td>que paréntesis y comillas vayan por parejas</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>«el texto entre comillas no está cerrado»</td><td>la comilla de cierre</td></tr>
+      <tr><td><code>missing )</code></td><td>«falta un paréntesis»</td><td>cada <code>(</code> necesita su <code>)</code></td></tr>
+      <tr><td><code>expected …, got …</code><br><code>unexpected token</code></td><td>«esperaba una cosa y me he encontrado otra»: un símbolo de más o raro</td><td>la línea que indica el error y la anterior</td></tr>
+    </table>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 ¿Recuerdas la tarea de la lección 1?</span>
+    <code>alert(Hola);</code> sin comillas también daba un error: <code>Hola is not defined</code>. Sin comillas, el ordenador cree que <code>Hola</code> es el nombre de algo que debería conocer. Con comillas entiende que es solo texto.
+  </div>
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Para personas adultas</span>
+    A veces la consola muestra mensajes que no tienen nada que ver con el código (por ejemplo, de extensiones del navegador). Solo hay que mirar los que mencionan nuestro archivo: <code>prueba.html</code> y, más adelante, <code>snake.html</code>.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>¿Cuántos minutos tiene un día? Muestra <code>24 * 60</code> en la consola.</li>
+      <li>¿Cuántos segundos tiene un día? (Pista: puedes multiplicar tres números.)</li>
+      <li>Escribe <code>console.log(10 - 3 * 2);</code> y <code>console.log((10 - 3) * 2);</code>. ¿Por qué salen resultados distintos? (Como en matemáticas: primero los paréntesis, luego la multiplicación.)</li>
+      <li>Pide a alguien que meta un error en tu código mientras no miras. ¡Encuéntralo con el mensaje de la consola!</li>
+      <li>⭐ ¿Qué muestra <code>console.log("2" + "2");</code>? Adivina por qué.</li>
+    </ol>
+  </div>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé abrir la consola (<kbd>F12</kbd>).</li>
+    <li>Sé la diferencia entre <code>2 + 2</code> y <code>"2 + 2"</code>.</li>
+    <li>Con el mensaje de error encuentro la línea correcta en Geany.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-01.html"><small>← Lección 1</small>Tu primer programa</a>
+    <a class="next" href="lesson-03.html"><small>Lección 3 →</small>Variables</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

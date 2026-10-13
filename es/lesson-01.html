@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu primer programa</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 1 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Tu primer programa</h1>
+  <p class="lead">Hoy vas a crear tu primer archivo de código, y el ordenador te va a saludar. Además conocerás el ciclo principal de cualquier programador: <b>escribir → guardar → recargar</b>.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>crear en Geany un archivo llamado <code>prueba.html</code> y guardarlo en la carpeta <code>codigo</code>;</li>
+      <li>escribir una página en HTML y tu primera orden en JavaScript;</li>
+      <li>abrir tu programa en el navegador;</li>
+      <li>aprender a comprobar tus cambios rápidamente.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Cómo ejecuta programas el navegador</td></tr>
+      <tr><td>10 min</td><td>Crear y guardar un archivo</td></tr>
+      <tr><td>15 min</td><td>Escribir el código y ejecutarlo</td></tr>
+      <tr><td>15 min</td><td>Experimentos y tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Cómo funciona</h2>
+  <p>Vamos a escribir archivos cuyo nombre termina en <code>.html</code>. El navegador sabe abrirlos. En un archivo así viven dos lenguajes:</p>
+  <ul>
+    <li><b>HTML</b> describe <i>qué</i> hay en la página: títulos, texto, el campo de juego.</li>
+    <li><b>JavaScript</b> (<b>JS</b>, para abreviar) describe <i>qué hacer</i>: mostrar mensajes, contar, mover la serpiente.</li>
+  </ul>
+  <p>Escribimos texto en el editor, y el navegador lo lee y lo ejecuta. Esa es toda la magia.</p>
+
+  <h2>Paso 1. Crear un archivo</h2>
+  <ol class="steps">
+    <li>Abre Geany. Si hay algún archivo viejo abierto, ciérralo con la cruz de su pestaña.</li>
+    <li>Elige <b>Archivo → Nuevo</b> (<i>File → New</i>) o pulsa <kbd>Ctrl</kbd> + <kbd>N</kbd>. Aparece una hoja vacía con la pestaña «untitled» (sin nombre).</li>
+    <li>Guárdala enseguida: <b>Archivo → Guardar como</b> (<i>File → Save As</i>) o <kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>S</kbd>.</li>
+    <li>En la ventana de guardar, elige a la izquierda tu carpeta personal (el icono de la casita) y luego abre con doble clic la carpeta <b>codigo</b>.</li>
+    <li>En el campo <b>Nombre</b> (<i>Name</i>) escribe <code>prueba.html</code> y pulsa <b>Guardar</b>.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 ¿Para qué guardar un archivo vacío?</span>
+    Por la terminación <code>.html</code>, Geany sabe en qué lenguaje escribes y empieza a colorear el código. Así es más fácil ver los errores.
+  </div>
+
+  <h2>Paso 2. Escribir el código</h2>
+  <p>Escribe con cuidado el código de abajo. Los números de línea no se escriben: Geany los pone solo. Puedes hacer la sangría al principio de la línea con la tecla <kbd>Tab</kbd>, y después de <kbd>Intro</kbd> Geany suele ponerla por ti.</p>
+  <pre class="code" data-file="prueba.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Mi primer programa&lt;/h1&gt;
+  &lt;script&gt;
+    alert("¡Hola! Soy tu ordenador.");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Escríbelo, no lo copies</span>
+    Así tus dedos recuerdan dónde están los símbolos, y tu cabeza recuerda las órdenes. Si te equivocas, no pasa nada: buscar erratas también es útil.
+  </div>
+
+  <h2>Paso 3. Guardar y ejecutar</h2>
+  <ol class="steps">
+    <li>Pulsa <kbd>Ctrl</kbd> + <kbd>S</kbd> para guardar. Mira la pestaña: si el nombre del archivo estaba en rojo o tenía un asterisco <code>*</code>, después de guardar vuelve a la normalidad.</li>
+    <li>Abre el <b>gestor de archivos</b> y entra en la carpeta <b>codigo</b>. Ahí está tu archivo <b>prueba.html</b>.</li>
+    <li>Haz clic en él con el botón <b>derecho</b> y elige <b>Abrir con…</b> → <b>Firefox</b>. Si Firefox es el navegador predeterminado, basta con un doble clic.</li>
+  </ol>
+  <p>Aparece una ventanita que dice «¡Hola! Soy tu ordenador.». Pulsa <b>Aceptar</b> y verás una página con el título «Mi primer programa».</p>
+  <div class="box ok">
+    <span class="title">🎉 ¡Enhorabuena!</span>
+    Acaba de funcionar tu primer programa de verdad.
+  </div>
+
+  <h2>Veamos qué hemos escrito</h2>
+  <p>El HTML está hecho de <b>etiquetas</b>: palabras entre ángulos. Normalmente van en parejas: una de apertura <code>&lt;body&gt;</code> y una de cierre <code>&lt;/body&gt;</code> (con barra). Todo lo que hay entre ellas está «dentro», como en una caja.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Lo que pone</th><th>Lo que significa</th></tr>
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>«Navegador, esto es una página HTML». Siempre la primera línea.</td></tr>
+      <tr><td><code>&lt;html&gt; … &lt;/html&gt;</code></td><td>La caja más grande: dentro está toda la página.</td></tr>
+      <tr><td><code>&lt;head&gt; … &lt;/head&gt;</code></td><td>La «cabeza»: información interna que no se ve en la página.</td></tr>
+      <tr><td><code>&lt;meta charset="utf-8"&gt;</code></td><td>Para que las tildes, la ñ y los signos ¡¿ se vean bien.</td></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>El nombre que se ve en la pestaña del navegador.</td></tr>
+      <tr><td><code>&lt;body&gt; … &lt;/body&gt;</code></td><td>El «cuerpo»: lo que se ve en la página.</td></tr>
+      <tr><td><code>&lt;h1&gt;</code></td><td>Un título grande.</td></tr>
+      <tr><td><code>&lt;script&gt; … &lt;/script&gt;</code></td><td>¡Aquí empieza JavaScript!</td></tr>
+    </table>
+  </div>
+  <p>Y esta es nuestra primera línea de JavaScript:</p>
+  <pre class="code nonum">alert("¡Hola! Soy tu ordenador.");</pre>
+  <ul>
+    <li><code>alert</code> es una <b>orden</b> que muestra una ventanita con un mensaje (en inglés, <i>alert</i> significa «aviso»).</li>
+    <li>Entre los <b>paréntesis</b> <code>( )</code> le decimos a la orden <i>qué</i> mostrar.</li>
+    <li>El texto siempre va entre <b>comillas</b> <code>" "</code>. Dentro de las comillas puedes escribir en español, con tildes y todo.</li>
+    <li>El <b>punto y coma</b> <code>;</code> del final es como el punto al final de una frase: la orden ha terminado.</li>
+  </ul>
+
+  <h2>El ciclo principal de quien programa</h2>
+  <p>Ahora lo más importante. Cada vez que cambies el código, haz esto:</p>
+  <figure>
+    <svg viewBox="0 0 600 170" width="600" role="img" aria-label="Ciclo: escribo código, guardo con Ctrl+S, recargo con F5, miro el resultado">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <g font-size="15" text-anchor="middle">
+        <rect x="10" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="70" y="66" class="svg-text" font-weight="700">✏️ Escribo</text>
+        <text x="70" y="88" class="svg-text" font-size="13">en Geany</text>
+        <rect x="165" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="225" y="66" class="svg-text" font-weight="700">💾 Guardo</text>
+        <text x="225" y="88" class="svg-text" font-size="13">Ctrl + S</text>
+        <rect x="320" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="380" y="66" class="svg-text" font-weight="700">🔄 Recargo</text>
+        <text x="380" y="88" class="svg-text" font-size="13">F5 en el navegador</text>
+        <rect x="475" y="40" width="115" height="60" rx="12" class="svg-card"/>
+        <text x="532" y="66" class="svg-text" font-weight="700">👀 Miro</text>
+        <text x="532" y="88" class="svg-text" font-size="13">qué ha salido</text>
+      </g>
+      <g fill="none" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#arr)">
+        <line x1="132" y1="70" x2="161" y2="70"/>
+        <line x1="287" y1="70" x2="316" y2="70"/>
+        <line x1="442" y1="70" x2="471" y2="70"/>
+        <path d="M532,102 C532,155 70,155 70,104"/>
+      </g>
+      <text x="300" y="160" text-anchor="middle" font-size="13" class="svg-text">y otra vez</text>
+    </svg>
+  </figure>
+  <p>No hace falta cerrar la ventana del navegador: después de guardar, pulsa <kbd>F5</kbd> en ella y el navegador volverá a leer el archivo.</p>
+
+  <h2>Experimentos</h2>
+  <p>Prueba uno por uno y, después de cada cambio, haz <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd>:</p>
+  <ol>
+    <li>Cambia el texto entre las comillas de <code>alert</code> por uno tuyo.</li>
+    <li>Cambia el texto del título entre <code>&lt;h1&gt;</code> y <code>&lt;/h1&gt;</code>.</li>
+    <li>Añade un párrafo de texto debajo del título: <code>&lt;p&gt;Me llamo …&lt;/p&gt;</code>. La etiqueta <code>&lt;p&gt;</code> significa párrafo.</li>
+  </ol>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Haz que aparezcan <b>tres</b> ventanitas seguidas: «Uno», «Dos», «Tres». Para eso, escribe tres líneas con <code>alert</code>, una debajo de otra.<br>
+      Fíjate: el programa se ejecuta <b>de arriba abajo</b>, una orden cada vez. ¡Es una regla muy importante!</li>
+      <li>¿Qué pasa si quitas las comillas: <code>alert(Hola);</code>? Pruébalo y luego déjalo como estaba. (Por qué pasa, lo veremos en la próxima lección.)</li>
+      <li>⭐ Prueba la orden <code>alert(2 + 3);</code>, sin comillas. ¿Qué muestra el ordenador?</li>
+    </ol>
+  </div>
+
+  <h2>Si no funciona</h2>
+  <ul>
+    <li><b>¿No aparece la ventanita?</b> Comprueba que las comillas son las rectas normales <code>"</code> y que no falta ningún paréntesis.</li>
+    <li><b>¿No ves los cambios?</b> ¿Está guardado el archivo (<kbd>Ctrl</kbd> + <kbd>S</kbd>)? ¿Has recargado la página (<kbd>F5</kbd>)?</li>
+    <li><b>¿El código no tiene colores?</b> Seguramente el archivo se guardó sin <code>.html</code> al final del nombre. Guárdalo otra vez con «Guardar como».</li>
+    <li><b>¿Salen símbolos raros en lugar de tildes?</b> Revisa la línea <code>&lt;meta charset="utf-8"&gt;</code>.</li>
+  </ul>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Mi archivo <code>prueba.html</code> está en la carpeta <code>codigo</code>.</li>
+    <li>Sé que el HTML describe la página y JavaScript describe las acciones.</li>
+    <li>Recuerdo el ciclo: escribo → <kbd>Ctrl</kbd>+<kbd>S</kbd> → <kbd>F5</kbd> → miro.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-00.html"><small>← Lección 0</small>Preparamos el ordenador</a>
+    <a class="next" href="lesson-02.html"><small>Lección 2 →</small>La consola y los errores</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loops</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 6 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>Loops</h1>
+  <p class="lead">How do you draw a row of 20 cells? You could write 20 lines with <code>drawCell</code>… Or just one, if you ask the computer to <b>repeat</b>. Repetition in programming is called a <b>loop</b>.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>learn the <code>for</code> loop and what parts it's made of;</li>
+      <li>follow, step by step, how a loop works;</li>
+      <li>draw rows, columns and diagonals of cells.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Recap: the <code>drawCell</code> and <code>clearField</code> functions</td></tr>
+      <tr><td>15 min</td><td>The <code>for</code> loop in the console: counting to 10</td></tr>
+      <tr><td>15 min</td><td>Drawing on the canvas with a loop</td></tr>
+      <tr><td>10 min</td><td>Tasks and tidying up</td></tr>
+    </table>
+  </div>
+
+  <h2>Counting to five</h2>
+  <p>Add these lines to the end of the script in <code>snake.html</code>:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 5; i++) {
+  console.log("Step number " + i);
+}</pre>
+  <p>Open the console (<kbd>F12</kbd>) and refresh the page:</p>
+  <pre class="console">Step number 0
+Step number 1
+Step number 2
+Step number 3
+Step number 4</pre>
+  <p>One line inside the loop ran <b>5 times</b>, and each time the variable <code>i</code> held a new number.</p>
+
+  <h2>What a for loop is made of</h2>
+  <p>In the round brackets after <code>for</code> there are three parts, separated by semicolons:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Part</th><th>What it means</th></tr>
+      <tr><td><code>let i = 0</code></td><td><b>Start:</b> create a counter <code>i</code> and put 0 in it.</td></tr>
+      <tr><td><code>i &lt; 5</code></td><td><b>Condition:</b> keep repeating while <code>i</code> is less than 5.</td></tr>
+      <tr><td><code>i++</code></td><td><b>Step:</b> after each round, add one to <code>i</code> (the same as <code>i = i + 1</code>).</td></tr>
+    </table>
+  </div>
+  <p>And inside the curly brackets <code>{ }</code> is the <b>body of the loop</b> — what needs repeating.</p>
+  <p>Let's follow how the computer runs the loop:</p>
+  <ol>
+    <li><code>i = 0</code>. Is 0 &lt; 5 true? Yes → run the body → <code>i++</code>, now <code>i = 1</code>.</li>
+    <li>1 &lt; 5? Yes → body → <code>i = 2</code>.</li>
+    <li>… the same for 2, 3 and 4 …</li>
+    <li><code>i = 5</code>. 5 &lt; 5? <b>No</b> → the loop is over, carry on with the program.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Why i?</span>
+    It's a tradition: <i>i</i> is the first letter of the word <i>index</i> ("number"). You can call the counter anything you like, but every programmer understands <code>i</code>.
+  </div>
+
+  <h2>Drawing with a loop</h2>
+  <p>Replace the loop with <code>console.log</code> with this one:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 20; i++) {
+  drawCell(i, 0, "gray");
+}</pre>
+  <p>A grey row of 20 cells appeared along the top edge! Each time round, <code>i</code> gets bigger and the next cell is drawn further right: (0, 0), (1, 0), (2, 0)… (19, 0).</p>
+  <p>The number 20 is the number of cells in a row, and we'll need it many more times. Let's put it in a variable. Add it right under <code>let size = 20;</code>:</p>
+  <pre class="code nonum">let cells = 20;</pre>
+  <p>Now in the loop you can write <code>i &lt; cells</code>. If one day you want a bigger field, you'll only have to change one number.</p>
+
+  <h3>Try it yourself</h3>
+  <p>Change the line inside the loop and see what you get:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Inside the loop</th><th>What gets drawn</th></tr>
+      <tr><td><code>drawCell(i, 0, "gray");</code></td><td>a row along the top</td></tr>
+      <tr><td><code>drawCell(i, 19, "gray");</code></td><td>a row along the bottom</td></tr>
+      <tr><td><code>drawCell(0, i, "gray");</code></td><td>a column on the left</td></tr>
+      <tr><td><code>drawCell(i, i, "yellow");</code></td><td>a diagonal from corner to corner</td></tr>
+    </table>
+  </div>
+  <p>You can write several commands inside one loop. For example, this loop draws a frame around the whole field:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; cells; i++) {
+  drawCell(i, 0, "gray");
+  drawCell(i, 19, "gray");
+  drawCell(0, i, "gray");
+  drawCell(19, i, "gray");
+}</pre>
+  <div class="box warn">
+    <span class="title">⚠️ An endless loop</span>
+    If the condition is always true (for example, if you forget <code>i++</code>), the loop never ends and the page "freezes". No big deal: close the browser tab, fix the code and open the file again.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Draw a cross: a column and a row that meet in the middle of the field (at cell 10).</li>
+      <li>Draw a snake 8 cells long with one loop.</li>
+      <li>How do you draw every <b>second</b> cell in a row? Hint: the loop's step can be <code>i = i + 2</code>.</li>
+      <li>⭐ You can put a loop inside another loop. Try it and explain what happened:
+<pre class="code nonum">for (let y = 0; y &lt; cells; y++) {
+  for (let x = 0; x &lt; cells; x++) {
+    drawCell(x, y, "darkgreen");
+  }
+}</pre>
+      </li>
+    </ol>
+  </div>
+
+  <h2>Tidying up</h2>
+  <p>Those were experiments. Before the next lesson <b>delete all the loops</b> that draw on the field, but keep the <code>cells</code> variable. It should end up like this:</p>
+
+  <details class="full" open>
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html" data-new="14">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    clearField();
+    drawCell(10, 10, "lime");
+    drawCell(9, 10, "lime");
+    drawCell(8, 10, "lime");
+    drawCell(15, 10, "red");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I can name the three parts of a <code>for</code> loop.</li>
+    <li>I understand why the loop <code>i &lt; 20</code> repeats exactly 20 times (from 0 to 19).</li>
+    <li>I can draw a row and a column of cells with a loop.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-05.html"><small>← Lesson 5</small>Functions</a>
+    <a class="next" href="lesson-07.html"><small>Lesson 7 →</small>Arrays and objects</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

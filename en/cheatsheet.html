@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Always at hand</p>
+  <h1>Cheat sheet</h1>
+  <p class="lead">All the most important things on one page. It's handy to print it out and keep it next to the keyboard.</p>
+
+  <h2>Keyboard symbols (US keyboard)</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Symbol</th><th>How to type it</th><th>Symbol</th><th>How to type it</th></tr>
+      <tr><td><code>( )</code></td><td><kbd>Shift</kbd> + <kbd>9</kbd> / <kbd>0</kbd></td><td><code>;</code></td><td>the key right of <kbd>L</kbd></td></tr>
+      <tr><td><code>{ }</code></td><td><kbd>Shift</kbd> + <kbd>[</kbd> / <kbd>]</kbd></td><td><code>:</code></td><td><kbd>Shift</kbd> + <kbd>;</kbd></td></tr>
+      <tr><td><code>[ ]</code></td><td>the keys right of <kbd>P</kbd></td><td><code>"</code></td><td><kbd>Shift</kbd> + <kbd>'</kbd> (UK: <kbd>Shift</kbd> + <kbd>2</kbd>)</td></tr>
+      <tr><td><code>&lt; &gt;</code></td><td><kbd>Shift</kbd> + <kbd>,</kbd> / <kbd>.</kbd></td><td><code>'</code></td><td>the key two right of <kbd>L</kbd></td></tr>
+      <tr><td><code>=</code> <code>+</code></td><td>the key left of <kbd>Backspace</kbd> (+ with <kbd>Shift</kbd>)</td><td><code>&amp;</code></td><td><kbd>Shift</kbd> + <kbd>7</kbd></td></tr>
+      <tr><td><code>*</code></td><td><kbd>Shift</kbd> + <kbd>8</kbd></td><td><code>|</code></td><td><kbd>Shift</kbd> + <kbd>\</kbd></td></tr>
+      <tr><td><code>/</code></td><td>the key left of the right <kbd>Shift</kbd></td><td><code>!</code></td><td><kbd>Shift</kbd> + <kbd>1</kbd></td></tr>
+    </table>
+  </div>
+
+  <h2>Shortcuts</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Where</th><th>Keys</th><th>What they do</th></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>new file</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>O</kbd></td><td>open a file</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>save</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd></td><td>save as (with a new name)</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>undo</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>-</kbd></td><td>bigger / smaller font</td></tr>
+      <tr><td>everywhere</td><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>copy / paste</td></tr>
+      <tr><td>Firefox</td><td><kbd>F5</kbd></td><td>refresh the page</td></tr>
+      <tr><td>Firefox</td><td><kbd>F12</kbd></td><td>open / close the developer tools</td></tr>
+      <tr><td>Firefox</td><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd></td><td>open the console directly</td></tr>
+    </table>
+  </div>
+  <p><b>The main loop:</b> write → <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd> → look (in the console too!).</p>
+
+  <h2>HTML file template</h2>
+  <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Heading&lt;/h1&gt;
+  &lt;script&gt;
+    // JavaScript goes here
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  <h2>JavaScript</h2>
+  <h3>Output</h3>
+  <pre class="code nonum">alert("A window with a message");
+console.log("A message in the console");
+let name = prompt("Question?");    // the answer goes into name</pre>
+
+  <h3>Variables and maths</h3>
+  <pre class="code nonum">let score = 0;              // create a box
+score = score + 1;          // change it (no let!)
+score++;                    // the same, shorter
+let text = "Score: " + score; // glue text together
+// + - * /  — plus, minus, times, divide</pre>
+
+  <h3>Conditions</h3>
+  <pre class="code nonum">if (score &gt; 10) {
+  // if true
+} else {
+  // otherwise
+}
+// comparisons: &gt;  &lt;  &gt;=  &lt;=  ===  !==
+// and: &amp;&amp;     or: ||     not: !</pre>
+
+  <h3>Loops</h3>
+  <pre class="code nonum">for (let i = 0; i &lt; 10; i++) {
+  // repeats 10 times, i = 0, 1, … 9
+}
+
+while (condition) {
+  // repeats as long as the condition is true
+}</pre>
+
+  <h3>Functions</h3>
+  <pre class="code nonum">function drawCell(x, y, color) {   // write the recipe
+  // steps
+}
+drawCell(3, 2, "lime");            // call it
+
+function randomCell() {
+  return Math.floor(Math.random() * 20);   // return an answer
+}</pre>
+
+  <h3>Objects and arrays</h3>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };    // object
+apple.x = 3;
+
+let snake = [{ x: 1, y: 1 }, { x: 0, y: 1 }];  // array
+snake[0]          // first element (numbers start at zero!)
+snake.length      // how many elements
+snake.push(a)     // add to the end
+snake.unshift(a)  // add to the start
+snake.pop()       // remove the last one</pre>
+
+  <h3>Canvas</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";                 // colour
+ctx.fillRect(x, y, width, height);     // rectangle
+ctx.font = "32px sans-serif";          // font
+ctx.fillText("Text", x, y);            // text</pre>
+  <p>(0, 0) is the top left corner. x grows to the right, y grows <b>downwards</b>.</p>
+
+  <h3>Time, keys, the page, memory</h3>
+  <pre class="code nonum">let timer = setInterval(step, 200);   // call step every 200 ms
+clearInterval(timer);                 // stop it
+
+document.addEventListener("keydown", onKey);
+// event.key: "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Enter"
+// event.code: "KeyW", "KeyA", ... (doesn't depend on Caps Lock or layout)
+
+document.getElementById("score").textContent = score;
+
+localStorage.setItem("snakeBest", 25);
+let best = Number(localStorage.getItem("snakeBest"));</pre>
+
+  <h2>CSS</h2>
+  <pre class="code nonum">&lt;style&gt;
+  body { background: black; color: white; }   /* by tag */
+  #score { font-weight: bold; }               /* by id */
+  .help { color: gray; }                      /* by class */
+&lt;/style&gt;</pre>
+
+  <h2>Common errors</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Message</th><th>What to check</th></tr>
+      <tr><td><code>… is not defined</code></td><td>a typo in the name, capital/small letters, text without quotes</td></tr>
+      <tr><td><code>missing ) after argument list</code></td><td>a <code>)</code> is missing</td></tr>
+      <tr><td><code>missing } after function body</code></td><td>a <code>}</code> is missing at the end of a function, <code>if</code> or loop</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>an unclosed quote</td></tr>
+      <tr><td><code>expected …, got …</code> / <code>illegal character</code></td><td>an extra or odd symbol</td></tr>
+      <tr><td><code>redeclaration of let …</code></td><td><code>let</code> written twice for the same variable</td></tr>
+      <tr><td><code>… is undefined</code></td><td>using an array element that doesn't exist, for example <code>snake[5]</code> when the snake has three pieces</td></tr>
+      <tr><td>Nothing changes</td><td>Is the file saved? Is the page refreshed (<kbd>F5</kbd>)? Is it the right file?</td></tr>
+    </table>
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="index.html"><small>←</small>Contents</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

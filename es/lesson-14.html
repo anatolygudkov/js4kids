@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velocidad y récord</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 14 de 16 <span class="time">⏱ 55 minutos</span></p>
+  <h1>Velocidad y récord</h1>
+  <p class="lead">El juego funciona, pero es demasiado tranquilo. Hoy la serpiente acelerará con cada manzana, el juego aprenderá a recordar tu récord incluso después de apagar el ordenador, y cazaremos un bug muy astuto.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>hacer que la serpiente acelere;</li>
+      <li>guardar el récord en la memoria del navegador con <code>localStorage</code>;</li>
+      <li>encontrar y arreglar el bug de la media vuelta rápida.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>15 min</td><td>La velocidad aumenta</td></tr>
+      <tr><td>20 min</td><td>El récord y <code>localStorage</code></td></tr>
+      <tr><td>15 min</td><td>A la caza del bug</td></tr>
+      <tr><td>5 min</td><td>¡A por el récord!</td></tr>
+    </table>
+  </div>
+
+  <h2>1. La velocidad aumenta</h2>
+  <p>Ahora el temporizador salta siempre cada 200 milisegundos. Vamos a guardar ese número en una variable llamada <code>speed</code> («velocidad» en inglés). En realidad es la <b>pausa entre pasos</b>: cuanto más pequeño es el número, más rápida va la serpiente.</p>
+  <p>Añade la variable arriba, con las demás:</p>
+  <pre class="code nonum" data-new="3">let gameOver;
+let timer;
+let speed;</pre>
+  <p>En <code>startGame</code> pon la velocidad inicial y úsala en el temporizador:</p>
+  <pre class="code" data-file="snake.html (función startGame)" data-new="2,7" data-del="6">  gameOver = false;
+  speed = 200;
+  showScore();
+  placeApple();
+  draw();
+  timer = setInterval(step, 200);
+  timer = setInterval(step, speed);
+}</pre>
+  <p>Y cuando la serpiente se come una manzana, acortamos la pausa 10 milisegundos. A un temporizador no se le puede cambiar la velocidad sobre la marcha, así que apagamos el viejo y ponemos en marcha uno nuevo, más rápido:</p>
+  <pre class="code" data-file="snake.html (función step)" data-new="5-9">  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    showScore();
+    placeApple();
+    if (speed &gt; 60) {
+      speed = speed - 10;
+      clearInterval(timer);
+      timer = setInterval(step, speed);
+    }
+  } else {
+    snake.pop();
+  }</pre>
+  <p>La comprobación <code>speed &gt; 60</code> sirve para que el juego no llegue a una velocidad imposible: la serpiente nunca irá más rápido que 60 milisegundos por paso.</p>
+
+  <h2>2. El récord</h2>
+  <p>Cuando la página se recarga o se cierra, todas las variables desaparecen: el programa empieza de nuevo. ¡Pero el récord queremos recordarlo siempre! Para eso el navegador tiene su propia memoria pequeñita: <b>localStorage</b> («almacén local»). Es como una libreta donde puedes apuntar un valor con un nombre:</p>
+  <pre class="code nonum">localStorage.setItem("snakeBest", 25);         // apuntar
+localStorage.getItem("snakeBest");             // leer</pre>
+  <p>Lo que apuntas en esta libreta se queda ahí aunque cierres el navegador y apagues el ordenador.</p>
+
+  <h3>Un sitio para el récord en la página</h3>
+  <pre class="code" data-file="snake.html (parte dentro de body)" data-new="2" data-del="1">&lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt; | Récord: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;</pre>
+
+  <h3>Leemos el récord al empezar</h3>
+  <p>Añade una variable arriba:</p>
+  <pre class="code nonum" data-new="1">let best = Number(localStorage.getItem("snakeBest"));</pre>
+  <p>La libreta <code>localStorage</code> lo guarda todo como <b>texto</b>, pero nosotros necesitamos un número para comparar. <code>Number(...)</code> convierte un texto en número. Si todavía no hay récord, <code>getItem</code> devuelve <code>null</code> («nada»), y <code>Number(null)</code> es 0. ¡Justo lo que necesitamos!</p>
+
+  <h3>Lo mostramos y lo guardamos</h3>
+  <p>Que <code>showScore</code> muestre los dos números:</p>
+  <pre class="code" data-file="snake.html (función showScore)" data-new="3">function showScore() {
+  document.getElementById("score").textContent = score;
+  document.getElementById("best").textContent = best;
+}</pre>
+  <p>Y en <code>endGame</code>, justo después de <code>clearInterval(timer);</code>, comprobamos si se ha batido el récord:</p>
+  <pre class="code" data-file="snake.html (función endGame)" data-new="4-8">function endGame() {
+  gameOver = true;
+  clearInterval(timer);
+  if (score &gt; best) {
+    best = score;
+    localStorage.setItem("snakeBest", best);
+    showScore();
+  }
+  ...</pre>
+  <p>Juega, consigue unos cuantos puntos y pierde. Luego cierra la pestaña y vuelve a abrir el juego: ¡el récord sigue ahí! 🏆</p>
+  <div class="box tip">
+    <span class="title">💡 Cómo borrar el récord</span>
+    En la consola escribe <code>localStorage.removeItem("snakeBest")</code> y recarga la página.
+  </div>
+
+  <h2>3. A la caza del bug</h2>
+  <p>Un <b>bug</b> («bicho» en inglés) es como se llama a un error en un programa. Haz un experimento: deja que la serpiente vaya a la derecha. Ahora, <b>muy rápido</b>, casi a la vez, pulsa <kbd>↑</kbd> y enseguida <kbd>←</kbd>. ¡A veces la serpiente pierde sin motivo! ¿Por qué?</p>
+  <p>Vamos a verlo paso a paso. Entre dos pasos de la serpiente se han pulsado dos teclas:</p>
+  <ol>
+    <li><kbd>↑</kbd>: la serpiente va a la derecha, <code>dy</code> no vale 1, así que se puede girar. Ahora <code>dx = 0, dy = -1</code>. ¡Pero la serpiente <b>todavía no se ha movido</b>!</li>
+    <li><kbd>←</kbd>: comprobamos <code>dx !== 1</code>. Ahora <code>dx</code> ya vale 0, así que se puede. Ahora <code>dx = -1</code>.</li>
+    <li>Llega el paso: la serpiente, que en realidad iba hacia la <b>derecha</b>, da un paso hacia la <b>izquierda</b>, directo contra su cuello.</li>
+  </ol>
+  <p><b>El arreglo:</b> guardaremos la tecla pulsada como la dirección <b>siguiente</b>, y solo cambiaremos la dirección de verdad al principio de cada paso. Las comprobaciones se harán con la dirección de verdad.</p>
+  <p>Añade dos variables más arriba:</p>
+  <pre class="code nonum" data-new="3-4">let dx;
+let dy;
+let nextDx;
+let nextDy;</pre>
+  <p>En <code>startGame</code> dales valores iniciales, al lado de <code>dx</code> y <code>dy</code>:</p>
+  <pre class="code nonum" data-new="3-4">  dx = 1;
+  dy = 0;
+  nextDx = 1;
+  nextDy = 0;</pre>
+  <p>Al principio del todo de <code>step</code> aplicamos la dirección siguiente:</p>
+  <pre class="code" data-file="snake.html (función step)" data-new="2-3">function step() {
+  dx = nextDx;
+  dy = nextDy;
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+  <p>Y en <code>onKey</code> solo cambiamos <code>nextDx</code> y <code>nextDy</code> (las comprobaciones se quedan igual):</p>
+  <pre class="code" data-file="snake.html (función onKey)" data-new="3-4,7-8,11-12,15-16">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    nextDx = 0;
+    nextDy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    nextDx = 0;
+    nextDy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    nextDx = -1;
+    nextDy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    nextDx = 1;
+    nextDy = 0;
+  }
+  if (event.key === " " &amp;&amp; gameOver) {
+    startGame();
+  }
+}</pre>
+  <p>Ahora, en nuestro ejemplo, la segunda tecla <kbd>←</kbd> se comprueba con la dirección de verdad: <code>dx</code> todavía vale 1 (la serpiente va a la derecha), así que girar a la izquierda está prohibido. ¡Bug cazado! 🐞</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Ajusta la aceleración a tu gusto: ¿quizá acortar la pausa 5 en lugar de 10? ¿O que la velocidad máxima sea 80?</li>
+      <li>Cuando se bata el récord, haz que en <code>endGame</code> aparezca otro mensaje debajo de los demás: «¡Nuevo récord!».</li>
+      <li>⭐ Añade una manzana «dorada»: con una probabilidad pequeña (<code>Math.random() &lt; 0.2</code>) la manzana se vuelve dorada y vale 5 puntos. Pista: añade al objeto <code>apple</code> una propiedad <code>gold</code> con el valor <code>true</code> o <code>false</code>.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt; | Récord: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake;
+    let apple = { x: 0, y: 0 };
+    let dx;
+    let dy;
+    let nextDx;
+    let nextDy;
+    let score;
+    let gameOver;
+    let timer;
+    let speed;
+    let best = Number(localStorage.getItem("snakeBest"));
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function showScore() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("best").textContent = best;
+    }
+
+    function placeApple() {
+      apple.x = randomCell();
+      apple.y = randomCell();
+      while (isOnSnake(apple.x, apple.y)) {
+        apple.x = randomCell();
+        apple.y = randomCell();
+      }
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      gameOver = true;
+      clearInterval(timer);
+      if (score &gt; best) {
+        best = score;
+        localStorage.setItem("snakeBest", best);
+        showScore();
+      }
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Fin del juego", 200, 200);
+      ctx.font = "18px sans-serif";
+      ctx.fillText("Pulsa espacio para jugar otra vez", 200, 240);
+    }
+
+    function step() {
+      dx = nextDx;
+      dy = nextDy;
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        showScore();
+        placeApple();
+        if (speed &gt; 60) {
+          speed = speed - 10;
+          clearInterval(timer);
+          timer = setInterval(step, speed);
+        }
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        nextDx = 0;
+        nextDy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        nextDx = 0;
+        nextDy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        nextDx = -1;
+        nextDy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        nextDx = 1;
+        nextDy = 0;
+      }
+      if (event.key === " " &amp;&amp; gameOver) {
+        startGame();
+      }
+    }
+
+    function startGame() {
+      snake = [
+        { x: 10, y: 10 },
+        { x: 9, y: 10 },
+        { x: 8, y: 10 }
+      ];
+      dx = 1;
+      dy = 0;
+      nextDx = 1;
+      nextDy = 0;
+      score = 0;
+      gameOver = false;
+      speed = 200;
+      showScore();
+      placeApple();
+      draw();
+      timer = setInterval(step, speed);
+    }
+
+    document.addEventListener("keydown", onKey);
+    startGame();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Entiendo por qué para cambiar la velocidad hay que reiniciar el temporizador.</li>
+    <li>Sé que <code>localStorage</code> recuerda los valores después de cerrar el navegador.</li>
+    <li>Sé contar cómo aparecía el bug de la media vuelta y cómo lo arreglamos.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-13.html"><small>← Lección 13</small>Nueva partida</a>
+    <a class="next" href="lesson-15.html"><small>Lección 15 →</small>Ponerlo bonito</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

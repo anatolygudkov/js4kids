@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variables</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 3 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Variables</h1>
+  <p class="lead">Un juego tiene que recordar muchas cosas: los puntos, la longitud de la serpiente, la velocidad. Para eso los programas tienen <b>variables</b>: cajas con etiqueta donde puedes guardar números y texto.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>crear variables con la orden <code>let</code>;</li>
+      <li>aprender a cambiar lo que hay dentro de una variable;</li>
+      <li>pegar texto a partir de trozos;</li>
+      <li>escribir un programa que pregunta tu nombre.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Repaso: la consola y los errores</td></tr>
+      <tr><td>15 min</td><td>Qué es una variable, <code>let</code>, cambiar un valor</td></tr>
+      <tr><td>10 min</td><td>Texto y pegar cadenas</td></tr>
+      <tr><td>15 min</td><td>Un programa que conversa con <code>prompt</code>, tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Una caja con etiqueta</h2>
+  <p>Imagina una caja con una etiqueta que pone <b>score</b> («puntuación» en inglés). Vamos a meter en ella el número 0:</p>
+  <pre class="code nonum">let score = 0;</pre>
+  <ul>
+    <li><code>let</code> — «que haya»: creamos una caja nueva;</li>
+    <li><code>score</code> — el nombre de la caja (la etiqueta);</li>
+    <li><code>=</code> — «mete dentro»;</li>
+    <li><code>0</code> — lo que metemos.</li>
+  </ul>
+  <p>Ahora, en cualquier sitio donde escribamos <code>score</code>, el ordenador usará lo que haya en la caja.</p>
+  <p>Abre <code>prueba.html</code>, borra todo lo que hay entre <code>&lt;script&gt;</code> y <code>&lt;/script&gt;</code> y escribe:</p>
+  <pre class="code" data-file="prueba.html (solo la parte dentro de script)">let score = 0;
+console.log(score);
+
+score = 10;
+console.log(score);
+
+score = score + 1;
+console.log(score);</pre>
+  <p>Guarda, recarga y mira la consola: <code>0</code>, <code>10</code>, <code>11</code>.</p>
+
+  <h3>Espera… ¿score = score + 1?</h3>
+  <p>En matemáticas eso es imposible: un número no puede ser igual a sí mismo más uno. Pero en programación <code>=</code> no significa «igual», sino <b>«mete en la caja»</b>. El ordenador lee esta línea de derecha a izquierda:</p>
+  <ol>
+    <li>coge lo que hay en <code>score</code> (un 10);</li>
+    <li>le suma 1 (sale 11);</li>
+    <li>vuelve a meter el resultado en <code>score</code>.</li>
+  </ol>
+  <p>¡Justo así crecerán los puntos en nuestro juego cuando la serpiente se coma una manzana!</p>
+  <div class="box warn">
+    <span class="title">⚠️ let se escribe una sola vez</span>
+    <code>let</code> solo hace falta cuando <b>creamos</b> la caja. Cuando cambiamos lo que hay dentro, escribimos simplemente <code>score = 10;</code>. Si escribes <code>let score</code> por segunda vez, sale el error <i>redeclaration of let score</i>: «la caja score se declara otra vez; ya existe».
+  </div>
+
+  <h2>Reglas para los nombres</h2>
+  <ul>
+    <li>Solo <b>letras inglesas</b> (sin tildes ni ñ), cifras y <code>_</code>. Sin espacios. Tampoco pueden empezar por una cifra.</li>
+    <li>Las mayúsculas y las minúsculas son <b>distintas</b>: <code>score</code> y <code>Score</code> son dos cajas diferentes.</li>
+    <li>Si el nombre tiene varias palabras, cada palabra a partir de la segunda empieza con mayúscula: <code>snakeLength</code>, <code>bestScore</code>. Parecen las jorobas de un camello, por eso este estilo se llama «camelCase».</li>
+    <li>Usa nombres claros: <code>speed</code> es mejor que <code>s</code> o <code>abc</code>. En el mundo de la programación los nombres suelen estar en inglés, así que en el juego también los pondremos en inglés.</li>
+  </ul>
+
+  <h2>Texto en las variables</h2>
+  <p>En una variable también se puede guardar texto (una cadena):</p>
+  <pre class="code nonum">let name = "Lucía";
+console.log("¡Hola, " + name + "!");</pre>
+  <p>Si sumas cadenas con <code>+</code>, se <b>pegan</b> en una sola: <code>¡Hola, Lucía!</code>. No olvides el espacio dentro de las comillas después de la coma, o saldrá «¡Hola,Lucía!».</p>
+  <p>¿Y si pegas texto y un número?</p>
+  <pre class="code nonum">let apples = 5;
+console.log("Manzanas comidas: " + apples);
+console.log("5" + 5);
+console.log(5 + 5);</pre>
+  <p>Sale <code>Manzanas comidas: 5</code>, luego <code>55</code> (el texto «5» y el número 5 se han pegado) y <code>10</code> (se han sumado dos números). Recuerda: las comillas convierten un número en texto.</p>
+
+  <h2>Un programa que conversa</h2>
+  <p>La orden <code>prompt</code> muestra una ventanita donde se puede <b>escribir</b> algo. Lo que escriba la persona se puede guardar directamente en una variable:</p>
+  <pre class="code" data-file="prueba.html (solo la parte dentro de script)">let name = prompt("¿Cómo te llamas?");
+alert("¡Hola, " + name + "! Vamos a programar un juego.");
+
+let year = 2026;
+let born = prompt("¿En qué año naciste?");
+alert("Tienes unos " + (year - born) + " años.");</pre>
+  <p>La expresión <code>(year - born)</code> va entre paréntesis para que el ordenador primero calcule la diferencia y luego la pegue al texto.</p>
+  <div class="box tip">
+    <span class="title">💡 ¿Ya no es 2026?</span>
+    Si ya estamos en otro año, pon el año actual en <code>year</code>.
+  </div>
+
+  <h2>Variables en la Serpiente</h2>
+  <p>Estas son las variables que aparecerán en nuestro juego:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Variable</th><th>Qué guarda</th></tr>
+      <tr><td><code>score</code></td><td>los puntos: cuántas manzanas se han comido</td></tr>
+      <tr><td><code>speed</code></td><td>la velocidad de la serpiente</td></tr>
+      <tr><td><code>size</code></td><td>el tamaño de una casilla del campo</td></tr>
+      <tr><td><code>snake</code></td><td>dónde está cada trozo de la serpiente</td></tr>
+      <tr><td><code>apple</code></td><td>dónde está la manzana</td></tr>
+    </table>
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Crea una variable <code>lives</code> (vidas) con el valor 3. Quita una vida (<code>lives = lives - 1;</code>) y muestra el resultado en la consola.</li>
+      <li>Pregunta al jugador su animal favorito y muestra: «Mi animal favorito es …».</li>
+      <li>Crea las variables <code>width = 20</code> y <code>height = 15</code>. Calcula cuántas casillas tiene el campo, <code>width × height</code>, y muestra el resultado con una explicación.</li>
+      <li>⭐ Escribe <code>score++;</code> en lugar de <code>score = score + 1;</code>. ¿Funciona? Es una forma abreviada, y la necesitaremos más adelante.</li>
+    </ol>
+  </div>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé qué hace <code>let</code> y que <code>=</code> significa «mete dentro».</li>
+    <li>Entiendo por qué <code>score = score + 1</code> aumenta los puntos.</li>
+    <li>Sé pegar texto y variables con <code>+</code>.</li>
+  </ul>
+  <div class="box ok">
+    <span class="title">🎉 ¡Calentamiento terminado!</span>
+    En la próxima lección empezamos a escribir el juego de verdad.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-02.html"><small>← Lección 2</small>La consola y los errores</a>
+    <a class="next" href="lesson-04.html"><small>Lección 4 →</small>El lienzo y las coordenadas</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

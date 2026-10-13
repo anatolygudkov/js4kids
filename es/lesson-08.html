@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La serpiente se mueve</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 8 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>La serpiente se mueve</h1>
+  <p class="lead">Unos dibujos animados son muchas imágenes que se cambian muy deprisa. Nuestro juego funcionará igual: varias veces por segundo moverá la serpiente y dibujará una imagen nueva. ¡Hoy la serpiente cobra vida!</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>aprender un truco para mover la serpiente: cabeza delante, cola fuera;</li>
+      <li>conocer las órdenes de los arrays <code>unshift</code> y <code>pop</code>;</li>
+      <li>poner en marcha el temporizador <code>setInterval</code>;</li>
+      <li>aprender a indicar la dirección con las variables <code>dx</code> y <code>dy</code>.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Cómo se mueve una serpiente: la idea en papel</td></tr>
+      <tr><td>10 min</td><td><code>unshift</code> y <code>pop</code> en la consola</td></tr>
+      <tr><td>15 min</td><td>La función <code>step</code> y el temporizador</td></tr>
+      <tr><td>10 min</td><td>Experimentos con la dirección y la velocidad</td></tr>
+    </table>
+  </div>
+
+  <h2>Cómo se mueve una serpiente</h2>
+  <p>Podrías mover cada trozo de la serpiente uno por uno, pero hay una forma más sencilla. Mira: para que la serpiente avance una casilla, basta con:</p>
+  <ol>
+    <li><b>añadir una cabeza nueva</b> en la casilla de delante;</li>
+    <li><b>quitar el último trozo</b> de la cola.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 560 230" width="560" role="img" aria-label="Un paso de la serpiente: se añade una cabeza nueva delante y se quita el último trozo de la cola">
+      <g font-size="14" class="svg-text">
+        <text x="20" y="30" font-weight="700">Antes:</text>
+        <text x="20" y="115" font-weight="700">Cabeza nueva:</text>
+        <text x="20" y="200" font-weight="700">Después:</text>
+      </g>
+      <rect x="150" y="10" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="13" width="28" height="28" fill="#32cd32"/><rect x="290" y="13" width="28" height="28" fill="#32cd32"/><rect x="320" y="13" width="28" height="28" fill="#ffd43b"/>
+      <rect x="150" y="95" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="98" width="28" height="28" fill="#ff5555" opacity="0.35"/><rect x="290" y="98" width="28" height="28" fill="#32cd32"/><rect x="320" y="98" width="28" height="28" fill="#32cd32"/><rect x="350" y="98" width="28" height="28" fill="#ffd43b"/>
+      <text x="274" y="117" text-anchor="middle" font-size="16" fill="#ffffff">✕</text>
+      <text x="364" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">unshift</text>
+      <text x="274" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">pop</text>
+      <rect x="150" y="180" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="290" y="183" width="28" height="28" fill="#32cd32"/><rect x="320" y="183" width="28" height="28" fill="#32cd32"/><rect x="350" y="183" width="28" height="28" fill="#ffd43b"/>
+      <text x="470" y="203" font-size="14" class="svg-text">→ una casilla</text>
+    </svg>
+    <figcaption>Los trozos del medio se quedan donde están; solo cambian la cabeza y la cola.</figcaption>
+  </figure>
+  <p>Los arrays tienen órdenes ya preparadas para esto:</p>
+  <ul>
+    <li><code>snake.unshift(algo)</code> — añadir un elemento <b>al principio</b> de la lista (en el sitio número 0);</li>
+    <li><code>snake.pop()</code> — quitar el <b>último</b> elemento de la lista.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Pruébalo en la consola</span>
+    Abre <code>snake.html</code>, pulsa <kbd>F12</kbd> y escribe una por una:
+    <pre class="code nonum">snake.unshift({ x: 11, y: 10 });
+snake.pop();
+draw();</pre>
+    ¡La serpiente ha avanzado una casilla a la derecha! Repite estas tres líneas un par de veces más (la flecha <kbd>↑</kbd> en la consola recupera las órdenes anteriores).
+  </div>
+
+  <h2>Hacia dónde ir: dx y dy</h2>
+  <p>La cabeza nueva aparece al lado de la vieja. Dónde exactamente, depende de la dirección. Vamos a crear dos variables:</p>
+  <ul>
+    <li><code>dx</code> — cuántas casillas moverse en x en cada paso;</li>
+    <li><code>dy</code> — cuántas casillas moverse en y.</li>
+  </ul>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Dirección</th><th><code>dx</code></th><th><code>dy</code></th></tr>
+      <tr><td>derecha →</td><td>1</td><td>0</td></tr>
+      <tr><td>izquierda ←</td><td>-1</td><td>0</td></tr>
+      <tr><td>abajo ↓</td><td>0</td><td>1</td></tr>
+      <tr><td>arriba ↑</td><td>0</td><td>-1</td></tr>
+    </table>
+  </div>
+  <p>(¿Recuerdas que en la pantalla y crece hacia <b>abajo</b>? Por eso «arriba» es <code>-1</code>.)</p>
+  <p>Entonces la cabeza nueva es la cabeza vieja más el desplazamiento:</p>
+  <pre class="code nonum">let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+
+  <h2>Un paso del juego</h2>
+  <p>Lo juntamos todo en una función, <code>step</code> («paso»): crear la cabeza nueva, añadirla, quitar la cola, volver a dibujar.</p>
+  <pre class="code" data-file="snake.html (parte dentro de script)" data-new="7-8,16-22,24">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+let dx = 1;
+let dy = 0;
+
+function clearField() { ... }      // sin cambios
+
+function drawCell(x, y, color) { ... }   // sin cambios
+
+function draw() { ... }            // sin cambios
+
+function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  snake.unshift(head);
+  snake.pop();
+  draw();
+}
+
+draw();
+setInterval(step, 200);</pre>
+  <div class="box warn">
+    <span class="title">⚠️ ¡No escribas los puntos suspensivos!</span>
+    <code>{ ... }   // sin cambios</code> significa que la función se queda igual que estaba. ¡No la borres! Si tienes dudas, mira el archivo completo al final de la lección.
+  </div>
+  <p>Guarda, recarga… ¡La serpiente se mueve! 🎉</p>
+
+  <h2>El temporizador</h2>
+  <pre class="code nonum">setInterval(step, 200);</pre>
+  <p><code>setInterval</code> significa «llama a la función <code>step</code> una y otra vez, cada 200 milisegundos». Un milisegundo es la milésima parte de un segundo, así que 200 milisegundos son la quinta parte de un segundo. Por tanto, la serpiente da 5 pasos por segundo.</p>
+  <div class="box warn">
+    <span class="title">⚠️ ¡Sin paréntesis!</span>
+    Se escribe <code>setInterval(step, 200)</code>, no <code>setInterval(step(), 200)</code>. No llamamos a <code>step</code> nosotros: se la <b>entregamos</b> al temporizador para que la llame él cuando toque.
+  </div>
+  <p>Y luego la serpiente se sale por el borde del campo y desaparece… No se ha esfumado: sus coordenadas se han hecho mayores que 19 y se mueve por algún sitio fuera del lienzo. Lo arreglaremos en la próxima lección.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Experimentos</span>
+    <ol>
+      <li>Cambia <code>200</code> por <code>500</code> y luego por <code>50</code>. ¿Cómo cambia la velocidad?</li>
+      <li>Haz que la serpiente vaya hacia abajo. ¿Qué <code>dx</code> y <code>dy</code> hacen falta?</li>
+      <li>Haz que la serpiente vaya a la izquierda. Fíjate bien en lo que pasa justo al principio. ¿Por qué?</li>
+      <li>¿Qué pasa si <code>dx = 1</code> y <code>dy = 1</code> a la vez?</li>
+      <li>⭐ Convierte en comentario la línea <code>snake.pop();</code> (ponle <code>//</code> delante). ¿Qué le pasa a la serpiente? ¡Acuérdate de esto, te servirá cuando la serpiente coma manzanas!</li>
+    </ol>
+    Al final deja <code>dx = 1</code>, <code>dy = 0</code>, la velocidad en 200 y la línea <code>snake.pop();</code> sin comentario.
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé explicar por qué para moverse basta con añadir una cabeza y quitar la cola.</li>
+    <li>Sé qué hacen <code>unshift</code> y <code>pop</code>.</li>
+    <li>Entiendo que <code>setInterval(step, 200)</code> llama a <code>step</code> 5 veces por segundo.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-07.html"><small>← Lección 7</small>Arrays y objetos</a>
+    <a class="next" href="lesson-09.html"><small>Lección 9 →</small>Condiciones</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

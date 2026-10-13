@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bucles</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 6 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Bucles</h1>
+  <p class="lead">¿Cómo se dibuja una fila de 20 casillas? Puedes escribir 20 líneas con <code>drawCell</code>… O solo una, si le pides al ordenador que <b>repita</b>. Una repetición en programación se llama <b>bucle</b>.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>conocer el bucle <code>for</code> y sus partes;</li>
+      <li>seguir paso a paso cómo funciona un bucle;</li>
+      <li>dibujar filas, columnas y diagonales de casillas.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Repaso: las funciones <code>drawCell</code> y <code>clearField</code></td></tr>
+      <tr><td>15 min</td><td>El bucle <code>for</code> en la consola: contamos hasta 10</td></tr>
+      <tr><td>15 min</td><td>Dibujamos con un bucle en el lienzo</td></tr>
+      <tr><td>10 min</td><td>Tareas y limpieza</td></tr>
+    </table>
+  </div>
+
+  <h2>Contamos hasta cinco</h2>
+  <p>Añade estas líneas al final del script de <code>snake.html</code>:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 5; i++) {
+  console.log("Paso número " + i);
+}</pre>
+  <p>Abre la consola (<kbd>F12</kbd>) y recarga la página:</p>
+  <pre class="console">Paso número 0
+Paso número 1
+Paso número 2
+Paso número 3
+Paso número 4</pre>
+  <p>Una sola línea dentro del bucle se ejecutó <b>5 veces</b>, y cada vez la variable <code>i</code> tenía un número nuevo.</p>
+
+  <h2>De qué está hecho el bucle for</h2>
+  <p>Entre los paréntesis que van después de <code>for</code> hay tres partes, separadas por punto y coma:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Parte</th><th>Qué significa</th></tr>
+      <tr><td><code>let i = 0</code></td><td><b>Inicio:</b> creamos un contador <code>i</code> y le metemos un 0.</td></tr>
+      <tr><td><code>i &lt; 5</code></td><td><b>Condición:</b> repetimos mientras <code>i</code> sea menor que 5.</td></tr>
+      <tr><td><code>i++</code></td><td><b>Paso:</b> después de cada vuelta, sumamos uno a <code>i</code> (es lo mismo que <code>i = i + 1</code>).</td></tr>
+    </table>
+  </div>
+  <p>Y entre las llaves <code>{ }</code> está el <b>cuerpo del bucle</b>: lo que hay que repetir.</p>
+  <p>Sigamos cómo ejecuta el ordenador el bucle:</p>
+  <ol>
+    <li><code>i = 0</code>. ¿Es verdad que 0 &lt; 5? Sí → ejecutamos el cuerpo → <code>i++</code>, ahora <code>i = 1</code>.</li>
+    <li>¿1 &lt; 5? Sí → cuerpo → <code>i = 2</code>.</li>
+    <li>… lo mismo con 2, 3 y 4 …</li>
+    <li><code>i = 5</code>. ¿5 &lt; 5? <b>No</b> → el bucle termina y seguimos con el programa.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 ¿Por qué i?</span>
+    Es una tradición: <i>i</i> es la primera letra de la palabra <i>índice</i>. Puedes llamar al contador como quieras, pero <code>i</code> lo entiende cualquier programador.
+  </div>
+
+  <h2>Dibujamos con un bucle</h2>
+  <p>Cambia el bucle de <code>console.log</code> por este:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 20; i++) {
+  drawCell(i, 0, "gray");
+}</pre>
+  <p>¡En el borde de arriba ha aparecido una fila gris de 20 casillas! En cada vuelta <code>i</code> crece, y la siguiente casilla se dibuja más a la derecha: (0, 0), (1, 0), (2, 0)… (19, 0).</p>
+  <p>El número 20 es la cantidad de casillas de una fila, y lo vamos a necesitar muchas veces. Vamos a guardarlo en una variable. Añádela justo debajo de <code>let size = 20;</code>:</p>
+  <pre class="code nonum">let cells = 20;</pre>
+  <p>Ahora en el bucle puedes escribir <code>i &lt; cells</code>. Si algún día quieres un campo más grande, solo tendrás que cambiar un número.</p>
+
+  <h3>Pruébalo tú</h3>
+  <p>Cambia la línea de dentro del bucle y mira qué sale:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Dentro del bucle</th><th>Qué se dibuja</th></tr>
+      <tr><td><code>drawCell(i, 0, "gray");</code></td><td>una fila arriba</td></tr>
+      <tr><td><code>drawCell(i, 19, "gray");</code></td><td>una fila abajo</td></tr>
+      <tr><td><code>drawCell(0, i, "gray");</code></td><td>una columna a la izquierda</td></tr>
+      <tr><td><code>drawCell(i, i, "yellow");</code></td><td>una diagonal de esquina a esquina</td></tr>
+    </table>
+  </div>
+  <p>Dentro de un bucle se pueden escribir varias órdenes. Por ejemplo, este bucle dibuja un marco alrededor de todo el campo:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; cells; i++) {
+  drawCell(i, 0, "gray");
+  drawCell(i, 19, "gray");
+  drawCell(0, i, "gray");
+  drawCell(19, i, "gray");
+}</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Un bucle infinito</span>
+    Si la condición siempre es verdad (por ejemplo, si olvidas <code>i++</code>), el bucle nunca termina y la página se «cuelga». No pasa nada: cierra la pestaña del navegador, corrige el código y vuelve a abrir el archivo.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Dibuja una cruz: una columna y una fila que se cruzan en el centro del campo (en la casilla 10).</li>
+      <li>Dibuja con un solo bucle una serpiente de 8 casillas.</li>
+      <li>¿Cómo se dibuja una casilla <b>sí y otra no</b> en una fila? Pista: el paso del bucle puede ser <code>i = i + 2</code>.</li>
+      <li>⭐ Un bucle se puede meter dentro de otro bucle. Pruébalo y explica qué ha salido:
+<pre class="code nonum">for (let y = 0; y &lt; cells; y++) {
+  for (let x = 0; x &lt; cells; x++) {
+    drawCell(x, y, "darkgreen");
+  }
+}</pre>
+      </li>
+    </ol>
+  </div>
+
+  <h2>Limpieza</h2>
+  <p>Eso eran experimentos. Antes de la próxima lección <b>borra todos los bucles</b> que dibujan en el campo, pero deja la variable <code>cells</code>. Debe quedar así:</p>
+
+  <details class="full" open>
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html" data-new="14">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    clearField();
+    drawCell(10, 10, "lime");
+    drawCell(9, 10, "lime");
+    drawCell(8, 10, "lime");
+    drawCell(15, 10, "red");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé decir las tres partes de un bucle <code>for</code>.</li>
+    <li>Entiendo por qué el bucle <code>i &lt; 20</code> repite exactamente 20 veces (de 0 a 19).</li>
+    <li>Sé dibujar una fila y una columna de casillas con un bucle.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-05.html"><small>← Lección 5</small>Funciones</a>
+    <a class="next" href="lesson-07.html"><small>Lección 7 →</small>Arrays y objetos</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

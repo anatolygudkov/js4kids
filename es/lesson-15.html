@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponerlo bonito</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 15 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Ponerlo bonito</h1>
+  <p class="lead">El juego está listo y funciona. Ahora viene lo más divertido: ¡vamos a decorarlo! Para el aspecto de las páginas existe un tercer lenguaje, el <b>CSS</b>. Lo hemos dejado a propósito para el final: primero el programa tiene que funcionar, y luego se decora.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>descubrir qué es el CSS y dónde se escribe;</li>
+      <li>cambiar el color de fondo y los tipos de letra, y poner un borde al campo;</li>
+      <li>aprender a elegir elementos por etiqueta, por <code>id</code> y por clase;</li>
+      <li>dibujar una manzana redonda.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Qué es el CSS</td></tr>
+      <tr><td>20 min</td><td>Decoramos la página: fondo, título, borde, puntos</td></tr>
+      <tr><td>10 min</td><td>Una manzana redonda en el lienzo</td></tr>
+      <tr><td>10 min</td><td>Inventa tu propio estilo</td></tr>
+    </table>
+  </div>
+
+  <h2>Tres lenguajes en una página</h2>
+  <ul>
+    <li><b>HTML</b> — <i>qué</i> hay en la página (título, puntos, campo);</li>
+    <li><b>JavaScript</b> — <i>cómo funciona</i> (la serpiente se mueve, come, crece);</li>
+    <li><b>CSS</b> — <i>qué aspecto tiene</i> (colores, tamaños, bordes, tipos de letra).</li>
+  </ul>
+  <p>El CSS se escribe dentro de la etiqueta <code>&lt;style&gt;</code>, en la «cabeza» de la página, en <code>&lt;head&gt;</code>. Una regla de CSS es así:</p>
+  <pre class="code nonum">h1 {
+  color: green;
+  font-size: 48px;
+}</pre>
+  <ul>
+    <li><code>h1</code> — <b>a quién</b> decoramos (todos los títulos <code>&lt;h1&gt;</code>). Se llama <b>selector</b>;</li>
+    <li>entre las llaves, <b>qué</b> cambiamos: propiedad, dos puntos, valor, punto y coma.</li>
+  </ul>
+  <p>Se parece mucho a los objetos de JavaScript, ¿verdad? Solo que con punto y coma en lugar de comas.</p>
+
+  <h2>Decoramos la página</h2>
+  <p>Añade en <code>&lt;head&gt;</code>, después de <code>&lt;title&gt;</code>, un bloque de estilos:</p>
+  <pre class="code" data-file="snake.html (parte dentro de head)" data-new="4-11">&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      background: #10241a;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;</pre>
+  <p>Guarda y recarga: el fondo es verde oscuro, el texto es blanco y todo está centrado. Vamos a verlo:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Propiedad</th><th>Qué cambia</th></tr>
+      <tr><td><code>background</code></td><td>el color de fondo</td></tr>
+      <tr><td><code>color</code></td><td>el color del texto</td></tr>
+      <tr><td><code>font-family</code></td><td>el tipo de letra: <code>sans-serif</code> — sin remates, <code>serif</code> — con remates, <code>monospace</code> — como en un editor de código</td></tr>
+      <tr><td><code>text-align</code></td><td>la alineación: <code>left</code>, <code>center</code>, <code>right</code></td></tr>
+      <tr><td><code>font-size</code></td><td>el tamaño de la letra, por ejemplo <code>48px</code></td></tr>
+      <tr><td><code>border</code></td><td>el borde: grosor, tipo, color — <code>6px solid green</code></td></tr>
+      <tr><td><code>border-radius</code></td><td>esquinas redondeadas</td></tr>
+      <tr><td><code>margin</code></td><td>el espacio alrededor de un elemento, por fuera</td></tr>
+      <tr><td><code>font-weight</code></td><td>el grosor de la letra: <code>bold</code> — negrita</td></tr>
+    </table>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Códigos de color</span>
+    <code>#10241a</code> es un color escrito en código: después de la almohadilla van tres parejas de símbolos, cuánto <b>rojo</b>, <b>verde</b> y <b>azul</b> tiene el color. Cada pareja va de <code>00</code> (nada) a <code>ff</code> (el máximo). Por ejemplo, <code>#ff0000</code> es rojo y <code>#ffff00</code> es amarillo. También se pueden usar nombres en inglés: <code>green</code>, <code>gold</code>, <code>tomato</code>.
+  </div>
+
+  <h3>El título y el borde</h3>
+  <p>Añade dentro de <code>&lt;style&gt;</code>, después de la regla de <code>body</code>, dos reglas más:</p>
+  <pre class="code nonum" data-new="1-9">    h1 {
+      color: #7ee081;
+      font-size: 48px;
+      margin: 10px;
+    }
+    canvas {
+      border: 6px solid #3fa34d;
+      border-radius: 10px;
+    }</pre>
+
+  <h3>Los puntos: elegir por id</h3>
+  <p>Para decorar un elemento concreto, se elige por su nombre <code>id</code> con un <code>#</code> delante. Vamos a poner los números de los puntos y del récord en amarillo y en negrita:</p>
+  <pre class="code nonum" data-new="1-4">    #score, #best {
+      color: yellow;
+      font-weight: bold;
+    }</pre>
+  <p>Una coma entre selectores significa «este y este».</p>
+
+  <h3>Una pista: elegir por clase</h3>
+  <p>Añade debajo del lienzo una pista para quien juega. Le daremos una <b>clase</b>: un nombre para el diseño. A diferencia de un <code>id</code>, una misma clase se puede dar a muchos elementos.</p>
+  <pre class="code" data-file="snake.html (parte dentro de body)" data-new="2">&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+&lt;p class="help"&gt;Flechas - mover, espacio - nueva partida&lt;/p&gt;</pre>
+  <p>En CSS, una clase se elige con un <b>punto</b>:</p>
+  <pre class="code nonum" data-new="1-3">    .help {
+      color: #9fb8a5;
+    }</pre>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Selector</th><th>A quién elige</th><th>Ejemplo</th></tr>
+      <tr><td><code>canvas</code></td><td>a todos los elementos con esa etiqueta</td><td><code>&lt;canvas&gt;</code></td></tr>
+      <tr><td><code>#score</code></td><td>al único elemento con <code>id="score"</code></td><td><code>&lt;span id="score"&gt;</code></td></tr>
+      <tr><td><code>.help</code></td><td>a todos los elementos con <code>class="help"</code></td><td><code>&lt;p class="help"&gt;</code></td></tr>
+    </table>
+  </div>
+
+  <h2>Una manzana redonda</h2>
+  <p>El CSS no decora el lienzo: en él dibuja JavaScript. Vamos a hacer redonda la manzana. Añade una función después de <code>drawCell</code>:</p>
+  <pre class="code" data-file="snake.html (función nueva)" data-new="1-6">function drawApple() {
+  ctx.fillStyle = "red";
+  ctx.beginPath();
+  ctx.arc(apple.x * size + size / 2, apple.y * size + size / 2, size / 2 - 1, 0, Math.PI * 2);
+  ctx.fill();
+}</pre>
+  <ul>
+    <li><code>beginPath()</code> — «empiezo una figura nueva»;</li>
+    <li><code>arc(x, y, radio, inicio, fin)</code> — un arco con el centro en el punto (x, y). El centro de una casilla es su esquina más la mitad de su tamaño. El radio es media casilla. Y <code>0</code> y <code>Math.PI * 2</code> significan «del principio al final del círculo»: un círculo completo;</li>
+    <li><code>fill()</code> — rellenar la figura.</li>
+  </ul>
+  <p>En la función <code>draw</code>, cambia cómo se dibuja la manzana:</p>
+  <pre class="code nonum" data-new="2" data-del="1">  drawCell(apple.x, apple.y, "red");
+  drawApple();</pre>
+
+  <div class="box task">
+    <span class="title">🎯 Inventa tu propio estilo</span>
+    <ol>
+      <li>Elige tus colores para el fondo, el título y el borde. Puedes hacer una serpiente «espacial» sobre fondo azul oscuro o una «del desierto» sobre color arena.</li>
+      <li>Cambia los colores de la serpiente en <code>draw</code> y el color del campo en <code>clearField</code> para que combinen con la página.</li>
+      <li>Ponle sombra al título: <code>text-shadow: 3px 3px 0 black;</code></li>
+      <li>⭐ Dibuja ojos a la serpiente: dos cuadraditos negros dentro de la casilla de la cabeza, después de dibujar la cabeza.</li>
+    </ol>
+  </div>
+
+  <details class="full" open>
+    <summary>📄 El juego terminado: el archivo snake.html completo</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      background: #10241a;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: #7ee081;
+      font-size: 48px;
+      margin: 10px;
+    }
+    canvas {
+      border: 6px solid #3fa34d;
+      border-radius: 10px;
+    }
+    #score, #best {
+      color: yellow;
+      font-weight: bold;
+    }
+    .help {
+      color: #9fb8a5;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt; | Récord: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;p class="help"&gt;Flechas - mover, espacio - nueva partida&lt;/p&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake;
+    let apple = { x: 0, y: 0 };
+    let dx;
+    let dy;
+    let nextDx;
+    let nextDy;
+    let score;
+    let gameOver;
+    let timer;
+    let speed;
+    let best = Number(localStorage.getItem("snakeBest"));
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function drawApple() {
+      ctx.fillStyle = "red";
+      ctx.beginPath();
+      ctx.arc(apple.x * size + size / 2, apple.y * size + size / 2, size / 2 - 1, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function showScore() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("best").textContent = best;
+    }
+
+    function placeApple() {
+      apple.x = randomCell();
+      apple.y = randomCell();
+      while (isOnSnake(apple.x, apple.y)) {
+        apple.x = randomCell();
+        apple.y = randomCell();
+      }
+    }
+
+    function draw() {
+      clearField();
+      drawApple();
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      gameOver = true;
+      clearInterval(timer);
+      if (score &gt; best) {
+        best = score;
+        localStorage.setItem("snakeBest", best);
+        showScore();
+      }
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Fin del juego", 200, 200);
+      ctx.font = "18px sans-serif";
+      ctx.fillText("Pulsa espacio para jugar otra vez", 200, 240);
+    }
+
+    function step() {
+      dx = nextDx;
+      dy = nextDy;
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        showScore();
+        placeApple();
+        if (speed &gt; 60) {
+          speed = speed - 10;
+          clearInterval(timer);
+          timer = setInterval(step, speed);
+        }
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        nextDx = 0;
+        nextDy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        nextDx = 0;
+        nextDy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        nextDx = -1;
+        nextDy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        nextDx = 1;
+        nextDy = 0;
+      }
+      if (event.key === " " &amp;&amp; gameOver) {
+        startGame();
+      }
+    }
+
+    function startGame() {
+      snake = [
+        { x: 10, y: 10 },
+        { x: 9, y: 10 },
+        { x: 8, y: 10 }
+      ];
+      dx = 1;
+      dy = 0;
+      nextDx = 1;
+      nextDy = 0;
+      score = 0;
+      gameOver = false;
+      speed = 200;
+      showScore();
+      placeApple();
+      draw();
+      timer = setInterval(step, speed);
+    }
+
+    document.addEventListener("keydown", onKey);
+    startGame();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <div class="box ok">
+    <span class="title">🎉 ¡El juego está terminado del todo!</span>
+    Has escrito un juego de verdad: más de 150 líneas de código en tres lenguajes. Solo falta enseñárselo al mundo.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-14.html"><small>← Lección 14</small>Velocidad y récord</a>
+    <a class="next" href="lesson-16.html"><small>Lección 16 →</small>El juego en internet</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

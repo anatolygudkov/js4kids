@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funciones</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 5 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Funciones</h1>
+  <p class="lead">Escribir cada vez <code>fillStyle</code> y luego <code>fillRect</code> con cuatro números es aburrido. Vamos a inventar <b>nuestra propia orden</b>: «dibuja una casilla». Estas órdenes caseras se llaman <b>funciones</b>.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>dividir el campo en casillas, como una hoja de cuadros;</li>
+      <li>escribir las funciones <code>clearField</code> y <code>drawCell</code>;</li>
+      <li>descubrir qué son los parámetros de una función;</li>
+      <li>dibujar la serpiente con números de casilla en lugar de píxeles.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Un campo hecho de casillas</td></tr>
+      <tr><td>10 min</td><td>Primera función sin parámetros: <code>clearField</code></td></tr>
+      <tr><td>15 min</td><td>Una función con parámetros: <code>drawCell</code></td></tr>
+      <tr><td>15 min</td><td>Dibujamos por casillas, tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Un campo hecho de casillas</h2>
+  <p>La serpiente se mueve por <b>casillas</b>. Nuestro lienzo mide 400 por 400 píxeles. Si cada casilla mide 20 píxeles, en una fila caben 400 / 20 = <b>20 casillas</b>. Las numeramos desde cero: de 0 a 19.</p>
+  <figure>
+    <svg viewBox="0 0 470 300" width="470" role="img" aria-label="La casilla (3, 2) empieza en el píxel (60, 40)">
+      <rect x="40" y="40" width="240" height="240" class="svg-field"/>
+      <g stroke="#3a3d47" stroke-width="1">
+        <line x1="80" y1="40" x2="80" y2="280"/><line x1="120" y1="40" x2="120" y2="280"/><line x1="160" y1="40" x2="160" y2="280"/><line x1="200" y1="40" x2="200" y2="280"/><line x1="240" y1="40" x2="240" y2="280"/>
+        <line x1="40" y1="80" x2="280" y2="80"/><line x1="40" y1="120" x2="280" y2="120"/><line x1="40" y1="160" x2="280" y2="160"/><line x1="40" y1="200" x2="280" y2="200"/><line x1="40" y1="240" x2="280" y2="240"/>
+      </g>
+      <g font-size="13" class="svg-text" text-anchor="middle">
+        <text x="60" y="32">0</text><text x="100" y="32">1</text><text x="140" y="32">2</text><text x="180" y="32">3</text><text x="220" y="32">4</text><text x="260" y="32">5</text>
+        <text x="26" y="65">0</text><text x="26" y="105">1</text><text x="26" y="145">2</text><text x="26" y="185">3</text><text x="26" y="225">4</text><text x="26" y="265">5</text>
+      </g>
+      <rect x="161" y="121" width="38" height="38" fill="#32cd32"/>
+      <text x="300" y="120" font-size="15" class="svg-text" font-weight="700">casilla (3, 2)</text>
+      <text x="300" y="145" font-size="14" class="svg-text">x = 3 × 20 = 60 píxeles</text>
+      <text x="300" y="168" font-size="14" class="svg-text">y = 2 × 20 = 40 píxeles</text>
+    </svg>
+    <figcaption>Para saber los píxeles, multiplicamos el número de casilla por su tamaño (20).</figcaption>
+  </figure>
+  <p>¿Ves la regla? <b>Píxeles = número de casilla × 20.</b> Que esa multiplicación la haga el ordenador.</p>
+
+  <h2>La primera función</h2>
+  <p>Una función es una <b>receta</b>: escribimos una vez qué hay que hacer y le ponemos un nombre a la receta. Después basta con decir el nombre y el ordenador hace todos los pasos. Empezamos con una receta sencilla, «limpia el campo»:</p>
+  <pre class="code nonum">function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}</pre>
+  <ul>
+    <li><code>function</code> — «ahora viene una receta»;</li>
+    <li><code>clearField</code> — su nombre (<i>clear field</i> significa «limpiar el campo»);</li>
+    <li><code>()</code> — los paréntesis son obligatorios, aunque estén vacíos;</li>
+    <li>entre las llaves <code>{ }</code> van los pasos de la receta. Se escriben con sangría para que se vea que están dentro.</li>
+  </ul>
+  <p>Una receta escrita <b>no hace nada</b> por sí sola. Para que funcione, hay que <b>llamarla</b>: escribir su nombre con paréntesis:</p>
+  <pre class="code nonum">clearField();</pre>
+  <p>Ya conoces funciones que inventaron otras personas: <code>alert(...)</code>, <code>console.log(...)</code>, <code>ctx.fillRect(...)</code>. ¡Ahora sabes hacer las tuyas!</p>
+
+  <h2>Una función con parámetros</h2>
+  <p>Para dibujar una casilla hay que saber <b>dónde</b> y <b>de qué color</b>. Esos datos se le pasan a la función entre paréntesis. Se llaman <b>parámetros</b>:</p>
+  <pre class="code nonum">function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}</pre>
+  <p>Cuando escribimos <code>drawCell(3, 2, "lime")</code>, la función recibe tres cajas: en <code>x</code> va un 3, en <code>y</code> un 2 y en <code>color</code> va <code>"lime"</code>. Después multiplica los números de casilla por el tamaño <code>size</code> y dibuja.</p>
+  <div class="box tip">
+    <span class="title">💡 ¿Por qué size - 1?</span>
+    El cuadrado sale un píxel más pequeño que la casilla, y entre trozos vecinos queda una rendija finita. Así se ve de qué trozos está hecha la serpiente. Luego prueba a escribir solo <code>size</code> y compara.
+  </div>
+
+  <h2>Reescribimos el juego</h2>
+  <p>Ahora cambia el script de <code>snake.html</code>: las líneas viejas con <code>fillRect</code> ya no hacen falta.</p>
+  <div class="box tip">
+    <span class="title">💡 Sobre la sangría</span>
+    A partir de ahora las lecciones muchas veces muestran solo el trozo de código que va dentro de <code>&lt;script&gt;</code>, sin la sangría de la izquierda. En tu archivo esas líneas están desplazadas a la derecha porque van dentro de la etiqueta <code>&lt;script&gt;</code>. Déjalas así: al ordenador las sangrías le dan igual, están para que las personas lean mejor el código. Cómo queda todo junto lo puedes ver siempre en el archivo completo al final de la lección.
+  </div>
+  <pre class="code" data-file="snake.html (parte dentro de script)" data-new="3-19">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+
+function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}
+
+clearField();
+drawCell(10, 10, "lime");
+drawCell(9, 10, "lime");
+drawCell(8, 10, "lime");
+drawCell(15, 10, "red");</pre>
+  <p>Guarda y recarga. Una serpiente de tres trozos mira a la derecha, y delante tiene una manzana. Fíjate qué fácil es ahora mover los trozos: cambias el número de casilla y listo.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Errores frecuentes</span>
+    <ul>
+      <li>Falta la llave de cierre <code>}</code>: sale el error <i>missing } after function body</i>, «falta una <code>}</code> después del cuerpo de la función».</li>
+      <li>Llamas a la función, pero su nombre está escrito distinto (<code>drawcell</code> en lugar de <code>drawCell</code>): sale el error <i>drawcell is not defined</i>.</li>
+    </ul>
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Dibuja con casillas la primera letra de tu nombre.</li>
+      <li>Pon una manzana en cada una de las cuatro esquinas del campo. ¿Qué números tienen las casillas de las esquinas? (Pista: la última casilla es la 19, no la 20.)</li>
+      <li>Pon la cabeza de la serpiente de otro color, por ejemplo <code>"yellow"</code>.</li>
+      <li>⭐ Escribe una función <code>drawApple(x, y)</code> que dibuje una casilla roja. ¡Por dentro puede limitarse a llamar a <code>drawCell</code>!</li>
+    </ol>
+    Cuando termines, deja la serpiente y la manzana como en el código de arriba: la próxima lección empieza desde ahí.
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    clearField();
+    drawCell(10, 10, "lime");
+    drawCell(9, 10, "lime");
+    drawCell(8, 10, "lime");
+    drawCell(15, 10, "red");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé la diferencia entre <b>escribir</b> una función y <b>llamarla</b>.</li>
+    <li>Entiendo qué son los parámetros <code>x</code>, <code>y</code>, <code>color</code>.</li>
+    <li>Sé convertir un número de casilla en píxeles: número × 20.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-04.html"><small>← Lección 4</small>El lienzo y las coordenadas</a>
+    <a class="next" href="lesson-06.html"><small>Lección 6 →</small>Bucles</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

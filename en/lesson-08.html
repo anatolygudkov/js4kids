@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Snake Crawls</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 8 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>The snake crawls</h1>
+  <p class="lead">A cartoon is lots of pictures that quickly replace each other. Our game will work the same way: several times a second it moves the snake and draws a new picture. Today the snake comes to life!</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>learn a clever way to move the snake: head forward, tail off;</li>
+      <li>meet the array commands <code>unshift</code> and <code>pop</code>;</li>
+      <li>start a <code>setInterval</code> timer;</li>
+      <li>learn to set the direction with the variables <code>dx</code> and <code>dy</code>.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>How a snake crawls: the idea on paper</td></tr>
+      <tr><td>10 min</td><td><code>unshift</code> and <code>pop</code> in the console</td></tr>
+      <tr><td>15 min</td><td>The <code>step</code> function and the timer</td></tr>
+      <tr><td>10 min</td><td>Experiments with direction and speed</td></tr>
+    </table>
+  </div>
+
+  <h2>How a snake crawls</h2>
+  <p>You could move every piece of the snake one by one, but there's a simpler way. Look: to make the snake crawl one cell, it's enough to:</p>
+  <ol>
+    <li><b>add a new head</b> on the cell in front;</li>
+    <li><b>remove the last piece</b> of the tail.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 560 230" width="560" role="img" aria-label="A snake's step: a new head is added in front, the last piece of the tail is removed">
+      <g font-size="14" class="svg-text">
+        <text x="20" y="30" font-weight="700">Before:</text>
+        <text x="20" y="115" font-weight="700">New head:</text>
+        <text x="20" y="200" font-weight="700">After:</text>
+      </g>
+      <rect x="150" y="10" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="13" width="28" height="28" fill="#32cd32"/><rect x="290" y="13" width="28" height="28" fill="#32cd32"/><rect x="320" y="13" width="28" height="28" fill="#ffd43b"/>
+      <rect x="150" y="95" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="98" width="28" height="28" fill="#ff5555" opacity="0.35"/><rect x="290" y="98" width="28" height="28" fill="#32cd32"/><rect x="320" y="98" width="28" height="28" fill="#32cd32"/><rect x="350" y="98" width="28" height="28" fill="#ffd43b"/>
+      <text x="274" y="117" text-anchor="middle" font-size="16" fill="#ffffff">✕</text>
+      <text x="364" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">unshift</text>
+      <text x="274" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">pop</text>
+      <rect x="150" y="180" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="290" y="183" width="28" height="28" fill="#32cd32"/><rect x="320" y="183" width="28" height="28" fill="#32cd32"/><rect x="350" y="183" width="28" height="28" fill="#ffd43b"/>
+      <text x="470" y="203" font-size="14" class="svg-text">→ one cell right</text>
+    </svg>
+    <figcaption>The middle pieces stay where they are; only the head and the tail change.</figcaption>
+  </figure>
+  <p>Arrays have ready-made commands for this:</p>
+  <ul>
+    <li><code>snake.unshift(something)</code> — add an element <b>to the start</b> of the list (in place number 0);</li>
+    <li><code>snake.pop()</code> — remove the <b>last</b> element of the list.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Try it in the console</span>
+    Open <code>snake.html</code>, press <kbd>F12</kbd> and type these one at a time:
+    <pre class="code nonum">snake.unshift({ x: 11, y: 10 });
+snake.pop();
+draw();</pre>
+    The snake moved one cell to the right! Repeat these three lines a couple more times (the <kbd>↑</kbd> arrow in the console brings back earlier commands).
+  </div>
+
+  <h2>Which way to go: dx and dy</h2>
+  <p>The new head appears next to the old one. Exactly where depends on the direction. Let's make two variables:</p>
+  <ul>
+    <li><code>dx</code> — how many cells to move along x in one step;</li>
+    <li><code>dy</code> — how many cells to move along y.</li>
+  </ul>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Direction</th><th><code>dx</code></th><th><code>dy</code></th></tr>
+      <tr><td>right →</td><td>1</td><td>0</td></tr>
+      <tr><td>left ←</td><td>-1</td><td>0</td></tr>
+      <tr><td>down ↓</td><td>0</td><td>1</td></tr>
+      <tr><td>up ↑</td><td>0</td><td>-1</td></tr>
+    </table>
+  </div>
+  <p>(Remember that on the screen y grows <b>downwards</b>? That's why "up" is <code>-1</code>.)</p>
+  <p>Then the new head is the old head plus the shift:</p>
+  <pre class="code nonum">let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+
+  <h2>One step of the game</h2>
+  <p>Let's put it all into a function called <code>step</code>: make a new head, add it, remove the tail, redraw.</p>
+  <pre class="code" data-file="snake.html (part inside script)" data-new="7-8,16-22,24">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+let dx = 1;
+let dy = 0;
+
+function clearField() { ... }      // no changes
+
+function drawCell(x, y, color) { ... }   // no changes
+
+function draw() { ... }            // no changes
+
+function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  snake.unshift(head);
+  snake.pop();
+  draw();
+}
+
+draw();
+setInterval(step, 200);</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Don't type the dots!</span>
+    <code>{ ... }   // no changes</code> means the function stays the same as before. Don't delete it! If you're unsure, look at the whole file at the end of the lesson.
+  </div>
+  <p>Save, refresh… The snake is crawling! 🎉</p>
+
+  <h2>The timer</h2>
+  <pre class="code nonum">setInterval(step, 200);</pre>
+  <p><code>setInterval</code> means "call the function <code>step</code> again and again, every 200 milliseconds". A millisecond is one thousandth of a second, so 200 milliseconds is a fifth of a second. That means the snake takes 5 steps a second.</p>
+  <div class="box warn">
+    <span class="title">⚠️ No brackets!</span>
+    We write <code>setInterval(step, 200)</code>, not <code>setInterval(step(), 200)</code>. We don't call <code>step</code> ourselves — we <b>hand</b> it to the timer, so that the timer calls it when the time comes.
+  </div>
+  <p>And then the snake crawls off the edge of the field and disappears… It hasn't vanished: its coordinates just became bigger than 19, and it's crawling somewhere outside the canvas. We'll fix that in the next lesson.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Experiments</span>
+    <ol>
+      <li>Change <code>200</code> to <code>500</code>, then to <code>50</code>. How does the speed change?</li>
+      <li>Make the snake crawl down. Which <code>dx</code> and <code>dy</code> do you need?</li>
+      <li>Make the snake crawl left. Watch closely what happens right at the start. Why?</li>
+      <li>What happens if <code>dx = 1</code> and <code>dy = 1</code> at the same time?</li>
+      <li>⭐ Comment out the line <code>snake.pop();</code> (put <code>//</code> in front of it). What happens to the snake? Remember this — it'll come in handy when the snake starts eating apples!</li>
+    </ol>
+    At the end, put back <code>dx = 1</code>, <code>dy = 0</code>, speed 200, and the line <code>snake.pop();</code> without the comment.
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I can explain why adding a head and removing the tail is enough to move.</li>
+    <li>I know what <code>unshift</code> and <code>pop</code> do.</li>
+    <li>I understand that <code>setInterval(step, 200)</code> calls <code>step</code> 5 times a second.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-07.html"><small>← Lesson 7</small>Arrays and objects</a>
+    <a class="next" href="lesson-09.html"><small>Lesson 9 →</small>Conditions</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

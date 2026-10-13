@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrays and Objects</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 7 of 16 <span class="time">⏱ 50 minutes</span></p>
+  <h1>Arrays and objects</h1>
+  <p class="lead">Right now the snake is drawn with three separate commands. But it's going to crawl and grow, and the computer has to <b>remember</b> where each of its pieces is. That's what <b>objects</b> and <b>arrays</b> are for.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>describe the apple with an object <code>{ x: 15, y: 10 }</code>;</li>
+      <li>describe the snake with an array — a list of pieces;</li>
+      <li>draw the whole snake with a loop;</li>
+      <li>write a <code>draw</code> function that draws the whole game.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Objects: the apple</td></tr>
+      <tr><td>15 min</td><td>Arrays: lists and numbering from zero</td></tr>
+      <tr><td>15 min</td><td>The snake is an array of objects, the <code>draw</code> function</td></tr>
+      <tr><td>10 min</td><td>Controlling the snake from the console, tasks</td></tr>
+    </table>
+  </div>
+
+  <h2>An object is a box with compartments</h2>
+  <p>An apple has two numbers: x and y. You could make two variables, <code>appleX</code> and <code>appleY</code>, but it's handier to put them in one box with compartments. A box like that is called an <b>object</b>:</p>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };</pre>
+  <p>An object is written in curly brackets. Inside are its <b>properties</b>: a name, a colon, a value. Properties are separated by commas. You get a value out with a dot:</p>
+  <pre class="code nonum">console.log(apple.x);   // 15
+console.log(apple.y);   // 10
+apple.x = 3;            // moved the apple</pre>
+  <p>You've seen a dot like this before: <code>ctx.fillStyle</code>, <code>console.log</code>. Those are objects with properties too!</p>
+
+  <h2>An array is a list</h2>
+  <p>An <b>array</b> is a list where values stand in order. It's written in square brackets:</p>
+  <pre class="code nonum">let colors = ["red", "green", "blue"];
+console.log(colors[0]);       // red
+console.log(colors[2]);       // blue
+console.log(colors.length);   // 3</pre>
+  <ul>
+    <li>Every place in the list has a number. It's called an <b>index</b>.</li>
+    <li>Numbering starts <b>from zero</b>! The first element is <code>colors[0]</code>, the second is <code>colors[1]</code>.</li>
+    <li><code>colors.length</code> is the length of the list — how many elements it has.</li>
+  </ul>
+  <div class="box warn">
+    <span class="title">⚠️ The last element</span>
+    If a list has 3 elements, their numbers are 0, 1, 2. There's no element number 3: <code>colors[3]</code> gives <code>undefined</code> ("not defined"). The last element always has the number <code>length - 1</code>.
+  </div>
+
+  <h2>The snake is a list of pieces</h2>
+  <p>Each piece of the snake is a cell with x and y coordinates — that is, an object. And the whole snake is a list of such objects. The first one in the list (number 0) will always be the <b>head</b>:</p>
+  <pre class="code nonum">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];</pre>
+  <figure>
+    <svg viewBox="0 0 460 150" width="460" role="img" aria-label="A snake of three cells: index 0 is the head at cell 10,10, index 1 is 9,10, index 2 is the tail at 8,10">
+      <rect x="20" y="20" width="420" height="70" rx="10" class="svg-field"/>
+      <rect x="290" y="35" width="40" height="40" fill="#ffd43b"/>
+      <rect x="248" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="206" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="380" y="35" width="40" height="40" fill="#ff3b3b"/>
+      <g font-size="14" text-anchor="middle" class="svg-text">
+        <text x="310" y="112" font-weight="700">[0]</text>
+        <text x="268" y="112" font-weight="700">[1]</text>
+        <text x="226" y="112" font-weight="700">[2]</text>
+        <text x="320" y="134">head</text>
+        <text x="216" y="134">tail</text>
+        <text x="400" y="112" font-weight="700">apple</text>
+        <text x="400" y="134">(15, 10)</text>
+        <text x="90" y="60" fill="#ffffff">snake =</text>
+      </g>
+    </svg>
+    <figcaption>The head is element number 0, the tail is the last element of the list.</figcaption>
+  </figure>
+  <p>How do you get the head's coordinates? First take the list element, then its property: <code>snake[0].x</code> is 10, <code>snake[2].x</code> is 8.</p>
+
+  <h2>Drawing the whole snake with a loop</h2>
+  <p>The loop goes through all the pieces with numbers from 0 to <code>snake.length - 1</code> and draws each one:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; snake.length; i++) {
+  drawCell(snake[i].x, snake[i].y, "lime");
+}</pre>
+  <p>However many pieces the snake has — 3 or 300 — this loop will draw them all.</p>
+
+  <h2>The draw function</h2>
+  <p>Let's collect all the drawing into one function, <code>draw</code>: clear the field, draw the apple and the snake. We'll draw the head in yellow <b>on top</b> of the green piece, so you can see which way the snake is facing. Rewrite the script like this (new lines are green, lines to delete are red):</p>
+  <pre class="code" data-file="snake.html (part inside script)" data-new="6-12,23-31,37" data-del="32-36">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+let cells = 20;
+
+let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+
+function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}
+
+function draw() {
+  clearField();
+  drawCell(apple.x, apple.y, "red");
+  for (let i = 0; i &lt; snake.length; i++) {
+    drawCell(snake[i].x, snake[i].y, "lime");
+  }
+  drawCell(snake[0].x, snake[0].y, "yellow");
+}
+
+clearField();
+drawCell(10, 10, "lime");
+drawCell(9, 10, "lime");
+drawCell(8, 10, "lime");
+drawCell(15, 10, "red");
+draw();</pre>
+  <div class="box tip">
+    <span class="title">💡 Order in a program</span>
+    At the top — variables (what we remember), in the middle — functions (what we can do), at the bottom — calls (what we do right now). This order helps you not get lost when the program gets long.
+  </div>
+
+  <h2>A console trick</h2>
+  <p>You can change the program's variables straight from the console! Open it (<kbd>F12</kbd>) and type these one at a time, pressing <kbd>Enter</kbd> after each line:</p>
+  <pre class="code nonum">snake.push({ x: 7, y: 10 });
+draw();</pre>
+  <p>The snake got longer! The <code>push</code> command adds a new element <b>to the end</b> of the list. Try some more:</p>
+  <pre class="code nonum">snake.length
+apple.x = 2;
+draw();</pre>
+  <p>If you refresh the page (<kbd>F5</kbd>), everything goes back to how it was: the program starts again from the beginning.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Add two more pieces to the <code>snake</code> array in the code, so the snake has five.</li>
+      <li>Make a snake that turns: let the tail bend downwards (for example, <code>{ x: 8, y: 11 }</code>, <code>{ x: 8, y: 12 }</code>).</li>
+      <li>What happens if you swap the first and the last pieces in the array? Which way is the head "facing" now?</li>
+      <li>⭐ Add a second apple: an <code>apple2</code> object and a line in <code>draw</code> that draws it.</li>
+    </ol>
+    After the tasks, put the <code>snake</code> array back to three pieces, like in the lesson's code.
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    draw();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I know that an object is written in <code>{ }</code> and an array in <code>[ ]</code>.</li>
+    <li>I remember that array numbers start from zero, and the snake's head is <code>snake[0]</code>.</li>
+    <li>I understand how a loop draws a snake of any length.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-06.html"><small>← Lesson 6</small>Loops</a>
+    <a class="next" href="lesson-08.html"><small>Lesson 8 →</small>The snake crawls</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

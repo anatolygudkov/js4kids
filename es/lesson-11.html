@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La manzana y el crecimiento</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 11 de 16 <span class="time">⏱ 50 minutos</span></p>
+  <h1>La manzana y el crecimiento</h1>
+  <p class="lead">La serpiente atraviesa la manzana y ni se entera. ¡Vamos a enseñarle a comer! Se come una manzana: crece un trozo, gana un punto, y aparece una manzana nueva en un sitio al azar.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>obtener números al azar con <code>Math.random</code> y <code>Math.floor</code>;</li>
+      <li>escribir una función que <b>devuelve</b> una respuesta (<code>return</code>);</li>
+      <li>enseñar a la serpiente a comer y a crecer;</li>
+      <li>mostrar los puntos en la página.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Números al azar en la consola</td></tr>
+      <tr><td>10 min</td><td>La función <code>randomCell</code> y <code>return</code></td></tr>
+      <tr><td>15 min</td><td>La serpiente come y crece</td></tr>
+      <tr><td>15 min</td><td>Los puntos en la página, jugar, tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Números al azar</h2>
+  <p>Abre la consola y escribe varias veces:</p>
+  <pre class="code nonum">Math.random()</pre>
+  <p>Cada vez sale un número decimal nuevo entre 0 y 1 (pero nunca exactamente 1): <code>0.7364…</code>, <code>0.0912…</code>. <code>Math</code> es un conjunto de órdenes matemáticas que trae JavaScript, y <code>random</code> significa «al azar».</p>
+  <p>Pero nosotros necesitamos una casilla del 0 al 19. Lo haremos en dos pasos:</p>
+  <ol>
+    <li><code>Math.random() * 20</code> — un número al azar entre 0 y 19,999…;</li>
+    <li><code>Math.floor(...)</code> — quitar la parte decimal (<i>floor</i> significa «suelo»: redondear hacia abajo). De 13.82 sale 13.</li>
+  </ol>
+  <pre class="code nonum">Math.floor(Math.random() * 20)</pre>
+  <p>Repítelo muchas veces en la consola: saldrán números enteros del 0 al 19, como en un dado de veinte caras.</p>
+
+  <h2>Una función que responde</h2>
+  <p>Hasta ahora nuestras funciones <b>hacían</b> algo: dibujaban, movían. Pero también hay funciones que <b>responden</b>: devuelven un resultado. Para eso existe la palabra <code>return</code> («devolver»):</p>
+  <pre class="code nonum">function randomCell() {
+  return Math.floor(Math.random() * cells);
+}</pre>
+  <p>Ahora puedes escribir <code>randomCell()</code> donde necesites un número al azar: <code>apple.x = randomCell();</code>, y en <code>apple.x</code> entrará la respuesta de la función. Igual que <code>prompt</code> devolvía lo que había escrito la persona.</p>
+
+  <h2>La serpiente come</h2>
+  <p>¿Cómo sabemos que la serpiente se ha comido la manzana? Su cabeza nueva está en la misma casilla que la manzana: coinciden la x <b>y</b> la y.</p>
+  <pre class="code nonum">if (head.x === apple.x &amp;&amp; head.y === apple.y) {</pre>
+  <p>Y ahora el truco. ¿Te acuerdas del experimento de la lección 8, cuando quitamos <code>snake.pop()</code> y la serpiente crecía? Haremos justo eso: si la serpiente se ha comido la manzana, <b>no quitamos la cola</b>. La cabeza se ha añadido, la cola se ha quedado, ¡y la serpiente es un trozo más larga!</p>
+
+  <h3>Cambiamos el programa</h3>
+  <p>1. En el HTML, entre el título y el lienzo, añade una línea con los puntos:</p>
+  <pre class="code" data-file="snake.html (parte dentro de body)" data-new="2">&lt;h1&gt;Serpiente&lt;/h1&gt;
+&lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;</pre>
+  <p><code>&lt;p&gt;</code> es un párrafo, y <code>&lt;span&gt;</code> es un trocito de texto dentro de él. Le hemos dado el nombre <code>id="score"</code> para encontrarlo desde JavaScript y cambiar el número.</p>
+
+  <p>2. Añade una variable para los puntos después de <code>dx</code> y <code>dy</code>:</p>
+  <pre class="code nonum" data-new="3">let dx = 1;
+let dy = 0;
+let score = 0;</pre>
+
+  <p>3. Añade la función <code>randomCell</code> después de <code>drawCell</code>:</p>
+  <pre class="code nonum" data-new="1-3">function randomCell() {
+  return Math.floor(Math.random() * cells);
+}</pre>
+
+  <p>4. En la función <code>step</code>, cambia la línea <code>snake.pop();</code> por una comprobación:</p>
+  <pre class="code" data-file="snake.html (final de la función step)" data-new="3-11" data-del="2">  snake.unshift(head);
+  snake.pop();
+
+  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    document.getElementById("score").textContent = score;
+    apple.x = randomCell();
+    apple.y = randomCell();
+  } else {
+    snake.pop();
+  }
+
+  draw();
+}</pre>
+  <p>Leámoslo en español: «<b>Si</b> la cabeza está en la manzana, sumar un punto, mostrarlo en la página y llevar la manzana a un sitio al azar. <b>Si no</b>, quitar la cola».</p>
+  <p><code>document.getElementById("score")</code> encuentra nuestro <code>&lt;span&gt;</code> en la página, y <code>.textContent = score</code> cambia el texto de dentro por el número nuevo.</p>
+  <p>Guarda, recarga ¡e intenta atrapar la manzana! 🍎</p>
+
+  <div class="box tip">
+    <span class="title">💡 Depurar con la consola</span>
+    Si algo va mal, añade un <code>console.log</code> en el sitio adecuado, por ejemplo <code>console.log("¡Ñam! Puntos: " + score);</code> dentro del <code>if</code>. Así ves si la condición se cumple. Cuando lo tengas claro, borra esa línea.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Juega y consigue 10 puntos. ¿Cuánto mide ahora la serpiente?</li>
+      <li>Haz que al empezar el juego la manzana también esté en un sitio al azar. Pista: llama a <code>randomCell()</code> justo al principio, al crear <code>apple</code>. ¿Hace falta mover algo en el programa para que la función ya se conozca? (Compruébalo: JavaScript conoce las funciones de antemano, incluso antes de su línea.)</li>
+      <li>Haz que cada manzana valga 10 puntos en lugar de 1.</li>
+      <li>⭐ A veces la manzana aparece justo dentro de la serpiente. ¿Te has dado cuenta? Piensa cómo arreglarlo. Lo haremos en la lección 13.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+    let score = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        document.getElementById("score").textContent = score;
+        apple.x = randomCell();
+        apple.y = randomCell();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé obtener un número al azar del 0 al 19.</li>
+    <li>Sé qué hace <code>return</code>.</li>
+    <li>Sé explicar por qué la serpiente crece cuando no llamamos a <code>pop</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-10.html"><small>← Lección 10</small>Control con las flechas</a>
+    <a class="next" href="lesson-12.html"><small>Lección 12 →</small>Fin del juego</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

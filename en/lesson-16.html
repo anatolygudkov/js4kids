@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Game on the Internet</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 16 of 16 <span class="time">⏱ 45–60 minutes</span></p>
+  <h1>The game on the internet</h1>
+  <p class="lead">Until now the game has only lived in the <code>code</code> folder on your Raspberry Pi. Today we'll put it on the internet, and anyone with the link will be able to play it: friends, grandparents, classmates. A free service called <b>GitHub Pages</b> will help us.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>prepare an <code>index.html</code> file for publishing;</li>
+      <li>create a repository on the GitHub website together with a grown-up;</li>
+      <li>upload the game there and switch on GitHub Pages;</li>
+      <li>get a link to your game;</li>
+      <li>think up ways to improve the game further.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>What GitHub and GitHub Pages are</td></tr>
+      <tr><td>5 min</td><td>Preparing the <code>index.html</code> file</td></tr>
+      <tr><td>20 min</td><td>Repository, uploading the file, switching on Pages</td></tr>
+      <tr><td>5 min</td><td>Play from the link, share it</td></tr>
+      <tr><td>10–25 min</td><td>What's next: ideas and a bonus for phones</td></tr>
+    </table>
+  </div>
+
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 For grown-ups</span>
+    <p>GitHub's rules only allow people aged 13 and over to have their own account. So use <b>a grown-up's account</b> (your own, or one created for this with your email) and go through the lesson together with your child. You'll need internet access.</p>
+    <p>No git or terminal is needed: the file is uploaded through the website with a button. If GitHub's interface has changed slightly by now, look for buttons with the same names.</p>
+    <p>The published game will be visible to everyone. Check that it contains no personal information: surname, address, school.</p>
+  </div>
+
+  <h2>What GitHub is</h2>
+  <p><b>GitHub</b> is a website where programmers from all over the world keep their programs. Each program lives in its own <b>repository</b> ("repo" for short). It's like a folder on the internet.</p>
+  <p><b>GitHub Pages</b> is a GitHub service that turns a repository into a real website with its own link. Our game is an HTML page, so it fits perfectly!</p>
+
+  <h2>Step 1. Prepare the file</h2>
+  <p>When a website is opened by its link, the first thing it looks for is a page called <code>index.html</code> (the "main page"). Let's make a copy of the game with that name:</p>
+  <ol class="steps">
+    <li>Open <code>snake.html</code> in Geany.</li>
+    <li><b>File → Save As</b> (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>), folder <b>code</b>, name <code>index.html</code>. Click <b>Save</b>.</li>
+    <li>Now Geany has <code>index.html</code> open. Close that tab: you'll keep changing your game in <code>snake.html</code>, and <code>index.html</code> is just the copy for the internet.</li>
+  </ol>
+  <p>Look in the file manager: the <b>code</b> folder now has three files — <code>test.html</code>, <code>snake.html</code> and <code>index.html</code>.</p>
+
+  <h2>Step 2. Create a repository</h2>
+  <ol class="steps">
+    <li>Open <b>github.com</b> in the browser and <b>Sign in</b>. A grown-up does this.</li>
+    <li>In the top right corner click <b>+</b> and choose <b>New repository</b>.</li>
+    <li>In the <b>Repository name</b> box type <code>snake</code>.</li>
+    <li>Check that <b>Public</b> is selected: GitHub Pages works for free with public repositories.</li>
+    <li>Click the green <b>Create repository</b> button.</li>
+  </ol>
+
+  <h2>Step 3. Upload the game</h2>
+  <ol class="steps">
+    <li>On the page of the new, empty repository, find the link <b>uploading an existing file</b> and click it. (If the repository isn't empty: the <b>Add file → Upload files</b> button.)</li>
+    <li>Click <b>choose your files</b>, open your home folder → <b>code</b> and pick <code>index.html</code>. You can also just drag the file with the mouse from the file manager into the browser window.</li>
+    <li>At the bottom of the page click the green <b>Commit changes</b> button.</li>
+  </ol>
+  <p>Now <code>index.html</code> shows in the repository's list of files. Your code is on the internet!</p>
+
+  <h2>Step 4. Switch on GitHub Pages</h2>
+  <ol class="steps">
+    <li>At the top of the repository page click the <b>Settings</b> tab (the gear icon).</li>
+    <li>In the menu on the left find and click <b>Pages</b>.</li>
+    <li>In the <b>Build and deployment</b> section, in the <b>Source</b> box, choose <b>Deploy from a branch</b>.</li>
+    <li>In the <b>Branch</b> box choose <b>main</b>, and leave the folder next to it as <b>/ (root)</b>. Click <b>Save</b>.</li>
+    <li>Wait a minute or two and refresh the page (<kbd>F5</kbd>). At the top you'll see <b>Your site is live at…</b> and a <b>Visit site</b> button.</li>
+  </ol>
+  <p>The address will look like this:</p>
+  <pre class="console">https://ACCOUNT-NAME.github.io/snake/</pre>
+  <p>Click <b>Visit site</b>, and there it is — your Snake on the internet! 🎉🐍 Copy the link from the address bar and send it to your friends.</p>
+  <div class="box tip">
+    <span class="title">💡 The high score on the internet</span>
+    The game on the internet has its own high score, separate from the one in your <code>code</code> folder. And every player has their own on their computer too: <code>localStorage</code> lives in the browser where the game is played.
+  </div>
+
+  <h2>How to update the game</h2>
+  <p>If you improve something in the game:</p>
+  <ol class="steps">
+    <li>Change and test <code>snake.html</code> as usual.</li>
+    <li>Save it again as <code>index.html</code> with "Save As". Geany will ask whether to replace the file — say yes. Close the <code>index.html</code> tab.</li>
+    <li>On GitHub, in the <code>snake</code> repository: <b>Add file → Upload files</b>, choose the new <code>index.html</code> and click <b>Commit changes</b>. The old file is replaced by the new one.</li>
+    <li>Wait a minute or two and refresh the game's page.</li>
+  </ol>
+
+  <div class="box warn">
+    <span class="title">⚠️ If it doesn't work</span>
+    <ul>
+      <li><b>A 404 page (not found)?</b> Wait a couple more minutes — GitHub Pages doesn't switch on instantly. Check that the file is called exactly <code>index.html</code>, in small letters.</li>
+      <li><b>A list of files or code text instead of the game?</b> Check that the Pages settings have the <b>main</b> branch and the <b>/ (root)</b> folder selected.</li>
+      <li><b>The game opened but doesn't work?</b> Open the console (<kbd>F12</kbd>) — you already know how to read errors!</li>
+    </ul>
+  </div>
+
+  <h2>Bonus: playing on a phone</h2>
+  <p>You can open the link on a phone too, but a phone has no keyboard with arrows. Let's add buttons to the screen! There's a trick here: the <code>onKey</code> function only needs <code>event.key</code>, so a button can call it itself and "pretend" to be a key.</p>
+  <p>Add this to <code>snake.html</code> under the <code>&lt;p class="help"&gt;</code> hint:</p>
+  <pre class="code" data-file="snake.html (part inside body)" data-new="1-11">&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowUp' })"&gt;Up&lt;/button&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowLeft' })"&gt;Left&lt;/button&gt;
+  &lt;button onclick="onKey({ key: ' ' })"&gt;Start&lt;/button&gt;
+  &lt;button onclick="onKey({ key: 'ArrowRight' })"&gt;Right&lt;/button&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowDown' })"&gt;Down&lt;/button&gt;
+&lt;/p&gt;</pre>
+  <ul>
+    <li><code>&lt;button&gt;</code> — a button;</li>
+    <li><code>onclick</code> — what to do when the button is pressed (that's an event too, like <code>keydown</code>);</li>
+    <li><code>{ key: 'ArrowUp' }</code> — we made an object ourselves that looks like a real event. Inside double quotes we write text in <b>single</b> quotes <code>'…'</code>, so the quotes don't get mixed up.</li>
+  </ul>
+  <p>And a little CSS in <code>&lt;style&gt;</code>, so the buttons are easy to press with a finger and the field fits on a narrow screen:</p>
+  <pre class="code nonum" data-new="1-9">    button {
+      font-size: 20px;
+      width: 110px;
+      height: 56px;
+      margin: 4px;
+    }
+    canvas {
+      max-width: 90%;
+    }</pre>
+  <p>Check on the computer that the buttons work, then update <code>index.html</code> on GitHub and open the link on a phone.</p>
+
+  <h2>What you can do now</h2>
+  <p>Look back: starting from zero, you've learned to create files, write code and find mistakes, and you've put your own game on the internet. Along the way you met the main ideas of programming, which exist in every language:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Idea</th><th>Where it was in Snake</th></tr>
+      <tr><td>Variables</td><td><code>score</code>, <code>speed</code>, <code>dx</code>, <code>dy</code></td></tr>
+      <tr><td>Functions</td><td><code>drawCell</code>, <code>step</code>, <code>startGame</code></td></tr>
+      <tr><td>Functions that answer (<code>return</code>)</td><td><code>randomCell</code>, <code>isOnSnake</code></td></tr>
+      <tr><td>Conditions</td><td>did it eat the apple, did it hit a wall</td></tr>
+      <tr><td><code>for</code> and <code>while</code> loops</td><td>drawing the snake, finding a free spot for the apple</td></tr>
+      <tr><td>Arrays and objects</td><td>the snake is a list of cells <code>{ x, y }</code></td></tr>
+      <tr><td>Events</td><td>key and button presses</td></tr>
+      <tr><td>Timer</td><td>the snake crawls by itself</td></tr>
+      <tr><td>Storing data</td><td>the high score in <code>localStorage</code></td></tr>
+      <tr><td>Debugging</td><td>the console, reading errors, the bug hunt</td></tr>
+    </table>
+  </div>
+
+  <h2>What's next? Ideas for improvements</h2>
+  <p>Real programmers never finish a game: there's always something else to add. Choose what you like. The stars show how hard it is.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Idea</th><th>Difficulty</th><th>Hint</th></tr>
+      <tr><td>Pause on the <kbd>P</kbd> key</td><td>⭐</td><td>a <code>paused</code> variable and <code>return</code> at the start of <code>step</code> (lesson 13)</td></tr>
+      <tr><td>Eyes on the snake</td><td>⭐</td><td>two small <code>fillRect</code>s on top of the head</td></tr>
+      <tr><td>Rainbow snake</td><td>⭐</td><td>an array of colours and <code>colors[i % colors.length]</code> in the drawing loop</td></tr>
+      <tr><td>"Portals" mode on the <kbd>M</kbd> key</td><td>⭐⭐</td><td>a flag variable and the portal code from lesson 9</td></tr>
+      <tr><td>A golden apple worth 5 points</td><td>⭐⭐</td><td>an <code>apple.gold</code> property and <code>Math.random() &lt; 0.2</code></td></tr>
+      <tr><td>Rocks as obstacles</td><td>⭐⭐</td><td>a <code>rocks</code> array, checked like in <code>isOnSnake</code></td></tr>
+      <tr><td>A chequered field</td><td>⭐⭐</td><td>two nested loops and <code>(x + y) % 2</code> to alternate the colour</td></tr>
+      <tr><td>Levels: every 5 apples a new level with rocks</td><td>⭐⭐⭐</td><td>a <code>level</code> variable</td></tr>
+      <tr><td>Two snakes for two players (arrows and WASD)</td><td>⭐⭐⭐</td><td>a second array, its own <code>dx</code>/<code>dy</code>, <code>event.code</code></td></tr>
+    </table>
+  </div>
+
+  <div class="box ok">
+    <span class="title">🏆 Congratulations!</span>
+    You've finished the whole course and made a real game, from the first line to publishing it on the internet. You're a programmer now! Think up your next game: "Breakout", "Tetris", "Battleships"… You already have all the tools you need.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-15.html"><small>← Lesson 15</small>Making it pretty</a>
+    <a class="next" href="cheatsheet.html"><small>Always at hand →</small>Cheat sheet</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

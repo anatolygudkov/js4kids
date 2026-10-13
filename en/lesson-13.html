@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Game</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 13 of 16 <span class="time">⏱ 50 minutes</span></p>
+  <h1>New game</h1>
+  <p class="lead">Lose, then press <kbd>F5</kbd>… Not very handy! Let's do it like in real games: press Space and a new game starts. For that we'll <b>rearrange</b> the program a little. We'll also stop the apple from appearing inside the snake.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>collect everything needed to start a game into a <code>startGame</code> function;</li>
+      <li>add a flag variable called <code>gameOver</code>;</li>
+      <li>make Space restart the game;</li>
+      <li>meet the <code>while</code> loop.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>What should happen in a new game</td></tr>
+      <tr><td>20 min</td><td>Rearranging the program: <code>startGame</code>, <code>showScore</code>, <code>gameOver</code></td></tr>
+      <tr><td>10 min</td><td>Restart with Space</td></tr>
+      <tr><td>10 min</td><td>No apple on the snake: the <code>while</code> loop</td></tr>
+      <tr><td>5 min</td><td>Play!</td></tr>
+    </table>
+  </div>
+
+  <h2>What "start again" means</h2>
+  <p>When a new game begins, we need to:</p>
+  <ol>
+    <li>put the three-piece snake back in the middle of the field;</li>
+    <li>point it to the right;</li>
+    <li>reset the score to zero;</li>
+    <li>put the apple in a new place;</li>
+    <li>draw the field and start the timer.</li>
+  </ol>
+  <p>Right now almost all of this happens at the very start of the program, when we create the variables. Let's move it into a <code>startGame</code> function so it can be called as many times as we like.</p>
+  <div class="box tip">
+    <span class="title">💡 This is called refactoring</span>
+    When programmers rearrange code to make it more convenient, while the game still works the same way, it's called <b>refactoring</b>. It's a normal part of the job. Take your time, and after each step check that the game still starts.
+  </div>
+
+  <h2>Step 1. Empty boxes</h2>
+  <p>We'll keep the variables at the top, but put values into them inside <code>startGame</code>. If you write <code>let</code> without <code>=</code>, you get an empty box. Let's also add two new ones: <code>gameOver</code> and <code>timer</code>.</p>
+  <pre class="code" data-file="snake.html (start of the script)" data-new="15-21" data-del="6-14">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+let cells = 20;
+
+let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+let dx = 1;
+let dy = 0;
+let score = 0;
+let snake;
+let apple = { x: 0, y: 0 };
+let dx;
+let dy;
+let score;
+let gameOver;
+let timer;</pre>
+  <p><code>gameOver</code> is a <b>flag</b>: it holds <code>true</code> or <code>false</code>. It tells the program whether the game is still going or has already finished.</p>
+
+  <h2>Step 2. The startGame function</h2>
+  <p>Add it <b>at the very end</b>, after the <code>onKey</code> function:</p>
+  <pre class="code" data-file="snake.html (new function)" data-new="1-15">function startGame() {
+  snake = [
+    { x: 10, y: 10 },
+    { x: 9, y: 10 },
+    { x: 8, y: 10 }
+  ];
+  dx = 1;
+  dy = 0;
+  score = 0;
+  gameOver = false;
+  showScore();
+  placeApple();
+  draw();
+  timer = setInterval(step, 200);
+}</pre>
+  <p>And the last lines of the program become:</p>
+  <pre class="code" data-file="snake.html (end of the script)" data-new="4" data-del="2-3">document.addEventListener("keydown", onKey);
+draw();
+let timer = setInterval(step, 200);
+startGame();</pre>
+  <p>Notice: inside <code>startGame</code> we write <code>snake = …</code> and <code>timer = …</code> <b>without</b> <code>let</code>, because the boxes were already created at the top. If you add <code>let</code>, you get a new box that only lives inside the function, and the rest of the program can't see it.</p>
+
+  <h2>Step 3. New helpers</h2>
+  <p>In <code>startGame</code> we called two functions that don't exist yet: <code>showScore</code> and <code>placeApple</code>. Let's write them (after <code>isOnSnake</code>):</p>
+  <pre class="code" data-file="snake.html (new functions)" data-new="1-12">function showScore() {
+  document.getElementById("score").textContent = score;
+}
+
+function placeApple() {
+  apple.x = randomCell();
+  apple.y = randomCell();
+  while (isOnSnake(apple.x, apple.y)) {
+    apple.x = randomCell();
+    apple.y = randomCell();
+  }
+}</pre>
+  <h3>The while loop</h3>
+  <p><code>while</code> repeats the code in its curly brackets <b>as long as</b> the condition is true. Here it means: "<b>while</b> the apple is on the snake, move it to a new random place". As soon as the apple lands on a free cell, the condition becomes <code>false</code> and the loop ends.</p>
+  <p>A <code>for</code> loop is handy when you know <b>how many times</b> to repeat. <code>while</code> is for repeating <b>until it works out</b>.</p>
+  <p>Now the <code>step</code> function can use the new helpers:</p>
+  <pre class="code" data-file="snake.html (step function)" data-new="6-7" data-del="3-5">  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    document.getElementById("score").textContent = score;
+    apple.x = randomCell();
+    apple.y = randomCell();
+    showScore();
+    placeApple();
+  } else {
+    snake.pop();
+  }</pre>
+
+  <h2>Step 4. Space starts a new game</h2>
+  <p>In <code>endGame</code> we'll raise the flag and add a hint for the player:</p>
+  <pre class="code" data-file="snake.html (endGame function)" data-new="2,8-9">function endGame() {
+  gameOver = true;
+  clearInterval(timer);
+  ctx.fillStyle = "white";
+  ctx.font = "32px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Game over", 200, 200);
+  ctx.font = "18px sans-serif";
+  ctx.fillText("Press Space to play again", 200, 240);
+}</pre>
+  <p>And in <code>onKey</code>, after the four arrows, add one more condition:</p>
+  <pre class="code" data-file="snake.html (end of the onKey function)" data-new="1-3">  if (event.key === " " &amp;&amp; gameOver) {
+    startGame();
+  }
+}</pre>
+  <p>The Space key is called <code>" "</code> — just a space in quotes.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Why check gameOver?</span>
+    As an experiment, try removing <code>&amp;&amp; gameOver</code> and pressing Space <b>in the middle</b> of a game, a few times if you can. The snake will go faster and faster! Each call to <code>startGame</code> starts another timer, and they all run at once. The flag stops a new game from starting until the old one has finished. Put <code>&amp;&amp; gameOver</code> back.
+  </div>
+
+  <p>Save and check everything: the game starts by itself, the messages appear when you lose, Space starts the game again, and the score resets.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Make a new game start with the <kbd>Enter</kbd> key too (its name is <code>"Enter"</code>). Hint: <code>||</code>.</li>
+      <li>Make the snake appear in a random row at the start of each game.</li>
+      <li>⭐ Add a <b>pause</b> on the <kbd>P</kbd> key (use <code>event.code === "KeyP"</code>). Hint: create a variable <code>paused</code>. When the key is pressed, flip it to the opposite: <code>paused = !paused;</code> (the <code>!</code> sign means "not"). And at the start of <code>step</code> write: if <code>paused</code>, then <code>return</code> straight away.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;p&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake;
+    let apple = { x: 0, y: 0 };
+    let dx;
+    let dy;
+    let score;
+    let gameOver;
+    let timer;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function showScore() {
+      document.getElementById("score").textContent = score;
+    }
+
+    function placeApple() {
+      apple.x = randomCell();
+      apple.y = randomCell();
+      while (isOnSnake(apple.x, apple.y)) {
+        apple.x = randomCell();
+        apple.y = randomCell();
+      }
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      gameOver = true;
+      clearInterval(timer);
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Game over", 200, 200);
+      ctx.font = "18px sans-serif";
+      ctx.fillText("Press Space to play again", 200, 240);
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        showScore();
+        placeApple();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+      if (event.key === " " &amp;&amp; gameOver) {
+        startGame();
+      }
+    }
+
+    function startGame() {
+      snake = [
+        { x: 10, y: 10 },
+        { x: 9, y: 10 },
+        { x: 8, y: 10 }
+      ];
+      dx = 1;
+      dy = 0;
+      score = 0;
+      gameOver = false;
+      showScore();
+      placeApple();
+      draw();
+      timer = setInterval(step, 200);
+    }
+
+    document.addEventListener("keydown", onKey);
+    startGame();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I understand why we moved the starting values into <code>startGame</code>.</li>
+    <li>I know why we don't write <code>let</code> inside <code>startGame</code>.</li>
+    <li>I can explain the difference between <code>for</code> and <code>while</code>.</li>
+  </ul>
+  <div class="box ok">
+    <span class="title">🎉 It's a real game now!</span>
+    You can play it as many times as you like. Next we'll make it more exciting and prettier.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-12.html"><small>← Lesson 12</small>Game over</a>
+    <a class="next" href="lesson-14.html"><small>Lesson 14 →</small>Speed and high score</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

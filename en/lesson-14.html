@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed and High Score</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 14 of 16 <span class="time">⏱ 55 minutes</span></p>
+  <h1>Speed and high score</h1>
+  <p class="lead">The game works, but it's a bit too calm. Today the snake will speed up after every apple, the game will learn to remember your best score even after the computer is switched off, and we'll catch one sneaky bug.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>make the snake speed up;</li>
+      <li>save the high score in the browser's memory with <code>localStorage</code>;</li>
+      <li>find and fix the quick-reverse bug.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>15 min</td><td>The speed goes up</td></tr>
+      <tr><td>20 min</td><td>The high score and <code>localStorage</code></td></tr>
+      <tr><td>15 min</td><td>Bug hunt</td></tr>
+      <tr><td>5 min</td><td>Play for a high score!</td></tr>
+    </table>
+  </div>
+
+  <h2>1. The speed goes up</h2>
+  <p>Right now the timer always fires every 200 milliseconds. Let's put that number in a variable called <code>speed</code>. Really it's the <b>pause between steps</b>: the smaller the number, the faster the snake.</p>
+  <p>Add the variable at the top, with the others:</p>
+  <pre class="code nonum" data-new="3">let gameOver;
+let timer;
+let speed;</pre>
+  <p>In <code>startGame</code> set the starting speed and use it in the timer:</p>
+  <pre class="code" data-file="snake.html (startGame function)" data-new="2,7" data-del="6">  gameOver = false;
+  speed = 200;
+  showScore();
+  placeApple();
+  draw();
+  timer = setInterval(step, 200);
+  timer = setInterval(step, speed);
+}</pre>
+  <p>And when the snake eats an apple, we'll shorten the pause by 10 milliseconds. A timer's speed can't be changed while it's running, so we switch off the old timer and start a new, faster one:</p>
+  <pre class="code" data-file="snake.html (step function)" data-new="5-9">  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    showScore();
+    placeApple();
+    if (speed &gt; 60) {
+      speed = speed - 10;
+      clearInterval(timer);
+      timer = setInterval(step, speed);
+    }
+  } else {
+    snake.pop();
+  }</pre>
+  <p>The check <code>speed &gt; 60</code> stops the game from reaching an impossible speed: the snake won't go faster than 60 milliseconds per step.</p>
+
+  <h2>2. The high score</h2>
+  <p>When the page is refreshed or closed, all variables disappear: the program starts again. But we want to remember the high score forever! For that the browser has its own little memory — <b>localStorage</b>. It's like a notebook where you can write down a value under a name:</p>
+  <pre class="code nonum">localStorage.setItem("snakeBest", 25);         // write
+localStorage.getItem("snakeBest");             // read</pre>
+  <p>Notes in this notebook stay even if you close the browser and switch off the computer.</p>
+
+  <h3>A place for the high score on the page</h3>
+  <pre class="code" data-file="snake.html (part inside body)" data-new="2" data-del="1">&lt;p&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt; | Best: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;</pre>
+
+  <h3>Reading the high score at the start</h3>
+  <p>Add a variable at the top:</p>
+  <pre class="code nonum" data-new="1">let best = Number(localStorage.getItem("snakeBest"));</pre>
+  <p>The <code>localStorage</code> notebook keeps everything as <b>text</b>, but we need a number to compare with. <code>Number(...)</code> turns text into a number. If there's no high score yet, <code>getItem</code> returns <code>null</code> ("nothing"), and <code>Number(null)</code> is 0. Just what we need!</p>
+
+  <h3>Showing it and saving it</h3>
+  <p>Let <code>showScore</code> show both numbers:</p>
+  <pre class="code" data-file="snake.html (showScore function)" data-new="3">function showScore() {
+  document.getElementById("score").textContent = score;
+  document.getElementById("best").textContent = best;
+}</pre>
+  <p>And in <code>endGame</code>, right after <code>clearInterval(timer);</code>, we'll check whether the high score has been beaten:</p>
+  <pre class="code" data-file="snake.html (endGame function)" data-new="4-8">function endGame() {
+  gameOver = true;
+  clearInterval(timer);
+  if (score &gt; best) {
+    best = score;
+    localStorage.setItem("snakeBest", best);
+    showScore();
+  }
+  ...</pre>
+  <p>Play, score a few points and lose. Then close the tab and open the game again: the high score is still there! 🏆</p>
+  <div class="box tip">
+    <span class="title">💡 How to reset the high score</span>
+    In the console type <code>localStorage.removeItem("snakeBest")</code> and refresh the page.
+  </div>
+
+  <h2>3. Bug hunt</h2>
+  <p>Programmers call a mistake in a program a <b>bug</b>. Try this experiment: let the snake crawl right. Now <b>very quickly</b>, almost at the same moment, press <kbd>↑</kbd> and then <kbd>←</kbd>. Sometimes the snake dies out of nowhere! Why?</p>
+  <p>Let's work it out step by step. Two keys were pressed between two of the snake's steps:</p>
+  <ol>
+    <li><kbd>↑</kbd>: the snake is crawling right, <code>dy</code> isn't 1, so turning is allowed. Now <code>dx = 0, dy = -1</code>. But the snake <b>hasn't moved yet</b>!</li>
+    <li><kbd>←</kbd>: we check <code>dx !== 1</code>. <code>dx</code> is already 0, so it's allowed. Now <code>dx = -1</code>.</li>
+    <li>The step comes: the snake, which was really crawling <b>right</b>, takes a step <b>left</b> — straight into its own neck.</li>
+  </ol>
+  <p><b>The fix:</b> we'll remember the pressed key as the <b>next</b> direction, and only change the real direction at the start of a step. The checks will use the real direction.</p>
+  <p>Add two more variables at the top:</p>
+  <pre class="code nonum" data-new="3-4">let dx;
+let dy;
+let nextDx;
+let nextDy;</pre>
+  <p>In <code>startGame</code> give them starting values, next to <code>dx</code> and <code>dy</code>:</p>
+  <pre class="code nonum" data-new="3-4">  dx = 1;
+  dy = 0;
+  nextDx = 1;
+  nextDy = 0;</pre>
+  <p>At the very start of <code>step</code> we apply the next direction:</p>
+  <pre class="code" data-file="snake.html (step function)" data-new="2-3">function step() {
+  dx = nextDx;
+  dy = nextDy;
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+  <p>And in <code>onKey</code> we only change <code>nextDx</code> and <code>nextDy</code> (the checks stay the same):</p>
+  <pre class="code" data-file="snake.html (onKey function)" data-new="3-4,7-8,11-12,15-16">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    nextDx = 0;
+    nextDy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    nextDx = 0;
+    nextDy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    nextDx = -1;
+    nextDy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    nextDx = 1;
+    nextDy = 0;
+  }
+  if (event.key === " " &amp;&amp; gameOver) {
+    startGame();
+  }
+}</pre>
+  <p>Now in our example the second key, <kbd>←</kbd>, is checked against the real direction: <code>dx</code> is still 1 (the snake is crawling right), so turning left is not allowed. Bug caught! 🐞</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Tune the speed-up to your taste: maybe shorten the pause by 5 instead of 10? Or make 80 the fastest?</li>
+      <li>When the high score is beaten, make another message appear under the others in <code>endGame</code>: "New high score!".</li>
+      <li>⭐ Add a "golden" apple: with a small chance (<code>Math.random() &lt; 0.2</code>) the apple turns golden and is worth 5 points. Hint: add a <code>gold</code> property to the <code>apple</code> object with the value <code>true</code> or <code>false</code>.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;p&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt; | Best: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake;
+    let apple = { x: 0, y: 0 };
+    let dx;
+    let dy;
+    let nextDx;
+    let nextDy;
+    let score;
+    let gameOver;
+    let timer;
+    let speed;
+    let best = Number(localStorage.getItem("snakeBest"));
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function showScore() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("best").textContent = best;
+    }
+
+    function placeApple() {
+      apple.x = randomCell();
+      apple.y = randomCell();
+      while (isOnSnake(apple.x, apple.y)) {
+        apple.x = randomCell();
+        apple.y = randomCell();
+      }
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      gameOver = true;
+      clearInterval(timer);
+      if (score &gt; best) {
+        best = score;
+        localStorage.setItem("snakeBest", best);
+        showScore();
+      }
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Game over", 200, 200);
+      ctx.font = "18px sans-serif";
+      ctx.fillText("Press Space to play again", 200, 240);
+    }
+
+    function step() {
+      dx = nextDx;
+      dy = nextDy;
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        showScore();
+        placeApple();
+        if (speed &gt; 60) {
+          speed = speed - 10;
+          clearInterval(timer);
+          timer = setInterval(step, speed);
+        }
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        nextDx = 0;
+        nextDy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        nextDx = 0;
+        nextDy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        nextDx = -1;
+        nextDy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        nextDx = 1;
+        nextDy = 0;
+      }
+      if (event.key === " " &amp;&amp; gameOver) {
+        startGame();
+      }
+    }
+
+    function startGame() {
+      snake = [
+        { x: 10, y: 10 },
+        { x: 9, y: 10 },
+        { x: 8, y: 10 }
+      ];
+      dx = 1;
+      dy = 0;
+      nextDx = 1;
+      nextDy = 0;
+      score = 0;
+      gameOver = false;
+      speed = 200;
+      showScore();
+      placeApple();
+      draw();
+      timer = setInterval(step, speed);
+    }
+
+    document.addEventListener("keydown", onKey);
+    startGame();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I understand why the timer has to be restarted to change the speed.</li>
+    <li>I know that <code>localStorage</code> remembers values after the browser is closed.</li>
+    <li>I can explain how the reverse bug happened and how we fixed it.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-13.html"><small>← Lesson 13</small>New game</a>
+    <a class="next" href="lesson-15.html"><small>Lesson 15 →</small>Making it pretty</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

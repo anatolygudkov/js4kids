@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fin del juego</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 12 de 16 <span class="time">⏱ 50 minutos</span></p>
+  <h1>Fin del juego</h1>
+  <p class="lead">En un juego de verdad se puede perder; si no, no tiene gracia. Nuestra serpiente perderá si choca con una pared o se muerde la cola. Y en el campo aparecerá el mensaje «Fin del juego».</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>cambiar los portales por paredes de verdad;</li>
+      <li>escribir una función <code>isOnSnake</code> que comprueba si una casilla está ocupada por la serpiente;</li>
+      <li>aprender a parar un temporizador (<code>clearInterval</code>) y una función (<code>return</code>);</li>
+      <li>escribir texto en el lienzo.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Las reglas para perder</td></tr>
+      <tr><td>15 min</td><td>Parar el juego: <code>endGame</code>, <code>clearInterval</code>, texto en el lienzo</td></tr>
+      <tr><td>10 min</td><td>Paredes en lugar de portales</td></tr>
+      <tr><td>15 min</td><td>Morderse la cola: <code>isOnSnake</code></td></tr>
+      <tr><td>5 min</td><td>¡A jugar!</td></tr>
+    </table>
+  </div>
+
+  <h2>Parar el temporizador</h2>
+  <p>A la serpiente la mueve el temporizador <code>setInterval</code>. Para que el juego se pare hay que apagarlo, y para eso tenemos que guardarlo en una variable. Cambia la última línea del programa:</p>
+  <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);
+let timer = setInterval(step, 200);</pre>
+  <p><code>setInterval</code> devuelve el número del temporizador, y lo guardamos en <code>timer</code>. El temporizador se apaga con la orden <code>clearInterval(timer)</code>.</p>
+
+  <h2>La función «Fin del juego»</h2>
+  <p>Añade una función nueva después de <code>draw</code>:</p>
+  <pre class="code" data-file="snake.html (función nueva)" data-new="1-7">function endGame() {
+  clearInterval(timer);
+  ctx.fillStyle = "white";
+  ctx.font = "32px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Fin del juego", 200, 200);
+}</pre>
+  <ul>
+    <li><code>clearInterval(timer)</code> — apagar el temporizador: <code>step</code> ya no se llama y la serpiente se queda quieta;</li>
+    <li><code>ctx.font</code> — el tamaño y el tipo de letra: 32 píxeles, una letra sin remates (<i>sans-serif</i>);</li>
+    <li><code>ctx.textAlign = "center"</code> — centrar el texto;</li>
+    <li><code>ctx.fillText(texto, x, y)</code> — escribir un texto en el punto (x, y). El punto (200, 200) es el centro del campo.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Pruébalo en la consola</span>
+    Escribe <code>endGame()</code> en la consola y pulsa <kbd>Intro</kbd>: la serpiente se para y aparece el mensaje. Así se pueden probar las funciones una por una, incluso antes de conectarlas al juego.
+  </div>
+
+  <h2>Paredes</h2>
+  <p>Los portales eran divertidos, pero en la Serpiente clásica las paredes son peligrosas. Quita de <code>step</code> las cuatro comprobaciones de los portales y pon una sola comprobación de paredes:</p>
+  <pre class="code" data-file="snake.html (principio de la función step)" data-new="16-19" data-del="4-15">function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  if (head.x &gt;= cells) {
+    head.x = 0;
+  }
+  if (head.x &lt; 0) {
+    head.x = cells - 1;
+  }
+  if (head.y &gt;= cells) {
+    head.y = 0;
+  }
+  if (head.y &lt; 0) {
+    head.y = cells - 1;
+  }
+  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+
+  snake.unshift(head);
+  ...</pre>
+  <p>Con <code>||</code> («o») hemos juntado cuatro preguntas en una: «¿la cabeza está a la izquierda del campo, <b>o</b> a la derecha, <b>o</b> por encima, <b>o</b> por debajo?». Si cualquiera de esas cosas es verdad, se acaba el juego.</p>
+  <h3>¿Para qué sirve return?</h3>
+  <p><code>return</code> <b>termina</b> la función en el acto: las líneas de debajo ya no se ejecutan. Sin él, la serpiente, después de «chocar», añadiría igualmente una cabeza fuera del campo y volvería a dibujarlo todo encima del mensaje «Fin del juego».</p>
+
+  <h2>Morderse la cola</h2>
+  <p>Hay que comprobar si la cabeza nueva ha caído en una casilla donde ya hay un trozo de la serpiente. Para eso recorremos todos los trozos con un bucle y comparamos las coordenadas. Vamos a escribir una función-pregunta que contesta <code>true</code> o <code>false</code>:</p>
+  <pre class="code" data-file="snake.html (función nueva, después de randomCell)" data-new="1-8">function isOnSnake(x, y) {
+  for (let i = 0; i &lt; snake.length; i++) {
+    if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+      return true;
+    }
+  }
+  return false;
+}</pre>
+  <p>Cómo funciona:</p>
+  <ul>
+    <li>el bucle mira uno por uno todos los trozos de la serpiente;</li>
+    <li>si encuentra un trozo en la casilla (x, y), la función contesta enseguida <code>true</code> («sí, aquí está la serpiente») y termina;</li>
+    <li>si el bucle lo ha revisado todo y no ha encontrado nada, el programa llega a la última línea y contesta <code>false</code>.</li>
+  </ul>
+  <p>El nombre de la función suena a pregunta: <i>is on snake?</i>, «¿está en la serpiente?». Así se suelen llamar las funciones que contestan «sí» o «no».</p>
+  <p>Ahora la usamos en <code>step</code>, justo después de comprobar las paredes:</p>
+  <pre class="code" data-file="snake.html (función step)" data-new="5-8">  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+  if (isOnSnake(head.x, head.y)) {
+    endGame();
+    return;
+  }</pre>
+  <p>Guarda, recarga y prueba las dos maneras de perder: choca con una pared y luego haz crecer la serpiente y muérdete. Para volver a jugar, de momento pulsa <kbd>F5</kbd>. En la próxima lección haremos que se reinicie con la barra espaciadora.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Debajo de «Fin del juego» añade una segunda línea más pequeña: «Puntos: …». Pista: cambia <code>ctx.font</code> a <code>"20px sans-serif"</code> y escribe el texto 40 píxeles más abajo. Los puntos se pueden pegar al texto con <code>+</code>.</li>
+      <li>Pon el mensaje en rojo o en amarillo.</li>
+      <li>⭐ Antes del mensaje, dibuja un rectángulo semitransparente para que el texto se lea mejor. Un color con transparencia se escribe así: <code>"rgba(0, 0, 0, 0.6)"</code>, negro con un 40 % de transparencia.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;p&gt;Puntos: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+    let score = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Fin del juego", 200, 200);
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        document.getElementById("score").textContent = score;
+        apple.x = randomCell();
+        apple.y = randomCell();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    let timer = setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé guardar un temporizador en una variable y apagarlo.</li>
+    <li>Entiendo que <code>return</code> termina la función en el acto.</li>
+    <li>Sé explicar cómo busca <code>isOnSnake</code> un trozo de la serpiente.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-11.html"><small>← Lección 11</small>La manzana y el crecimiento</a>
+    <a class="next" href="lesson-13.html"><small>Lección 13 →</small>Nueva partida</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

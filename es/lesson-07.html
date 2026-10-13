@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrays y objetos</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 7 de 16 <span class="time">⏱ 50 minutos</span></p>
+  <h1>Arrays y objetos</h1>
+  <p class="lead">Ahora mismo la serpiente se dibuja con tres órdenes sueltas. Pero va a moverse y a crecer, y el ordenador tiene que <b>recordar</b> dónde está cada uno de sus trozos. Para eso existen los <b>objetos</b> y los <b>arrays</b>.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>describir la manzana con un objeto <code>{ x: 15, y: 10 }</code>;</li>
+      <li>describir la serpiente con un array: una lista de trozos;</li>
+      <li>dibujar la serpiente entera con un bucle;</li>
+      <li>escribir una función <code>draw</code> que dibuja todo el juego.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Objetos: la manzana</td></tr>
+      <tr><td>15 min</td><td>Arrays: listas y números desde cero</td></tr>
+      <tr><td>15 min</td><td>La serpiente es un array de objetos, la función <code>draw</code></td></tr>
+      <tr><td>10 min</td><td>Manejamos la serpiente desde la consola, tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Un objeto es una caja con compartimentos</h2>
+  <p>La manzana tiene dos números: x e y. Podrías hacer dos variables, <code>appleX</code> y <code>appleY</code>, pero es más cómodo meterlos en una sola caja con compartimentos. Una caja así se llama <b>objeto</b>:</p>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };</pre>
+  <p>Un objeto se escribe entre llaves. Dentro van sus <b>propiedades</b>: nombre, dos puntos, valor. Las propiedades se separan con comas. Para sacar un valor se usa un punto:</p>
+  <pre class="code nonum">console.log(apple.x);   // 15
+console.log(apple.y);   // 10
+apple.x = 3;            // hemos movido la manzana</pre>
+  <p>Ya has visto antes un punto así: <code>ctx.fillStyle</code>, <code>console.log</code>. ¡También son objetos con propiedades!</p>
+
+  <h2>Un array es una lista</h2>
+  <p>Un <b>array</b> es una lista donde los valores van en orden. Se escribe entre corchetes:</p>
+  <pre class="code nonum">let colors = ["red", "green", "blue"];
+console.log(colors[0]);       // red
+console.log(colors[2]);       // blue
+console.log(colors.length);   // 3</pre>
+  <ul>
+    <li>Cada sitio de la lista tiene un número. Se llama <b>índice</b>.</li>
+    <li>¡Los números empiezan <b>desde cero</b>! El primer elemento es <code>colors[0]</code>, el segundo es <code>colors[1]</code>.</li>
+    <li><code>colors.length</code> es la longitud de la lista: cuántos elementos tiene.</li>
+  </ul>
+  <div class="box warn">
+    <span class="title">⚠️ El último elemento</span>
+    Si una lista tiene 3 elementos, sus números son 0, 1, 2. No existe el elemento número 3: <code>colors[3]</code> devuelve <code>undefined</code> («sin definir»). El último elemento siempre tiene el número <code>length - 1</code>.
+  </div>
+
+  <h2>La serpiente es una lista de trozos</h2>
+  <p>Cada trozo de la serpiente es una casilla con coordenadas x e y, es decir, un objeto. Y la serpiente entera es una lista de esos objetos. El primero de la lista (el número 0) siempre será la <b>cabeza</b>:</p>
+  <pre class="code nonum">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];</pre>
+  <figure>
+    <svg viewBox="0 0 460 150" width="460" role="img" aria-label="Serpiente de tres casillas: el índice 0 es la cabeza en la casilla 10,10, el índice 1 es 9,10 y el índice 2 es la cola en 8,10">
+      <rect x="20" y="20" width="420" height="70" rx="10" class="svg-field"/>
+      <rect x="290" y="35" width="40" height="40" fill="#ffd43b"/>
+      <rect x="248" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="206" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="380" y="35" width="40" height="40" fill="#ff3b3b"/>
+      <g font-size="14" text-anchor="middle" class="svg-text">
+        <text x="310" y="112" font-weight="700">[0]</text>
+        <text x="268" y="112" font-weight="700">[1]</text>
+        <text x="226" y="112" font-weight="700">[2]</text>
+        <text x="320" y="134">cabeza</text>
+        <text x="216" y="134">cola</text>
+        <text x="400" y="112" font-weight="700">apple</text>
+        <text x="400" y="134">(15, 10)</text>
+        <text x="90" y="60" fill="#ffffff">snake =</text>
+      </g>
+    </svg>
+    <figcaption>La cabeza es el elemento número 0; la cola, el último elemento de la lista.</figcaption>
+  </figure>
+  <p>¿Cómo se sacan las coordenadas de la cabeza? Primero cogemos el elemento de la lista y luego su propiedad: <code>snake[0].x</code> es 10, <code>snake[2].x</code> es 8.</p>
+
+  <h2>Dibujamos toda la serpiente con un bucle</h2>
+  <p>El bucle recorre todos los trozos con números del 0 al <code>snake.length - 1</code> y dibuja cada uno:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; snake.length; i++) {
+  drawCell(snake[i].x, snake[i].y, "lime");
+}</pre>
+  <p>Tenga la serpiente los trozos que tenga, 3 o 300, este bucle los dibuja todos.</p>
+
+  <h2>La función draw</h2>
+  <p>Vamos a juntar todo el dibujo en una función, <code>draw</code> («dibujar»): limpiar el campo, dibujar la manzana y la serpiente. La cabeza la dibujaremos en amarillo <b>encima</b> del trozo verde, para que se vea hacia dónde mira la serpiente. Cambia el script así (lo nuevo está en verde y lo que hay que borrar, en rojo):</p>
+  <pre class="code" data-file="snake.html (parte dentro de script)" data-new="6-12,23-31,37" data-del="32-36">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+let cells = 20;
+
+let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+
+function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}
+
+function draw() {
+  clearField();
+  drawCell(apple.x, apple.y, "red");
+  for (let i = 0; i &lt; snake.length; i++) {
+    drawCell(snake[i].x, snake[i].y, "lime");
+  }
+  drawCell(snake[0].x, snake[0].y, "yellow");
+}
+
+clearField();
+drawCell(10, 10, "lime");
+drawCell(9, 10, "lime");
+drawCell(8, 10, "lime");
+drawCell(15, 10, "red");
+draw();</pre>
+  <div class="box tip">
+    <span class="title">💡 El orden del programa</span>
+    Arriba, las variables (lo que recordamos); en medio, las funciones (lo que sabemos hacer); abajo, las llamadas (lo que hacemos ahora mismo). Este orden ayuda a no perderse cuando el programa se hace largo.
+  </div>
+
+  <h2>Un truco con la consola</h2>
+  <p>¡Las variables del programa se pueden cambiar directamente desde la consola! Ábrela (<kbd>F12</kbd>) y escribe una por una, pulsando <kbd>Intro</kbd> después de cada línea:</p>
+  <pre class="code nonum">snake.push({ x: 7, y: 10 });
+draw();</pre>
+  <p>¡La serpiente se ha alargado! La orden <code>push</code> añade un elemento nuevo <b>al final</b> de la lista. Prueba más:</p>
+  <pre class="code nonum">snake.length
+apple.x = 2;
+draw();</pre>
+  <p>Si recargas la página (<kbd>F5</kbd>), todo vuelve a estar como antes: el programa empieza otra vez desde el principio.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Añade dos trozos más al array <code>snake</code> del código, para que la serpiente tenga cinco.</li>
+      <li>Haz una serpiente que gira: que la cola se doble hacia abajo (por ejemplo, <code>{ x: 8, y: 11 }</code>, <code>{ x: 8, y: 12 }</code>).</li>
+      <li>¿Qué pasa si cambias de sitio el primer y el último trozo del array? ¿Hacia dónde «mira» ahora la cabeza?</li>
+      <li>⭐ Añade una segunda manzana: un objeto <code>apple2</code> y una línea en <code>draw</code> que la dibuje.</li>
+    </ol>
+    Después de las tareas, deja el array <code>snake</code> con tres trozos, como en el código de la lección.
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    draw();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé que un objeto se escribe con <code>{ }</code> y un array con <code>[ ]</code>.</li>
+    <li>Recuerdo que los números de un array empiezan desde cero y que la cabeza es <code>snake[0]</code>.</li>
+    <li>Entiendo cómo un bucle dibuja una serpiente de cualquier longitud.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-06.html"><small>← Lección 6</small>Bucles</a>
+    <a class="next" href="lesson-08.html"><small>Lección 8 →</small>La serpiente se mueve</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

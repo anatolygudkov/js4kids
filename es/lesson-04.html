@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El lienzo y las coordenadas</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 4 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>El lienzo y las coordenadas</h1>
+  <p class="lead">¡Empieza el juego! Vamos a crear el archivo <code>snake.html</code>: en él vivirá la Serpiente hasta el final del curso. Hoy dibujaremos el campo de juego, la cabeza de la serpiente y una manzana.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>crear el archivo del juego <code>snake.html</code>;</li>
+      <li>añadir a la página un lienzo <code>&lt;canvas&gt;</code>;</li>
+      <li>descubrir cómo cuenta el ordenador las coordenadas;</li>
+      <li>dibujar rectángulos de colores.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Creamos <code>snake.html</code> y el lienzo</td></tr>
+      <tr><td>10 min</td><td>Coordenadas: dónde está x, dónde está y</td></tr>
+      <tr><td>10 min</td><td>Dibujamos el campo, la cabeza y la manzana</td></tr>
+      <tr><td>15 min</td><td>Dibujamos nuestro propio dibujo con rectángulos</td></tr>
+    </table>
+  </div>
+
+  <h2>Un archivo nuevo para el juego</h2>
+  <p>Crea en Geany un archivo nuevo (<kbd>Ctrl</kbd> + <kbd>N</kbd>) y guárdalo enseguida en la carpeta <b>codigo</b> con el nombre <code>snake.html</code> (<kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>S</kbd>). Escribe el código:</p>
+  <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>Guárdalo y abre <code>snake.html</code> en el navegador (desde el gestor de archivos, como en la primera lección). Verás un campo negro, un cuadrado verde (será la cabeza de la serpiente) y un cuadrado rojo (la manzana).</p>
+
+  <h2>Qué hemos escrito</h2>
+  <h3>El lienzo</h3>
+  <pre class="code nonum">&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;</pre>
+  <p><code>&lt;canvas&gt;</code> es un <b>lienzo</b>, un sitio para dibujar. Su anchura (<code>width</code>) y su altura (<code>height</code>) son de 400 puntos. Cada uno de esos puntos de la pantalla se llama <b>píxel</b>. Y <code>id="game"</code> es el nombre del lienzo, para que JavaScript pueda encontrarlo.</p>
+
+  <h3>El pincel</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");</pre>
+  <ul>
+    <li><code>document.getElementById("game")</code> — «busca en la página (el <i>document</i>) el elemento que se llama <code>game</code>». Guardamos el lienzo encontrado en la variable <code>canvas</code>.</li>
+    <li><code>canvas.getContext("2d")</code> — «dame las herramientas para dibujar en plano (2D)». Las guardamos en la variable <code>ctx</code>. A partir de ahora <code>ctx</code> será nuestro <b>pincel</b>.</li>
+  </ul>
+  <p>Estas dos líneas puedes simplemente aprendértelas: hacen falta al principio de cualquier programa que dibuje en un lienzo.</p>
+
+  <h3>Dibujamos</h3>
+  <pre class="code nonum">ctx.fillStyle = "lime";
+ctx.fillRect(200, 200, 20, 20);</pre>
+  <ul>
+    <li><code>fillStyle</code> — de qué color pintar. Primero mojamos el pincel en la pintura.</li>
+    <li><code>fillRect(x, y, anchura, altura)</code> — dibuja un rectángulo relleno (<i>fill rectangle</i>).</li>
+  </ul>
+  <p>Los colores se pueden escribir con palabras en inglés: <code>"red"</code> (rojo), <code>"green"</code> (verde), <code>"lime"</code> (verde lima), <code>"blue"</code> (azul), <code>"yellow"</code> (amarillo), <code>"orange"</code> (naranja), <code>"purple"</code> (morado), <code>"pink"</code> (rosa), <code>"white"</code> (blanco), <code>"black"</code> (negro), <code>"gray"</code> (gris), <code>"brown"</code> (marrón).</p>
+
+  <h2>Coordenadas</h2>
+  <p>Para decir dónde dibujar hacen falta dos números: <b>x</b>, cuántos píxeles avanzar hacia la <b>derecha</b> desde el borde izquierdo, e <b>y</b>, cuántos píxeles bajar desde el borde de <b>arriba</b>.</p>
+  <figure>
+    <svg viewBox="0 0 460 440" width="460" role="img" aria-label="Lienzo de 400 por 400: x crece hacia la derecha, y crece hacia abajo, un cuadrado en el punto 200, 200">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <rect x="40" y="40" width="400" height="400" class="svg-field"/>
+      <g class="svg-grid" stroke-width="1" opacity="0.6">
+        <line x1="140" y1="40" x2="140" y2="440"/><line x1="240" y1="40" x2="240" y2="440"/><line x1="340" y1="40" x2="340" y2="440"/>
+        <line x1="40" y1="140" x2="440" y2="140"/><line x1="40" y1="240" x2="440" y2="240"/><line x1="40" y1="340" x2="440" y2="340"/>
+      </g>
+      <g font-size="13" class="svg-text" text-anchor="middle">
+        <text x="40" y="32">0</text><text x="140" y="32">100</text><text x="240" y="32">200</text><text x="340" y="32">300</text><text x="430" y="32">400</text>
+        <text x="22" y="145">100</text><text x="22" y="245">200</text><text x="22" y="345">300</text>
+      </g>
+      <line x1="40" y1="16" x2="200" y2="16" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="210" y="21" font-size="16" font-weight="700" class="svg-accent2">x</text>
+      <line x1="10" y1="60" x2="10" y2="200" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="4" y="222" font-size="16" font-weight="700" class="svg-accent2">y</text>
+      <line x1="40" y1="250" x2="240" y2="250" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <line x1="250" y1="40" x2="250" y2="240" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <rect x="240" y="240" width="20" height="20" fill="#32cd32"/>
+      <text x="268" y="275" font-size="14" fill="#ffffff">(200, 200)</text>
+      <rect x="340" y="140" width="20" height="20" fill="#ff3b3b"/>
+      <text x="368" y="175" font-size="14" fill="#ffffff">(300, 100)</text>
+      <circle cx="40" cy="40" r="5" fill="#ffd43b"/>
+      <text x="48" y="58" font-size="13" fill="#ffd43b">(0, 0)</text>
+    </svg>
+    <figcaption>El punto de partida (0, 0) está en la esquina de arriba a la izquierda. x crece hacia la derecha, y crece hacia abajo.</figcaption>
+  </figure>
+  <div class="box warn">
+    <span class="title">⚠️ ¡No es como en matemáticas!</span>
+    En clase de matemáticas el eje y apunta hacia arriba, pero en la pantalla del ordenador apunta hacia <b>abajo</b>. Cuanto mayor es y, más abajo en la pantalla.
+  </div>
+  <p>Ahora está claro qué significa cada línea con <code>fillRect</code>:</p>
+  <ul>
+    <li><code>fillRect(0, 0, 400, 400)</code> — desde la esquina de arriba a la izquierda, pintar un cuadrado de 400 por 400, es decir, todo el lienzo.</li>
+    <li><code>fillRect(200, 200, 20, 20)</code> — avanzar 200 a la derecha y 200 hacia abajo y dibujar un cuadradito de 20 por 20.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 El orden importa</span>
+    El ordenador dibuja en el orden en que está escrito el código: lo nuevo se pone <b>encima</b> de lo viejo, como la pintura en un papel. Prueba a mover las líneas del campo negro al final del script. ¿Dónde se han metido los cuadrados?
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Mueve la manzana a la esquina de abajo a la izquierda del campo.</li>
+      <li>Dibuja dos cuadrados más detrás de la cabeza para que salga una serpiente de tres trozos: <code>(180, 200)</code> y <code>(160, 200)</code>.</li>
+      <li>Dibuja un semáforo: un rectángulo gris y tres cuadrados de colores. Después bórralo o conviértelo en comentario (mira el consejo de abajo): el juego no lo necesita.</li>
+      <li>⭐ El color también se puede dar con un código: <code>"#ff8800"</code> es naranja. Prueba distintas letras y cifras del 0 a la f después de la almohadilla.</li>
+    </ol>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Comentarios</span>
+    Si pones dos barras <code>//</code> al principio de una línea, el ordenador se la salta. Es un <b>comentario</b>: una nota para las personas. Sirve para dejarte explicaciones o para «apagar» líneas de código durante un rato.
+    <pre class="code nonum">// Esta es la cabeza de la serpiente
+ctx.fillStyle = "lime";</pre>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección (compáralo con el tuyo si algo no funciona)</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+    ctx.fillRect(180, 200, 20, 20);
+    ctx.fillRect(160, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>En la carpeta <code>codigo</code> hay un archivo <code>snake.html</code>.</li>
+    <li>Sé que (0, 0) es la esquina de arriba a la izquierda y que y crece hacia abajo.</li>
+    <li>Sé dibujar un rectángulo del color que quiero donde quiero.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-03.html"><small>← Lección 3</small>Variables</a>
+    <a class="next" href="lesson-05.html"><small>Lección 5 →</small>Funciones</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

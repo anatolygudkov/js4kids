@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuleta</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Siempre a mano</p>
+  <h1>Chuleta</h1>
+  <p class="lead">Lo más importante en una sola página. Es práctico imprimirla y tenerla al lado del teclado.</p>
+
+  <h2>Símbolos del teclado (teclado español de España)</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Símbolo</th><th>Cómo escribirlo</th><th>Símbolo</th><th>Cómo escribirlo</th></tr>
+      <tr><td><code>( )</code></td><td><kbd>Mayús</kbd> + <kbd>8</kbd> / <kbd>9</kbd></td><td><code>;</code></td><td><kbd>Mayús</kbd> + <kbd>,</kbd></td></tr>
+      <tr><td><code>{ }</code></td><td><kbd>AltGr</kbd> + <kbd>´</kbd> / <kbd>Ç</kbd></td><td><code>:</code></td><td><kbd>Mayús</kbd> + <kbd>.</kbd></td></tr>
+      <tr><td><code>[ ]</code></td><td><kbd>AltGr</kbd> + <kbd>`</kbd> / <kbd>+</kbd></td><td><code>"</code></td><td><kbd>Mayús</kbd> + <kbd>2</kbd></td></tr>
+      <tr><td><code>&lt; &gt;</code></td><td>la tecla a la izquierda de <kbd>Z</kbd> (<code>&gt;</code> con <kbd>Mayús</kbd>)</td><td><code>'</code></td><td>la tecla a la derecha del <kbd>0</kbd></td></tr>
+      <tr><td><code>=</code></td><td><kbd>Mayús</kbd> + <kbd>0</kbd></td><td><code>&amp;</code></td><td><kbd>Mayús</kbd> + <kbd>6</kbd></td></tr>
+      <tr><td><code>+</code> <code>*</code></td><td>la tecla <kbd>+</kbd> (<code>*</code> con <kbd>Mayús</kbd>)</td><td><code>|</code></td><td><kbd>AltGr</kbd> + <kbd>1</kbd></td></tr>
+      <tr><td><code>/</code></td><td><kbd>Mayús</kbd> + <kbd>7</kbd></td><td><code>!</code></td><td><kbd>Mayús</kbd> + <kbd>1</kbd></td></tr>
+    </table>
+  </div>
+
+  <h2>Atajos de teclado</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Dónde</th><th>Teclas</th><th>Qué hacen</th></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>archivo nuevo</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>O</kbd></td><td>abrir un archivo</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>guardar</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>S</kbd></td><td>guardar como (con otro nombre)</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>deshacer</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>-</kbd></td><td>letra más grande / más pequeña</td></tr>
+      <tr><td>en todas partes</td><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>copiar / pegar</td></tr>
+      <tr><td>Firefox</td><td><kbd>F5</kbd></td><td>recargar la página</td></tr>
+      <tr><td>Firefox</td><td><kbd>F12</kbd></td><td>abrir / cerrar las herramientas</td></tr>
+      <tr><td>Firefox</td><td><kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>K</kbd></td><td>abrir directamente la consola</td></tr>
+    </table>
+  </div>
+  <p><b>El ciclo principal:</b> escribo → <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd> → miro (¡también la consola!).</p>
+
+  <h2>Plantilla de archivo HTML</h2>
+  <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Nombre&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Título&lt;/h1&gt;
+  &lt;script&gt;
+    // aquí va JavaScript
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  <h2>JavaScript</h2>
+  <h3>Mostrar cosas</h3>
+  <pre class="code nonum">alert("Ventanita con un mensaje");
+console.log("Mensaje en la consola");
+let name = prompt("¿Pregunta?");   // la respuesta va a name</pre>
+
+  <h3>Variables y operaciones</h3>
+  <pre class="code nonum">let score = 0;              // crear una caja
+score = score + 1;          // cambiarla (¡sin let!)
+score++;                    // lo mismo, más corto
+let text = "Puntos: " + score; // pegar texto
+// + - * /  — sumar, restar, multiplicar, dividir</pre>
+
+  <h3>Condiciones</h3>
+  <pre class="code nonum">if (score &gt; 10) {
+  // si es verdad
+} else {
+  // si no
+}
+// comparaciones: &gt;  &lt;  &gt;=  &lt;=  ===  !==
+// y: &amp;&amp;     o: ||     no: !</pre>
+
+  <h3>Bucles</h3>
+  <pre class="code nonum">for (let i = 0; i &lt; 10; i++) {
+  // se repite 10 veces, i = 0, 1, … 9
+}
+
+while (condición) {
+  // se repite mientras la condición sea verdad
+}</pre>
+
+  <h3>Funciones</h3>
+  <pre class="code nonum">function drawCell(x, y, color) {   // escribir la receta
+  // pasos
+}
+drawCell(3, 2, "lime");            // llamarla
+
+function randomCell() {
+  return Math.floor(Math.random() * 20);   // devolver una respuesta
+}</pre>
+
+  <h3>Objetos y arrays</h3>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };    // objeto
+apple.x = 3;
+
+let snake = [{ x: 1, y: 1 }, { x: 0, y: 1 }];  // array
+snake[0]          // primer elemento (¡los números empiezan en cero!)
+snake.length      // cuántos elementos hay
+snake.push(a)     // añadir al final
+snake.unshift(a)  // añadir al principio
+snake.pop()       // quitar el último</pre>
+
+  <h3>Lienzo</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";                 // color
+ctx.fillRect(x, y, width, height);     // rectángulo
+ctx.font = "32px sans-serif";          // tipo de letra
+ctx.fillText("Texto", x, y);           // texto</pre>
+  <p>(0, 0) es la esquina de arriba a la izquierda. x crece hacia la derecha; y, hacia <b>abajo</b>.</p>
+
+  <h3>Tiempo, teclas, la página, la memoria</h3>
+  <pre class="code nonum">let timer = setInterval(step, 200);   // llamar a step cada 200 ms
+clearInterval(timer);                 // pararlo
+
+document.addEventListener("keydown", onKey);
+// event.key: "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Enter"
+// event.code: "KeyW", "KeyA", ... (no depende de Bloq Mayús ni del idioma)
+
+document.getElementById("score").textContent = score;
+
+localStorage.setItem("snakeBest", 25);
+let best = Number(localStorage.getItem("snakeBest"));</pre>
+
+  <h2>CSS</h2>
+  <pre class="code nonum">&lt;style&gt;
+  body { background: black; color: white; }   /* por etiqueta */
+  #score { font-weight: bold; }               /* por id */
+  .help { color: gray; }                      /* por clase */
+&lt;/style&gt;</pre>
+
+  <h2>Errores frecuentes</h2>
+  <p>Firefox escribe los errores en inglés. Aquí tienes los más habituales:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Mensaje</th><th>Qué revisar</th></tr>
+      <tr><td><code>… is not defined</code></td><td>una errata en el nombre, mayúsculas/minúsculas, texto sin comillas</td></tr>
+      <tr><td><code>missing ) after argument list</code></td><td>falta un <code>)</code></td></tr>
+      <tr><td><code>missing } after function body</code></td><td>falta una <code>}</code> al final de una función, un <code>if</code> o un bucle</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>una comilla sin cerrar</td></tr>
+      <tr><td><code>expected …, got …</code> / <code>illegal character</code></td><td>un símbolo de más o raro</td></tr>
+      <tr><td><code>redeclaration of let …</code></td><td><code>let</code> escrito dos veces para la misma variable</td></tr>
+      <tr><td><code>… is undefined</code></td><td>usar un elemento de un array que no existe, por ejemplo <code>snake[5]</code> si la serpiente tiene tres trozos</td></tr>
+      <tr><td>No cambia nada</td><td>¿Está guardado el archivo? ¿Has recargado la página (<kbd>F5</kbd>)? ¿Es el archivo correcto?</td></tr>
+    </table>
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="index.html"><small>←</small>Índice</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

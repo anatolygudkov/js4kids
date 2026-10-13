@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas and Coordinates</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 4 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>Canvas and coordinates</h1>
+  <p class="lead">The game begins! Let's create a file called <code>snake.html</code> — the Snake will live in it until the very end of the course. Today we'll draw the playing field, the snake's head and an apple.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>create the game file <code>snake.html</code>;</li>
+      <li>add a <code>&lt;canvas&gt;</code> to the page;</li>
+      <li>find out how the computer counts coordinates;</li>
+      <li>draw coloured rectangles.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Create <code>snake.html</code> and the canvas</td></tr>
+      <tr><td>10 min</td><td>Coordinates: where x is, where y is</td></tr>
+      <tr><td>10 min</td><td>Draw the field, the head and the apple</td></tr>
+      <tr><td>15 min</td><td>Draw your own picture out of rectangles</td></tr>
+    </table>
+  </div>
+
+  <h2>A new file for the game</h2>
+  <p>Create a new file in Geany (<kbd>Ctrl</kbd> + <kbd>N</kbd>) and save it straight away in the <b>code</b> folder as <code>snake.html</code> (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>). Type the code:</p>
+  <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>Save it and open <code>snake.html</code> in the browser (through the file manager, like in the first lesson). You'll see a black field, a green square (this will be the snake's head) and a red square (the apple).</p>
+
+  <h2>What's written here</h2>
+  <h3>The canvas</h3>
+  <pre class="code nonum">&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;</pre>
+  <p><code>&lt;canvas&gt;</code> is a place for drawing. Its <code>width</code> and <code>height</code> are 400 dots. Each such dot on the screen is called a <b>pixel</b>. And <code>id="game"</code> is the canvas's name, so that JavaScript can find it.</p>
+
+  <h3>The paintbrush</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");</pre>
+  <ul>
+    <li><code>document.getElementById("game")</code> — "find the element named <code>game</code> on the page (the <i>document</i>)". We put the canvas we found into the variable <code>canvas</code>.</li>
+    <li><code>canvas.getContext("2d")</code> — "give me the tools for flat (2D) drawing". We put them into the variable <code>ctx</code>. From now on <code>ctx</code> is our <b>paintbrush</b>.</li>
+  </ul>
+  <p>You can simply memorise these two lines: they're needed at the start of any program that draws on a canvas.</p>
+
+  <h3>Drawing</h3>
+  <pre class="code nonum">ctx.fillStyle = "lime";
+ctx.fillRect(200, 200, 20, 20);</pre>
+  <ul>
+    <li><code>fillStyle</code> — which colour to paint with. First we dip the brush in paint.</li>
+    <li><code>fillRect(x, y, width, height)</code> — draw a filled rectangle.</li>
+  </ul>
+  <p>You can write colours as English words: <code>"red"</code>, <code>"green"</code>, <code>"lime"</code>, <code>"blue"</code>, <code>"yellow"</code>, <code>"orange"</code>, <code>"purple"</code>, <code>"pink"</code>, <code>"white"</code>, <code>"black"</code>, <code>"gray"</code>, <code>"brown"</code>.</p>
+
+  <h2>Coordinates</h2>
+  <p>To say where to draw, you need two numbers: <b>x</b> — how many pixels to move <b>right</b> from the left edge, and <b>y</b> — how many pixels to move <b>down</b> from the top edge.</p>
+  <figure>
+    <svg viewBox="0 0 460 440" width="460" role="img" aria-label="A 400 by 400 canvas: x grows to the right, y grows downwards, a square at point 200, 200">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <rect x="40" y="40" width="400" height="400" class="svg-field"/>
+      <g class="svg-grid" stroke-width="1" opacity="0.6">
+        <line x1="140" y1="40" x2="140" y2="440"/><line x1="240" y1="40" x2="240" y2="440"/><line x1="340" y1="40" x2="340" y2="440"/>
+        <line x1="40" y1="140" x2="440" y2="140"/><line x1="40" y1="240" x2="440" y2="240"/><line x1="40" y1="340" x2="440" y2="340"/>
+      </g>
+      <g font-size="13" class="svg-text" text-anchor="middle">
+        <text x="40" y="32">0</text><text x="140" y="32">100</text><text x="240" y="32">200</text><text x="340" y="32">300</text><text x="430" y="32">400</text>
+        <text x="22" y="145">100</text><text x="22" y="245">200</text><text x="22" y="345">300</text>
+      </g>
+      <line x1="40" y1="16" x2="200" y2="16" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="210" y="21" font-size="16" font-weight="700" class="svg-accent2">x</text>
+      <line x1="10" y1="60" x2="10" y2="200" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="4" y="222" font-size="16" font-weight="700" class="svg-accent2">y</text>
+      <line x1="40" y1="250" x2="240" y2="250" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <line x1="250" y1="40" x2="250" y2="240" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <rect x="240" y="240" width="20" height="20" fill="#32cd32"/>
+      <text x="268" y="275" font-size="14" fill="#ffffff">(200, 200)</text>
+      <rect x="340" y="140" width="20" height="20" fill="#ff3b3b"/>
+      <text x="368" y="175" font-size="14" fill="#ffffff">(300, 100)</text>
+      <circle cx="40" cy="40" r="5" fill="#ffd43b"/>
+      <text x="48" y="58" font-size="13" fill="#ffd43b">(0, 0)</text>
+    </svg>
+    <figcaption>The starting point (0, 0) is in the top left corner. x grows to the right, y grows downwards.</figcaption>
+  </figure>
+  <div class="box warn">
+    <span class="title">⚠️ Not like in maths!</span>
+    In maths lessons the y axis points up, but on a computer screen it points <b>down</b>. The bigger y is, the lower on the screen.
+  </div>
+  <p>Now it's clear what each line with <code>fillRect</code> means:</p>
+  <ul>
+    <li><code>fillRect(0, 0, 400, 400)</code> — from the top left corner, fill a 400 by 400 square — that's the whole canvas.</li>
+    <li><code>fillRect(200, 200, 20, 20)</code> — move 200 right and 200 down and draw a 20 by 20 square.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Order matters</span>
+    The computer draws in the order the code is written: new things go <b>on top</b> of old ones, like paint on paper. Try moving the lines with the black field to the very end of the script. Where did the squares go?
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Move the apple to the bottom left corner of the field.</li>
+      <li>Draw two more squares behind the head to make a snake of three pieces: <code>(180, 200)</code> and <code>(160, 200)</code>.</li>
+      <li>Draw a traffic light: a grey rectangle and three coloured squares. Then delete it or comment it out (see the tip below) — the game doesn't need it.</li>
+      <li>⭐ You can also give a colour as a code: <code>"#ff8800"</code> is orange. Try different letters and digits from 0 to f after the hash sign.</li>
+    </ol>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Comments</span>
+    If you put two slashes <code>//</code> at the start of a line, the computer skips that line. It's a <b>comment</b> — a note for people. You can use it to leave yourself explanations or to "switch off" lines of code for a while.
+    <pre class="code nonum">// This is the snake's head
+ctx.fillStyle = "lime";</pre>
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson (compare with yours if something doesn't work)</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+    ctx.fillRect(180, 200, 20, 20);
+    ctx.fillRect(160, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>There's a <code>snake.html</code> file in the <code>code</code> folder.</li>
+    <li>I know that (0, 0) is the top left corner and that y grows downwards.</li>
+    <li>I can draw a rectangle of the right colour in the right place.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-03.html"><small>← Lesson 3</small>Variables</a>
+    <a class="next" href="lesson-05.html"><small>Lesson 5 →</small>Functions</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

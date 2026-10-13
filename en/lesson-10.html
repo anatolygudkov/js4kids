@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrow Key Controls</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 10 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>Arrow key controls</h1>
+  <p class="lead">The snake crawls wherever it likes, and it's time it listened to the player. Let's teach the program to find out which key was pressed and turn the snake with the arrow keys.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>find out what <b>events</b> are;</li>
+      <li>"subscribe" to key presses with <code>addEventListener</code>;</li>
+      <li>learn what the arrow keys are called;</li>
+      <li>teach the snake to turn, but not to reverse.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Events: spying on the keyboard</td></tr>
+      <tr><td>15 min</td><td>The <code>onKey</code> function: turning the snake</td></tr>
+      <tr><td>10 min</td><td>No reversing allowed</td></tr>
+      <tr><td>10 min</td><td>Play and do the tasks</td></tr>
+    </table>
+  </div>
+
+  <h2>Events</h2>
+  <p>When you press a key, move the mouse or click a button, the browser notices. These happenings are called <b>events</b>. We can ask the browser: "When a key is pressed, call my function."</p>
+  <p>Add this to the end of the script, before <code>draw();</code>:</p>
+  <pre class="code nonum">function onKey(event) {
+  console.log(event.key);
+}
+
+document.addEventListener("keydown", onKey);</pre>
+  <ul>
+    <li><code>"keydown"</code> is the "a key was pressed" event.</li>
+    <li><code>addEventListener</code> means "add a listener": now every time a key is pressed, the browser will call our function <code>onKey</code>.</li>
+    <li>The browser itself passes the parameter <code>event</code> to the function; it has everything about the event written in it. <code>event.key</code> holds the name of the key.</li>
+  </ul>
+  <p>Save, refresh the page, open the console and <b>click on the page with the mouse</b> (so that it "listens" to the keyboard). Press various keys and arrows. Their names appear in the console:</p>
+  <pre class="console">ArrowUp
+ArrowDown
+ArrowLeft
+ArrowRight
+a
+Enter</pre>
+  <p>So <code>ArrowUp</code> is the up arrow.</p>
+  <div class="box tip">
+    <span class="title">💡 Keys not working?</span>
+    If you press keys and nothing shows up in the console, click on the page itself, for example on the black field. Keys go to the window or the part of the screen you clicked last.
+  </div>
+
+  <h2>Turning</h2>
+  <p>Now instead of <code>console.log</code> we'll change the direction <code>dx</code> and <code>dy</code>. Remember the table of directions from lesson 8? Replace the <code>onKey</code> function:</p>
+  <pre class="code" data-file="snake.html (onKey function)" data-new="3-18" data-del="2">function onKey(event) {
+  console.log(event.key);
+  if (event.key === "ArrowUp") {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown") {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft") {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight") {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Save, refresh, click on the field and steer with the arrows! 🎮</p>
+  <p>The name of a key is text, so <code>"ArrowUp"</code> is written in quotes. Capital letters matter: <code>"arrowup"</code> won't work.</p>
+
+  <h2>No going back!</h2>
+  <p>Try this: the snake is crawling right and you press the left arrow. The snake turns around and crawls straight through itself. In a real Snake game that's not allowed: the head would crash into its own body.</p>
+  <p>The rule is: <b>you can turn up only if the snake isn't crawling down right now.</b> Crawling down means <code>dy</code> is 1. Let's add that to the condition with <code>&amp;&amp;</code> ("and"):</p>
+  <pre class="code" data-file="snake.html (onKey function)" data-new="2,6,10,14">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Let's read the first condition in plain English: "If the up arrow is pressed <b>and</b> the snake isn't crawling down, then turn up."</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Use the arrows to make the snake draw a "square" on the field. Did it work?</li>
+      <li>Make the snake faster (an interval of 120) and try steering it. What about 60?</li>
+      <li>⭐ Lots of games use the <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> keys. Add them. Here's a trick: if Caps Lock is on, <code>event.key</code> for the W key will be <code>"W"</code>, not <code>"w"</code>! So use <code>event.code</code> — that's the key's "place" on the keyboard, and it doesn't depend on Caps Lock or the keyboard language: <code>"KeyW"</code>, <code>"KeyA"</code>, <code>"KeyS"</code>, <code>"KeyD"</code>. Hint: you can extend the condition with <code>||</code>:
+<pre class="code nonum">if ((event.key === "ArrowUp" || event.code === "KeyW") &amp;&amp; dy !== 1) {</pre>
+      </li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I know what an event is and what <code>addEventListener</code> does.</li>
+    <li>I can find out a key's name using the console.</li>
+    <li>I can explain the condition <code>event.key === "ArrowUp" &amp;&amp; dy !== 1</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-09.html"><small>← Lesson 9</small>Conditions</a>
+    <a class="next" href="lesson-11.html"><small>Lesson 11 →</small>The apple and growing</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

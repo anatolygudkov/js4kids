@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control con las flechas</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 10 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Control con las flechas</h1>
+  <p class="lead">La serpiente va a su aire, y ya es hora de que obedezca a quien juega. Vamos a enseñar al programa a saber qué tecla se ha pulsado y a girar la serpiente con las flechas.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>descubrir qué son los <b>eventos</b>;</li>
+      <li>«suscribirte» a las pulsaciones de teclas con <code>addEventListener</code>;</li>
+      <li>aprender cómo se llaman las teclas de flecha;</li>
+      <li>enseñar a la serpiente a girar, pero no a dar media vuelta.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Eventos: espiamos al teclado</td></tr>
+      <tr><td>15 min</td><td>La función <code>onKey</code>: giramos la serpiente</td></tr>
+      <tr><td>10 min</td><td>Prohibido dar media vuelta</td></tr>
+      <tr><td>10 min</td><td>Jugamos y hacemos las tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>Eventos</h2>
+  <p>Cuando pulsas una tecla, mueves el ratón o haces clic en un botón, el navegador se da cuenta. Estas cosas que pasan se llaman <b>eventos</b>. Podemos pedirle al navegador: «Cuando pulsen una tecla, llama a mi función».</p>
+  <p>Añade al final del script, antes de <code>draw();</code>:</p>
+  <pre class="code nonum">function onKey(event) {
+  console.log(event.key);
+}
+
+document.addEventListener("keydown", onKey);</pre>
+  <ul>
+    <li><code>"keydown"</code> es el evento «se ha pulsado una tecla» (<i>key down</i>: «tecla abajo»).</li>
+    <li><code>addEventListener</code> significa «añade un oyente»: a partir de ahora, cada vez que se pulse una tecla, el navegador llamará a nuestra función <code>onKey</code>.</li>
+    <li>El propio navegador le pasa a la función el parámetro <code>event</code>, donde está apuntado todo sobre el evento. En <code>event.key</code> está el nombre de la tecla.</li>
+  </ul>
+  <p>Guarda, recarga la página, abre la consola y <b>haz clic con el ratón en la página</b> (para que «escuche» al teclado). Pulsa distintas teclas y flechas. Sus nombres aparecen en la consola:</p>
+  <pre class="console">ArrowUp
+ArrowDown
+ArrowLeft
+ArrowRight
+a
+Enter</pre>
+  <p><i>Arrow</i> significa «flecha» en inglés. Así que <code>ArrowUp</code> es la flecha hacia arriba.</p>
+  <div class="box tip">
+    <span class="title">💡 ¿No funcionan las teclas?</span>
+    Si pulsas teclas y en la consola no sale nada, haz clic en la propia página, por ejemplo en el campo negro. Las teclas las recibe la ventana o la parte de la pantalla donde hiciste el último clic.
+  </div>
+
+  <h2>Giramos</h2>
+  <p>Ahora, en lugar de <code>console.log</code>, cambiaremos la dirección <code>dx</code> y <code>dy</code>. ¿Recuerdas la tabla de direcciones de la lección 8? Cambia la función <code>onKey</code>:</p>
+  <pre class="code" data-file="snake.html (función onKey)" data-new="3-18" data-del="2">function onKey(event) {
+  console.log(event.key);
+  if (event.key === "ArrowUp") {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown") {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft") {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight") {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Guarda, recarga, haz clic en el campo… ¡y maneja con las flechas! 🎮</p>
+  <p>El nombre de una tecla es texto, por eso <code>"ArrowUp"</code> va entre comillas. Las mayúsculas importan: <code>"arrowup"</code> no funciona.</p>
+
+  <h2>¡Hacia atrás no!</h2>
+  <p>Prueba esto: la serpiente va hacia la derecha y pulsas la flecha izquierda. La serpiente da media vuelta y pasa a través de sí misma. En la Serpiente de verdad eso no se puede: la cabeza chocaría con su propio cuerpo.</p>
+  <p>La regla es: <b>solo se puede girar hacia arriba si la serpiente no va hacia abajo en ese momento.</b> Ir hacia abajo significa que <code>dy</code> vale 1. Lo añadimos a la condición con <code>&amp;&amp;</code> («y»):</p>
+  <pre class="code" data-file="snake.html (función onKey)" data-new="2,6,10,14">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Leamos la primera condición en español: «Si se ha pulsado la flecha arriba <b>y</b> la serpiente no va hacia abajo, entonces girar hacia arriba».</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>Con las flechas, haz que la serpiente dibuje un «cuadrado» en el campo. ¿Lo has conseguido?</li>
+      <li>Haz la serpiente más rápida (un intervalo de 120) e intenta manejarla. ¿Y con 60?</li>
+      <li>⭐ Muchos juegos se manejan con las teclas <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. Añádelas. Pero ojo: si tienes activado Bloq Mayús, <code>event.key</code> de la tecla W será <code>"W"</code>, ¡no <code>"w"</code>! Por eso usa <code>event.code</code>: es el «sitio» de la tecla en el teclado, y no depende de las mayúsculas ni del idioma del teclado: <code>"KeyW"</code>, <code>"KeyA"</code>, <code>"KeyS"</code>, <code>"KeyD"</code>. Pista: la condición se puede ampliar con <code>||</code>:
+<pre class="code nonum">if ((event.key === "ArrowUp" || event.code === "KeyW") &amp;&amp; dy !== 1) {</pre>
+      </li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé qué es un evento y qué hace <code>addEventListener</code>.</li>
+    <li>Sé averiguar el nombre de una tecla con la consola.</li>
+    <li>Sé explicar la condición <code>event.key === "ArrowUp" &amp;&amp; dy !== 1</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-09.html"><small>← Lección 9</small>Condiciones</a>
+    <a class="next" href="lesson-11.html"><small>Lección 11 →</small>La manzana y el crecimiento</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

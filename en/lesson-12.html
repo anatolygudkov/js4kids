@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Over</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 12 of 16 <span class="time">⏱ 50 minutes</span></p>
+  <h1>Game over</h1>
+  <p class="lead">In a real game you can lose — otherwise it's no fun. Our snake will die if it crashes into a wall or bites its own tail. And the words "Game over" will appear on the field.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>replace the portals with real walls;</li>
+      <li>write a function <code>isOnSnake</code> that checks whether a cell is taken by the snake;</li>
+      <li>learn how to stop a timer (<code>clearInterval</code>) and a function (<code>return</code>);</li>
+      <li>write text on the canvas.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>The rules for losing</td></tr>
+      <tr><td>15 min</td><td>Stopping the game: <code>endGame</code>, <code>clearInterval</code>, text on the canvas</td></tr>
+      <tr><td>10 min</td><td>Walls instead of portals</td></tr>
+      <tr><td>15 min</td><td>Biting the tail: <code>isOnSnake</code></td></tr>
+      <tr><td>5 min</td><td>Play!</td></tr>
+    </table>
+  </div>
+
+  <h2>Stopping the timer</h2>
+  <p>The snake is moved by the <code>setInterval</code> timer. To stop the game, the timer has to be switched off. For that we need to remember it in a variable. Change the last line of the program:</p>
+  <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);
+let timer = setInterval(step, 200);</pre>
+  <p><code>setInterval</code> returns the timer's number, and we put it in <code>timer</code>. You switch the timer off with the command <code>clearInterval(timer)</code>.</p>
+
+  <h2>The "Game over" function</h2>
+  <p>Add a new function after <code>draw</code>:</p>
+  <pre class="code" data-file="snake.html (new function)" data-new="1-7">function endGame() {
+  clearInterval(timer);
+  ctx.fillStyle = "white";
+  ctx.font = "32px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Game over", 200, 200);
+}</pre>
+  <ul>
+    <li><code>clearInterval(timer)</code> — switch off the timer: <code>step</code> isn't called any more, the snake freezes;</li>
+    <li><code>ctx.font</code> — the size and style of the font: 32 pixels, a font without little "feet" (<i>sans-serif</i>);</li>
+    <li><code>ctx.textAlign = "center"</code> — centre the text;</li>
+    <li><code>ctx.fillText(text, x, y)</code> — write text at the point (x, y). The point (200, 200) is the middle of the field.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Try it in the console</span>
+    Type <code>endGame()</code> in the console and press <kbd>Enter</kbd>: the snake stops and the message appears. This is how you can test functions one at a time, even before they're connected to the game.
+  </div>
+
+  <h2>Walls</h2>
+  <p>The portals were fun, but in classic Snake the walls are dangerous. Remove the four portal checks from <code>step</code> and put in one wall check:</p>
+  <pre class="code" data-file="snake.html (start of the step function)" data-new="16-19" data-del="4-15">function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  if (head.x &gt;= cells) {
+    head.x = 0;
+  }
+  if (head.x &lt; 0) {
+    head.x = cells - 1;
+  }
+  if (head.y &gt;= cells) {
+    head.y = 0;
+  }
+  if (head.y &lt; 0) {
+    head.y = cells - 1;
+  }
+  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+
+  snake.unshift(head);
+  ...</pre>
+  <p>With <code>||</code> ("or") we joined four questions into one: "is the head left of the field, <b>or</b> right of it, <b>or</b> above it, <b>or</b> below it?" If any of these is true, the game is over.</p>
+  <h3>Why return?</h3>
+  <p><code>return</code> <b>ends</b> the function immediately: the lines below it don't run. Without it, the snake — having already "crashed" — would still add a head outside the field and redraw the picture on top of the "Game over" message.</p>
+
+  <h2>Biting its own tail</h2>
+  <p>We need to check whether the new head has landed on a cell where a piece of the snake already is. To do that, we go through all the pieces with a loop and compare the coordinates. Let's write a question-function that answers <code>true</code> or <code>false</code>:</p>
+  <pre class="code" data-file="snake.html (new function, after randomCell)" data-new="1-8">function isOnSnake(x, y) {
+  for (let i = 0; i &lt; snake.length; i++) {
+    if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+      return true;
+    }
+  }
+  return false;
+}</pre>
+  <p>How it works:</p>
+  <ul>
+    <li>the loop looks at each piece of the snake in turn;</li>
+    <li>if there's a piece on cell (x, y), the function immediately answers <code>true</code> ("yes, the snake is here") and ends;</li>
+    <li>if the loop has checked them all and found nobody, the program reaches the last line and answers <code>false</code>.</li>
+  </ul>
+  <p>The function's name sounds like a question: <i>is on snake?</i>. That's the usual way to name functions that answer "yes" or "no".</p>
+  <p>Now let's use it in <code>step</code>, right after the wall check:</p>
+  <pre class="code" data-file="snake.html (step function)" data-new="5-8">  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+  if (isOnSnake(head.x, head.y)) {
+    endGame();
+    return;
+  }</pre>
+  <p>Save, refresh and test both ways of losing: crash into a wall, then grow the snake longer and bite yourself. To play again, press <kbd>F5</kbd> for now. In the next lesson we'll make Space restart the game.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Under "Game over" add a second, smaller line: "Score: …". Hint: change <code>ctx.font</code> to <code>"20px sans-serif"</code> and write the text 40 pixels lower. You can glue the score to the text with <code>+</code>.</li>
+      <li>Make the message red or yellow.</li>
+      <li>⭐ Before the message, draw a see-through rectangle so the text is easier to read. A colour with transparency is written like this: <code>"rgba(0, 0, 0, 0.6)"</code> — black, 40% see-through.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 The whole snake.html file after this lesson</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Snake&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Snake&lt;/h1&gt;
+  &lt;p&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+    let score = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Game over", 200, 200);
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        document.getElementById("score").textContent = score;
+        apple.x = randomCell();
+        apple.y = randomCell();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    let timer = setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I know how to remember a timer in a variable and switch it off.</li>
+    <li>I understand that <code>return</code> ends a function right away.</li>
+    <li>I can explain how <code>isOnSnake</code> looks for a piece of the snake.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-11.html"><small>← Lesson 11</small>The apple and growing</a>
+    <a class="next" href="lesson-13.html"><small>Lesson 13 →</small>New game</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condiciones</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 9 de 16 <span class="time">⏱ 45 minutos</span></p>
+  <h1>Condiciones</h1>
+  <p class="lead">La serpiente se sale por el borde del campo. Necesitamos que el programa sepa <b>decidir</b>: <i>si</i> la serpiente está en el borde, <i>entonces</i> hacer algo especial. Para eso está la orden <code>if</code>. Con ella haremos portales mágicos: la serpiente entra por una pared y sale por la de enfrente.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>descubrir qué son <code>true</code> y <code>false</code>;</li>
+      <li>aprender a comparar números: <code>&gt;</code>, <code>&lt;</code>, <code>===</code> y otros;</li>
+      <li>escribir condiciones <code>if</code> e <code>if … else</code>;</li>
+      <li>unir condiciones con «y» (<code>&amp;&amp;</code>) y «o» (<code>||</code>);</li>
+      <li>hacer portales en los bordes del campo.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>10 min</td><td>Verdadero y falso: comparaciones en la consola</td></tr>
+      <tr><td>10 min</td><td><code>if</code> y <code>else</code></td></tr>
+      <tr><td>15 min</td><td>Portales en el juego</td></tr>
+      <tr><td>10 min</td><td><code>&amp;&amp;</code> y <code>||</code>, tareas</td></tr>
+    </table>
+  </div>
+
+  <h2>¿Verdadero o falso?</h2>
+  <p>Abre la consola y hazle preguntas al ordenador:</p>
+  <pre class="code nonum">5 &gt; 3
+2 &gt; 7
+10 === 10
+10 === 11</pre>
+  <p>A cada pregunta el ordenador contesta <code>true</code> (verdadero) o <code>false</code> (falso). Estas son todas las formas de comparar:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Signo</th><th>Pregunta</th><th>Ejemplo</th></tr>
+      <tr><td><code>&gt;</code></td><td>¿mayor?</td><td><code>5 &gt; 3</code> → true</td></tr>
+      <tr><td><code>&lt;</code></td><td>¿menor?</td><td><code>5 &lt; 3</code> → false</td></tr>
+      <tr><td><code>&gt;=</code></td><td>¿mayor o igual?</td><td><code>20 &gt;= 20</code> → true</td></tr>
+      <tr><td><code>&lt;=</code></td><td>¿menor o igual?</td><td><code>0 &lt;= -1</code> → false</td></tr>
+      <tr><td><code>===</code></td><td>¿igual?</td><td><code>7 === 7</code> → true</td></tr>
+      <tr><td><code>!==</code></td><td>¿distinto?</td><td><code>7 !== 7</code> → false</td></tr>
+    </table>
+  </div>
+  <div class="box warn">
+    <span class="title">⚠️ ¿Uno, dos o tres signos igual?</span>
+    <code>=</code> (uno) significa «mete en la caja». <code>===</code> (tres) pregunta «¿son iguales?». ¡No los confundas! En este curso, para comparar siempre usamos tres signos igual.
+  </div>
+
+  <h2>Si… entonces… si no</h2>
+  <pre class="code nonum">let score = 12;
+
+if (score &gt; 10) {
+  console.log("¡Muy bien!");
+}</pre>
+  <p>Entre los paréntesis que van después de <code>if</code> («si») va una pregunta. Si la respuesta es <code>true</code>, se ejecuta lo que hay entre las llaves. Si es <code>false</code>, se salta.</p>
+  <p>Y con <code>else</code> («si no») puedes decir qué hacer cuando la respuesta es «no»:</p>
+  <pre class="code nonum">if (score &gt; 10) {
+  console.log("¡Muy bien!");
+} else {
+  console.log("¡Inténtalo otra vez!");
+}</pre>
+  <p>Cambia <code>score</code> a 5 y comprueba qué sale. Puedes hacer experimentos en <code>prueba.html</code>.</p>
+
+  <h2>Portales mágicos</h2>
+  <p>El campo va de la casilla 0 a la casilla 19. La cabeza de la serpiente se ha salido del campo si:</p>
+  <ul>
+    <li><code>head.x &gt;= cells</code> — se ha salido por la derecha (x vale 20);</li>
+    <li><code>head.x &lt; 0</code> — se ha salido por la izquierda (x vale -1);</li>
+    <li><code>head.y &gt;= cells</code> — se ha salido por abajo;</li>
+    <li><code>head.y &lt; 0</code> — se ha salido por arriba.</li>
+  </ul>
+  <p>En cada caso llevaremos la cabeza a la pared de enfrente. Añade las comprobaciones a la función <code>step</code>: después de crear <code>head</code>, pero <b>antes</b> de <code>unshift</code>.</p>
+  <pre class="code" data-file="snake.html (función step)" data-new="3-16">function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  if (head.x &gt;= cells) {
+    head.x = 0;
+  }
+  if (head.x &lt; 0) {
+    head.x = cells - 1;
+  }
+  if (head.y &gt;= cells) {
+    head.y = 0;
+  }
+  if (head.y &lt; 0) {
+    head.y = cells - 1;
+  }
+
+  snake.unshift(head);
+  snake.pop();
+  draw();
+}</pre>
+  <p>Guarda, recarga y mira: la serpiente llega al borde derecho y sale por la izquierda. ¡Los portales funcionan!</p>
+  <p>Cambia <code>dx</code> y <code>dy</code> al principio del programa para probar los cuatro portales.</p>
+  <div class="box tip">
+    <span class="title">💡 ¿Por qué cells - 1?</span>
+    <code>cells</code> vale 20, pero la última casilla es la número 19. Por eso, al salir por la pared izquierda, vamos a la casilla <code>cells - 1</code>, es decir, la 19.
+  </div>
+
+  <h2>«Y» y «o»</h2>
+  <p>A veces hay que comprobar dos condiciones a la vez:</p>
+  <ul>
+    <li><code>&amp;&amp;</code> — <b>«y»</b>: es verdad solo si <b>las dos</b> condiciones son verdad.</li>
+    <li><code>||</code> — <b>«o»</b>: es verdad si <b>al menos una</b> condición es verdad.</li>
+  </ul>
+  <pre class="code nonum">let x = 5;
+console.log(x &gt; 0 &amp;&amp; x &lt; 10);    // true: x es mayor que 0 Y menor que 10
+console.log(x &lt; 0 || x &gt; 3);     // true: al menos una se cumple
+console.log(x &lt; 0 || x &gt; 100);   // false: no se cumple ninguna</pre>
+  <p>El símbolo <code>&amp;</code> es <kbd>Mayús</kbd> + <kbd>6</kbd>, y <code>|</code> es <kbd>AltGr</kbd> + <kbd>1</kbd>. Los dos se escriben <b>dos veces</b>. El «y» y el «o» nos harán falta ya en la próxima lección.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Tareas</span>
+    <ol>
+      <li>En la consola comprueba: <code>3 + 4 === 7</code>, <code>"gato" === "gato"</code>, <code>"gato" === "Gato"</code>. ¿Por qué el último da false?</li>
+      <li>Haz que la cabeza de la serpiente sea <code>"orange"</code> cuando la serpiente está en la mitad izquierda del campo (<code>snake[0].x &lt; 10</code>), y <code>"yellow"</code> en la mitad derecha. Pista: en la función <code>draw</code> crea una variable <code>headColor</code> y cámbiala con <code>if … else</code>.</li>
+      <li>⭐ En <code>prueba.html</code> escribe un juego de adivinar: el ordenador tiene un número «secreto» en una variable, el jugador lo intenta adivinar con <code>prompt</code> y el programa contesta «más», «menos» o «¡acertaste!».</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 El archivo snake.html completo después de esta lección</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Serpiente&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Serpiente&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé la diferencia entre <code>=</code> y <code>===</code>.</li>
+    <li>Sé escribir <code>if</code> e <code>if … else</code>.</li>
+    <li>Entiendo cuándo <code>&amp;&amp;</code> da true y cuándo lo da <code>||</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-08.html"><small>← Lección 8</small>La serpiente se mueve</a>
+    <a class="next" href="lesson-10.html"><small>Lección 10 →</small>Control con las flechas</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

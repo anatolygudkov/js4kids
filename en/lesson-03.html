@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variables</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 3 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>Variables</h1>
+  <p class="lead">A game has lots to remember: the score, the length of the snake, the speed. For that, programs have <b>variables</b> — labelled boxes where you can keep numbers and text.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>create variables with the <code>let</code> command;</li>
+      <li>learn to change what's inside a variable;</li>
+      <li>glue text together from pieces;</li>
+      <li>write a program that asks for your name.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>Recap: the console and errors</td></tr>
+      <tr><td>15 min</td><td>What a variable is, <code>let</code>, changing a value</td></tr>
+      <tr><td>10 min</td><td>Text and gluing strings</td></tr>
+      <tr><td>15 min</td><td>A chatty program with <code>prompt</code>, tasks</td></tr>
+    </table>
+  </div>
+
+  <h2>A box with a label</h2>
+  <p>Imagine a box with the word <b>score</b> written on it. Let's put the number 0 in it:</p>
+  <pre class="code nonum">let score = 0;</pre>
+  <ul>
+    <li><code>let</code> — "let there be": we're making a new box;</li>
+    <li><code>score</code> — the box's name (its label);</li>
+    <li><code>=</code> — "put into it";</li>
+    <li><code>0</code> — what we put in.</li>
+  </ul>
+  <p>Now, wherever we write <code>score</code>, the computer will use whatever is in the box.</p>
+  <p>Open <code>test.html</code>, delete everything between <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code>, and write:</p>
+  <pre class="code" data-file="test.html (only the part inside script)">let score = 0;
+console.log(score);
+
+score = 10;
+console.log(score);
+
+score = score + 1;
+console.log(score);</pre>
+  <p>Save, refresh and look in the console: <code>0</code>, <code>10</code>, <code>11</code>.</p>
+
+  <h3>Wait, score = score + 1?!</h3>
+  <p>In maths that's impossible: a number can't equal itself plus one. But in programming <code>=</code> doesn't mean "equals", it means <b>"put in the box"</b>. The computer reads this line from right to left:</p>
+  <ol>
+    <li>it takes what's in <code>score</code> (that's 10);</li>
+    <li>adds 1 (that makes 11);</li>
+    <li>puts the result back into <code>score</code>.</li>
+  </ol>
+  <p>That's exactly how the score in our game will grow when the snake eats an apple!</p>
+  <div class="box warn">
+    <span class="title">⚠️ Write let only once</span>
+    <code>let</code> is only needed when we <b>create</b> a box. When we change what's inside, we just write <code>score = 10;</code>. If you write <code>let score</code> a second time, you'll get the error <i>redeclaration of let score</i>: "the box score is being declared again — it already exists".
+  </div>
+
+  <h2>Rules for names</h2>
+  <ul>
+    <li>Only <b>English letters</b>, digits and <code>_</code>. No spaces. A name can't start with a digit.</li>
+    <li>Capital and small letters are <b>different</b>: <code>score</code> and <code>Score</code> are two different boxes.</li>
+    <li>If a name has several words, start each word after the first with a capital letter: <code>snakeLength</code>, <code>bestScore</code>. It looks like a camel's humps, so this style is called "camelCase".</li>
+    <li>Choose clear names: <code>speed</code> is better than <code>s</code> or <code>abc</code>.</li>
+  </ul>
+
+  <h2>Text in variables</h2>
+  <p>You can put text (a string) in a variable too:</p>
+  <pre class="code nonum">let name = "Alex";
+console.log("Hello, " + name + "!");</pre>
+  <p>If you add strings with <code>+</code>, they <b>glue together</b> into one: <code>Hello, Alex!</code>. Don't forget the space inside the quotes after the comma, or you'll get "Hello,Alex!".</p>
+  <p>And what if you glue text and a number?</p>
+  <pre class="code nonum">let apples = 5;
+console.log("Apples eaten: " + apples);
+console.log("5" + 5);
+console.log(5 + 5);</pre>
+  <p>You get <code>Apples eaten: 5</code>, then <code>55</code> (the text "5" and the number 5 got glued together), and <code>10</code> (two numbers were added). Remember: quotes turn a number into text.</p>
+
+  <h2>A chatty program</h2>
+  <p>The <code>prompt</code> command shows a window where you can <b>type</b> something. Whatever the person types can go straight into a variable:</p>
+  <pre class="code" data-file="test.html (only the part inside script)">let name = prompt("What's your name?");
+alert("Hello, " + name + "! Let's write a game.");
+
+let year = 2026;
+let born = prompt("What year were you born?");
+alert("You are about " + (year - born) + " years old.");</pre>
+  <p>The expression <code>(year - born)</code> is in brackets so that the computer first works out the difference, and only then glues it to the text.</p>
+  <div class="box tip">
+    <span class="title">💡 Is it a different year now?</span>
+    If it's no longer 2026, put the current year in <code>year</code>.
+  </div>
+
+  <h2>Variables in Snake</h2>
+  <p>Here are the variables that will appear in our game:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Variable</th><th>What it stores</th></tr>
+      <tr><td><code>score</code></td><td>the score — how many apples have been eaten</td></tr>
+      <tr><td><code>speed</code></td><td>the snake's speed</td></tr>
+      <tr><td><code>size</code></td><td>the size of one square on the field</td></tr>
+      <tr><td><code>snake</code></td><td>where each piece of the snake is</td></tr>
+      <tr><td><code>apple</code></td><td>where the apple is</td></tr>
+    </table>
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Create a variable <code>lives</code> with the value 3. Take away one life (<code>lives = lives - 1;</code>) and print the result to the console.</li>
+      <li>Ask the player for their favourite animal and print: "My favourite animal is …".</li>
+      <li>Make variables <code>width = 20</code> and <code>height = 15</code>. Work out how many squares the field has, <code>width × height</code>, and print the answer with an explanation.</li>
+      <li>⭐ Write <code>score++;</code> instead of <code>score = score + 1;</code>. Does it work? It's a shorthand, and we'll need it later.</li>
+    </ol>
+  </div>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>I know what <code>let</code> does and that <code>=</code> means "put in".</li>
+    <li>I understand why <code>score = score + 1</code> makes the score bigger.</li>
+    <li>I can glue text and variables together with <code>+</code>.</li>
+  </ul>
+  <div class="box ok">
+    <span class="title">🎉 Warm-up finished!</span>
+    In the next lesson we start writing the game itself.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-02.html"><small>← Lesson 2</small>The console and errors</a>
+    <a class="next" href="lesson-04.html"><small>Lesson 4 →</small>Canvas and coordinates</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your First Program</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript for Kids</a>
+  <nav><a href="index.html">Contents</a><a href="cheatsheet.html">Cheat sheet</a><a href="../index.html">🌐 Language</a></nav>
+</header>
+<main>
+  <p class="kicker">Lesson 1 of 16 <span class="time">⏱ 45 minutes</span></p>
+  <h1>Your first program</h1>
+  <p class="lead">Today you'll create your first code file, and the computer will say hello to you. You'll also learn the main loop every programmer uses: <b>write → save → refresh</b>.</p>
+
+  <div class="goals">
+    <b>In this lesson you will:</b>
+    <ul>
+      <li>create a file called <code>test.html</code> in Geany and save it in the <code>code</code> folder;</li>
+      <li>write a page in HTML and your first JavaScript command;</li>
+      <li>open your program in the browser;</li>
+      <li>learn to check your changes quickly.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Lesson plan</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>How the browser runs programs</td></tr>
+      <tr><td>10 min</td><td>Create and save a file</td></tr>
+      <tr><td>15 min</td><td>Type the code and run it</td></tr>
+      <tr><td>15 min</td><td>Experiments and tasks</td></tr>
+    </table>
+  </div>
+
+  <h2>How it works</h2>
+  <p>We'll write files whose names end in <code>.html</code>. A browser knows how to open them. Two languages live in such a file:</p>
+  <ul>
+    <li><b>HTML</b> describes <i>what</i> is on the page: headings, text, a field for the game.</li>
+    <li><b>JavaScript</b> (<b>JS</b> for short) describes <i>what to do</i>: show messages, count, move the snake.</li>
+  </ul>
+  <p>We write text in the editor, and the browser reads it and carries it out. That's all the magic.</p>
+
+  <h2>Step 1. Create a file</h2>
+  <ol class="steps">
+    <li>Open Geany. If an old file is open there, close it with the cross on its tab.</li>
+    <li>Choose <b>File → New</b> or press <kbd>Ctrl</kbd> + <kbd>N</kbd>. An empty sheet appears with an "untitled" tab.</li>
+    <li>Save it straight away: <b>File → Save As</b> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.</li>
+    <li>In the save window choose your home folder on the left (the house icon), then double-click the <b>code</b> folder to open it.</li>
+    <li>In the <b>Name</b> box type <code>test.html</code> and click <b>Save</b>.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Why save an empty file?</span>
+    From the ending <code>.html</code> Geany learns which language you're writing in and starts colouring the code. That makes mistakes easier to spot.
+  </div>
+
+  <h2>Step 2. Write the code</h2>
+  <p>Carefully type the code below. Don't type the line numbers — Geany adds them itself. You can indent the start of a line with the <kbd>Tab</kbd> key, and after <kbd>Enter</kbd> Geany usually indents for you.</p>
+  <pre class="code" data-file="test.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;My first program&lt;/h1&gt;
+  &lt;script&gt;
+    alert("Hello! I'm your computer.");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Type it, don't copy it</span>
+    That way your fingers remember where the symbols are, and your head remembers the commands. If you make a mistake, no problem: hunting for typos is useful too.
+  </div>
+
+  <h2>Step 3. Save and run</h2>
+  <ol class="steps">
+    <li>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save. Look at the tab: if the file name was red or had a star <code>*</code>, it becomes normal after saving.</li>
+    <li>Open the <b>file manager</b> and go into the <b>code</b> folder. Your file <b>test.html</b> is there.</li>
+    <li>Right-click it and choose <b>Open With…</b> → <b>Firefox</b>. If Firefox is the default browser, a double click is enough.</li>
+  </ol>
+  <p>A little window appears saying "Hello! I'm your computer." Click <b>OK</b>, and you'll see a page with the heading "My first program".</p>
+  <div class="box ok">
+    <span class="title">🎉 Congratulations!</span>
+    Your very first real program just ran.
+  </div>
+
+  <h2>Let's look at what we wrote</h2>
+  <p>HTML is made of <b>tags</b> — words in angle brackets. Tags usually come in pairs: an opening <code>&lt;body&gt;</code> and a closing <code>&lt;/body&gt;</code> (with a slash). Everything between them is "inside", like in a box.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>What's written</th><th>What it means</th></tr>
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>"Browser, this is an HTML page." Always the first line.</td></tr>
+      <tr><td><code>&lt;html&gt; … &lt;/html&gt;</code></td><td>The biggest box: the whole page is in it.</td></tr>
+      <tr><td><code>&lt;head&gt; … &lt;/head&gt;</code></td><td>The "head": behind-the-scenes information you don't see on the page.</td></tr>
+      <tr><td><code>&lt;meta charset="utf-8"&gt;</code></td><td>So that all letters and symbols display correctly.</td></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>The name you see on the browser tab.</td></tr>
+      <tr><td><code>&lt;body&gt; … &lt;/body&gt;</code></td><td>The "body": what you see on the page.</td></tr>
+      <tr><td><code>&lt;h1&gt;</code></td><td>A big heading.</td></tr>
+      <tr><td><code>&lt;script&gt; … &lt;/script&gt;</code></td><td>JavaScript starts here!</td></tr>
+    </table>
+  </div>
+  <p>And here is our first line of JavaScript:</p>
+  <pre class="code nonum">alert("Hello! I'm your computer.");</pre>
+  <ul>
+    <li><code>alert</code> is a <b>command</b> that shows a little window with a message.</li>
+    <li>In the <b>round brackets</b> <code>( )</code> we tell the command <i>what</i> to show.</li>
+    <li>Text is always written in <b>quotes</b> <code>" "</code>.</li>
+    <li>The <b>semicolon</b> <code>;</code> at the end is like a full stop at the end of a sentence: the command is finished.</li>
+  </ul>
+
+  <h2>The programmer's main loop</h2>
+  <p>Now the most important part. Every time you change the code, do this:</p>
+  <figure>
+    <svg viewBox="0 0 600 170" width="600" role="img" aria-label="Loop: write code, save with Ctrl+S, refresh with F5, look at the result">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <g font-size="15" text-anchor="middle">
+        <rect x="10" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="70" y="66" class="svg-text" font-weight="700">✏️ Write</text>
+        <text x="70" y="88" class="svg-text" font-size="13">in Geany</text>
+        <rect x="165" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="225" y="66" class="svg-text" font-weight="700">💾 Save</text>
+        <text x="225" y="88" class="svg-text" font-size="13">Ctrl + S</text>
+        <rect x="320" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="380" y="66" class="svg-text" font-weight="700">🔄 Refresh</text>
+        <text x="380" y="88" class="svg-text" font-size="13">F5 in the browser</text>
+        <rect x="475" y="40" width="115" height="60" rx="12" class="svg-card"/>
+        <text x="532" y="66" class="svg-text" font-weight="700">👀 Look</text>
+        <text x="532" y="88" class="svg-text" font-size="13">at the result</text>
+      </g>
+      <g fill="none" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#arr)">
+        <line x1="132" y1="70" x2="161" y2="70"/>
+        <line x1="287" y1="70" x2="316" y2="70"/>
+        <line x1="442" y1="70" x2="471" y2="70"/>
+        <path d="M532,102 C532,155 70,155 70,104"/>
+      </g>
+      <text x="300" y="160" text-anchor="middle" font-size="13" class="svg-text">and again</text>
+    </svg>
+  </figure>
+  <p>You don't need to close the browser window: after saving, just press <kbd>F5</kbd> in it, and the browser reads the file again.</p>
+
+  <h2>Experiments</h2>
+  <p>Try these one at a time, and after each change do <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd>:</p>
+  <ol>
+    <li>Change the text inside the quotes in <code>alert</code> to your own.</li>
+    <li>Change the heading text between <code>&lt;h1&gt;</code> and <code>&lt;/h1&gt;</code>.</li>
+    <li>Add a paragraph of text under the heading: <code>&lt;p&gt;My name is …&lt;/p&gt;</code>. The <code>&lt;p&gt;</code> tag means paragraph.</li>
+  </ol>
+
+  <div class="box task">
+    <span class="title">🎯 Tasks</span>
+    <ol>
+      <li>Make <b>three</b> little windows appear one after another: "One", "Two", "Three". To do that, write three lines with <code>alert</code>, one under another.<br>
+      Notice: the program runs <b>from top to bottom</b>, one command at a time. This is a very important rule!</li>
+      <li>What happens if you remove the quotes: <code>alert(Hello);</code>? Try it, then put it back the way it was. (We'll find out why in the next lesson.)</li>
+      <li>⭐ Try the command <code>alert(2 + 3);</code> — without quotes. What does the computer show?</li>
+    </ol>
+  </div>
+
+  <h2>If it doesn't work</h2>
+  <ul>
+    <li><b>No little window appears?</b> Check that the quotes are ordinary straight quotes <code>"</code> and that every bracket is in place.</li>
+    <li><b>You can't see your changes?</b> Is the file saved (<kbd>Ctrl</kbd> + <kbd>S</kbd>)? Is the page refreshed (<kbd>F5</kbd>)?</li>
+    <li><b>The code isn't coloured?</b> The file was probably saved without <code>.html</code> at the end of its name. Save it again with "Save As".</li>
+  </ul>
+
+  <h2>Check yourself</h2>
+  <ul class="check">
+    <li>My file <code>test.html</code> is in the <code>code</code> folder.</li>
+    <li>I know that HTML describes the page and JavaScript describes actions.</li>
+    <li>I remember the loop: write → <kbd>Ctrl</kbd>+<kbd>S</kbd> → <kbd>F5</kbd> → look.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-00.html"><small>← Lesson 0</small>Setting up the computer</a>
+    <a class="next" href="lesson-02.html"><small>Lesson 2 →</small>The console and errors</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

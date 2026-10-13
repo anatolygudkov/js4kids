@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preparamos el ordenador</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript desde cero</a>
+  <nav><a href="index.html">Índice</a><a href="cheatsheet.html">Chuleta</a><a href="../index.html">🌐 Idioma</a></nav>
+</header>
+<main>
+  <p class="kicker">Lección 0 de 16 <span class="time">⏱ 45–60 minutos</span></p>
+  <h1>Preparamos el ordenador</h1>
+  <p class="lead">Antes de escribir un juego, vamos a preparar el sitio de trabajo: veremos cómo funciona el escritorio, buscaremos dónde se esconden las llaves y los corchetes en el teclado, crearemos una carpeta para nuestros programas y configuraremos un editor de código.</p>
+
+  <div class="goals">
+    <b>En esta lección vas a:</b>
+    <ul>
+      <li>conocer el escritorio de Raspberry Pi OS;</li>
+      <li>encontrar los símbolos «de programador» en el teclado;</li>
+      <li>crear una carpeta llamada <code>codigo</code> para tus programas;</li>
+      <li>abrir y configurar el editor Geany;</li>
+      <li>colocar las ventanas del editor y del navegador para trabajar con comodidad.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>Plan de la lección</b>
+    <table class="plan">
+      <tr><td>5 min</td><td>El escritorio y el menú</td></tr>
+      <tr><td>15 min</td><td>El teclado: símbolos y un poco de práctica</td></tr>
+      <tr><td>10 min</td><td>El gestor de archivos y la carpeta <code>codigo</code></td></tr>
+      <tr><td>15 min</td><td>El editor Geany: encontrarlo, abrirlo, configurarlo</td></tr>
+      <tr><td>5–10 min</td><td>El navegador, colocar las ventanas, la lista de comprobación</td></tr>
+    </table>
+  </div>
+
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Para personas adultas: antes de la primera lección</span>
+    <p>Hace falta Raspberry Pi OS <b>con escritorio</b> (<i>with desktop</i>). Si todavía no está instalado, grabadlo en una tarjeta de memoria con <b>Raspberry Pi Imager</b>, que se descarga de raspberrypi.com. Es cómodo crear desde el principio un usuario propio para la niña o el niño.</p>
+    <p>Comprobad que la distribución del teclado del sistema coincide con el teclado físico, por ejemplo <b>Español (España)</b> o <b>Español (Latinoamérica)</b>. Se configura en <b>Menú → Preferencias → Control Centre / Configuración de Raspberry Pi</b>, en el apartado de teclado o localización (los nombres cambian un poco según la versión del sistema).</p>
+    <p>Es mejor hacer esta lección juntos.</p>
+  </div>
+
+  <h2>1. El escritorio</h2>
+  <p>Enciende la Raspberry Pi y espera a que aparezca el <b>escritorio</b>: una pantalla con una imagen y una barra arriba. Esa barra se llama <b>barra de tareas</b>.</p>
+  <ul>
+    <li>En la esquina izquierda de la barra hay un <b>icono de frambuesa</b> 🍓. Es el <b>Menú</b>: ahí están todos los programas, ordenados por apartados.</li>
+    <li>Al lado están los iconos de los programas más útiles: el <b>navegador</b> (para visitar páginas web), el <b>gestor de archivos</b> (un icono de carpeta) y la <b>terminal</b> (una pantallita negra). La terminal no la vamos a necesitar.</li>
+    <li>A la derecha de la barra están el reloj, el volumen y la red.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Cómo manejar las ventanas</span>
+    Cada programa abierto tiene una <b>ventana</b>. Arriba de la ventana está la <b>barra de título</b>, con el nombre y tres botones a la derecha: <b>—</b> ocultar, <b>□</b> ocupar toda la pantalla, <b>×</b> cerrar. Para mover una ventana, arrástrala con el ratón por la barra de título. Para cambiar su tamaño, arrastra un borde o una esquina.
+  </div>
+
+  <h2>2. Un teclado de programador</h2>
+  <p>Los programas se escriben con letras normales y muchos símbolos distintos: <code>( ) { } [ ] ; " = &lt; &gt;</code>. Puede que algunos no los hayas escrito nunca. ¡Vamos a buscarlos!</p>
+
+  <h3>Dónde se esconden los símbolos</h3>
+  <p>Escribir <kbd>Mayús</kbd> + <kbd>8</kbd> significa «mantén pulsada la tecla Mayús (la flecha gorda ⇧) y, sin soltarla, pulsa 8». <kbd>AltGr</kbd> es la tecla que está a la derecha de la barra espaciadora. La tabla es para un teclado <b>español de España</b>.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Símbolo</th><th>Nombre</th><th>Cómo escribirlo</th></tr>
+      <tr><td><code>( )</code></td><td>paréntesis</td><td><kbd>Mayús</kbd> + <kbd>8</kbd> y <kbd>Mayús</kbd> + <kbd>9</kbd></td></tr>
+      <tr><td><code>{ }</code></td><td>llaves</td><td><kbd>AltGr</kbd> + la tecla <kbd>´</kbd> (a la derecha de la <kbd>Ñ</kbd>) y <kbd>AltGr</kbd> + la tecla <kbd>Ç</kbd></td></tr>
+      <tr><td><code>[ ]</code></td><td>corchetes</td><td><kbd>AltGr</kbd> + la tecla <kbd>`</kbd> (a la derecha de la <kbd>P</kbd>) y <kbd>AltGr</kbd> + la tecla <kbd>+</kbd></td></tr>
+      <tr><td><code>&lt; &gt;</code></td><td>menor que, mayor que</td><td>la tecla a la izquierda de la <kbd>Z</kbd>; con <kbd>Mayús</kbd> sale <code>&gt;</code></td></tr>
+      <tr><td><code>;</code></td><td>punto y coma</td><td><kbd>Mayús</kbd> + <kbd>,</kbd></td></tr>
+      <tr><td><code>:</code></td><td>dos puntos</td><td><kbd>Mayús</kbd> + <kbd>.</kbd></td></tr>
+      <tr><td><code>"</code></td><td>comillas dobles</td><td><kbd>Mayús</kbd> + <kbd>2</kbd></td></tr>
+      <tr><td><code>'</code></td><td>comilla simple (apóstrofo)</td><td>la tecla a la derecha del <kbd>0</kbd></td></tr>
+      <tr><td><code>/</code></td><td>barra</td><td><kbd>Mayús</kbd> + <kbd>7</kbd></td></tr>
+      <tr><td><code>=</code></td><td>igual</td><td><kbd>Mayús</kbd> + <kbd>0</kbd></td></tr>
+      <tr><td><code>+</code> y <code>*</code></td><td>más y asterisco (por)</td><td>la tecla <kbd>+</kbd> (a la izquierda de <kbd>Intro</kbd>); con <kbd>Mayús</kbd> sale <code>*</code></td></tr>
+      <tr><td><code>-</code> y <code>_</code></td><td>menos y guion bajo</td><td>la tecla a la izquierda de <kbd>Mayús</kbd> derecha; con <kbd>Mayús</kbd> sale <code>_</code></td></tr>
+      <tr><td><code>!</code></td><td>exclamación</td><td><kbd>Mayús</kbd> + <kbd>1</kbd></td></tr>
+      <tr><td><code>&amp;</code></td><td>et («y»)</td><td><kbd>Mayús</kbd> + <kbd>6</kbd></td></tr>
+      <tr><td><code>|</code></td><td>barra vertical («o»)</td><td><kbd>AltGr</kbd> + <kbd>1</kbd></td></tr>
+    </table>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 ¿Teclado latinoamericano?</span>
+    En los teclados latinoamericanos algunos símbolos están en otro sitio. Fíjate en los dibujos de las teclas: el símbolo de abajo a la derecha suele salir con <kbd>AltGr</kbd>, y el de arriba, con <kbd>Mayús</kbd>.
+  </div>
+  <div class="box warn">
+    <span class="title">⚠️ Teclas «muertas» y Bloq Mayús</span>
+    Las teclas de los acentos (<kbd>´</kbd> y <kbd>`</kbd>) son «muertas»: al pulsarlas no aparece nada hasta que pulsas otra tecla, porque esperan una vocal para escribir <i>á</i> o <i>à</i>. Si te pasa sin querer, pulsa la barra espaciadora. Y si de repente todo sale en MAYÚSCULAS, has activado <kbd>Bloq Mayús</kbd>: púlsala otra vez. ¡En el código, las mayúsculas y las minúsculas son distintas!
+  </div>
+
+  <h3>Teclas importantes</h3>
+  <ul>
+    <li><kbd>Intro</kbd> — línea nueva.</li>
+    <li><kbd>Retroceso</kbd> (la flecha larga ←) — borra el carácter a la <b>izquierda</b> del cursor; <kbd>Supr</kbd> — a la <b>derecha</b>.</li>
+    <li><kbd>Tab</kbd> — sangría (mover la línea a la derecha).</li>
+    <li>Las flechas <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> — mueven el cursor (la rayita que parpadea) por el texto.</li>
+    <li><kbd>Ctrl</kbd> + <kbd>Z</kbd> — deshacer lo último. ¡Tu botón mágico de «volver atrás»!</li>
+  </ul>
+
+  <div class="box task">
+    <span class="title">🎯 Práctica (5 minutos)</span>
+    Abre <b>Menú → Accesorios → Editor de textos</b> (o cualquier otro editor de texto) y escribe:
+    <pre class="console">( ) { } [ ] &lt; &gt; ; : " ' = + * !</pre>
+    Después cierra el editor. Cuando pregunte «¿Guardar?», puedes contestar «No»: solo era práctica.
+  </div>
+
+  <h2>3. Una carpeta para tus programas</h2>
+  <p>El ordenador lo guarda todo en <b>archivos</b>: fotos, música, programas. Los archivos están dentro de <b>carpetas</b>, como hojas en los cajones de una mesa. Vamos a hacer un cajón para todos los programas de este curso.</p>
+  <ol class="steps">
+    <li>Haz clic en el icono del <b>gestor de archivos</b> (una carpeta) en la barra de tareas. Se abre tu <b>carpeta personal</b>. Es tu sitio en el ordenador; ya tiene carpetas como «Documentos» y «Descargas».</li>
+    <li>Haz clic con el botón <b>derecho</b> del ratón en un sitio vacío de la ventana (no encima de una carpeta).</li>
+    <li>En el menú elige <b>Crear nuevo… → Carpeta</b> (en inglés <i>Create New… → Folder</i>).</li>
+    <li>Escribe el nombre <code>codigo</code> (sin tilde) y pulsa <kbd>Intro</kbd> o <b>Aceptar</b>.</li>
+  </ol>
+  <p>Hecho: junto a las demás ha aparecido una carpeta llamada <b>codigo</b>. Todos los programas del curso vivirán en ella.</p>
+  <div class="box tip">
+    <span class="title">💡 ¿Por qué sin tildes ni espacios?</span>
+    A los programas les gustan los nombres de archivos y carpetas escritos con <b>letras minúsculas sin tildes ni eñes</b>, y sin espacios. Siempre llamaremos así a los archivos: <code>prueba.html</code>, <code>snake.html</code> (<i>snake</i> es «serpiente» en inglés).
+  </div>
+
+  <h2>4. El editor de código Geany</h2>
+  <p>Puedes escribir código en cualquier editor de texto, pero es más fácil en uno especial para programar. Colorea el código, numera las líneas y pone las sangrías por ti. Usaremos <b>Geany</b>: es sencillo y va rápido en una Raspberry Pi.</p>
+
+  <h3>Busca Geany</h3>
+  <p>Abre <b>Menú 🍓 → Programación</b>. Si ahí está <b>Geany</b>, perfecto: pasa a la configuración.</p>
+  <p>Si Geany no está, hay que instalarlo (llama a una persona adulta, quizá haga falta una contraseña):</p>
+  <ol class="steps">
+    <li><b>Menú → Preferencias → Software recomendado</b> (<i>Preferences → Recommended Software</i>).</li>
+    <li>A la izquierda elige el apartado <b>Programación</b> (<i>Programming</i>).</li>
+    <li>Busca <b>Geany</b> en la lista y márcalo.</li>
+    <li>Pulsa <b>Aplicar</b> (<i>Apply</i>) y espera a que termine la instalación.</li>
+  </ol>
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Para personas adultas</span>
+    Si en el menú no aparece «Software recomendado», instalad Geany desde la terminal con <code>sudo apt install geany</code>.
+  </div>
+
+  <h3>Configura Geany</h3>
+  <p>Abre Geany: <b>Menú → Programación → Geany</b>. Los menús aparecen aquí en español y, entre paréntesis, en inglés: en tu ordenador puede salir cualquiera de las dos versiones.</p>
+  <ol class="steps">
+    <li><b>Letra grande.</b> <b>Editar → Preferencias</b> (<i>Edit → Preferences</i>) → pestaña <b>Interfaz</b> (<i>Interface</i>) → <b>Tipografías</b> (<i>Fonts</i>) → la línea <b>Editor</b>. Pulsa el botón de la letra y pon el tamaño <b>16</b> o <b>18</b>. También puedes agrandar la letra con <kbd>Ctrl</kbd> + <kbd>+</kbd> y achicarla con <kbd>Ctrl</kbd> + <kbd>-</kbd>.</li>
+    <li><b>Sangría.</b> En las mismas preferencias: pestaña <b>Editor</b> → <b>Sangría</b> (<i>Indentation</i>). Pon <b>Anchura: 2</b> (<i>Width</i>) y <b>Tipo: Espacios</b> (<i>Type: Spaces</i>). Pulsa <b>Aceptar</b>.</li>
+    <li><b>Quitamos lo que sobra.</b> En el menú <b>Ver</b> (<i>View</i>) desmarca <b>Mostrar barra lateral</b> (<i>Show Sidebar</i>) y <b>Mostrar ventana de mensajes</b> (<i>Show Message Window</i>). Así queda sitio solo para el código.</li>
+    <li><b>Números de línea.</b> A la izquierda del texto debe haber números de línea: 1, 2, 3… Si no están, actívalos en <b>Ver → Mostrar números de línea</b> (<i>View → Show Line Numbers</i>).</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 No tengas miedo de pulsar</span>
+    Si en el editor desaparece algo o se ve raro, no se ha roto nada. Cierra Geany y vuelve a abrirlo, o pide ayuda a una persona adulta.
+  </div>
+
+  <h2>5. El navegador</h2>
+  <p>Nuestros programas los ejecutará un <b>navegador</b>, el mismo programa con el que se visitan páginas web. Usaremos <b>Firefox</b>: su icono es un zorro naranja. Búscalo en la barra de tareas o en <b>Menú → Internet</b> y ábrelo.</p>
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Para personas adultas</span>
+    Poned Firefox como navegador predeterminado para que los archivos <code>.html</code> se abran en él con doble clic. En Raspberry Pi OS se hace en <b>Menú → Preferencias → Control Centre / Configuración de Raspberry Pi</b>, pestaña <b>System</b>, opción <b>Browser</b> → Firefox. Si Firefox no está instalado, está en <b>Software recomendado</b> (apartado <i>Internet</i>).
+  </div>
+
+  <h2>6. Colocamos las ventanas</h2>
+  <p>Quien programa mira todo el rato el código y luego el resultado. Pon las ventanas una al lado de la otra: <b>Geany a la izquierda</b> y <b>el navegador a la derecha</b>. Arrástralas por la barra de título y mueve los bordes para que cada una ocupe media pantalla.</p>
+  <figure>
+    <svg viewBox="0 0 640 330" width="640" role="img" aria-label="Pantalla: a la izquierda la ventana de Geany con código, a la derecha la ventana del navegador">
+      <rect x="10" y="10" width="620" height="310" rx="14" class="svg-card"/>
+      <text x="30" y="30" class="svg-text" font-size="13">🍓  barra de tareas</text>
+      <line x1="10" y1="40" x2="630" y2="40" class="svg-grid" stroke-width="2"/>
+      <rect x="24" y="54" width="290" height="252" rx="8" class="svg-field"/>
+      <rect x="24" y="54" width="290" height="24" rx="8" class="svg-accent"/>
+      <text x="36" y="71" font-size="13" fill="#fff" font-weight="700">Geany — snake.html</text>
+      <g font-family="monospace" font-size="12">
+        <text x="36" y="100" fill="#6c6f85">1</text><text x="58" y="100" fill="#8be9fd">&lt;canvas&gt;</text>
+        <text x="36" y="120" fill="#6c6f85">2</text><text x="58" y="120" fill="#ff79c6">let</text><text x="88" y="120" fill="#ecebe8">score = 0;</text>
+        <text x="36" y="140" fill="#6c6f85">3</text><text x="58" y="140" fill="#ff79c6">function</text><text x="128" y="140" fill="#50fa7b">step</text><text x="160" y="140" fill="#ecebe8">() {</text>
+        <text x="36" y="160" fill="#6c6f85">4</text><text x="74" y="160" fill="#ecebe8">…</text>
+      </g>
+      <text x="169" y="240" text-anchor="middle" font-size="15" fill="#ecebe8">aquí escribimos código</text>
+      <rect x="326" y="54" width="290" height="252" rx="8" class="svg-card"/>
+      <rect x="326" y="54" width="290" height="24" rx="8" class="svg-accent2"/>
+      <text x="338" y="71" font-size="13" fill="#fff" font-weight="700">Firefox</text>
+      <rect x="401" y="96" width="140" height="140" class="svg-field"/>
+      <rect x="461" y="156" width="12" height="12" fill="#50fa7b"/>
+      <rect x="449" y="156" width="12" height="12" fill="#2f9e44"/>
+      <rect x="437" y="156" width="12" height="12" fill="#2f9e44"/>
+      <rect x="505" y="120" width="12" height="12" fill="#ff5555"/>
+      <text x="471" y="270" text-anchor="middle" font-size="15" class="svg-text">aquí vemos el resultado</text>
+    </svg>
+    <figcaption>Así se trabaja cómodo: el código a la izquierda, el resultado a la derecha.</figcaption>
+  </figure>
+
+  <h2>Compruébalo</h2>
+  <ul class="check">
+    <li>Sé escribir <code>{ } ( ) ; "</code>.</li>
+    <li>En mi carpeta personal hay una carpeta llamada <code>codigo</code>.</li>
+    <li>Geany se abre, la letra es grande y la sangría es de 2 espacios.</li>
+    <li>Sé abrir Firefox y poner las ventanas una al lado de la otra.</li>
+  </ul>
+  <div class="box ok">
+    <span class="title">🎉 ¡Tu sitio de trabajo está listo!</span>
+    Todo preparado. En la próxima lección escribiremos nuestro primer programa.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="index.html"><small>←</small>Índice</a>
+    <a class="next" href="lesson-01.html"><small>Lección 1 →</small>Tu primer programa</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>
