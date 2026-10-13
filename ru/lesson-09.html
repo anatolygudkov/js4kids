@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Условия</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 9 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Условия</h1>
+  <p class="lead">Змейка уползает за край поля. Нужно, чтобы программа умела <b>решать</b>: <i>если</i> змейка у края, <i>то</i> сделать что-то особенное. Для этого есть команда <code>if</code>. С её помощью мы сделаем волшебные порталы: змейка уползает в одну стену и выползает из противоположной.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>узнаешь, что такое <code>true</code> и <code>false</code>;</li>
+      <li>научишься сравнивать числа: <code>&gt;</code>, <code>&lt;</code>, <code>===</code> и другие;</li>
+      <li>напишешь условия <code>if</code> и <code>if … else</code>;</li>
+      <li>соединишь условия словами «и» (<code>&amp;&amp;</code>) и «или» (<code>||</code>);</li>
+      <li>сделаешь порталы по краям поля.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>Правда и ложь: сравнения в консоли</td></tr>
+      <tr><td>10 мин</td><td><code>if</code> и <code>else</code></td></tr>
+      <tr><td>15 мин</td><td>Порталы в игре</td></tr>
+      <tr><td>10 мин</td><td><code>&amp;&amp;</code> и <code>||</code>, задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Правда или ложь?</h2>
+  <p>Открой консоль и задай компьютеру вопросы:</p>
+  <pre class="code nonum">5 &gt; 3
+2 &gt; 7
+10 === 10
+10 === 11</pre>
+  <p>На каждый вопрос компьютер отвечает <code>true</code> (правда) или <code>false</code> (ложь). Вот все способы сравнивать:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Знак</th><th>Вопрос</th><th>Пример</th></tr>
+      <tr><td><code>&gt;</code></td><td>больше?</td><td><code>5 &gt; 3</code> → true</td></tr>
+      <tr><td><code>&lt;</code></td><td>меньше?</td><td><code>5 &lt; 3</code> → false</td></tr>
+      <tr><td><code>&gt;=</code></td><td>больше или равно?</td><td><code>20 &gt;= 20</code> → true</td></tr>
+      <tr><td><code>&lt;=</code></td><td>меньше или равно?</td><td><code>0 &lt;= -1</code> → false</td></tr>
+      <tr><td><code>===</code></td><td>равно?</td><td><code>7 === 7</code> → true</td></tr>
+      <tr><td><code>!==</code></td><td>не равно?</td><td><code>7 !== 7</code> → false</td></tr>
+    </table>
+  </div>
+  <div class="box warn">
+    <span class="title">⚠️ Одно, два или три «равно»?</span>
+    <code>=</code> (одно) — «положи в коробку». <code>===</code> (три) — вопрос «равны ли?». Не путай их! В нашем курсе для сравнения всегда пишем три знака равенства.
+  </div>
+
+  <h2>Если… то… иначе</h2>
+  <pre class="code nonum">let score = 12;
+
+if (score &gt; 10) {
+  console.log("Ты молодец!");
+}</pre>
+  <p>В круглых скобках после <code>if</code> («если») — вопрос. Если ответ <code>true</code>, выполняется то, что в фигурных скобках. Если <code>false</code> — пропускается.</p>
+  <p>А с помощью <code>else</code> («иначе») можно сказать, что делать, когда ответ «нет»:</p>
+  <pre class="code nonum">if (score &gt; 10) {
+  console.log("Ты молодец!");
+} else {
+  console.log("Попробуй ещё раз!");
+}</pre>
+  <p>Поменяй <code>score</code> на 5 и проверь, что выведется. Можешь поэкспериментировать в <code>proba.html</code>.</p>
+
+  <h2>Волшебные порталы</h2>
+  <p>Поле — от клеточки 0 до клеточки 19. Голова змейки вышла за край, если:</p>
+  <ul>
+    <li><code>head.x &gt;= cells</code> — ушла за правый край (x стал 20);</li>
+    <li><code>head.x &lt; 0</code> — ушла за левый край (x стал -1);</li>
+    <li><code>head.y &gt;= cells</code> — ушла за нижний край;</li>
+    <li><code>head.y &lt; 0</code> — ушла за верхний край.</li>
+  </ul>
+  <p>В каждом случае перенесём голову к противоположной стене. Добавь проверки в функцию <code>step</code>: после того как создали <code>head</code>, но <b>до</b> <code>unshift</code>.</p>
+  <pre class="code" data-file="snake.html (функция step)" data-new="3-16">function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  if (head.x &gt;= cells) {
+    head.x = 0;
+  }
+  if (head.x &lt; 0) {
+    head.x = cells - 1;
+  }
+  if (head.y &gt;= cells) {
+    head.y = 0;
+  }
+  if (head.y &lt; 0) {
+    head.y = cells - 1;
+  }
+
+  snake.unshift(head);
+  snake.pop();
+  draw();
+}</pre>
+  <p>Сохрани, обнови и смотри: змейка доползает до правого края и выползает слева. Порталы работают!</p>
+  <p>Поменяй в начале программы <code>dx</code> и <code>dy</code>, чтобы проверить все четыре портала.</p>
+  <div class="box tip">
+    <span class="title">💡 Почему cells - 1?</span>
+    <code>cells</code> равно 20, а последняя клеточка имеет номер 19. Поэтому из левой стены выходим на клеточку <code>cells - 1</code>, то есть 19.
+  </div>
+
+  <h2>«И» и «или»</h2>
+  <p>Иногда нужно проверить два условия сразу:</p>
+  <ul>
+    <li><code>&amp;&amp;</code> — <b>«и»</b>: правда, только если <b>оба</b> условия правда.</li>
+    <li><code>||</code> — <b>«или»</b>: правда, если <b>хотя бы одно</b> условие правда.</li>
+  </ul>
+  <pre class="code nonum">let x = 5;
+console.log(x &gt; 0 &amp;&amp; x &lt; 10);    // true: x больше 0 И меньше 10
+console.log(x &lt; 0 || x &gt; 3);     // true: хотя бы одно верно
+console.log(x &lt; 0 || x &gt; 100);   // false: оба неверны</pre>
+  <p>Символ <code>&amp;</code> — это <kbd>Shift</kbd> + <kbd>7</kbd>, а <code>|</code> — <kbd>Shift</kbd> + <kbd>\</kbd>. Оба знака пишутся <b>по два раза</b>. Эти «и» и «или» понадобятся нам уже в следующем уроке.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>В консоли проверь: <code>3 + 4 === 7</code>, <code>"кот" === "кот"</code>, <code>"кот" === "Кот"</code>. Почему последнее — false?</li>
+      <li>Сделай так, чтобы голова змейки была <code>"orange"</code>, когда змейка в левой половине поля (<code>snake[0].x &lt; 10</code>), и <code>"yellow"</code> — в правой. Подсказка: в функции <code>draw</code> заведи переменную <code>headColor</code> и поменяй её с помощью <code>if … else</code>.</li>
+      <li>⭐ Напиши в <code>proba.html</code> программу-угадайку: компьютер «загадал» число в переменной, игрок вводит его через <code>prompt</code>, а программа отвечает «больше», «меньше» или «угадал».</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю разницу между <code>=</code> и <code>===</code>.</li>
+    <li>Я умею писать <code>if</code> и <code>if … else</code>.</li>
+    <li>Я понимаю, когда <code>&amp;&amp;</code> даёт true, а когда <code>||</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-08.html"><small>← Урок 8</small>Змейка ползёт</a>
+    <a class="next" href="lesson-10.html"><small>Урок 10 →</small>Управление стрелками</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

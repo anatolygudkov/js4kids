@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Холст и координаты</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 4 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Холст и координаты</h1>
+  <p class="lead">Начинаем игру! Создадим файл <code>snake.html</code> — в нём будет жить Змейка до самого конца курса. Сегодня нарисуем игровое поле, голову змейки и яблоко.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>создашь файл игры <code>snake.html</code>;</li>
+      <li>добавишь на страницу холст <code>&lt;canvas&gt;</code>;</li>
+      <li>узнаешь, как компьютер считает координаты;</li>
+      <li>нарисуешь цветные прямоугольники.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>Создаём <code>snake.html</code> и холст</td></tr>
+      <tr><td>10 мин</td><td>Координаты: где x, где y</td></tr>
+      <tr><td>10 мин</td><td>Рисуем поле, голову и яблоко</td></tr>
+      <tr><td>15 мин</td><td>Рисуем свою картинку из прямоугольников</td></tr>
+    </table>
+  </div>
+
+  <h2>Новый файл для игры</h2>
+  <p>Создай в Geany новый файл (<kbd>Ctrl</kbd> + <kbd>N</kbd>) и сразу сохрани его в папку <b>kod</b> под именем <code>snake.html</code> (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>). Набери код:</p>
+  <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>Сохрани и открой <code>snake.html</code> в браузере (через файловый менеджер, как в первом уроке). Ты увидишь чёрное поле, зелёный квадратик (это будет голова змейки) и красный квадратик (яблоко).</p>
+
+  <h2>Что тут написано</h2>
+  <h3>Холст</h3>
+  <pre class="code nonum">&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;</pre>
+  <p><code>&lt;canvas&gt;</code> — это <b>холст</b>, место для рисования. Его ширина (<code>width</code>) и высота (<code>height</code>) — 400 точек. Каждая такая точка на экране называется <b>пиксель</b>. А <code>id="game"</code> — имя холста, чтобы JavaScript мог его найти.</p>
+
+  <h3>Кисточка</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");</pre>
+  <ul>
+    <li><code>document.getElementById("game")</code> — «найди на странице (<i>document</i>) элемент с именем <code>game</code>». Найденный холст кладём в переменную <code>canvas</code>.</li>
+    <li><code>canvas.getContext("2d")</code> — «дай мне инструменты для плоского (2D) рисования». Кладём их в переменную <code>ctx</code>. Дальше <code>ctx</code> будет нашей <b>кисточкой</b>.</li>
+  </ul>
+  <p>Эти две строчки можно просто запомнить: они нужны в начале любой программы, которая рисует на холсте.</p>
+
+  <h3>Рисуем</h3>
+  <pre class="code nonum">ctx.fillStyle = "lime";
+ctx.fillRect(200, 200, 20, 20);</pre>
+  <ul>
+    <li><code>fillStyle</code> — каким цветом красить. Сначала макаем кисточку в краску.</li>
+    <li><code>fillRect(x, y, ширина, высота)</code> — нарисовать закрашенный прямоугольник (<i>fill rectangle</i>).</li>
+  </ul>
+  <p>Цвета можно писать английскими словами: <code>"red"</code>, <code>"green"</code>, <code>"lime"</code>, <code>"blue"</code>, <code>"yellow"</code>, <code>"orange"</code>, <code>"purple"</code>, <code>"pink"</code>, <code>"white"</code>, <code>"black"</code>, <code>"gray"</code>, <code>"brown"</code>.</p>
+
+  <h2>Координаты</h2>
+  <p>Чтобы сказать, где рисовать, нужны два числа: <b>x</b> — сколько пикселей отступить <b>вправо</b> от левого края, и <b>y</b> — сколько пикселей отступить <b>вниз</b> от верхнего края.</p>
+  <figure>
+    <svg viewBox="0 0 460 440" width="460" role="img" aria-label="Холст 400 на 400: x растёт вправо, y растёт вниз, квадрат в точке 200, 200">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <rect x="40" y="40" width="400" height="400" class="svg-field"/>
+      <g class="svg-grid" stroke-width="1" opacity="0.6">
+        <line x1="140" y1="40" x2="140" y2="440"/><line x1="240" y1="40" x2="240" y2="440"/><line x1="340" y1="40" x2="340" y2="440"/>
+        <line x1="40" y1="140" x2="440" y2="140"/><line x1="40" y1="240" x2="440" y2="240"/><line x1="40" y1="340" x2="440" y2="340"/>
+      </g>
+      <g font-size="13" class="svg-text" text-anchor="middle">
+        <text x="40" y="32">0</text><text x="140" y="32">100</text><text x="240" y="32">200</text><text x="340" y="32">300</text><text x="430" y="32">400</text>
+        <text x="22" y="145">100</text><text x="22" y="245">200</text><text x="22" y="345">300</text>
+      </g>
+      <line x1="40" y1="16" x2="200" y2="16" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="210" y="21" font-size="16" font-weight="700" class="svg-accent2">x</text>
+      <line x1="10" y1="60" x2="10" y2="200" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#a1)"/>
+      <text x="4" y="222" font-size="16" font-weight="700" class="svg-accent2">y</text>
+      <line x1="40" y1="250" x2="240" y2="250" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <line x1="250" y1="40" x2="250" y2="240" stroke="#ffffff" stroke-dasharray="5 5" opacity="0.6"/>
+      <rect x="240" y="240" width="20" height="20" fill="#32cd32"/>
+      <text x="268" y="275" font-size="14" fill="#ffffff">(200, 200)</text>
+      <rect x="340" y="140" width="20" height="20" fill="#ff3b3b"/>
+      <text x="368" y="175" font-size="14" fill="#ffffff">(300, 100)</text>
+      <circle cx="40" cy="40" r="5" fill="#ffd43b"/>
+      <text x="48" y="58" font-size="13" fill="#ffd43b">(0, 0)</text>
+    </svg>
+    <figcaption>Начало отсчёта (0, 0) — в левом верхнем углу. x растёт вправо, y растёт вниз.</figcaption>
+  </figure>
+  <div class="box warn">
+    <span class="title">⚠️ Не как в математике!</span>
+    На уроках математики ось y смотрит вверх, а на экране компьютера — <b>вниз</b>. Чем больше y, тем ниже на экране.
+  </div>
+  <p>Теперь понятно, что значит каждая строчка с <code>fillRect</code>:</p>
+  <ul>
+    <li><code>fillRect(0, 0, 400, 400)</code> — от левого верхнего угла закрасить квадрат 400 на 400, то есть весь холст.</li>
+    <li><code>fillRect(200, 200, 20, 20)</code> — отступить 200 вправо и 200 вниз и нарисовать квадратик 20 на 20.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Порядок важен</span>
+    Компьютер рисует в том порядке, в каком написан код: новое ложится <b>поверх</b> старого, как краска на бумаге. Попробуй перенести строчки с чёрным полем в самый конец скрипта. Куда пропали квадратики?
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Передвинь яблоко в левый нижний угол поля.</li>
+      <li>Нарисуй за головой ещё два квадратика, чтобы получилась змейка из трёх кусочков: <code>(180, 200)</code> и <code>(160, 200)</code>.</li>
+      <li>Нарисуй светофор: серый прямоугольник и три цветных квадрата. Потом удали его или закомментируй (см. подсказку ниже), он не нужен в игре.</li>
+      <li>⭐ Цвет можно задать кодом: <code>"#ff8800"</code> — оранжевый. Попробуй разные буквы и цифры от 0 до f после решётки.</li>
+    </ol>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Комментарии</span>
+    Если в начале строки поставить две косые черты <code>//</code>, компьютер эту строку пропустит. Это <b>комментарий</b> — записка для людей. Так можно оставлять себе пояснения или временно «выключать» строки кода.
+    <pre class="code nonum">// Это голова змейки
+ctx.fillStyle = "lime";</pre>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока (сверься, если что-то не работает)</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 400, 400);
+
+    ctx.fillStyle = "lime";
+    ctx.fillRect(200, 200, 20, 20);
+    ctx.fillRect(180, 200, 20, 20);
+    ctx.fillRect(160, 200, 20, 20);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(300, 100, 20, 20);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>В папке <code>kod</code> появился файл <code>snake.html</code>.</li>
+    <li>Я знаю, что (0, 0) — левый верхний угол, а y растёт вниз.</li>
+    <li>Я умею нарисовать прямоугольник нужного цвета в нужном месте.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-03.html"><small>← Урок 3</small>Переменные</a>
+    <a class="next" href="lesson-05.html"><small>Урок 5 →</small>Функции</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

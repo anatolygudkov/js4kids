@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Первая программа</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 1 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Первая программа</h1>
+  <p class="lead">Сегодня ты создашь свой первый файл с кодом, и компьютер с тобой поздоровается. А ещё ты узнаешь главный цикл любого программиста: <b>написать → сохранить → обновить</b>.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>создашь в Geany файл <code>proba.html</code> и сохранишь его в папку <code>kod</code>;</li>
+      <li>напишешь страницу на HTML и первую команду на JavaScript;</li>
+      <li>откроешь свою программу в браузере;</li>
+      <li>научишься быстро проверять изменения.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Как браузер запускает программы</td></tr>
+      <tr><td>10 мин</td><td>Создаём и сохраняем файл</td></tr>
+      <tr><td>15 мин</td><td>Набираем код и запускаем</td></tr>
+      <tr><td>15 мин</td><td>Эксперименты и задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Как это работает</h2>
+  <p>Мы будем писать файлы, имя которых заканчивается на <code>.html</code>. Браузер умеет их открывать. В таком файле живут два языка:</p>
+  <ul>
+    <li><b>HTML</b> описывает, <i>что</i> есть на странице: заголовки, текст, поле для игры.</li>
+    <li><b>JavaScript</b> (сокращённо <b>JS</b>) описывает, <i>что делать</i>: показывать сообщения, считать, двигать змейку.</li>
+  </ul>
+  <p>Мы пишем текст в редакторе, а браузер читает его и выполняет. Вот и всё волшебство.</p>
+
+  <h2>Шаг 1. Создаём файл</h2>
+  <ol class="steps">
+    <li>Открой Geany. Если там открыт какой-то старый файл, закрой его крестиком на вкладке.</li>
+    <li>Выбери <b>Файл → Создать</b> (<i>File → New</i>) или нажми <kbd>Ctrl</kbd> + <kbd>N</kbd>. Появится пустой лист с вкладкой «untitled» (без имени).</li>
+    <li>Сразу сохрани его: <b>Файл → Сохранить как</b> (<i>File → Save As</i>) или <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.</li>
+    <li>В окне сохранения слева выбери свою домашнюю папку (значок домика), затем двойным щелчком открой папку <b>kod</b>.</li>
+    <li>В поле <b>Имя</b> (<i>Name</i>) напиши <code>proba.html</code> и нажми <b>Сохранить</b>.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Зачем сохранять пустой файл?</span>
+    По окончанию имени <code>.html</code> Geany узнаёт, на каком языке ты пишешь, и начинает раскрашивать код. Так проще заметить ошибки.
+  </div>
+
+  <h2>Шаг 2. Пишем код</h2>
+  <p>Переключи раскладку на <b>EN</b> и аккуратно набери код ниже. Номера строк набирать не надо, Geany ставит их сам. Отступы в начале строк можно делать клавишей <kbd>Tab</kbd>, а после <kbd>Enter</kbd> Geany обычно сам ставит нужный отступ.</p>
+  <pre class="code" data-file="proba.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Проба&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Моя первая программа&lt;/h1&gt;
+  &lt;script&gt;
+    alert("Привет! Я твой компьютер.");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Набирай руками, а не копируй</span>
+    Так пальцы запомнят, где символы, а голова запомнит команды. Если ошибёшься, ничего страшного: искать опечатки тоже полезно.
+  </div>
+
+  <h2>Шаг 3. Сохраняем и запускаем</h2>
+  <ol class="steps">
+    <li>Нажми <kbd>Ctrl</kbd> + <kbd>S</kbd>, чтобы сохранить. Посмотри на вкладку: если имя файла было красным или со звёздочкой <code>*</code>, после сохранения оно станет обычным.</li>
+    <li>Открой <b>файловый менеджер</b> и зайди в папку <b>kod</b>. Там лежит твой файл <b>proba.html</b>.</li>
+    <li>Нажми на него <b>правой</b> кнопкой мыши и выбери <b>Открыть с помощью…</b> → <b>Firefox</b>. Если Firefox — браузер по умолчанию, хватит просто двойного щелчка.</li>
+  </ol>
+  <p>Появится окошко с надписью «Привет! Я твой компьютер.» Нажми <b>OK</b>, и ты увидишь страницу с заголовком «Моя первая программа».</p>
+  <div class="box ok">
+    <span class="title">🎉 Поздравляем!</span>
+    Только что заработала твоя первая настоящая программа.
+  </div>
+
+  <h2>Разберём, что мы написали</h2>
+  <p>HTML состоит из <b>тегов</b> — слов в уголках. Обычно теги идут парами: открывающий <code>&lt;body&gt;</code> и закрывающий <code>&lt;/body&gt;</code> (с косой чертой). Всё, что между ними, лежит «внутри», как в коробке.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Что написано</th><th>Что значит</th></tr>
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>«Браузер, это HTML-страница». Всегда первая строка.</td></tr>
+      <tr><td><code>&lt;html&gt; … &lt;/html&gt;</code></td><td>Самая большая коробка: в ней вся страница.</td></tr>
+      <tr><td><code>&lt;head&gt; … &lt;/head&gt;</code></td><td>«Голова»: служебные сведения, на странице их не видно.</td></tr>
+      <tr><td><code>&lt;meta charset="utf-8"&gt;</code></td><td>Чтобы русские буквы показывались правильно.</td></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>Название, которое видно на вкладке браузера.</td></tr>
+      <tr><td><code>&lt;body&gt; … &lt;/body&gt;</code></td><td>«Тело»: то, что видно на странице.</td></tr>
+      <tr><td><code>&lt;h1&gt;</code></td><td>Большой заголовок.</td></tr>
+      <tr><td><code>&lt;script&gt; … &lt;/script&gt;</code></td><td>Здесь начинается JavaScript!</td></tr>
+    </table>
+  </div>
+  <p>А вот наша первая строчка на JavaScript:</p>
+  <pre class="code nonum">alert("Привет! Я твой компьютер.");</pre>
+  <ul>
+    <li><code>alert</code> — <b>команда</b>, которая показывает окошко с сообщением. (По-английски <i>alert</i> — «тревога, внимание».)</li>
+    <li>В <b>круглых скобках</b> <code>( )</code> мы говорим команде, <i>что</i> показать.</li>
+    <li>Текст всегда пишут в <b>кавычках</b> <code>" "</code>. Внутри кавычек можно писать по-русски.</li>
+    <li><b>Точка с запятой</b> <code>;</code> в конце — как точка в конце предложения: команда закончилась.</li>
+  </ul>
+
+  <h2>Главный цикл программиста</h2>
+  <p>Теперь самое важное. Каждый раз, когда ты меняешь код, делай так:</p>
+  <figure>
+    <svg viewBox="0 0 600 170" width="600" role="img" aria-label="Цикл: пишу код, сохраняю Ctrl+S, обновляю F5, смотрю результат">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="svg-accent2"/></marker>
+      </defs>
+      <g font-size="15" text-anchor="middle">
+        <rect x="10" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="70" y="66" class="svg-text" font-weight="700">✏️ Пишу</text>
+        <text x="70" y="88" class="svg-text" font-size="13">в Geany</text>
+        <rect x="165" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="225" y="66" class="svg-text" font-weight="700">💾 Сохраняю</text>
+        <text x="225" y="88" class="svg-text" font-size="13">Ctrl + S</text>
+        <rect x="320" y="40" width="120" height="60" rx="12" class="svg-card"/>
+        <text x="380" y="66" class="svg-text" font-weight="700">🔄 Обновляю</text>
+        <text x="380" y="88" class="svg-text" font-size="13">F5 в браузере</text>
+        <rect x="475" y="40" width="115" height="60" rx="12" class="svg-card"/>
+        <text x="532" y="66" class="svg-text" font-weight="700">👀 Смотрю</text>
+        <text x="532" y="88" class="svg-text" font-size="13">что вышло</text>
+      </g>
+      <g fill="none" stroke-width="3" class="svg-stroke-accent2" marker-end="url(#arr)">
+        <line x1="132" y1="70" x2="161" y2="70"/>
+        <line x1="287" y1="70" x2="316" y2="70"/>
+        <line x1="442" y1="70" x2="471" y2="70"/>
+        <path d="M532,102 C532,155 70,155 70,104"/>
+      </g>
+      <text x="300" y="160" text-anchor="middle" font-size="13" class="svg-text">и снова</text>
+    </svg>
+  </figure>
+  <p>Окно браузера закрывать не нужно: после сохранения просто нажми в нём <kbd>F5</kbd>, и браузер заново прочитает файл.</p>
+
+  <h2>Эксперименты</h2>
+  <p>Попробуй по очереди и после каждого изменения делай <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd>:</p>
+  <ol>
+    <li>Поменяй текст внутри кавычек в <code>alert</code> на свой.</li>
+    <li>Поменяй текст заголовка между <code>&lt;h1&gt;</code> и <code>&lt;/h1&gt;</code>.</li>
+    <li>Добавь под заголовком абзац текста: <code>&lt;p&gt;Меня зовут …&lt;/p&gt;</code>. Тег <code>&lt;p&gt;</code> означает абзац (<i>paragraph</i>).</li>
+  </ol>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Сделай так, чтобы появилось <b>три</b> окошка подряд: «Раз», «Два», «Три». Для этого напиши три строчки с <code>alert</code> одну под другой.<br>
+      Заметь: программа выполняется <b>сверху вниз</b>, по одной команде за раз. Это очень важное правило!</li>
+      <li>Что будет, если убрать кавычки: <code>alert(Привет);</code>? Попробуй, а потом верни как было. (Почему так вышло, узнаем на следующем уроке.)</li>
+      <li>⭐ Попробуй команду <code>alert(2 + 3);</code> — без кавычек. Что покажет компьютер?</li>
+    </ol>
+  </div>
+
+  <h2>Если не работает</h2>
+  <ul>
+    <li><b>Окошко не появляется?</b> Проверь, что код набран в английской раскладке и кавычки обычные <code>"</code>.</li>
+    <li><b>Изменения не видны?</b> Файл сохранён (<kbd>Ctrl</kbd> + <kbd>S</kbd>)? Страница обновлена (<kbd>F5</kbd>)?</li>
+    <li><b>Код не раскрашивается?</b> Наверное, файл сохранён без <code>.html</code> в конце имени. Сохрани его заново через «Сохранить как».</li>
+    <li><b>Вместо русских букв непонятные значки?</b> Проверь строку <code>&lt;meta charset="utf-8"&gt;</code>.</li>
+  </ul>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>В папке <code>kod</code> лежит мой файл <code>proba.html</code>.</li>
+    <li>Я знаю, что HTML описывает страницу, а JavaScript — действия.</li>
+    <li>Я помню цикл: пишу → <kbd>Ctrl</kbd>+<kbd>S</kbd> → <kbd>F5</kbd> → смотрю.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-00.html"><small>← Урок 0</small>Готовим компьютер</a>
+    <a class="next" href="lesson-02.html"><small>Урок 2 →</small>Консоль и ошибки</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

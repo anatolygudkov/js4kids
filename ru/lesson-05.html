@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Функции</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 5 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Функции</h1>
+  <p class="lead">Каждый раз писать <code>fillStyle</code>, а потом <code>fillRect</code> с четырьмя числами — скучно. Давай придумаем <b>свою команду</b> «нарисуй клеточку». Такие самодельные команды называются <b>функциями</b>.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>разделишь поле на клеточки, как тетрадный лист;</li>
+      <li>напишешь функции <code>clearField</code> и <code>drawCell</code>;</li>
+      <li>узнаешь, что такое параметры функции;</li>
+      <li>нарисуешь змейку, указывая номера клеточек, а не пиксели.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Поле из клеточек</td></tr>
+      <tr><td>10 мин</td><td>Первая функция без параметров: <code>clearField</code></td></tr>
+      <tr><td>15 мин</td><td>Функция с параметрами: <code>drawCell</code></td></tr>
+      <tr><td>15 мин</td><td>Рисуем по клеточкам, задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Поле из клеточек</h2>
+  <p>Змейка ползает по <b>клеточкам</b>. Холст у нас 400 на 400 пикселей. Если взять клеточку размером 20 пикселей, в ряду поместится 400 / 20 = <b>20 клеточек</b>. Пронумеруем их с нуля: от 0 до 19.</p>
+  <figure>
+    <svg viewBox="0 0 470 300" width="470" role="img" aria-label="Клетка с номером (3, 2) начинается в пикселе (60, 40)">
+      <rect x="40" y="40" width="240" height="240" class="svg-field"/>
+      <g stroke="#3a3d47" stroke-width="1">
+        <line x1="80" y1="40" x2="80" y2="280"/><line x1="120" y1="40" x2="120" y2="280"/><line x1="160" y1="40" x2="160" y2="280"/><line x1="200" y1="40" x2="200" y2="280"/><line x1="240" y1="40" x2="240" y2="280"/>
+        <line x1="40" y1="80" x2="280" y2="80"/><line x1="40" y1="120" x2="280" y2="120"/><line x1="40" y1="160" x2="280" y2="160"/><line x1="40" y1="200" x2="280" y2="200"/><line x1="40" y1="240" x2="280" y2="240"/>
+      </g>
+      <g font-size="13" class="svg-text" text-anchor="middle">
+        <text x="60" y="32">0</text><text x="100" y="32">1</text><text x="140" y="32">2</text><text x="180" y="32">3</text><text x="220" y="32">4</text><text x="260" y="32">5</text>
+        <text x="26" y="65">0</text><text x="26" y="105">1</text><text x="26" y="145">2</text><text x="26" y="185">3</text><text x="26" y="225">4</text><text x="26" y="265">5</text>
+      </g>
+      <rect x="161" y="121" width="38" height="38" fill="#32cd32"/>
+      <text x="300" y="120" font-size="15" class="svg-text" font-weight="700">клеточка (3, 2)</text>
+      <text x="300" y="145" font-size="14" class="svg-text">x = 3 × 20 = 60 пикселей</text>
+      <text x="300" y="168" font-size="14" class="svg-text">y = 2 × 20 = 40 пикселей</text>
+    </svg>
+    <figcaption>Чтобы найти пиксели, умножаем номер клеточки на её размер (20).</figcaption>
+  </figure>
+  <p>Видишь правило? <b>Пиксели = номер клеточки × 20.</b> Пусть это умножение делает компьютер.</p>
+
+  <h2>Первая функция</h2>
+  <p>Функция — это <b>рецепт</b>: мы один раз записываем, что делать, и даём рецепту имя. Потом достаточно назвать имя, и компьютер выполнит все шаги. Начнём с простого рецепта «очисти поле»:</p>
+  <pre class="code nonum">function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}</pre>
+  <ul>
+    <li><code>function</code> — «сейчас будет рецепт»;</li>
+    <li><code>clearField</code> — его имя (<i>clear field</i> — «очистить поле»);</li>
+    <li><code>()</code> — круглые скобки обязательны, даже пустые;</li>
+    <li>между фигурными скобками <code>{ }</code> — шаги рецепта. Их пишут с отступом, чтобы было видно, что они внутри.</li>
+  </ul>
+  <p>Записанный рецепт сам по себе <b>ничего не делает</b>. Чтобы он сработал, его надо <b>вызвать</b> — написать имя со скобками:</p>
+  <pre class="code nonum">clearField();</pre>
+  <p>Ты уже знаешь функции, которые придумали до тебя: <code>alert(...)</code>, <code>console.log(...)</code>, <code>ctx.fillRect(...)</code>. Теперь ты умеешь делать свои!</p>
+
+  <h2>Функция с параметрами</h2>
+  <p>Чтобы нарисовать клеточку, нужно знать, <b>где</b> и <b>каким цветом</b>. Эти сведения передают функции в скобках. Они называются <b>параметрами</b>:</p>
+  <pre class="code nonum">function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}</pre>
+  <p>Когда мы пишем <code>drawCell(3, 2, "lime")</code>, функция получает три коробки: в <code>x</code> кладётся 3, в <code>y</code> — 2, в <code>color</code> — <code>"lime"</code>. Дальше она умножает номера клеточек на размер <code>size</code> и рисует.</p>
+  <div class="box tip">
+    <span class="title">💡 Зачем size - 1?</span>
+    Квадратик получается на один пиксель меньше клеточки, и между соседними кусочками остаётся тонкая щёлочка. Так видно, из каких кусочков состоит змейка. Попробуй потом написать просто <code>size</code> и сравни.
+  </div>
+
+  <h2>Переписываем игру</h2>
+  <p>Теперь замени скрипт в <code>snake.html</code>: старые строки с <code>fillRect</code> больше не нужны.</p>
+  <div class="box tip">
+    <span class="title">💡 Про отступы</span>
+    Дальше в уроках мы часто показываем только кусочек кода, который лежит внутри <code>&lt;script&gt;</code>, без отступа слева. В твоём файле эти строки сдвинуты вправо, потому что они внутри тега <code>&lt;script&gt;</code>. Так и оставь: компьютеру отступы не важны, они нужны людям, чтобы код было легче читать. Как всё выглядит целиком, всегда можно посмотреть в полном файле в конце урока.
+  </div>
+  <pre class="code" data-file="snake.html (часть внутри script)" data-new="3-19">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+
+function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}
+
+clearField();
+drawCell(10, 10, "lime");
+drawCell(9, 10, "lime");
+drawCell(8, 10, "lime");
+drawCell(15, 10, "red");</pre>
+  <p>Сохрани и обнови. Змейка из трёх кусочков смотрит вправо, а впереди неё лежит яблоко. Заметь, как легко теперь двигать кусочки: меняешь номер клеточки, и всё.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Частые ошибки</span>
+    <ul>
+      <li>Забыта закрывающая фигурная скобка <code>}</code>: появится ошибка <i>missing } after function body</i> — «не хватает <code>}</code> после тела функции».</li>
+      <li>Функцию вызвали, но имя написано по-другому (<code>drawcell</code> вместо <code>drawCell</code>): ошибка <i>drawcell is not defined</i>.</li>
+    </ul>
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Нарисуй из клеточек первую букву своего имени.</li>
+      <li>Поставь яблоко в каждый из четырёх углов поля. Какие номера у угловых клеточек? (Подсказка: последняя клеточка — 19, а не 20.)</li>
+      <li>Сделай голову змейки другого цвета, например <code>"yellow"</code>.</li>
+      <li>⭐ Напиши функцию <code>drawApple(x, y)</code>, которая рисует красную клеточку. Внутри она может просто вызывать <code>drawCell</code>!</li>
+    </ol>
+    Когда закончишь, верни змейку и яблоко как в коде выше: в следующем уроке мы начнём с него.
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    clearField();
+    drawCell(10, 10, "lime");
+    drawCell(9, 10, "lime");
+    drawCell(8, 10, "lime");
+    drawCell(15, 10, "red");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю, чем отличается <b>записать</b> функцию от <b>вызвать</b> её.</li>
+    <li>Я понимаю, что такое параметры <code>x</code>, <code>y</code>, <code>color</code>.</li>
+    <li>Я умею переводить номер клеточки в пиксели: номер × 20.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-04.html"><small>← Урок 4</small>Холст и координаты</a>
+    <a class="next" href="lesson-06.html"><small>Урок 6 →</small>Циклы</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

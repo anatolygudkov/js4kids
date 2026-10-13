@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Змейка ползёт</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 8 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Змейка ползёт</h1>
+  <p class="lead">Мультфильм — это много картинок, которые быстро сменяют друг друга. Наша игра будет работать так же: несколько раз в секунду сдвигать змейку и рисовать новую картинку. Сегодня змейка оживёт!</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>узнаешь хитрый способ двигать змейку: голову вперёд, хвост долой;</li>
+      <li>познакомишься с командами массивов <code>unshift</code> и <code>pop</code>;</li>
+      <li>запустишь таймер <code>setInterval</code>;</li>
+      <li>научишься задавать направление переменными <code>dx</code> и <code>dy</code>.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>Как ползает змейка: идея на бумаге</td></tr>
+      <tr><td>10 мин</td><td><code>unshift</code> и <code>pop</code> в консоли</td></tr>
+      <tr><td>15 мин</td><td>Функция <code>step</code> и таймер</td></tr>
+      <tr><td>10 мин</td><td>Эксперименты с направлением и скоростью</td></tr>
+    </table>
+  </div>
+
+  <h2>Как ползает змейка</h2>
+  <p>Можно сдвигать каждый кусочек змейки по очереди, но есть способ проще. Смотри: чтобы змейка проползла на одну клеточку, достаточно:</p>
+  <ol>
+    <li><b>добавить новую голову</b> на клеточку впереди;</li>
+    <li><b>убрать последний кусочек</b> хвоста.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 560 230" width="560" role="img" aria-label="Шаг змейки: впереди добавляется новая голова, последний кусочек хвоста удаляется">
+      <g font-size="14" class="svg-text">
+        <text x="20" y="30" font-weight="700">Было:</text>
+        <text x="20" y="115" font-weight="700">Новая голова:</text>
+        <text x="20" y="200" font-weight="700">Стало:</text>
+      </g>
+      <rect x="150" y="10" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="13" width="28" height="28" fill="#32cd32"/><rect x="290" y="13" width="28" height="28" fill="#32cd32"/><rect x="320" y="13" width="28" height="28" fill="#ffd43b"/>
+      <rect x="150" y="95" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="260" y="98" width="28" height="28" fill="#ff5555" opacity="0.35"/><rect x="290" y="98" width="28" height="28" fill="#32cd32"/><rect x="320" y="98" width="28" height="28" fill="#32cd32"/><rect x="350" y="98" width="28" height="28" fill="#ffd43b"/>
+      <text x="274" y="117" text-anchor="middle" font-size="16" fill="#ffffff">✕</text>
+      <text x="364" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">unshift</text>
+      <text x="274" y="152" text-anchor="middle" font-size="13" class="svg-accent2" font-weight="700">pop</text>
+      <rect x="150" y="180" width="300" height="34" rx="6" class="svg-field"/>
+      <rect x="290" y="183" width="28" height="28" fill="#32cd32"/><rect x="320" y="183" width="28" height="28" fill="#32cd32"/><rect x="350" y="183" width="28" height="28" fill="#ffd43b"/>
+      <text x="470" y="203" font-size="14" class="svg-text">→ на клетку вправо</text>
+    </svg>
+    <figcaption>Средние кусочки остаются на месте, меняются только голова и хвост.</figcaption>
+  </figure>
+  <p>Для этого у массивов есть готовые команды:</p>
+  <ul>
+    <li><code>snake.unshift(что-то)</code> — добавить элемент <b>в начало</b> списка (на место номер 0);</li>
+    <li><code>snake.pop()</code> — убрать <b>последний</b> элемент списка.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Проверь в консоли</span>
+    Открой <code>snake.html</code>, нажми <kbd>F12</kbd> и введи по очереди:
+    <pre class="code nonum">snake.unshift({ x: 11, y: 10 });
+snake.pop();
+draw();</pre>
+    Змейка сдвинулась на одну клеточку вправо! Повтори эти три строчки ещё пару раз (стрелка <kbd>↑</kbd> в консоли вызывает предыдущие команды).
+  </div>
+
+  <h2>Куда ползти: dx и dy</h2>
+  <p>Новая голова появляется рядом со старой. Где именно, зависит от направления. Заведём две переменные:</p>
+  <ul>
+    <li><code>dx</code> — на сколько клеточек сдвигаться по x за один шаг;</li>
+    <li><code>dy</code> — на сколько клеточек сдвигаться по y.</li>
+  </ul>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Направление</th><th><code>dx</code></th><th><code>dy</code></th></tr>
+      <tr><td>вправо →</td><td>1</td><td>0</td></tr>
+      <tr><td>влево ←</td><td>-1</td><td>0</td></tr>
+      <tr><td>вниз ↓</td><td>0</td><td>1</td></tr>
+      <tr><td>вверх ↑</td><td>0</td><td>-1</td></tr>
+    </table>
+  </div>
+  <p>(Помнишь, на экране y растёт <b>вниз</b>? Поэтому «вверх» — это <code>-1</code>.)</p>
+  <p>Тогда новая голова — это старая голова плюс сдвиг:</p>
+  <pre class="code nonum">let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+
+  <h2>Один шаг игры</h2>
+  <p>Соберём всё в функцию <code>step</code> («шаг»): сделать новую голову, добавить её, убрать хвост, перерисовать.</p>
+  <pre class="code" data-file="snake.html (часть внутри script)" data-new="7-8,16-22,24">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+let dx = 1;
+let dy = 0;
+
+function clearField() { ... }      // без изменений
+
+function drawCell(x, y, color) { ... }   // без изменений
+
+function draw() { ... }            // без изменений
+
+function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  snake.unshift(head);
+  snake.pop();
+  draw();
+}
+
+draw();
+setInterval(step, 200);</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Многоточия не набирай!</span>
+    Запись <code>{ ... }   // без изменений</code> значит, что функция остаётся такой же, как была. Не стирай её! Если сомневаешься, загляни в полный файл в конце урока.
+  </div>
+  <p>Сохрани, обнови… Змейка поползла! 🎉</p>
+
+  <h2>Таймер</h2>
+  <pre class="code nonum">setInterval(step, 200);</pre>
+  <p><code>setInterval</code> — «вызывай функцию <code>step</code> снова и снова, каждые 200 миллисекунд». Миллисекунда — это одна тысячная секунды, так что 200 миллисекунд — это пятая часть секунды. Значит, змейка делает 5 шагов в секунду.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Без скобок!</span>
+    Пишем <code>setInterval(step, 200)</code>, а не <code>setInterval(step(), 200)</code>. Мы не вызываем <code>step</code> сами, а <b>отдаём</b> её таймеру, чтобы он вызывал её, когда придёт время.
+  </div>
+  <p>А потом змейка уползает за край поля и исчезает… Она не пропала, её координаты просто стали больше 19, и она ползёт где-то за пределами холста. Это мы исправим в следующем уроке.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Эксперименты</span>
+    <ol>
+      <li>Поменяй <code>200</code> на <code>500</code>, потом на <code>50</code>. Как меняется скорость?</li>
+      <li>Сделай, чтобы змейка ползла вниз. Какие нужны <code>dx</code> и <code>dy</code>?</li>
+      <li>Пусть змейка ползёт влево. Посмотри внимательно, что происходит в самом начале. Почему?</li>
+      <li>Что будет, если <code>dx = 1</code> и <code>dy = 1</code> одновременно?</li>
+      <li>⭐ Закомментируй строчку <code>snake.pop();</code> (поставь перед ней <code>//</code>). Что происходит со змейкой? Запомни это, пригодится, когда змейка будет есть яблоки!</li>
+    </ol>
+    В конце верни <code>dx = 1</code>, <code>dy = 0</code>, скорость 200 и строчку <code>snake.pop();</code> без комментария.
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я могу объяснить, почему для движения достаточно добавить голову и убрать хвост.</li>
+    <li>Я знаю, что делают <code>unshift</code> и <code>pop</code>.</li>
+    <li>Я понимаю, что <code>setInterval(step, 200)</code> вызывает <code>step</code> 5 раз в секунду.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-07.html"><small>← Урок 7</small>Массивы и объекты</a>
+    <a class="next" href="lesson-09.html"><small>Урок 9 →</small>Условия</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

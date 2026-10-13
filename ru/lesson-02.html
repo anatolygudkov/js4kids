@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Консоль и ошибки</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 2 из 16 <span class="time">⏱ 40 минут</span></p>
+  <h1>Консоль и ошибки</h1>
+  <p class="lead">У каждого программиста есть секретное окно, куда программа пишет сообщения, — <b>консоль</b>. Там же компьютер рассказывает об ошибках. Сегодня научимся с ней дружить и перестанем бояться красных надписей.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>откроешь консоль браузера;</li>
+      <li>научишься выводить в неё текст и числа командой <code>console.log</code>;</li>
+      <li>превратишь компьютер в калькулятор;</li>
+      <li>нарочно сломаешь программу и научишься читать ошибки.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Вспоминаем урок 1: открываем <code>proba.html</code></td></tr>
+      <tr><td>10 мин</td><td>Консоль и <code>console.log</code></td></tr>
+      <tr><td>10 мин</td><td>Числа и арифметика</td></tr>
+      <tr><td>15 мин</td><td>Ломаем и чиним: читаем ошибки</td></tr>
+    </table>
+  </div>
+
+  <h2>Открываем консоль</h2>
+  <ol class="steps">
+    <li>Открой в Geany свой файл <code>proba.html</code>: <b>Файл → Открыть</b> (<kbd>Ctrl</kbd> + <kbd>O</kbd>) → папка <b>kod</b>. Ещё проще — <b>Файл → Недавние файлы</b> (<i>Recent Files</i>).</li>
+    <li>Открой этот же файл в браузере, как в прошлом уроке.</li>
+    <li>В браузере нажми <kbd>F12</kbd>. Справа или снизу появится панель с инструментами разработчика.</li>
+    <li>Вверху панели выбери вкладку <b>Консоль</b> (<i>Console</i>).</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Быстрые клавиши</span>
+    В Firefox консоль сразу открывается сочетанием <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>. Закрыть панель можно снова кнопкой <kbd>F12</kbd>.
+  </div>
+
+  <h2>Пишем в консоль</h2>
+  <p>Окошко <code>alert</code> мешает: пока не нажмёшь OK, ничего не происходит. Поэтому программисты пишут сообщения в консоль командой <code>console.log</code> (<i>log</i> — «записать в журнал»). Замени строчку с <code>alert</code> на эти:</p>
+  <pre class="code" data-file="proba.html" data-new="10-12">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Проба&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Моя первая программа&lt;/h1&gt;
+  &lt;script&gt;
+    console.log("Привет из консоли!");
+    console.log("Я умею считать:");
+    console.log(2 + 2);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <p>Зелёным отмечены новые строчки. Сохрани (<kbd>Ctrl</kbd> + <kbd>S</kbd>) и обнови страницу (<kbd>F5</kbd>). На самой странице ничего нового не будет, а в консоли появится:</p>
+  <pre class="console">Привет из консоли!
+Я умею считать:
+4</pre>
+  <p>Обрати внимание на <code>console.log</code>: между <code>console</code> и <code>log</code> стоит <b>точка</b>. Получается «консоль, запиши!».</p>
+
+  <h2>Компьютер-калькулятор</h2>
+  <p>Компьютер отлично считает. Вот знаки действий:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Знак</th><th>Действие</th><th>Пример</th><th>Ответ</th></tr>
+      <tr><td><code>+</code></td><td>сложить</td><td><code>7 + 5</code></td><td>12</td></tr>
+      <tr><td><code>-</code></td><td>вычесть</td><td><code>7 - 5</code></td><td>2</td></tr>
+      <tr><td><code>*</code></td><td>умножить (звёздочка!)</td><td><code>7 * 5</code></td><td>35</td></tr>
+      <tr><td><code>/</code></td><td>разделить (косая черта)</td><td><code>10 / 4</code></td><td>2.5</td></tr>
+    </table>
+  </div>
+  <p>Дробные числа в программировании пишут через <b>точку</b>: <code>2.5</code>, а не <code>2,5</code>.</p>
+  <p>Попробуй разницу между <b>числом</b> и <b>текстом</b>. Добавь в программу:</p>
+  <pre class="code nonum">console.log(2 + 2);
+console.log("2 + 2");</pre>
+  <p>Первая строка выведет <code>4</code>, вторая — <code>2 + 2</code>. Всё, что в кавычках, компьютер не считает, а просто показывает как есть. Такой текст в кавычках программисты называют <b>строкой</b>.</p>
+
+  <div class="box tip">
+    <span class="title">💡 Консоль тоже умеет считать</span>
+    Щёлкни мышкой в самом низу консоли, где мигает курсор после знака <code>&gt;&gt;</code>, напиши <code>7 * 8</code> и нажми <kbd>Enter</kbd>. Ответ появится сразу. Так удобно проверять маленькие кусочки кода.
+  </div>
+
+  <h2>Ломаем и чиним</h2>
+  <p>Ошибки делают <b>все</b> программисты, даже самые опытные, и много раз в день. Главное — научиться их находить. Давай сделаем ошибку специально.</p>
+
+  <h3>Ошибка 1: опечатка в команде</h3>
+  <p>Убери букву <code>e</code> в одной из команд, чтобы получилось <code>consol.log("Привет из консоли!");</code>. Сохрани и обнови страницу. В консоли появится красная надпись:</p>
+  <pre class="console"><span class="err">❌ Uncaught ReferenceError: consol is not defined        proba.html:10:5</span>
+</pre>
+  <p>Переведём:</p>
+  <ul>
+    <li><b>ReferenceError: consol is not defined</b> — «Ошибка: я не знаю, что такое <code>consol</code>».</li>
+    <li><b>proba.html:10:5</b> — ошибка в файле <code>proba.html</code> на <b>строке 10</b> (а 5 — номер символа в строке). Посмотри на номера строк в Geany: на десятой строке и есть опечатка!</li>
+  </ul>
+  <p>Исправь опечатку, сохрани и обнови: ошибка исчезла.</p>
+  <div class="box warn">
+    <span class="title">⚠️ Заметь</span>
+    После ошибки программа <b>остановилась</b>: строки ниже неё тоже не выполнились. Поэтому одна маленькая опечатка может «сломать» всё. Не страшно — исправляешь, и всё снова работает.
+  </div>
+
+  <h3>Ошибка 2: забытая кавычка</h3>
+  <p>Сотри закрывающую кавычку: <code>console.log("Привет из консоли!);</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: "" string literal contains an unescaped line break</span>
+</pre>
+  <p><b>SyntaxError</b> — «ошибка в написании», как грамматическая ошибка в предложении. Компьютер говорит: «текст в кавычках не закончился до конца строки» — он не понял, где кончается текст.</p>
+
+  <h3>Ошибка 3: забытая скобка</h3>
+  <p>Сотри закрывающую скобку: <code>console.log("Привет из консоли!";</code></p>
+  <pre class="console"><span class="err">❌ Uncaught SyntaxError: missing ) after argument list</span>
+</pre>
+  <p>Тут компьютер прямо говорит: <i>missing )</i> — «не хватает скобки <code>)</code>».</p>
+
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Если видишь…</th><th>Это значит…</th><th>Проверь</th></tr>
+      <tr><td><code>… is not defined</code></td><td>«не знаю такого слова»</td><td>опечатки, большие и маленькие буквы, кавычки вокруг текста</td></tr>
+      <tr><td><code>SyntaxError</code></td><td>«не могу прочитать, написано неправильно»</td><td>парные скобки и кавычки, русские буквы вместо английских</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>«текст в кавычках не закрыт»</td><td>закрывающую кавычку</td></tr>
+      <tr><td><code>missing )</code></td><td>«не хватает скобки»</td><td>у каждой <code>(</code> должна быть своя <code>)</code></td></tr>
+      <tr><td><code>expected …, got …</code><br><code>unexpected token</code></td><td>«ждал одно, а встретил другое» — лишний или странный символ</td><td>строку, указанную в ошибке, и строку перед ней</td></tr>
+    </table>
+  </div>
+  <div class="box tip">
+    <span class="title">💡 Помнишь задание из урока 1?</span>
+    <code>alert(Привет);</code> без кавычек тоже давал ошибку: <code>Привет is not defined</code>. Без кавычек компьютер думает, что <code>Привет</code> — это имя чего-то, что он должен знать. А с кавычками понимает, что это просто текст.
+  </div>
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Для взрослых</span>
+    В консоли иногда бывают сообщения, которые к коду ребёнка не относятся (например, от расширений браузера). Смотреть надо только на те, где указан наш файл: <code>proba.html</code>, а потом <code>snake.html</code>.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Сколько минут в сутках? Выведи в консоль <code>24 * 60</code>.</li>
+      <li>Сколько секунд в сутках? (Подсказка: можно перемножить три числа.)</li>
+      <li>Напиши <code>console.log(10 - 3 * 2);</code> и <code>console.log((10 - 3) * 2);</code>. Почему ответы разные? (Как в математике: сначала скобки, потом умножение.)</li>
+      <li>Попроси соседа или взрослого сделать в твоём коде одну ошибку, пока ты не смотришь. Найди её по сообщению в консоли!</li>
+      <li>⭐ Что выведет <code>console.log("2" + "2");</code>? Догадайся, почему.</li>
+    </ol>
+  </div>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я умею открывать консоль (<kbd>F12</kbd>).</li>
+    <li>Я знаю разницу между <code>2 + 2</code> и <code>"2 + 2"</code>.</li>
+    <li>По сообщению об ошибке я нахожу нужную строку в Geany.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-01.html"><small>← Урок 1</small>Первая программа</a>
+    <a class="next" href="lesson-03.html"><small>Урок 3 →</small>Переменные</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

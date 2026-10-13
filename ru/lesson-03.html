@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Переменные</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 3 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Переменные</h1>
+  <p class="lead">В игре нужно многое запоминать: счёт, длину змейки, скорость. Для этого в программах есть <b>переменные</b> — коробки с наклейками, в которые можно класть числа и текст.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>создашь переменные командой <code>let</code>;</li>
+      <li>научишься менять то, что лежит в переменной;</li>
+      <li>склеишь текст из кусочков;</li>
+      <li>напишешь программу, которая спрашивает твоё имя.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Повторение: консоль и ошибки</td></tr>
+      <tr><td>15 мин</td><td>Что такое переменная, <code>let</code>, изменение значения</td></tr>
+      <tr><td>10 мин</td><td>Текст и склеивание строк</td></tr>
+      <tr><td>15 мин</td><td>Программа-собеседник с <code>prompt</code>, задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Коробка с наклейкой</h2>
+  <p>Представь коробку, на которой написано <b>score</b> (по-английски «счёт»). Положим в неё число 0:</p>
+  <pre class="code nonum">let score = 0;</pre>
+  <ul>
+    <li><code>let</code> — «пусть будет»: создаём новую коробку;</li>
+    <li><code>score</code> — имя коробки (наклейка);</li>
+    <li><code>=</code> — «положи в неё»;</li>
+    <li><code>0</code> — что кладём.</li>
+  </ul>
+  <p>Теперь везде, где мы напишем <code>score</code>, компьютер подставит то, что лежит в коробке.</p>
+  <p>Открой <code>proba.html</code>, удали всё, что было между <code>&lt;script&gt;</code> и <code>&lt;/script&gt;</code>, и напиши:</p>
+  <pre class="code" data-file="proba.html (только часть внутри script)">let score = 0;
+console.log(score);
+
+score = 10;
+console.log(score);
+
+score = score + 1;
+console.log(score);</pre>
+  <p>Сохрани, обнови, посмотри в консоль: <code>0</code>, <code>10</code>, <code>11</code>.</p>
+
+  <h3>Подожди, score = score + 1?!</h3>
+  <p>В математике так не бывает: число не может быть равно самому себе плюс один. Но в программировании <code>=</code> — это не «равно», а <b>«положи в коробку»</b>. Компьютер читает эту строку справа налево:</p>
+  <ol>
+    <li>берёт то, что лежит в <code>score</code> (там 10);</li>
+    <li>прибавляет 1 (получается 11);</li>
+    <li>кладёт результат обратно в <code>score</code>.</li>
+  </ol>
+  <p>Ровно так в нашей игре будет расти счёт, когда змейка съест яблоко!</p>
+  <div class="box warn">
+    <span class="title">⚠️ let пишем только один раз</span>
+    <code>let</code> нужен, только когда коробку <b>создаём</b>. Когда меняем то, что в ней лежит, пишем просто <code>score = 10;</code>. Если написать <code>let score</code> второй раз, будет ошибка <i>redeclaration of let score</i>: «коробка score объявлена повторно, такая уже есть».
+  </div>
+
+  <h2>Правила для имён</h2>
+  <ul>
+    <li>Только <b>латинские буквы</b>, цифры и <code>_</code>. Пробелов нельзя. Начинаться с цифры тоже нельзя.</li>
+    <li>Большие и маленькие буквы — <b>разные</b>: <code>score</code> и <code>Score</code> — две разные коробки.</li>
+    <li>Если имя из нескольких слов, второе слово начинают с большой буквы: <code>snakeLength</code>, <code>bestScore</code>. Это похоже на горбы верблюда, поэтому такой стиль называют «верблюжьим».</li>
+    <li>Давай понятные имена: <code>speed</code> лучше, чем <code>s</code> или <code>abc</code>.</li>
+  </ul>
+
+  <h2>Текст в переменных</h2>
+  <p>В переменную можно положить и текст (строку):</p>
+  <pre class="code nonum">let name = "Саша";
+console.log("Привет, " + name + "!");</pre>
+  <p>Если сложить строки знаком <code>+</code>, они <b>склеятся</b> в одну: <code>Привет, Саша!</code>. Не забудь пробел внутри кавычек после запятой, иначе получится «Привет,Саша!».</p>
+  <p>А если склеить текст и число?</p>
+  <pre class="code nonum">let apples = 5;
+console.log("Яблок съедено: " + apples);
+console.log("5" + 5);
+console.log(5 + 5);</pre>
+  <p>Получится <code>Яблок съедено: 5</code>, потом <code>55</code> (текст «5» и цифра 5 склеились) и <code>10</code> (два числа сложились). Помни: кавычки превращают число в текст.</p>
+
+  <h2>Программа-собеседник</h2>
+  <p>Команда <code>prompt</code> показывает окошко, где можно что-то <b>написать</b>. То, что напишет человек, можно сразу положить в переменную:</p>
+  <pre class="code" data-file="proba.html (только часть внутри script)">let name = prompt("Как тебя зовут?");
+alert("Привет, " + name + "! Давай напишем игру.");
+
+let year = 2026;
+let born = prompt("Какой у тебя год рождения?");
+alert("Тебе примерно " + (year - born) + " лет.");</pre>
+  <p>Выражение <code>(year - born)</code> стоит в скобках, чтобы компьютер сначала посчитал разницу, а потом склеил её с текстом.</p>
+  <div class="box tip">
+    <span class="title">💡 Год поменялся?</span>
+    Если сейчас уже не 2026 год, поставь в <code>year</code> текущий год.
+  </div>
+
+  <h2>Переменные в Змейке</h2>
+  <p>Вот какие переменные появятся в нашей игре:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Переменная</th><th>Что хранит</th></tr>
+      <tr><td><code>score</code></td><td>счёт — сколько яблок съедено</td></tr>
+      <tr><td><code>speed</code></td><td>скорость змейки</td></tr>
+      <tr><td><code>size</code></td><td>размер одной клеточки поля</td></tr>
+      <tr><td><code>snake</code></td><td>где находится каждый кусочек змейки</td></tr>
+      <tr><td><code>apple</code></td><td>где лежит яблоко</td></tr>
+    </table>
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Создай переменную <code>lives</code> (жизни) со значением 3. Отними одну жизнь (<code>lives = lives - 1;</code>) и выведи результат в консоль.</li>
+      <li>Спроси у игрока его любимое животное и выведи: «Моё любимое животное — …».</li>
+      <li>Сделай переменные <code>width = 20</code> и <code>height = 15</code>. Посчитай, сколько клеточек в поле <code>width × height</code>, и выведи ответ с пояснением.</li>
+      <li>⭐ Напиши <code>score++;</code> вместо <code>score = score + 1;</code>. Работает? Это сокращённая запись, она нам ещё пригодится.</li>
+    </ol>
+  </div>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю, что делает <code>let</code> и что <code>=</code> значит «положи».</li>
+    <li>Я понимаю, почему <code>score = score + 1</code> увеличивает счёт.</li>
+    <li>Я умею склеивать текст и переменные знаком <code>+</code>.</li>
+  </ul>
+  <div class="box ok">
+    <span class="title">🎉 Разминка закончена!</span>
+    В следующем уроке начнём писать саму игру.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-02.html"><small>← Урок 2</small>Консоль и ошибки</a>
+    <a class="next" href="lesson-04.html"><small>Урок 4 →</small>Холст и координаты</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

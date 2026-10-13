@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шпаргалка</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Всегда под рукой</p>
+  <h1>Шпаргалка</h1>
+  <p class="lead">Всё самое нужное на одной странице. Её удобно распечатать и положить рядом с клавиатурой.</p>
+
+  <h2>Символы на клавиатуре (раскладка EN)</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Символ</th><th>Как набрать</th><th>Символ</th><th>Как набрать</th></tr>
+      <tr><td><code>( )</code></td><td><kbd>Shift</kbd> + <kbd>9</kbd> / <kbd>0</kbd></td><td><code>;</code></td><td><kbd>Ж</kbd></td></tr>
+      <tr><td><code>{ }</code></td><td><kbd>Shift</kbd> + <kbd>Х</kbd> / <kbd>Ъ</kbd></td><td><code>:</code></td><td><kbd>Shift</kbd> + <kbd>Ж</kbd></td></tr>
+      <tr><td><code>[ ]</code></td><td><kbd>Х</kbd> / <kbd>Ъ</kbd></td><td><code>"</code></td><td><kbd>Shift</kbd> + <kbd>Э</kbd></td></tr>
+      <tr><td><code>&lt; &gt;</code></td><td><kbd>Shift</kbd> + <kbd>Б</kbd> / <kbd>Ю</kbd></td><td><code>'</code></td><td><kbd>Э</kbd></td></tr>
+      <tr><td><code>=</code> <code>+</code></td><td>клавиша слева от <kbd>Backspace</kbd> (+ с <kbd>Shift</kbd>)</td><td><code>&amp;</code></td><td><kbd>Shift</kbd> + <kbd>7</kbd></td></tr>
+      <tr><td><code>*</code></td><td><kbd>Shift</kbd> + <kbd>8</kbd></td><td><code>|</code></td><td><kbd>Shift</kbd> + <kbd>\</kbd></td></tr>
+      <tr><td><code>/</code></td><td>клавиша справа от <kbd>Ю</kbd></td><td><code>!</code></td><td><kbd>Shift</kbd> + <kbd>1</kbd></td></tr>
+    </table>
+  </div>
+
+  <h2>Горячие клавиши</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Где</th><th>Клавиши</th><th>Что делают</th></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>новый файл</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>O</kbd></td><td>открыть файл</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>сохранить</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd></td><td>сохранить как (с новым именем)</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>отменить</td></tr>
+      <tr><td>Geany</td><td><kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>-</kbd></td><td>шрифт крупнее / мельче</td></tr>
+      <tr><td>везде</td><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>копировать / вставить</td></tr>
+      <tr><td>Firefox</td><td><kbd>F5</kbd></td><td>обновить страницу</td></tr>
+      <tr><td>Firefox</td><td><kbd>F12</kbd></td><td>открыть / закрыть инструменты</td></tr>
+      <tr><td>Firefox</td><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd></td><td>сразу открыть консоль</td></tr>
+    </table>
+  </div>
+  <p><b>Главный цикл:</b> пишу → <kbd>Ctrl</kbd> + <kbd>S</kbd> → <kbd>F5</kbd> → смотрю (и в консоль тоже!).</p>
+
+  <h2>Заготовка HTML-файла</h2>
+  <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Название&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Заголовок&lt;/h1&gt;
+  &lt;script&gt;
+    // здесь JavaScript
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  <h2>JavaScript</h2>
+  <h3>Вывод</h3>
+  <pre class="code nonum">alert("Окошко с сообщением");
+console.log("Сообщение в консоль");
+let name = prompt("Вопрос?");      // ответ попадёт в name</pre>
+
+  <h3>Переменные и действия</h3>
+  <pre class="code nonum">let score = 0;              // создать коробку
+score = score + 1;          // изменить (без let!)
+score++;                    // то же самое короче
+let text = "Счёт: " + score; // склеить текст
+// + - * /  — плюс, минус, умножить, разделить</pre>
+
+  <h3>Условия</h3>
+  <pre class="code nonum">if (score &gt; 10) {
+  // если правда
+} else {
+  // иначе
+}
+// сравнения: &gt;  &lt;  &gt;=  &lt;=  ===  !==
+// и: &amp;&amp;     или: ||     не: !</pre>
+
+  <h3>Циклы</h3>
+  <pre class="code nonum">for (let i = 0; i &lt; 10; i++) {
+  // повторится 10 раз, i = 0, 1, … 9
+}
+
+while (условие) {
+  // повторяется, пока условие правда
+}</pre>
+
+  <h3>Функции</h3>
+  <pre class="code nonum">function drawCell(x, y, color) {   // записать рецепт
+  // шаги
+}
+drawCell(3, 2, "lime");            // вызвать
+
+function randomCell() {
+  return Math.floor(Math.random() * 20);   // вернуть ответ
+}</pre>
+
+  <h3>Объекты и массивы</h3>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };    // объект
+apple.x = 3;
+
+let snake = [{ x: 1, y: 1 }, { x: 0, y: 1 }];  // массив
+snake[0]          // первый элемент (номера с нуля!)
+snake.length      // сколько элементов
+snake.push(a)     // добавить в конец
+snake.unshift(a)  // добавить в начало
+snake.pop()       // убрать последний</pre>
+
+  <h3>Холст</h3>
+  <pre class="code nonum">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";                 // цвет
+ctx.fillRect(x, y, width, height);     // прямоугольник
+ctx.font = "32px sans-serif";          // шрифт
+ctx.fillText("Текст", x, y);           // текст</pre>
+  <p>(0, 0) — левый верхний угол. x растёт вправо, y — <b>вниз</b>.</p>
+
+  <h3>Время, клавиши, страница, память</h3>
+  <pre class="code nonum">let timer = setInterval(step, 200);   // вызывать step каждые 200 мс
+clearInterval(timer);                 // остановить
+
+document.addEventListener("keydown", onKey);
+// event.key: "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Enter"
+// event.code: "KeyW", "KeyA", ... (не зависит от раскладки)
+
+document.getElementById("score").textContent = score;
+
+localStorage.setItem("snakeBest", 25);
+let best = Number(localStorage.getItem("snakeBest"));</pre>
+
+  <h2>CSS</h2>
+  <pre class="code nonum">&lt;style&gt;
+  body { background: black; color: white; }   /* по тегу */
+  #score { font-weight: bold; }               /* по id */
+  .help { color: gray; }                      /* по классу */
+&lt;/style&gt;</pre>
+
+  <h2>Частые ошибки</h2>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Сообщение</th><th>Что проверить</th></tr>
+      <tr><td><code>… is not defined</code></td><td>опечатка в имени, большие/маленькие буквы, текст без кавычек</td></tr>
+      <tr><td><code>missing ) after argument list</code></td><td>не хватает <code>)</code></td></tr>
+      <tr><td><code>missing } after function body</code></td><td>не хватает <code>}</code> в конце функции, <code>if</code> или цикла</td></tr>
+      <tr><td><code>string literal contains an unescaped line break</code></td><td>незакрытая кавычка</td></tr>
+      <tr><td><code>expected …, got …</code> / <code>illegal character</code></td><td>лишний или странный символ, русская буква вместо символа</td></tr>
+      <tr><td><code>redeclaration of let …</code></td><td><code>let</code> написан дважды для одной переменной</td></tr>
+      <tr><td><code>… is undefined</code></td><td>обращение к несуществующему элементу массива, например <code>snake[5]</code> у змейки из трёх кусочков</td></tr>
+      <tr><td>Ничего не меняется</td><td>файл сохранён? страница обновлена (<kbd>F5</kbd>)? открыт тот файл?</td></tr>
+    </table>
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="index.html"><small>←</small>Оглавление</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

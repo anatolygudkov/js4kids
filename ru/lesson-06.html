@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Циклы</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 6 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Циклы</h1>
+  <p class="lead">Как нарисовать ряд из 20 клеточек? Можно написать 20 строчек с <code>drawCell</code>… А можно одну, если попросить компьютер <b>повторить</b>. Повторение в программировании называется <b>циклом</b>.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>узнаешь цикл <code>for</code> и из каких частей он состоит;</li>
+      <li>проследишь шаг за шагом, как работает цикл;</li>
+      <li>нарисуешь ряды, столбики и диагонали из клеточек.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Повторение: функции <code>drawCell</code> и <code>clearField</code></td></tr>
+      <tr><td>15 мин</td><td>Цикл <code>for</code> в консоли: считаем до 10</td></tr>
+      <tr><td>15 мин</td><td>Рисуем циклом на холсте</td></tr>
+      <tr><td>10 мин</td><td>Задания и уборка</td></tr>
+    </table>
+  </div>
+
+  <h2>Считаем до пяти</h2>
+  <p>Добавь в конец скрипта <code>snake.html</code> такие строки:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 5; i++) {
+  console.log("Шаг номер " + i);
+}</pre>
+  <p>Открой консоль (<kbd>F12</kbd>) и обнови страницу:</p>
+  <pre class="console">Шаг номер 0
+Шаг номер 1
+Шаг номер 2
+Шаг номер 3
+Шаг номер 4</pre>
+  <p>Одна строчка внутри цикла выполнилась <b>5 раз</b>, и каждый раз в переменной <code>i</code> лежало новое число.</p>
+
+  <h2>Из чего сделан цикл for</h2>
+  <p>В круглых скобках после <code>for</code> — три части, разделённые точкой с запятой:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Часть</th><th>Что значит</th></tr>
+      <tr><td><code>let i = 0</code></td><td><b>Начало:</b> заводим счётчик <code>i</code> и кладём в него 0.</td></tr>
+      <tr><td><code>i &lt; 5</code></td><td><b>Условие:</b> повторяем, пока <code>i</code> меньше 5.</td></tr>
+      <tr><td><code>i++</code></td><td><b>Шаг:</b> после каждого круга прибавляем к <code>i</code> единицу (это то же, что <code>i = i + 1</code>).</td></tr>
+    </table>
+  </div>
+  <p>А в фигурных скобках <code>{ }</code> — <b>тело цикла</b>, то, что надо повторять.</p>
+  <p>Проследим, как компьютер выполняет цикл:</p>
+  <ol>
+    <li><code>i = 0</code>. Правда, что 0 &lt; 5? Да → выполняем тело → <code>i++</code>, теперь <code>i = 1</code>.</li>
+    <li>1 &lt; 5? Да → тело → <code>i = 2</code>.</li>
+    <li>… так же для 2, 3 и 4 …</li>
+    <li><code>i = 5</code>. 5 &lt; 5? <b>Нет</b> → цикл закончен, идём дальше по программе.</li>
+  </ol>
+  <div class="box tip">
+    <span class="title">💡 Почему i?</span>
+    Это традиция: <i>i</i> — первая буква слова <i>index</i> («номер»). Можно назвать счётчик как угодно, но <code>i</code> понятен любому программисту.
+  </div>
+
+  <h2>Рисуем циклом</h2>
+  <p>Замени цикл с <code>console.log</code> на этот:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; 20; i++) {
+  drawCell(i, 0, "gray");
+}</pre>
+  <p>Вдоль верхнего края появился серый ряд из 20 клеточек! При каждом повторе <code>i</code> увеличивается, и следующая клеточка рисуется правее: (0, 0), (1, 0), (2, 0)… (19, 0).</p>
+  <p>Число 20 — это количество клеточек в ряду, и оно нам ещё много раз понадобится. Давай положим его в переменную. Добавь её сразу под <code>let size = 20;</code>:</p>
+  <pre class="code nonum">let cells = 20;</pre>
+  <p>Теперь в цикле можно писать <code>i &lt; cells</code>. Если когда-нибудь захочешь поле побольше, менять придётся только одно число.</p>
+
+  <h3>Попробуй сам</h3>
+  <p>Меняй строчку внутри цикла и смотри, что получится:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Внутри цикла</th><th>Что нарисуется</th></tr>
+      <tr><td><code>drawCell(i, 0, "gray");</code></td><td>ряд сверху</td></tr>
+      <tr><td><code>drawCell(i, 19, "gray");</code></td><td>ряд снизу</td></tr>
+      <tr><td><code>drawCell(0, i, "gray");</code></td><td>столбик слева</td></tr>
+      <tr><td><code>drawCell(i, i, "yellow");</code></td><td>диагональ из угла в угол</td></tr>
+    </table>
+  </div>
+  <p>Внутри одного цикла можно написать несколько команд. Например, такой цикл нарисует рамку вокруг всего поля:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; cells; i++) {
+  drawCell(i, 0, "gray");
+  drawCell(i, 19, "gray");
+  drawCell(0, i, "gray");
+  drawCell(19, i, "gray");
+}</pre>
+  <div class="box warn">
+    <span class="title">⚠️ Бесконечный цикл</span>
+    Если условие всегда правда (например, забыть <code>i++</code>), цикл никогда не закончится и страница «зависнет». Ничего страшного: закрой вкладку браузера, исправь код и открой файл снова.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Нарисуй крест: столбик и ряд, которые пересекаются в центре поля (в клеточке 10).</li>
+      <li>Нарисуй змейку длиной 8 клеточек одним циклом.</li>
+      <li>Как нарисовать каждую <b>вторую</b> клеточку в ряду? Подсказка: шаг цикла может быть <code>i = i + 2</code>.</li>
+      <li>⭐ Цикл можно положить внутрь другого цикла. Попробуй и объясни, что получилось:
+<pre class="code nonum">for (let y = 0; y &lt; cells; y++) {
+  for (let x = 0; x &lt; cells; x++) {
+    drawCell(x, y, "darkgreen");
+  }
+}</pre>
+      </li>
+    </ol>
+  </div>
+
+  <h2>Уборка</h2>
+  <p>Это были эксперименты. Перед следующим уроком <b>удали все циклы</b>, которые рисуют на поле, но оставь переменную <code>cells</code>. Должно остаться вот так:</p>
+
+  <details class="full" open>
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html" data-new="14">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    clearField();
+    drawCell(10, 10, "lime");
+    drawCell(9, 10, "lime");
+    drawCell(8, 10, "lime");
+    drawCell(15, 10, "red");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я могу назвать три части цикла <code>for</code>.</li>
+    <li>Я понимаю, почему цикл <code>i &lt; 20</code> делает ровно 20 повторов (от 0 до 19).</li>
+    <li>Я умею нарисовать циклом ряд и столбик клеточек.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-05.html"><small>← Урок 5</small>Функции</a>
+    <a class="next" href="lesson-07.html"><small>Урок 7 →</small>Массивы и объекты</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

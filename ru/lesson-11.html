@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Яблоко и рост</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 11 из 16 <span class="time">⏱ 50 минут</span></p>
+  <h1>Яблоко и рост</h1>
+  <p class="lead">Змейка проползает сквозь яблоко и даже не замечает его. Научим её есть! Съела яблоко — выросла на один кусочек, получила очко, а новое яблоко появилось в случайном месте.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>получишь случайные числа с помощью <code>Math.random</code> и <code>Math.floor</code>;</li>
+      <li>напишешь функцию, которая <b>возвращает</b> ответ (<code>return</code>);</li>
+      <li>научишь змейку есть и расти;</li>
+      <li>выведешь счёт на страницу.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>Случайные числа в консоли</td></tr>
+      <tr><td>10 мин</td><td>Функция <code>randomCell</code> и <code>return</code></td></tr>
+      <tr><td>15 мин</td><td>Змейка ест и растёт</td></tr>
+      <tr><td>15 мин</td><td>Счёт на странице, играем, задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Случайные числа</h2>
+  <p>Открой консоль и несколько раз введи:</p>
+  <pre class="code nonum">Math.random()</pre>
+  <p>Каждый раз получается новое дробное число от 0 до 1 (но никогда не ровно 1): <code>0.7364…</code>, <code>0.0912…</code>. <code>Math</code> — это встроенный в JavaScript набор математических команд, а <code>random</code> значит «случайный».</p>
+  <p>А нам нужна клеточка от 0 до 19. Сделаем это в два шага:</p>
+  <ol>
+    <li><code>Math.random() * 20</code> — случайное число от 0 до 19.999…;</li>
+    <li><code>Math.floor(...)</code> — отбросить дробную часть (<i>floor</i> — «пол»: округлить вниз). Из 13.82 получится 13.</li>
+  </ol>
+  <pre class="code nonum">Math.floor(Math.random() * 20)</pre>
+  <p>Повтори это в консоли много раз: будут выпадать целые числа от 0 до 19, как на кубике с двадцатью гранями.</p>
+
+  <h2>Функция, которая отвечает</h2>
+  <p>Наши функции до сих пор что-то <b>делали</b>: рисовали, двигали. А бывают функции, которые <b>отвечают</b>, то есть возвращают результат. Для этого есть слово <code>return</code> («вернуть»):</p>
+  <pre class="code nonum">function randomCell() {
+  return Math.floor(Math.random() * cells);
+}</pre>
+  <p>Теперь <code>randomCell()</code> можно писать везде, где нужно случайное число: <code>apple.x = randomCell();</code> — и в <code>apple.x</code> попадёт ответ функции. Так же, как <code>prompt</code> возвращал то, что ввёл человек.</p>
+
+  <h2>Змейка ест</h2>
+  <p>Как понять, что змейка съела яблоко? Её новая голова оказалась на той же клеточке, что и яблоко: совпадают и x, <b>и</b> y.</p>
+  <pre class="code nonum">if (head.x === apple.x &amp;&amp; head.y === apple.y) {</pre>
+  <p>А теперь хитрость. Помнишь эксперимент из урока 8, когда мы убирали <code>snake.pop()</code> и змейка росла? Так и сделаем: если змейка съела яблоко, <b>не убираем хвост</b>. Голова добавилась, хвост остался, и змейка стала на кусочек длиннее!</p>
+
+  <h3>Меняем программу</h3>
+  <p>1. В HTML, между заголовком и холстом, добавь строку со счётом:</p>
+  <pre class="code" data-file="snake.html (часть внутри body)" data-new="2">&lt;h1&gt;Змейка&lt;/h1&gt;
+&lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;</pre>
+  <p><code>&lt;p&gt;</code> — абзац, а <code>&lt;span&gt;</code> — кусочек текста внутри него. Мы дали ему имя <code>id="score"</code>, чтобы найти его из JavaScript и менять число.</p>
+
+  <p>2. Добавь переменную для счёта после <code>dx</code> и <code>dy</code>:</p>
+  <pre class="code nonum" data-new="3">let dx = 1;
+let dy = 0;
+let score = 0;</pre>
+
+  <p>3. Добавь функцию <code>randomCell</code> после <code>drawCell</code>:</p>
+  <pre class="code nonum" data-new="1-3">function randomCell() {
+  return Math.floor(Math.random() * cells);
+}</pre>
+
+  <p>4. В функции <code>step</code> замени строчку <code>snake.pop();</code> на проверку:</p>
+  <pre class="code" data-file="snake.html (конец функции step)" data-new="3-11" data-del="2">  snake.unshift(head);
+  snake.pop();
+
+  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    document.getElementById("score").textContent = score;
+    apple.x = randomCell();
+    apple.y = randomCell();
+  } else {
+    snake.pop();
+  }
+
+  draw();
+}</pre>
+  <p>Прочитаем по-русски: «<b>Если</b> голова на яблоке — прибавить очко, показать его на странице, переложить яблоко в случайное место. <b>Иначе</b> — убрать хвост».</p>
+  <p><code>document.getElementById("score")</code> находит на странице наш <code>&lt;span&gt;</code>, а <code>.textContent = score</code> меняет текст внутри него на новое число.</p>
+  <p>Сохрани, обнови и попробуй поймать яблоко! 🍎</p>
+
+  <div class="box tip">
+    <span class="title">💡 Отладка через консоль</span>
+    Если что-то идёт не так, добавь в нужное место <code>console.log</code>, например <code>console.log("Съела! Счёт: " + score);</code> внутрь <code>if</code>. Так видно, срабатывает ли условие. Когда разберёшься, удали эту строчку.
+  </div>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Сыграй и набери 10 очков. Какой длины стала змейка?</li>
+      <li>Пусть в начале игры яблоко тоже лежит в случайном месте. Подсказка: вызови <code>randomCell()</code> в самом начале, при создании <code>apple</code>. Нужно ли переставить что-то в программе, чтобы функция уже была известна? (Проверь — JavaScript знает функции заранее, ещё до их строчки.)</li>
+      <li>Сделай, чтобы за яблоко давали 10 очков, а не 1.</li>
+      <li>⭐ Иногда яблоко появляется прямо внутри змейки. Замечаешь? Подумай, как это исправить. Мы сделаем это в уроке 13.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+    let score = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        document.getElementById("score").textContent = score;
+        apple.x = randomCell();
+        apple.y = randomCell();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я умею получить случайное число от 0 до 19.</li>
+    <li>Я знаю, что делает <code>return</code>.</li>
+    <li>Я могу объяснить, почему змейка растёт, когда мы не вызываем <code>pop</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-10.html"><small>← Урок 10</small>Управление стрелками</a>
+    <a class="next" href="lesson-12.html"><small>Урок 12 →</small>Конец игры</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

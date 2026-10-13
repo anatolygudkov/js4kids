@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Массивы и объекты</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 7 из 16 <span class="time">⏱ 50 минут</span></p>
+  <h1>Массивы и объекты</h1>
+  <p class="lead">Пока змейка нарисована тремя отдельными командами. Но она будет ползти и расти, и компьютер должен <b>помнить</b>, где лежит каждый её кусочек. Для этого есть <b>объекты</b> и <b>массивы</b>.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>опишешь яблоко объектом <code>{ x: 15, y: 10 }</code>;</li>
+      <li>опишешь змейку массивом — списком кусочков;</li>
+      <li>нарисуешь всю змейку циклом;</li>
+      <li>напишешь функцию <code>draw</code>, которая рисует всю игру.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>Объекты: яблоко</td></tr>
+      <tr><td>15 мин</td><td>Массивы: списки и номера с нуля</td></tr>
+      <tr><td>15 мин</td><td>Змейка — массив объектов, функция <code>draw</code></td></tr>
+      <tr><td>10 мин</td><td>Управляем змейкой из консоли, задания</td></tr>
+    </table>
+  </div>
+
+  <h2>Объект — коробка с отделениями</h2>
+  <p>У яблока есть два числа: x и y. Можно сделать две переменные <code>appleX</code> и <code>appleY</code>, но удобнее сложить их в одну коробку с отделениями. Такая коробка называется <b>объект</b>:</p>
+  <pre class="code nonum">let apple = { x: 15, y: 10 };</pre>
+  <p>Объект пишут в фигурных скобках. Внутри — <b>свойства</b>: имя, двоеточие, значение. Свойства разделяют запятой. Достать значение можно через точку:</p>
+  <pre class="code nonum">console.log(apple.x);   // 15
+console.log(apple.y);   // 10
+apple.x = 3;            // переложили яблоко</pre>
+  <p>Такая точка уже встречалась: <code>ctx.fillStyle</code>, <code>console.log</code>. Это тоже объекты со свойствами!</p>
+
+  <h2>Массив — список</h2>
+  <p><b>Массив</b> — это список, в котором значения стоят по порядку. Его пишут в квадратных скобках:</p>
+  <pre class="code nonum">let colors = ["red", "green", "blue"];
+console.log(colors[0]);       // red
+console.log(colors[2]);       // blue
+console.log(colors.length);   // 3</pre>
+  <ul>
+    <li>У каждого места в списке есть номер. Он называется <b>индекс</b>.</li>
+    <li>Номера начинаются <b>с нуля</b>! Первый элемент — <code>colors[0]</code>, второй — <code>colors[1]</code>.</li>
+    <li><code>colors.length</code> — длина списка, то есть сколько в нём элементов.</li>
+  </ul>
+  <div class="box warn">
+    <span class="title">⚠️ Последний элемент</span>
+    Если в списке 3 элемента, их номера 0, 1, 2. Элемента с номером 3 нет: <code>colors[3]</code> вернёт <code>undefined</code> («не определено»). Последний элемент всегда имеет номер <code>length - 1</code>.
+  </div>
+
+  <h2>Змейка — список кусочков</h2>
+  <p>Каждый кусочек змейки — это клеточка с координатами x и y, то есть объект. А вся змейка — список таких объектов. Первым в списке (номер 0) всегда будет <b>голова</b>:</p>
+  <pre class="code nonum">let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];</pre>
+  <figure>
+    <svg viewBox="0 0 460 150" width="460" role="img" aria-label="Змейка из трёх клеток: индекс 0 — голова в клетке 10,10, индекс 1 — 9,10, индекс 2 — хвост 8,10">
+      <rect x="20" y="20" width="420" height="70" rx="10" class="svg-field"/>
+      <rect x="290" y="35" width="40" height="40" fill="#ffd43b"/>
+      <rect x="248" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="206" y="35" width="40" height="40" fill="#32cd32"/>
+      <rect x="380" y="35" width="40" height="40" fill="#ff3b3b"/>
+      <g font-size="14" text-anchor="middle" class="svg-text">
+        <text x="310" y="112" font-weight="700">[0]</text>
+        <text x="268" y="112" font-weight="700">[1]</text>
+        <text x="226" y="112" font-weight="700">[2]</text>
+        <text x="320" y="134">голова</text>
+        <text x="216" y="134">хвост</text>
+        <text x="400" y="112" font-weight="700">apple</text>
+        <text x="400" y="134">(15, 10)</text>
+        <text x="90" y="60" fill="#ffffff">snake =</text>
+      </g>
+    </svg>
+    <figcaption>Голова — элемент номер 0, хвост — последний элемент списка.</figcaption>
+  </figure>
+  <p>Как достать координаты головы? Сначала берём элемент списка, потом его свойство: <code>snake[0].x</code> — это 10, <code>snake[2].x</code> — 8.</p>
+
+  <h2>Рисуем всю змейку циклом</h2>
+  <p>Цикл пройдёт по всем кусочкам с номерами от 0 до <code>snake.length - 1</code> и нарисует каждый:</p>
+  <pre class="code nonum">for (let i = 0; i &lt; snake.length; i++) {
+  drawCell(snake[i].x, snake[i].y, "lime");
+}</pre>
+  <p>Сколько бы кусочков ни было в змейке — 3 или 300, — этот цикл нарисует их все.</p>
+
+  <h2>Функция draw</h2>
+  <p>Соберём всё рисование в одну функцию <code>draw</code> («нарисовать»): очистить поле, нарисовать яблоко и змейку. Голову нарисуем жёлтой <b>поверх</b> зелёного кусочка, чтобы было видно, куда смотрит змейка. Перепиши скрипт так (зелёным отмечено новое, красным — то, что надо удалить):</p>
+  <pre class="code" data-file="snake.html (часть внутри script)" data-new="6-12,23-31,37" data-del="32-36">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+let size = 20;
+let cells = 20;
+
+let snake = [
+  { x: 10, y: 10 },
+  { x: 9, y: 10 },
+  { x: 8, y: 10 }
+];
+let apple = { x: 15, y: 10 };
+
+function clearField() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+}
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * size, y * size, size - 1, size - 1);
+}
+
+function draw() {
+  clearField();
+  drawCell(apple.x, apple.y, "red");
+  for (let i = 0; i &lt; snake.length; i++) {
+    drawCell(snake[i].x, snake[i].y, "lime");
+  }
+  drawCell(snake[0].x, snake[0].y, "yellow");
+}
+
+clearField();
+drawCell(10, 10, "lime");
+drawCell(9, 10, "lime");
+drawCell(8, 10, "lime");
+drawCell(15, 10, "red");
+draw();</pre>
+  <div class="box tip">
+    <span class="title">💡 Порядок в программе</span>
+    Сверху — переменные (что мы помним), посередине — функции (что мы умеем), внизу — вызовы (что делаем прямо сейчас). Такой порядок помогает не запутаться, когда программа станет длинной.
+  </div>
+
+  <h2>Фокус с консолью</h2>
+  <p>Переменные программы можно менять прямо из консоли! Открой её (<kbd>F12</kbd>) и введи по очереди, нажимая <kbd>Enter</kbd> после каждой строки:</p>
+  <pre class="code nonum">snake.push({ x: 7, y: 10 });
+draw();</pre>
+  <p>Змейка стала длиннее! Команда <code>push</code> добавляет новый элемент <b>в конец</b> списка. Попробуй ещё:</p>
+  <pre class="code nonum">snake.length
+apple.x = 2;
+draw();</pre>
+  <p>Если обновить страницу (<kbd>F5</kbd>), всё вернётся как было: программа запустится заново с начала.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Добавь в массив <code>snake</code> в коде ещё два кусочка, чтобы змейка была из пяти.</li>
+      <li>Сделай змейку, которая поворачивает: пусть хвост загибается вниз (например, <code>{ x: 8, y: 11 }</code>, <code>{ x: 8, y: 12 }</code>).</li>
+      <li>Что будет, если поменять местами первый и последний кусочки в массиве? Куда теперь «смотрит» голова?</li>
+      <li>⭐ Добавь второе яблоко: объект <code>apple2</code> и строчку в <code>draw</code>, которая его рисует.</li>
+    </ol>
+    После заданий верни массив <code>snake</code> к трём кусочкам, как в коде урока.
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    draw();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю, что объект пишут в <code>{ }</code>, а массив — в <code>[ ]</code>.</li>
+    <li>Я помню, что номера в массиве начинаются с нуля, а голова змейки — <code>snake[0]</code>.</li>
+    <li>Я понимаю, как цикл рисует змейку любой длины.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-06.html"><small>← Урок 6</small>Циклы</a>
+    <a class="next" href="lesson-08.html"><small>Урок 8 →</small>Змейка ползёт</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

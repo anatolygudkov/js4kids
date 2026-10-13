@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Управление стрелками</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 10 из 16 <span class="time">⏱ 45 минут</span></p>
+  <h1>Управление стрелками</h1>
+  <p class="lead">Змейка ползёт сама по себе, а пора бы ей слушаться игрока. Научим программу узнавать, какую клавишу нажали, и поворачивать змейку стрелками.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>узнаешь, что такое <b>события</b>;</li>
+      <li>«подпишешься» на нажатия клавиш с помощью <code>addEventListener</code>;</li>
+      <li>узнаешь, как называются клавиши-стрелки;</li>
+      <li>научишь змейку поворачивать, но не разворачиваться назад.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>10 мин</td><td>События: подглядываем за клавиатурой</td></tr>
+      <tr><td>15 мин</td><td>Функция <code>onKey</code>: поворачиваем змейку</td></tr>
+      <tr><td>10 мин</td><td>Запрещаем разворот назад</td></tr>
+      <tr><td>10 мин</td><td>Играем и делаем задания</td></tr>
+    </table>
+  </div>
+
+  <h2>События</h2>
+  <p>Когда ты нажимаешь клавишу, двигаешь мышку или щёлкаешь по кнопке, браузер замечает это. Такие случаи называются <b>событиями</b>. Мы можем попросить браузер: «Когда нажмут клавишу, вызови мою функцию».</p>
+  <p>Добавь в конец скрипта, перед <code>draw();</code>:</p>
+  <pre class="code nonum">function onKey(event) {
+  console.log(event.key);
+}
+
+document.addEventListener("keydown", onKey);</pre>
+  <ul>
+    <li><code>"keydown"</code> — событие «клавишу нажали» (<i>key down</i> — «клавиша вниз»).</li>
+    <li><code>addEventListener</code> — «добавь слушателя»: теперь при каждом нажатии клавиши браузер будет вызывать нашу функцию <code>onKey</code>.</li>
+    <li>Браузер сам передаёт в функцию параметр <code>event</code>, где записано всё о событии. В <code>event.key</code> лежит название клавиши.</li>
+  </ul>
+  <p>Сохрани, обнови страницу, открой консоль и <b>щёлкни мышкой по странице</b> (чтобы она «слушала» клавиатуру). Понажимай разные клавиши и стрелки. В консоли появятся их названия:</p>
+  <pre class="console">ArrowUp
+ArrowDown
+ArrowLeft
+ArrowRight
+a
+Enter</pre>
+  <p><i>Arrow</i> по-английски — «стрелка». Значит, <code>ArrowUp</code> — стрелка вверх.</p>
+  <div class="box tip">
+    <span class="title">💡 Клавиши не работают?</span>
+    Если ты нажимаешь клавиши, а в консоли ничего нет, — щёлкни мышкой по самой странице, например по чёрному полю. Клавиши получает то окно или та часть экрана, где был последний щелчок.
+  </div>
+
+  <h2>Поворачиваем</h2>
+  <p>Теперь вместо <code>console.log</code> будем менять направление <code>dx</code> и <code>dy</code>. Помнишь таблицу направлений из урока 8? Замени функцию <code>onKey</code>:</p>
+  <pre class="code" data-file="snake.html (функция onKey)" data-new="3-18" data-del="2">function onKey(event) {
+  console.log(event.key);
+  if (event.key === "ArrowUp") {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown") {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft") {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight") {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Сохрани, обнови, щёлкни по полю и управляй стрелками! 🎮</p>
+  <p>Название клавиши — это текст, поэтому <code>"ArrowUp"</code> пишется в кавычках. Большие буквы важны: <code>"arrowup"</code> не сработает.</p>
+
+  <h2>Нельзя назад!</h2>
+  <p>Попробуй: змейка ползёт вправо, а ты нажимаешь стрелку влево. Змейка разворачивается и проползает сама сквозь себя. В настоящей Змейке так нельзя: голова врезалась бы в собственное тело.</p>
+  <p>Правило такое: <b>повернуть вверх можно, только если змейка сейчас не ползёт вниз.</b> Ползёт вниз — значит, <code>dy</code> равно 1. Добавим это в условие через <code>&amp;&amp;</code> («и»):</p>
+  <pre class="code" data-file="snake.html (функция onKey)" data-new="2,6,10,14">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    dx = 0;
+    dy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    dx = 0;
+    dy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    dx = -1;
+    dy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    dx = 1;
+    dy = 0;
+  }
+}</pre>
+  <p>Прочитаем первое условие по-русски: «Если нажата стрелка вверх <b>и</b> змейка не ползёт вниз, то повернуть вверх».</p>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Нарисуй змейкой «квадрат» на поле с помощью стрелок. Получилось?</li>
+      <li>Сделай змейку быстрее (интервал 120) и попробуй ей управлять. А на 60?</li>
+      <li>⭐ Многие игры управляются клавишами <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. Добавь их. Но есть хитрость: в русской раскладке <code>event.key</code> для клавиши W будет <code>"ц"</code>! Поэтому используй <code>event.code</code> — это «место» клавиши на клавиатуре, оно не зависит от раскладки: <code>"KeyW"</code>, <code>"KeyA"</code>, <code>"KeyS"</code>, <code>"KeyD"</code>. Подсказка: условие можно расширить через <code>||</code>:
+<pre class="code nonum">if ((event.key === "ArrowUp" || event.code === "KeyW") &amp;&amp; dy !== 1) {</pre>
+      </li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &gt;= cells) {
+        head.x = 0;
+      }
+      if (head.x &lt; 0) {
+        head.x = cells - 1;
+      }
+      if (head.y &gt;= cells) {
+        head.y = 0;
+      }
+      if (head.y &lt; 0) {
+        head.y = cells - 1;
+      }
+
+      snake.unshift(head);
+      snake.pop();
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю, что такое событие и что делает <code>addEventListener</code>.</li>
+    <li>Я умею узнать название клавиши через консоль.</li>
+    <li>Я могу объяснить условие <code>event.key === "ArrowUp" &amp;&amp; dy !== 1</code>.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-09.html"><small>← Урок 9</small>Условия</a>
+    <a class="next" href="lesson-11.html"><small>Урок 11 →</small>Яблоко и рост</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конец игры</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 12 из 16 <span class="time">⏱ 50 минут</span></p>
+  <h1>Конец игры</h1>
+  <p class="lead">В настоящей игре можно проиграть, иначе неинтересно. Наша змейка будет погибать, если врежется в стену или укусит себя за хвост. А на поле появится надпись «Игра окончена».</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>заменишь порталы на настоящие стены;</li>
+      <li>напишешь функцию <code>isOnSnake</code>, которая проверяет, занята ли клеточка змейкой;</li>
+      <li>узнаешь, как остановить таймер (<code>clearInterval</code>) и функцию (<code>return</code>);</li>
+      <li>напишешь на холсте текст.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Правила проигрыша</td></tr>
+      <tr><td>15 мин</td><td>Останавливаем игру: <code>endGame</code>, <code>clearInterval</code>, текст на холсте</td></tr>
+      <tr><td>10 мин</td><td>Стены вместо порталов</td></tr>
+      <tr><td>15 мин</td><td>Укус хвоста: <code>isOnSnake</code></td></tr>
+      <tr><td>5 мин</td><td>Играем!</td></tr>
+    </table>
+  </div>
+
+  <h2>Остановить таймер</h2>
+  <p>Змейку двигает таймер <code>setInterval</code>. Чтобы игра остановилась, таймер надо выключить. Для этого его нужно запомнить в переменной. Измени последнюю строчку программы:</p>
+  <pre class="code nonum" data-new="2" data-del="1">setInterval(step, 200);
+let timer = setInterval(step, 200);</pre>
+  <p><code>setInterval</code> возвращает номер таймера, и мы кладём его в <code>timer</code>. Выключить таймер можно командой <code>clearInterval(timer)</code>.</p>
+
+  <h2>Функция «Игра окончена»</h2>
+  <p>Добавь новую функцию после <code>draw</code>:</p>
+  <pre class="code" data-file="snake.html (новая функция)" data-new="1-7">function endGame() {
+  clearInterval(timer);
+  ctx.fillStyle = "white";
+  ctx.font = "32px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Игра окончена", 200, 200);
+}</pre>
+  <ul>
+    <li><code>clearInterval(timer)</code> — выключить таймер: <code>step</code> больше не вызывается, змейка замирает;</li>
+    <li><code>ctx.font</code> — размер и вид шрифта: 32 пикселя, шрифт без засечек (<i>sans-serif</i>);</li>
+    <li><code>ctx.textAlign = "center"</code> — выравнивать текст по центру;</li>
+    <li><code>ctx.fillText(текст, x, y)</code> — написать текст в точке (x, y). Точка (200, 200) — середина поля.</li>
+  </ul>
+  <div class="box tip">
+    <span class="title">💡 Проверь в консоли</span>
+    Набери в консоли <code>endGame()</code> и нажми <kbd>Enter</kbd>: змейка остановится и появится надпись. Так можно проверять функции по одной, ещё до того, как они подключены к игре.
+  </div>
+
+  <h2>Стены</h2>
+  <p>Порталы были весёлыми, но в классической Змейке стены опасны. Убери из <code>step</code> четыре проверки-портала и вставь одну проверку стен:</p>
+  <pre class="code" data-file="snake.html (начало функции step)" data-new="16-19" data-del="4-15">function step() {
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  if (head.x &gt;= cells) {
+    head.x = 0;
+  }
+  if (head.x &lt; 0) {
+    head.x = cells - 1;
+  }
+  if (head.y &gt;= cells) {
+    head.y = 0;
+  }
+  if (head.y &lt; 0) {
+    head.y = cells - 1;
+  }
+  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+
+  snake.unshift(head);
+  ...</pre>
+  <p>Через <code>||</code> («или») мы собрали четыре вопроса в один: «голова левее поля, <b>или</b> правее, <b>или</b> выше, <b>или</b> ниже?» Если хоть что-то из этого правда, игра окончена.</p>
+  <h3>Зачем return?</h3>
+  <p><code>return</code> немедленно <b>завершает</b> функцию: строчки ниже уже не выполнятся. Без него змейка, уже «врезавшись», всё равно добавила бы голову за пределами поля и перерисовала бы картинку поверх надписи «Игра окончена».</p>
+
+  <h2>Укусить себя за хвост</h2>
+  <p>Нужно проверить, не попала ли новая голова на клеточку, где уже есть кусочек змейки. Для этого надо пройти по всем кусочкам циклом и сравнить координаты. Напишем функцию-вопрос, которая отвечает <code>true</code> или <code>false</code>:</p>
+  <pre class="code" data-file="snake.html (новая функция, после randomCell)" data-new="1-8">function isOnSnake(x, y) {
+  for (let i = 0; i &lt; snake.length; i++) {
+    if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+      return true;
+    }
+  }
+  return false;
+}</pre>
+  <p>Как это работает:</p>
+  <ul>
+    <li>цикл по очереди смотрит на каждый кусочек змейки;</li>
+    <li>если нашёлся кусочек на клеточке (x, y), функция сразу отвечает <code>true</code> («да, тут змейка») и заканчивается;</li>
+    <li>если цикл проверил всех и никого не нашёл, программа доходит до последней строчки и отвечает <code>false</code>.</li>
+  </ul>
+  <p>Имя функции похоже на вопрос: <i>is on snake?</i> — «на змейке?». Так принято называть функции, которые отвечают «да» или «нет».</p>
+  <p>Теперь используем её в <code>step</code>, сразу после проверки стен:</p>
+  <pre class="code" data-file="snake.html (функция step)" data-new="5-8">  if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+    endGame();
+    return;
+  }
+  if (isOnSnake(head.x, head.y)) {
+    endGame();
+    return;
+  }</pre>
+  <p>Сохрани, обнови и проверь оба способа проиграть: врежься в стену, а потом отрасти змейку подлиннее и укуси себя. Чтобы сыграть снова, пока что нажимай <kbd>F5</kbd>. В следующем уроке сделаем перезапуск по пробелу.</p>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Добавь под надписью «Игра окончена» вторую строчку поменьше: «Счёт: …». Подсказка: поменяй <code>ctx.font</code> на <code>"20px sans-serif"</code> и напиши текст на 40 пикселей ниже. Счёт можно приклеить к тексту через <code>+</code>.</li>
+      <li>Сделай надпись красной или жёлтой.</li>
+      <li>⭐ Перед надписью нарисуй полупрозрачный прямоугольник, чтобы текст лучше читался. Цвет с прозрачностью пишется так: <code>"rgba(0, 0, 0, 0.6)"</code> — чёрный, прозрачный на 40%.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let apple = { x: 15, y: 10 };
+    let dx = 1;
+    let dy = 0;
+    let score = 0;
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Игра окончена", 200, 200);
+    }
+
+    function step() {
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        document.getElementById("score").textContent = score;
+        apple.x = randomCell();
+        apple.y = randomCell();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        dx = 0;
+        dy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        dx = 0;
+        dy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        dx = -1;
+        dy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        dx = 1;
+        dy = 0;
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    draw();
+    let timer = setInterval(step, 200);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я знаю, как запомнить таймер в переменной и выключить его.</li>
+    <li>Я понимаю, что <code>return</code> сразу завершает функцию.</li>
+    <li>Я могу объяснить, как <code>isOnSnake</code> ищет кусочек змейки.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-11.html"><small>← Урок 11</small>Яблоко и рост</a>
+    <a class="next" href="lesson-13.html"><small>Урок 13 →</small>Новая игра</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

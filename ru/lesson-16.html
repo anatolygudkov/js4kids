@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Игра в интернете</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 16 из 16 <span class="time">⏱ 45–60 минут</span></p>
+  <h1>Игра в интернете</h1>
+  <p class="lead">До сих пор игра жила только в папке <code>kod</code> на твоём Raspberry Pi. Сегодня мы выложим её в интернет, и в неё сможет сыграть кто угодно по ссылке: друзья, бабушка, одноклассники. Поможет нам бесплатный сервис <b>GitHub Pages</b>.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>подготовишь файл <code>index.html</code> для публикации;</li>
+      <li>вместе со взрослым создашь хранилище на сайте GitHub;</li>
+      <li>загрузишь туда игру и включишь GitHub Pages;</li>
+      <li>получишь ссылку на свою игру;</li>
+      <li>придумаешь, как улучшить игру дальше.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>5 мин</td><td>Что такое GitHub и GitHub Pages</td></tr>
+      <tr><td>5 мин</td><td>Готовим файл <code>index.html</code></td></tr>
+      <tr><td>20 мин</td><td>Хранилище, загрузка файла, включаем Pages</td></tr>
+      <tr><td>5 мин</td><td>Играем по ссылке, делимся</td></tr>
+      <tr><td>10–25 мин</td><td>Что дальше: идеи и бонус для телефона</td></tr>
+    </table>
+  </div>
+
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Для взрослых</span>
+    <p>По правилам GitHub завести свой аккаунт можно только с 13 лет. Поэтому используйте <b>аккаунт взрослого</b> (свой или созданный для этого на ваш email) и проходите урок вместе с ребёнком. Нужен интернет.</p>
+    <p>Git и терминал не понадобятся: файл загружается через сайт, кнопкой. Сайт GitHub на английском, поэтому ниже рядом с каждой кнопкой дан перевод. Если интерфейс GitHub к этому времени немного изменится, ищите кнопки с теми же названиями.</p>
+    <p>Опубликованная игра будет видна всем. Проверьте, что в ней нет личных данных: фамилии, адреса, школы.</p>
+  </div>
+
+  <h2>Что такое GitHub</h2>
+  <p><b>GitHub</b> — это сайт, где программисты со всего мира хранят свои программы. Каждая программа лежит в своём <b>хранилище</b> (по-английски <i>repository</i>, или коротко «репозиторий»). Это как папка в интернете.</p>
+  <p><b>GitHub Pages</b> — услуга GitHub, которая превращает такое хранилище в настоящий сайт со своей ссылкой. Наша игра — это HTML-страница, так что она отлично подходит!</p>
+
+  <h2>Шаг 1. Готовим файл</h2>
+  <p>Сайт, открытый по ссылке, первым делом ищет страницу с именем <code>index.html</code> («главная страница»). Сделаем копию игры с таким именем:</p>
+  <ol class="steps">
+    <li>Открой в Geany <code>snake.html</code>.</li>
+    <li><b>Файл → Сохранить как</b> (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>), папка <b>kod</b>, имя <code>index.html</code>. Нажми <b>Сохранить</b>.</li>
+    <li>Теперь в Geany открыт <code>index.html</code>. Закрой эту вкладку: свою игру ты и дальше будешь менять в <code>snake.html</code>, а <code>index.html</code> — только копия для интернета.</li>
+  </ol>
+  <p>Загляни в файловый менеджер: в папке <b>kod</b> теперь три файла — <code>proba.html</code>, <code>snake.html</code> и <code>index.html</code>.</p>
+
+  <h2>Шаг 2. Создаём хранилище</h2>
+  <ol class="steps">
+    <li>Открой в браузере сайт <b>github.com</b> и войди в аккаунт (<i>Sign in</i> — «войти»). Это делает взрослый.</li>
+    <li>В правом верхнем углу нажми <b>+</b> и выбери <b>New repository</b> («новое хранилище»).</li>
+    <li>В поле <b>Repository name</b> («имя хранилища») напиши <code>snake</code>.</li>
+    <li>Проверь, что выбрано <b>Public</b> («открытое для всех»): GitHub Pages бесплатно работает с открытыми хранилищами.</li>
+    <li>Нажми зелёную кнопку <b>Create repository</b> («создать хранилище»).</li>
+  </ol>
+
+  <h2>Шаг 3. Загружаем игру</h2>
+  <ol class="steps">
+    <li>На странице нового пустого хранилища найди ссылку <b>uploading an existing file</b> («загрузить существующий файл») и нажми на неё. (Если хранилище не пустое: кнопка <b>Add file → Upload files</b>.)</li>
+    <li>Нажми <b>choose your files</b> («выбрать файлы»), открой домашнюю папку → <b>kod</b> и выбери <code>index.html</code>. Можно и просто перетащить файл мышкой из файлового менеджера в окно браузера.</li>
+    <li>Внизу страницы нажми зелёную кнопку <b>Commit changes</b> («сохранить изменения»).</li>
+  </ol>
+  <p>Теперь в списке файлов хранилища виден <code>index.html</code>. Твой код лежит в интернете!</p>
+
+  <h2>Шаг 4. Включаем GitHub Pages</h2>
+  <ol class="steps">
+    <li>Вверху страницы хранилища нажми вкладку <b>Settings</b> («настройки», значок шестерёнки).</li>
+    <li>В меню слева найди и нажми <b>Pages</b>.</li>
+    <li>В разделе <b>Build and deployment</b> («сборка и публикация»), в поле <b>Source</b> («источник»), выбери <b>Deploy from a branch</b> («публиковать из ветки»).</li>
+    <li>В поле <b>Branch</b> («ветка») выбери <b>main</b>, рядом оставь папку <b>/ (root)</b>. Нажми <b>Save</b> («сохранить»).</li>
+    <li>Подожди одну-две минуты и обнови страницу (<kbd>F5</kbd>). Вверху появится надпись <b>Your site is live at…</b> («Твой сайт работает по адресу…») и кнопка <b>Visit site</b> («открыть сайт»).</li>
+  </ol>
+  <p>Адрес будет таким:</p>
+  <pre class="console">https://ИМЯ-АККАУНТА.github.io/snake/</pre>
+  <p>Нажми <b>Visit site</b>, и вот она, твоя Змейка в интернете! 🎉🐍 Скопируй ссылку из адресной строки и отправь друзьям.</p>
+  <div class="box tip">
+    <span class="title">💡 Рекорд в интернете</span>
+    У игры в интернете свой рекорд, отдельный от рекорда в папке <code>kod</code>. И у каждого игрока на его компьютере тоже свой: <code>localStorage</code> живёт в том браузере, где играют.
+  </div>
+
+  <h2>Как обновить игру</h2>
+  <p>Если ты что-то улучшишь в игре:</p>
+  <ol class="steps">
+    <li>Поменяй и проверь <code>snake.html</code> как обычно.</li>
+    <li>Снова сохрани его как <code>index.html</code> через «Сохранить как». Geany спросит, заменить ли файл, — соглашайся. Закрой вкладку <code>index.html</code>.</li>
+    <li>На GitHub, в хранилище <code>snake</code>: <b>Add file → Upload files</b>, выбери новый <code>index.html</code> и нажми <b>Commit changes</b>. Старый файл заменится новым.</li>
+    <li>Подожди минуту-две и обнови страницу игры.</li>
+  </ol>
+
+  <div class="box warn">
+    <span class="title">⚠️ Если не работает</span>
+    <ul>
+      <li><b>Страница 404 (не найдено)?</b> Подожди ещё пару минут, GitHub Pages включается не мгновенно. Проверь, что файл называется именно <code>index.html</code>, маленькими буквами.</li>
+      <li><b>Вместо игры — список файлов или текст кода?</b> Проверь, что в настройках Pages выбрана ветка <b>main</b> и папка <b>/ (root)</b>.</li>
+      <li><b>Игра открылась, но не работает?</b> Открой консоль (<kbd>F12</kbd>) — ты уже умеешь читать ошибки!</li>
+    </ul>
+  </div>
+
+  <h2>Бонус: играем на телефоне</h2>
+  <p>Ссылку можно открыть и на телефоне, но там нет клавиатуры со стрелками. Добавим кнопки на экран! Здесь есть хитрость: функции <code>onKey</code> нужно только <code>event.key</code>, поэтому кнопка может вызвать её сама и «притвориться» клавишей.</p>
+  <p>Добавь в <code>snake.html</code> под подсказкой <code>&lt;p class="help"&gt;</code>:</p>
+  <pre class="code" data-file="snake.html (часть внутри body)" data-new="1-11">&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowUp' })"&gt;Вверх&lt;/button&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowLeft' })"&gt;Влево&lt;/button&gt;
+  &lt;button onclick="onKey({ key: ' ' })"&gt;Старт&lt;/button&gt;
+  &lt;button onclick="onKey({ key: 'ArrowRight' })"&gt;Вправо&lt;/button&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;button onclick="onKey({ key: 'ArrowDown' })"&gt;Вниз&lt;/button&gt;
+&lt;/p&gt;</pre>
+  <ul>
+    <li><code>&lt;button&gt;</code> — кнопка;</li>
+    <li><code>onclick</code> — что делать при нажатии на кнопку (это тоже событие, как <code>keydown</code>);</li>
+    <li><code>{ key: 'ArrowUp' }</code> — мы сами сделали объект, похожий на настоящее событие. Внутри двойных кавычек текст пишем в <b>одинарных</b> кавычках <code>'…'</code>, чтобы кавычки не перепутались.</li>
+  </ul>
+  <p>И немного CSS в <code>&lt;style&gt;</code>, чтобы кнопки было удобно нажимать пальцем, а поле помещалось на узком экране:</p>
+  <pre class="code nonum" data-new="1-9">    button {
+      font-size: 20px;
+      width: 110px;
+      height: 56px;
+      margin: 4px;
+    }
+    canvas {
+      max-width: 90%;
+    }</pre>
+  <p>Проверь на компьютере, что кнопки работают, потом обнови <code>index.html</code> на GitHub и открой ссылку на телефоне.</p>
+
+  <h2>Что ты теперь умеешь</h2>
+  <p>Оглянись назад: с нуля ты научился(-ась) создавать файлы, писать код, искать ошибки и выложил(а) свою игру в интернет. А по пути узнал(а) главные понятия программирования, которые есть во всех языках:</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Понятие</th><th>Где было в Змейке</th></tr>
+      <tr><td>Переменные</td><td><code>score</code>, <code>speed</code>, <code>dx</code>, <code>dy</code></td></tr>
+      <tr><td>Функции</td><td><code>drawCell</code>, <code>step</code>, <code>startGame</code></td></tr>
+      <tr><td>Функции, которые отвечают (<code>return</code>)</td><td><code>randomCell</code>, <code>isOnSnake</code></td></tr>
+      <tr><td>Условия</td><td>съела ли яблоко, врезалась ли в стену</td></tr>
+      <tr><td>Циклы <code>for</code> и <code>while</code></td><td>рисуем змейку, ищем свободное место для яблока</td></tr>
+      <tr><td>Массивы и объекты</td><td>змейка — список клеточек <code>{ x, y }</code></td></tr>
+      <tr><td>События</td><td>нажатия клавиш и кнопок</td></tr>
+      <tr><td>Таймер</td><td>змейка ползёт сама</td></tr>
+      <tr><td>Хранение данных</td><td>рекорд в <code>localStorage</code></td></tr>
+      <tr><td>Отладка</td><td>консоль, чтение ошибок, охота на баг</td></tr>
+    </table>
+  </div>
+
+  <h2>Что дальше? Идеи для улучшений</h2>
+  <p>Настоящие программисты никогда не заканчивают игру: всегда хочется добавить что-то ещё. Выбирай, что нравится. Звёздочки показывают сложность.</p>
+  <div class="tbl-wrap">
+    <table class="t">
+      <tr><th>Идея</th><th>Сложность</th><th>Подсказка</th></tr>
+      <tr><td>Пауза на клавишу <kbd>P</kbd></td><td>⭐</td><td>переменная <code>paused</code> и <code>return</code> в начале <code>step</code> (урок 13)</td></tr>
+      <tr><td>Глаза у змейки</td><td>⭐</td><td>два маленьких <code>fillRect</code> поверх головы</td></tr>
+      <tr><td>Змейка-радуга</td><td>⭐</td><td>массив цветов и <code>colors[i % colors.length]</code> в цикле рисования</td></tr>
+      <tr><td>Режим «порталы» на клавишу <kbd>M</kbd></td><td>⭐⭐</td><td>переменная-флажок и код порталов из урока 9</td></tr>
+      <tr><td>Золотое яблоко за 5 очков</td><td>⭐⭐</td><td>свойство <code>apple.gold</code> и <code>Math.random() &lt; 0.2</code></td></tr>
+      <tr><td>Камни-препятствия</td><td>⭐⭐</td><td>массив <code>rocks</code>, проверка как в <code>isOnSnake</code></td></tr>
+      <tr><td>Поле в клеточку</td><td>⭐⭐</td><td>два вложенных цикла и <code>(x + y) % 2</code> для чередования цвета</td></tr>
+      <tr><td>Уровни: каждые 5 яблок — новый уровень с камнями</td><td>⭐⭐⭐</td><td>переменная <code>level</code></td></tr>
+      <tr><td>Две змейки для двух игроков (стрелки и WASD)</td><td>⭐⭐⭐</td><td>второй массив, свои <code>dx</code>/<code>dy</code>, <code>event.code</code></td></tr>
+    </table>
+  </div>
+
+  <div class="box ok">
+    <span class="title">🏆 Поздравляем!</span>
+    Ты прошёл (прошла) весь курс и сделал(а) настоящую игру от первой строчки до публикации в интернете. Теперь ты программист! Придумай свою следующую игру: «Арканоид», «Тетрис», «Морской бой»… Все нужные инструменты у тебя уже есть.
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-15.html"><small>← Урок 15</small>Красота: оформление</a>
+    <a class="next" href="cheatsheet.html"><small>Всегда под рукой →</small>Шпаргалка</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>

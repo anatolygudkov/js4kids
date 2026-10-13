@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Скорость и рекорд</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main>
+  <p class="kicker">Урок 14 из 16 <span class="time">⏱ 55 минут</span></p>
+  <h1>Скорость и рекорд</h1>
+  <p class="lead">Игра работает, но пока слишком спокойная. Сегодня змейка будет ускоряться после каждого яблока, игра научится помнить твой рекорд даже после выключения компьютера, а ещё мы поймаем один хитрый баг.</p>
+
+  <div class="goals">
+    <b>В этом уроке ты:</b>
+    <ul>
+      <li>сделаешь, чтобы змейка ускорялась;</li>
+      <li>сохранишь рекорд в памяти браузера с помощью <code>localStorage</code>;</li>
+      <li>найдёшь и исправишь баг с быстрым разворотом.</li>
+    </ul>
+  </div>
+
+  <div class="goals">
+    <b>План урока</b>
+    <table class="plan">
+      <tr><td>15 мин</td><td>Скорость растёт</td></tr>
+      <tr><td>20 мин</td><td>Рекорд и <code>localStorage</code></td></tr>
+      <tr><td>15 мин</td><td>Охота на баг</td></tr>
+      <tr><td>5 мин</td><td>Играем на рекорд!</td></tr>
+    </table>
+  </div>
+
+  <h2>1. Скорость растёт</h2>
+  <p>Сейчас таймер всегда срабатывает каждые 200 миллисекунд. Положим это число в переменную <code>speed</code> (по-английски «скорость»). На самом деле это <b>пауза между шагами</b>: чем число меньше, тем быстрее змейка.</p>
+  <p>Добавь переменную наверху, к остальным:</p>
+  <pre class="code nonum" data-new="3">let gameOver;
+let timer;
+let speed;</pre>
+  <p>В <code>startGame</code> задай начальную скорость и используй её в таймере:</p>
+  <pre class="code" data-file="snake.html (функция startGame)" data-new="2,7" data-del="6">  gameOver = false;
+  speed = 200;
+  showScore();
+  placeApple();
+  draw();
+  timer = setInterval(step, 200);
+  timer = setInterval(step, speed);
+}</pre>
+  <p>А когда змейка съедает яблоко, уменьшим паузу на 10 миллисекунд. Только у таймера нельзя поменять скорость на ходу, поэтому выключаем старый таймер и запускаем новый, побыстрее:</p>
+  <pre class="code" data-file="snake.html (функция step)" data-new="5-9">  if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+    score = score + 1;
+    showScore();
+    placeApple();
+    if (speed &gt; 60) {
+      speed = speed - 10;
+      clearInterval(timer);
+      timer = setInterval(step, speed);
+    }
+  } else {
+    snake.pop();
+  }</pre>
+  <p>Проверка <code>speed &gt; 60</code> нужна, чтобы игра не разогналась до невозможной скорости: быстрее, чем 60 миллисекунд на шаг, змейка не станет.</p>
+
+  <h2>2. Рекорд</h2>
+  <p>Когда страницу обновляют или закрывают, все переменные исчезают: программа начинается заново. А рекорд хочется помнить всегда! Для этого у браузера есть своя маленькая память — <b>localStorage</b> («местное хранилище»). Это как блокнот, в который можно записать значение под каким-нибудь именем:</p>
+  <pre class="code nonum">localStorage.setItem("snakeBest", 25);         // записать
+localStorage.getItem("snakeBest");             // прочитать</pre>
+  <p>Записи в этом блокноте остаются, даже если закрыть браузер и выключить компьютер.</p>
+
+  <h3>Место для рекорда на странице</h3>
+  <pre class="code" data-file="snake.html (часть внутри body)" data-new="2" data-del="1">&lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt; | Рекорд: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;</pre>
+
+  <h3>Читаем рекорд при запуске</h3>
+  <p>Добавь переменную наверху:</p>
+  <pre class="code nonum" data-new="1">let best = Number(localStorage.getItem("snakeBest"));</pre>
+  <p>Блокнот <code>localStorage</code> хранит всё как <b>текст</b>, а нам нужно число, чтобы сравнивать. <code>Number(...)</code> превращает текст в число. Если рекорда ещё нет, <code>getItem</code> вернёт <code>null</code> («ничего»), а <code>Number(null)</code> — это 0. То, что надо!</p>
+
+  <h3>Показываем и сохраняем</h3>
+  <p>Пусть <code>showScore</code> показывает оба числа:</p>
+  <pre class="code" data-file="snake.html (функция showScore)" data-new="3">function showScore() {
+  document.getElementById("score").textContent = score;
+  document.getElementById("best").textContent = best;
+}</pre>
+  <p>А в <code>endGame</code>, сразу после <code>clearInterval(timer);</code>, проверим, побит ли рекорд:</p>
+  <pre class="code" data-file="snake.html (функция endGame)" data-new="4-8">function endGame() {
+  gameOver = true;
+  clearInterval(timer);
+  if (score &gt; best) {
+    best = score;
+    localStorage.setItem("snakeBest", best);
+    showScore();
+  }
+  ...</pre>
+  <p>Сыграй, набери несколько очков и проиграй. Потом закрой вкладку и открой игру снова: рекорд на месте! 🏆</p>
+  <div class="box tip">
+    <span class="title">💡 Как сбросить рекорд</span>
+    В консоли введи <code>localStorage.removeItem("snakeBest")</code> и обнови страницу.
+  </div>
+
+  <h2>3. Охота на баг</h2>
+  <p><b>Баг</b> (по-английски «жучок») — так программисты называют ошибку в программе. Проведи опыт: пусть змейка ползёт вправо. Теперь <b>очень быстро</b>, почти одновременно, нажми <kbd>↑</kbd> и сразу <kbd>←</kbd>. Иногда змейка погибает на ровном месте! Почему?</p>
+  <p>Давай разберёмся по шагам. Между двумя шагами змейки нажаты две клавиши:</p>
+  <ol>
+    <li><kbd>↑</kbd>: змейка ползёт вправо, <code>dy</code> не равно 1, значит, можно поворачивать. Теперь <code>dx = 0, dy = -1</code>. Но змейка <b>ещё не сдвинулась</b>!</li>
+    <li><kbd>←</kbd>: проверяем <code>dx !== 1</code>. Сейчас <code>dx</code> уже 0, значит, можно. Теперь <code>dx = -1</code>.</li>
+    <li>Наступает шаг: змейка, которая на самом деле ползла <b>вправо</b>, делает шаг <b>влево</b>, прямо в свою шею.</li>
+  </ol>
+  <p><b>Исправление:</b> будем запоминать нажатую клавишу как <b>следующее</b> направление, а настоящее направление менять только в начале шага. Проверять же будем по настоящему направлению.</p>
+  <p>Добавь наверху ещё две переменные:</p>
+  <pre class="code nonum" data-new="3-4">let dx;
+let dy;
+let nextDx;
+let nextDy;</pre>
+  <p>В <code>startGame</code> задай им начальные значения рядом с <code>dx</code> и <code>dy</code>:</p>
+  <pre class="code nonum" data-new="3-4">  dx = 1;
+  dy = 0;
+  nextDx = 1;
+  nextDy = 0;</pre>
+  <p>В самом начале <code>step</code> применяем следующее направление:</p>
+  <pre class="code" data-file="snake.html (функция step)" data-new="2-3">function step() {
+  dx = nextDx;
+  dy = nextDy;
+  let head = { x: snake[0].x + dx, y: snake[0].y + dy };</pre>
+  <p>А в <code>onKey</code> меняем только <code>nextDx</code> и <code>nextDy</code> (проверки остаются как были):</p>
+  <pre class="code" data-file="snake.html (функция onKey)" data-new="3-4,7-8,11-12,15-16">function onKey(event) {
+  if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+    nextDx = 0;
+    nextDy = -1;
+  }
+  if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+    nextDx = 0;
+    nextDy = 1;
+  }
+  if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+    nextDx = -1;
+    nextDy = 0;
+  }
+  if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+    nextDx = 1;
+    nextDy = 0;
+  }
+  if (event.key === " " &amp;&amp; gameOver) {
+    startGame();
+  }
+}</pre>
+  <p>Теперь в нашем примере вторая клавиша <kbd>←</kbd> проверяется по настоящему направлению: <code>dx</code> всё ещё 1 (змейка ползёт вправо), значит, поворот налево запрещён. Баг пойман! 🐞</p>
+
+  <div class="box task">
+    <span class="title">🎯 Задания</span>
+    <ol>
+      <li>Подбери ускорение по вкусу: может быть, уменьшать паузу на 5, а не на 10? Или самая большая скорость — 80?</li>
+      <li>Когда рекорд побит, пусть в <code>endGame</code> под надписями появляется ещё одна: «Новый рекорд!».</li>
+      <li>⭐ Добавь «золотое» яблоко: с небольшим шансом (<code>Math.random() &lt; 0.2</code>) яблоко становится золотым и даёт 5 очков. Подсказка: добавь в объект <code>apple</code> свойство <code>gold</code> со значением <code>true</code> или <code>false</code>.</li>
+    </ol>
+  </div>
+
+  <details class="full">
+    <summary>📄 Весь файл snake.html после этого урока</summary>
+    <pre class="code" data-file="snake.html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Змейка&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Змейка&lt;/h1&gt;
+  &lt;p&gt;Счёт: &lt;span id="score"&gt;0&lt;/span&gt; | Рекорд: &lt;span id="best"&gt;0&lt;/span&gt;&lt;/p&gt;
+  &lt;canvas id="game" width="400" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    let canvas = document.getElementById("game");
+    let ctx = canvas.getContext("2d");
+    let size = 20;
+    let cells = 20;
+
+    let snake;
+    let apple = { x: 0, y: 0 };
+    let dx;
+    let dy;
+    let nextDx;
+    let nextDy;
+    let score;
+    let gameOver;
+    let timer;
+    let speed;
+    let best = Number(localStorage.getItem("snakeBest"));
+
+    function clearField() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 400, 400);
+    }
+
+    function drawCell(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size, y * size, size - 1, size - 1);
+    }
+
+    function randomCell() {
+      return Math.floor(Math.random() * cells);
+    }
+
+    function isOnSnake(x, y) {
+      for (let i = 0; i &lt; snake.length; i++) {
+        if (snake[i].x === x &amp;&amp; snake[i].y === y) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function showScore() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("best").textContent = best;
+    }
+
+    function placeApple() {
+      apple.x = randomCell();
+      apple.y = randomCell();
+      while (isOnSnake(apple.x, apple.y)) {
+        apple.x = randomCell();
+        apple.y = randomCell();
+      }
+    }
+
+    function draw() {
+      clearField();
+      drawCell(apple.x, apple.y, "red");
+      for (let i = 0; i &lt; snake.length; i++) {
+        drawCell(snake[i].x, snake[i].y, "lime");
+      }
+      drawCell(snake[0].x, snake[0].y, "yellow");
+    }
+
+    function endGame() {
+      gameOver = true;
+      clearInterval(timer);
+      if (score &gt; best) {
+        best = score;
+        localStorage.setItem("snakeBest", best);
+        showScore();
+      }
+      ctx.fillStyle = "white";
+      ctx.font = "32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Игра окончена", 200, 200);
+      ctx.font = "18px sans-serif";
+      ctx.fillText("Нажми пробел, чтобы сыграть ещё", 200, 240);
+    }
+
+    function step() {
+      dx = nextDx;
+      dy = nextDy;
+      let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+      if (head.x &lt; 0 || head.x &gt;= cells || head.y &lt; 0 || head.y &gt;= cells) {
+        endGame();
+        return;
+      }
+      if (isOnSnake(head.x, head.y)) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === apple.x &amp;&amp; head.y === apple.y) {
+        score = score + 1;
+        showScore();
+        placeApple();
+        if (speed &gt; 60) {
+          speed = speed - 10;
+          clearInterval(timer);
+          timer = setInterval(step, speed);
+        }
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function onKey(event) {
+      if (event.key === "ArrowUp" &amp;&amp; dy !== 1) {
+        nextDx = 0;
+        nextDy = -1;
+      }
+      if (event.key === "ArrowDown" &amp;&amp; dy !== -1) {
+        nextDx = 0;
+        nextDy = 1;
+      }
+      if (event.key === "ArrowLeft" &amp;&amp; dx !== 1) {
+        nextDx = -1;
+        nextDy = 0;
+      }
+      if (event.key === "ArrowRight" &amp;&amp; dx !== -1) {
+        nextDx = 1;
+        nextDy = 0;
+      }
+      if (event.key === " " &amp;&amp; gameOver) {
+        startGame();
+      }
+    }
+
+    function startGame() {
+      snake = [
+        { x: 10, y: 10 },
+        { x: 9, y: 10 },
+        { x: 8, y: 10 }
+      ];
+      dx = 1;
+      dy = 0;
+      nextDx = 1;
+      nextDy = 0;
+      score = 0;
+      gameOver = false;
+      speed = 200;
+      showScore();
+      placeApple();
+      draw();
+      timer = setInterval(step, speed);
+    }
+
+    document.addEventListener("keydown", onKey);
+    startGame();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </details>
+
+  <h2>Проверь себя</h2>
+  <ul class="check">
+    <li>Я понимаю, почему для смены скорости нужно перезапустить таймер.</li>
+    <li>Я знаю, что <code>localStorage</code> помнит значения после закрытия браузера.</li>
+    <li>Я могу рассказать, как появлялся баг с разворотом и как мы его исправили.</li>
+  </ul>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-13.html"><small>← Урок 13</small>Новая игра</a>
+    <a class="next" href="lesson-15.html"><small>Урок 15 →</small>Красота: оформление</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+</body>
+</html>
