@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Preparamos el ordenador</title>
-<link rel="stylesheet" href="../assets/style.css?v=e9ae573a">
+<link rel="stylesheet" href="../assets/style.css?v=ea498be7">
 </head>
 <body>
 <header class="top">
@@ -14,59 +14,140 @@
 <main>
   <p class="kicker">Lección 0 de 16 <span class="time">⏱ 45–60 minutos</span></p>
   <h1>Preparamos el ordenador</h1>
-  <p class="lead">Antes de escribir un juego, vamos a preparar el sitio de trabajo: veremos cómo funciona el escritorio, buscaremos dónde se esconden las llaves y los corchetes en el teclado, crearemos una carpeta para nuestros programas y configuraremos un editor de código.</p>
+  <p class="lead">Antes de escribir un juego, vamos a preparar el sitio de trabajo: instalaremos un editor de código y un navegador, crearemos una carpeta para nuestros programas y buscaremos dónde se esconden las llaves y los corchetes en el teclado. El curso sirve para cualquier ordenador: Windows, macOS o Linux.</p>
 
   <div class="goals">
     <b>En esta lección vas a:</b>
     <ul>
-      <li>conocer el escritorio de Raspberry Pi OS;</li>
-      <li>encontrar los símbolos «de programador» en el teclado;</li>
+      <li>descubrir qué sistema tiene tu ordenador y dónde están sus programas;</li>
       <li>crear una carpeta llamada <code>codigo</code> para tus programas;</li>
-      <li>abrir y configurar el editor Geany;</li>
-      <li>colocar las ventanas del editor y del navegador para trabajar con comodidad.</li>
+      <li>instalar y configurar el editor Geany y el navegador Firefox;</li>
+      <li>encontrar los símbolos «de programador» en el teclado;</li>
+      <li>colocar las ventanas para trabajar con comodidad.</li>
     </ul>
   </div>
 
   <div class="goals">
     <b>Plan de la lección</b>
     <table class="plan">
-      <tr><td>5 min</td><td>El escritorio y el menú</td></tr>
-      <tr><td>15 min</td><td>El teclado: símbolos y un poco de práctica</td></tr>
-      <tr><td>10 min</td><td>El gestor de archivos y la carpeta <code>codigo</code></td></tr>
-      <tr><td>15 min</td><td>El editor Geany: encontrarlo, abrirlo, configurarlo</td></tr>
-      <tr><td>5–10 min</td><td>El navegador, colocar las ventanas, la lista de comprobación</td></tr>
+      <tr><td>5 min</td><td>¿Qué ordenador tienes?</td></tr>
+      <tr><td>20 min</td><td>Tu sistema: la carpeta <code>codigo</code>, instalar Geany y Firefox</td></tr>
+      <tr><td>10 min</td><td>Un teclado de programador</td></tr>
+      <tr><td>10 min</td><td>Configuramos Geany y practicamos</td></tr>
+      <tr><td>5–10 min</td><td>Colocar las ventanas, la lista de comprobación</td></tr>
     </table>
   </div>
 
-  <div class="box adult">
-    <span class="title">👨‍👩‍👧 Para personas adultas: antes de la primera lección</span>
-    <p>Hace falta Raspberry Pi OS <b>con escritorio</b> (<i>with desktop</i>). Si todavía no está instalado, grabadlo en una tarjeta de memoria con <b>Raspberry Pi Imager</b>, que se descarga de raspberrypi.com. Es cómodo crear desde el principio un usuario propio para la niña o el niño.</p>
-    <p>Comprobad que la distribución del teclado del sistema coincide con el teclado físico, por ejemplo <b>Español (España)</b> o <b>Español (Latinoamérica)</b>. Se configura en <b>Menú → Preferencias → Control Centre / Configuración de Raspberry Pi</b>, en el apartado de teclado o localización (los nombres cambian un poco según la versión del sistema).</p>
-    <p>Es mejor hacer esta lección juntos.</p>
-  </div>
-
   <figure class="illus">
-    <img src="../assets/illustrations/l00-setup.svg" alt="Un robot junto a una mesa con una Raspberry Pi: en el monitor, Geany a la izquierda y el navegador a la derecha; en el teclado, las teclas { } ; ( )">
+    <img src="../assets/illustrations/l00-setup.svg" alt="Un robot junto a una mesa con un ordenador: en el monitor, Geany a la izquierda y el navegador a la derecha; en el teclado, las teclas { } ; ( )">
     <figcaption>El sitio de trabajo de quien programa: el editor Geany a la izquierda, el navegador a la derecha y, en el teclado, los símbolos principales del código.</figcaption>
   </figure>
 
-  <h2>1. El escritorio</h2>
-  <p>Enciende la Raspberry Pi y espera a que aparezca el <b>escritorio</b>: una pantalla con una imagen y una barra arriba. Esa barra se llama <b>barra de tareas</b>.</p>
-  <ul>
-    <li>En la esquina izquierda de la barra hay un <b>icono de frambuesa</b> 🍓. Es el <b>Menú</b>: ahí están todos los programas, ordenados por apartados.</li>
-    <li>Al lado están los iconos de los programas más útiles: el <b>navegador</b> (para visitar páginas web), el <b>gestor de archivos</b> (un icono de carpeta) y la <b>terminal</b> (una pantallita negra). La terminal no la vamos a necesitar.</li>
-    <li>A la derecha de la barra están el reloj, el volumen y la red.</li>
-  </ul>
-  <div class="box tip">
-    <span class="title">💡 Cómo manejar las ventanas</span>
-    Cada programa abierto tiene una <b>ventana</b>. Arriba de la ventana está la <b>barra de título</b>, con el nombre y tres botones a la derecha: <b>—</b> ocultar, <b>□</b> ocupar toda la pantalla, <b>×</b> cerrar. Para mover una ventana, arrástrala con el ratón por la barra de título. Para cambiar su tamaño, arrastra un borde o una esquina.
+  <div class="box adult">
+    <span class="title">👨‍👩‍👧 Para personas adultas</span>
+    <p>Sirve cualquier ordenador: con <b>Linux</b> (por ejemplo, Raspberry Pi OS o Ubuntu), <b>macOS</b> o <b>Windows</b>. Instalamos dos programas gratuitos que se ven igual en todos los sistemas: el editor <b>Geany</b> y el navegador <b>Firefox</b>. Por eso todas las demás lecciones son iguales para todos; solo cambia esta.</p>
+    <p>Es mejor hacer esta lección juntos: para instalar programas pueden hacer falta una contraseña y permisos de administrador. Es cómodo crear un usuario propio para la niña o el niño.</p>
   </div>
+
+  <h2>1. ¿Qué ordenador tienes?</h2>
+  <p>Cada ordenador funciona con un <b>sistema operativo</b>: el programa principal, que muestra el escritorio, las ventanas y los menús. Los más conocidos son <b>Windows</b>, <b>macOS</b> (en los ordenadores Apple) y <b>Linux</b> (por ejemplo, en los ordenadores pequeñitos Raspberry Pi o con Ubuntu).</p>
+  <p>Abajo hay un apartado para cada sistema. El de tu sistema suele abrirse solo. Si no, ábrelo con un clic. No hace falta leer los demás.</p>
+  <div class="box tip">
+    <span class="title">💡 Cómo manejar las ventanas (en cualquier sistema)</span>
+    Cada programa abierto tiene una <b>ventana</b>. Arriba está la <b>barra de título</b>, con el nombre y unos botones: minimizar, ocupar toda la pantalla y cerrar (<b>×</b>). Para mover una ventana, arrástrala por la barra de título. Para cambiar su tamaño, arrastra un borde o una esquina.
+  </div>
+
+  <details class="os" data-os="rpi">
+    <summary>🍓 Raspberry Pi OS (Linux)</summary>
+    <h3>El escritorio</h3>
+    <p>Arriba de la pantalla está la <b>barra de tareas</b>. En su esquina izquierda hay un <b>icono de frambuesa</b> 🍓: es el <b>Menú</b> con todos los programas. Al lado están los iconos del navegador y del <b>gestor de archivos</b> (una carpeta).</p>
+    <h3>Una carpeta para tus programas</h3>
+    <ol class="steps">
+      <li>Pulsa el icono del <b>gestor de archivos</b> y abre la carpeta <b>Documentos</b> (<i>Documents</i>).</li>
+      <li>Haz clic con el botón <b>derecho</b> en un sitio vacío y elige <b>Crear nuevo… → Carpeta</b> (<i>Create New… → Folder</i>).</li>
+      <li>Llámala <code>codigo</code> (sin tilde) y pulsa <kbd>Intro</kbd>.</li>
+    </ol>
+    <h3>Geany y Firefox</h3>
+    <p>Muchas veces Geany ya está: <b>Menú → Programación → Geany</b>. Firefox está en <b>Menú → Internet</b>. Si falta alguno:</p>
+    <ol class="steps">
+      <li><b>Menú → Preferencias → Software recomendado</b> (<i>Recommended Software</i>).</li>
+      <li>Geany está en el apartado <b>Programación</b> y Firefox en <b>Internet</b>. Márcalo.</li>
+      <li>Pulsa <b>Aplicar</b> (<i>Apply</i>) y espera a que termine la instalación.</li>
+    </ol>
+    <div class="box adult"><span class="title">👨‍👩‍👧 Para personas adultas</span>Desde la terminal: <code>sudo apt install geany firefox</code>. El navegador predeterminado se elige en <b>Control Centre</b>, pestaña <b>System</b>, opción <b>Browser</b>. Comprobad ahí también que la distribución del teclado coincide con el teclado físico (España o Latinoamérica).</div>
+  </details>
+
+  <details class="os" data-os="ubuntu">
+    <summary>🐧 Ubuntu y otros Linux</summary>
+    <h3>El escritorio</h3>
+    <p>A la izquierda o abajo está el <b>dock</b> con los iconos de los programas. El botón <b>Mostrar aplicaciones</b> (un cuadrado de puntos) abre todos los programas, y tiene buscador: empieza a escribir el nombre. Las carpetas se abren con el programa <b>Archivos</b>.</p>
+    <h3>Una carpeta para tus programas</h3>
+    <ol class="steps">
+      <li>Abre <b>Archivos</b> y entra en la carpeta <b>Documentos</b>.</li>
+      <li>Haz clic con el botón <b>derecho</b> en un sitio vacío → <b>Nueva carpeta</b>.</li>
+      <li>Llámala <code>codigo</code> y pulsa <b>Crear</b>.</li>
+    </ol>
+    <h3>Geany y Firefox</h3>
+    <p>Firefox ya viene con Ubuntu. Geany se instala así:</p>
+    <ol class="steps">
+      <li>Abre el <b>Centro de aplicaciones</b> (<i>App Center</i> o <i>Ubuntu Software</i>).</li>
+      <li>Busca <b>Geany</b> y pulsa <b>Instalar</b>. Si pide contraseña, llama a una persona adulta.</li>
+      <li>Abre Geany desde <b>Mostrar aplicaciones</b>: empieza a escribir «geany».</li>
+    </ol>
+    <div class="box adult"><span class="title">👨‍👩‍👧 Para personas adultas</span>Desde la terminal: <code>sudo apt install geany</code> (en Fedora: <code>sudo dnf install geany</code>). Navegador predeterminado: <b>Configuración → Aplicaciones predeterminadas → Web</b>.</div>
+  </details>
+
+  <details class="os" data-os="mac">
+    <summary>🍏 macOS (ordenadores Apple)</summary>
+    <h3>El escritorio</h3>
+    <p>Abajo de la pantalla está el <b>Dock</b> con los iconos de los programas. Cualquier programa se encuentra con <b>Spotlight</b>: pulsa <kbd>⌘ Cmd</kbd> + <kbd>Espacio</kbd> y empieza a escribir el nombre. Las carpetas se abren con el <b>Finder</b> (el icono azul sonriente).</p>
+    <h3>Una carpeta para tus programas</h3>
+    <ol class="steps">
+      <li>Abre el <b>Finder</b> y elige <b>Documentos</b> a la izquierda.</li>
+      <li>Haz clic con el botón <b>derecho</b> (o <kbd>Ctrl</kbd> + clic) en un sitio vacío → <b>Nueva carpeta</b>.</li>
+      <li>Llámala <code>codigo</code> y pulsa <kbd>Retorno</kbd>.</li>
+    </ol>
+    <h3>Geany y Firefox</h3>
+    <ol class="steps">
+      <li><b>Geany:</b> en <b>geany.org</b> abre <b>Download → Releases</b> y descarga el archivo para <b>macOS</b> (<code>.dmg</code>). Ábrelo y arrastra el icono de Geany a <b>Aplicaciones</b>.</li>
+      <li><b>Firefox:</b> descárgalo de <b>mozilla.org</b> y arrástralo también a <b>Aplicaciones</b>.</li>
+      <li>Si la primera vez macOS no deja abrir un programa, haz clic derecho sobre él en <b>Aplicaciones</b> → <b>Abrir</b> → <b>Abrir</b>. O bien: <b>Ajustes del Sistema → Privacidad y seguridad → Abrir igualmente</b>.</li>
+    </ol>
+    <div class="box warn">
+      <span class="title">⌘ En un Mac, Cmd en lugar de Ctrl</span>
+      En las lecciones pone <kbd>Ctrl</kbd> + <kbd>S</kbd>; en un Mac pulsa <kbd>⌘ Cmd</kbd> + <kbd>S</kbd>. Lo mismo con <kbd>N</kbd>, <kbd>O</kbd>, <kbd>Z</kbd> y <kbd>+</kbd>. En el navegador, la página se recarga con <kbd>⌘</kbd> + <kbd>R</kbd> (en lugar de <kbd>F5</kbd>) y la consola se abre con <kbd>⌘</kbd> + <kbd>⌥ Opción</kbd> + <kbd>K</kbd>. La tabla completa está en la <a href="cheatsheet.html">chuleta</a>. En el teclado español de Mac algunos símbolos están en otro sitio: fíjate en los dibujos de las teclas, la tecla <kbd>⌥ Opción</kbd> hace el papel de <kbd>AltGr</kbd>.
+    </div>
+    <div class="box adult"><span class="title">👨‍👩‍👧 Para personas adultas</span>Con Homebrew: <code>brew install --cask geany firefox</code>. Navegador predeterminado: <b>Ajustes del Sistema → Escritorio y Dock → Navegador web por omisión</b>.</div>
+  </details>
+
+  <details class="os" data-os="windows">
+    <summary>🪟 Windows</summary>
+    <h3>El escritorio</h3>
+    <p>Abajo de la pantalla está la <b>barra de tareas</b>. El botón <b>Inicio</b> (el logotipo de Windows) abre todos los programas y tiene buscador: empieza a escribir el nombre. Las carpetas se abren con el <b>Explorador de archivos</b> (la carpeta amarilla).</p>
+    <h3>Una carpeta para tus programas</h3>
+    <ol class="steps">
+      <li>Abre el <b>Explorador de archivos</b> y elige <b>Documentos</b> a la izquierda.</li>
+      <li>Haz clic con el botón <b>derecho</b> en un sitio vacío → <b>Nuevo → Carpeta</b>.</li>
+      <li>Llámala <code>codigo</code> y pulsa <kbd>Intro</kbd>.</li>
+    </ol>
+    <div class="box warn">
+      <span class="title">⚠️ Muestra las extensiones</span>
+      Windows esconde la terminación de los nombres de archivo, y en lugar de <code>prueba.html</code> verás solo <code>prueba</code>. Actívalas: en el Explorador, <b>Vista → Mostrar → Extensiones de nombre de archivo</b> (en Windows 10: pestaña <b>Vista</b> → marca <b>Extensiones de nombre de archivo</b>).
+    </div>
+    <h3>Geany y Firefox</h3>
+    <ol class="steps">
+      <li><b>Geany:</b> en <b>geany.org</b> abre <b>Download → Releases</b> y descarga el instalador para <b>Windows</b> (el archivo que termina en <code>_setup.exe</code>). Ejecútalo y pulsa <b>Siguiente</b> dejándolo todo como está.</li>
+      <li><b>Firefox:</b> descárgalo de <b>mozilla.org</b> e instálalo igual.</li>
+      <li>Los dos programas aparecen en el menú <b>Inicio</b>.</li>
+    </ol>
+    <div class="box adult"><span class="title">👨‍👩‍👧 Para personas adultas</span>Descargad los programas solo de sus webs oficiales. Desde la terminal: <code>winget install Geany.Geany Mozilla.Firefox</code>. Navegador predeterminado: <b>Configuración → Aplicaciones → Aplicaciones predeterminadas → Firefox</b>.</div>
+  </details>
 
   <h2>2. Un teclado de programador</h2>
   <p>Los programas se escriben con letras normales y muchos símbolos distintos: <code>( ) { } [ ] ; " = &lt; &gt;</code>. Puede que algunos no los hayas escrito nunca. ¡Vamos a buscarlos!</p>
 
   <h3>Dónde se esconden los símbolos</h3>
-  <p>Escribir <kbd>Mayús</kbd> + <kbd>8</kbd> significa «mantén pulsada la tecla Mayús (la flecha gorda ⇧) y, sin soltarla, pulsa 8». <kbd>AltGr</kbd> es la tecla que está a la derecha de la barra espaciadora. La tabla es para un teclado <b>español de España</b>.</p>
+  <p>Escribir <kbd>Mayús</kbd> + <kbd>8</kbd> significa «mantén pulsada la tecla Mayús (la flecha gorda ⇧) y, sin soltarla, pulsa 8». <kbd>AltGr</kbd> es la tecla que está a la derecha de la barra espaciadora. La tabla es para un teclado <b>español de España</b> de PC.</p>
   <div class="tbl-wrap">
     <table class="t">
       <tr><th>Símbolo</th><th>Nombre</th><th>Cómo escribirlo</th></tr>
@@ -88,8 +169,8 @@
     </table>
   </div>
   <div class="box tip">
-    <span class="title">💡 ¿Teclado latinoamericano?</span>
-    En los teclados latinoamericanos algunos símbolos están en otro sitio. Fíjate en los dibujos de las teclas: el símbolo de abajo a la derecha suele salir con <kbd>AltGr</kbd>, y el de arriba, con <kbd>Mayús</kbd>.
+    <span class="title">💡 ¿Teclado latinoamericano o de Mac?</span>
+    En los teclados latinoamericanos y de Mac algunos símbolos están en otro sitio. Fíjate en los dibujos de las teclas: el símbolo de abajo a la derecha suele salir con <kbd>AltGr</kbd> (en Mac, con <kbd>⌥ Opción</kbd>), y el de arriba, con <kbd>Mayús</kbd>.
   </div>
   <div class="box warn">
     <span class="title">⚠️ Teclas «muertas» y Bloq Mayús</span>
@@ -98,111 +179,88 @@
 
   <h3>Teclas importantes</h3>
   <ul>
-    <li><kbd>Intro</kbd> — línea nueva.</li>
+    <li><kbd>Intro</kbd> — línea nueva (en Mac se llama <kbd>Retorno</kbd>).</li>
     <li><kbd>Retroceso</kbd> (la flecha larga ←) — borra el carácter a la <b>izquierda</b> del cursor; <kbd>Supr</kbd> — a la <b>derecha</b>.</li>
     <li><kbd>Tab</kbd> — sangría (mover la línea a la derecha).</li>
     <li>Las flechas <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> — mueven el cursor (la rayita que parpadea) por el texto.</li>
-    <li><kbd>Ctrl</kbd> + <kbd>Z</kbd> — deshacer lo último. ¡Tu botón mágico de «volver atrás»!</li>
+    <li><kbd>Ctrl</kbd> + <kbd>Z</kbd> (en Mac <kbd>⌘</kbd> + <kbd>Z</kbd>) — deshacer lo último. ¡Tu botón mágico de «volver atrás»!</li>
   </ul>
 
-  <div class="box task">
-    <span class="title">🎯 Práctica (5 minutos)</span>
-    Abre <b>Menú → Accesorios → Editor de textos</b> (o cualquier otro editor de texto) y escribe:
-    <pre class="console">( ) { } [ ] &lt; &gt; ; : " ' = + * !</pre>
-    Después cierra el editor. Cuando pregunte «¿Guardar?», puedes contestar «No»: solo era práctica.
-  </div>
-
-  <h2>3. Una carpeta para tus programas</h2>
-  <p>El ordenador lo guarda todo en <b>archivos</b>: fotos, música, programas. Los archivos están dentro de <b>carpetas</b>, como hojas en los cajones de una mesa. Vamos a hacer un cajón para todos los programas de este curso.</p>
+  <h2>3. Configuramos Geany</h2>
+  <p>Puedes escribir código en cualquier editor de texto, pero es más fácil en uno especial para programar. Colorea el código, numera las líneas y pone las sangrías por ti. Hemos elegido <b>Geany</b>: es sencillo, gratuito y se ve igual en todos los sistemas.</p>
+  <p>Abre Geany. Los menús aparecen aquí en español y, entre paréntesis, en inglés: en tu ordenador puede salir cualquiera de las dos versiones.</p>
   <ol class="steps">
-    <li>Haz clic en el icono del <b>gestor de archivos</b> (una carpeta) en la barra de tareas. Se abre tu <b>carpeta personal</b>. Es tu sitio en el ordenador; ya tiene carpetas como «Documentos» y «Descargas».</li>
-    <li>Haz clic con el botón <b>derecho</b> del ratón en un sitio vacío de la ventana (no encima de una carpeta).</li>
-    <li>En el menú elige <b>Crear nuevo… → Carpeta</b> (en inglés <i>Create New… → Folder</i>).</li>
-    <li>Escribe el nombre <code>codigo</code> (sin tilde) y pulsa <kbd>Intro</kbd> o <b>Aceptar</b>.</li>
-  </ol>
-  <p>Hecho: junto a las demás ha aparecido una carpeta llamada <b>codigo</b>. Todos los programas del curso vivirán en ella.</p>
-  <div class="box tip">
-    <span class="title">💡 ¿Por qué sin tildes ni espacios?</span>
-    A los programas les gustan los nombres de archivos y carpetas escritos con <b>letras minúsculas sin tildes ni eñes</b>, y sin espacios. Siempre llamaremos así a los archivos: <code>prueba.html</code>, <code>snake.html</code> (<i>snake</i> es «serpiente» en inglés).
-  </div>
-
-  <h2>4. El editor de código Geany</h2>
-  <p>Puedes escribir código en cualquier editor de texto, pero es más fácil en uno especial para programar. Colorea el código, numera las líneas y pone las sangrías por ti. Usaremos <b>Geany</b>: es sencillo y va rápido en una Raspberry Pi.</p>
-
-  <h3>Busca Geany</h3>
-  <p>Abre <b>Menú 🍓 → Programación</b>. Si ahí está <b>Geany</b>, perfecto: pasa a la configuración.</p>
-  <p>Si Geany no está, hay que instalarlo (llama a una persona adulta, quizá haga falta una contraseña):</p>
-  <ol class="steps">
-    <li><b>Menú → Preferencias → Software recomendado</b> (<i>Preferences → Recommended Software</i>).</li>
-    <li>A la izquierda elige el apartado <b>Programación</b> (<i>Programming</i>).</li>
-    <li>Busca <b>Geany</b> en la lista y márcalo.</li>
-    <li>Pulsa <b>Aplicar</b> (<i>Apply</i>) y espera a que termine la instalación.</li>
-  </ol>
-  <div class="box adult">
-    <span class="title">👨‍👩‍👧 Para personas adultas</span>
-    Si en el menú no aparece «Software recomendado», instalad Geany desde la terminal con <code>sudo apt install geany</code>.
-  </div>
-
-  <h3>Configura Geany</h3>
-  <p>Abre Geany: <b>Menú → Programación → Geany</b>. Los menús aparecen aquí en español y, entre paréntesis, en inglés: en tu ordenador puede salir cualquiera de las dos versiones.</p>
-  <ol class="steps">
-    <li><b>Letra grande.</b> <b>Editar → Preferencias</b> (<i>Edit → Preferences</i>) → pestaña <b>Interfaz</b> (<i>Interface</i>) → <b>Tipografías</b> (<i>Fonts</i>) → la línea <b>Editor</b>. Pulsa el botón de la letra y pon el tamaño <b>16</b> o <b>18</b>. También puedes agrandar la letra con <kbd>Ctrl</kbd> + <kbd>+</kbd> y achicarla con <kbd>Ctrl</kbd> + <kbd>-</kbd>.</li>
+    <li><b>Letra grande.</b> <b>Editar → Preferencias</b> (<i>Edit → Preferences</i>; en Mac puede estar en el menú <b>Geany</b>) → pestaña <b>Interfaz</b> (<i>Interface</i>) → <b>Tipografías</b> (<i>Fonts</i>) → la línea <b>Editor</b>. Pon el tamaño <b>16</b> o <b>18</b>. También puedes agrandar la letra con <kbd>Ctrl</kbd> + <kbd>+</kbd> y achicarla con <kbd>Ctrl</kbd> + <kbd>-</kbd>.</li>
     <li><b>Sangría.</b> En las mismas preferencias: pestaña <b>Editor</b> → <b>Sangría</b> (<i>Indentation</i>). Pon <b>Anchura: 2</b> (<i>Width</i>) y <b>Tipo: Espacios</b> (<i>Type: Spaces</i>). Pulsa <b>Aceptar</b>.</li>
     <li><b>Quitamos lo que sobra.</b> En el menú <b>Ver</b> (<i>View</i>) desmarca <b>Mostrar barra lateral</b> (<i>Show Sidebar</i>) y <b>Mostrar ventana de mensajes</b> (<i>Show Message Window</i>). Así queda sitio solo para el código.</li>
     <li><b>Números de línea.</b> A la izquierda del texto debe haber números de línea: 1, 2, 3… Si no están, actívalos en <b>Ver → Mostrar números de línea</b> (<i>View → Show Line Numbers</i>).</li>
   </ol>
+  <div class="box task">
+    <span class="title">🎯 Práctica (5 minutos)</span>
+    Crea un archivo nuevo en Geany (<b>Archivo → Nuevo</b>) y escribe:
+    <pre class="console">( ) { } [ ] &lt; &gt; ; : " ' = + * !</pre>
+    Después cierra la pestaña. Cuando pregunte «¿Guardar?», contesta «No»: solo era práctica.
+  </div>
   <div class="box tip">
     <span class="title">💡 No tengas miedo de pulsar</span>
     Si en el editor desaparece algo o se ve raro, no se ha roto nada. Cierra Geany y vuelve a abrirlo, o pide ayuda a una persona adulta.
   </div>
 
-  <h2>5. El navegador</h2>
-  <p>Nuestros programas los ejecutará un <b>navegador</b>, el mismo programa con el que se visitan páginas web. Usaremos <b>Firefox</b>: su icono es un zorro naranja. Búscalo en la barra de tareas o en <b>Menú → Internet</b> y ábrelo.</p>
   <div class="box adult">
-    <span class="title">👨‍👩‍👧 Para personas adultas</span>
-    Poned Firefox como navegador predeterminado para que los archivos <code>.html</code> se abran en él con doble clic. En Raspberry Pi OS se hace en <b>Menú → Preferencias → Control Centre / Configuración de Raspberry Pi</b>, pestaña <b>System</b>, opción <b>Browser</b> → Firefox. Si Firefox no está instalado, está en <b>Software recomendado</b> (apartado <i>Internet</i>).
+    <span class="title">👨‍👩‍👧 Para personas adultas: alternativas a Geany</span>
+    <p>Hemos elegido Geany porque es ligero, gratuito e igual en Windows, macOS y Linux, y así es más fácil explicarlo. Si preferís otro editor:</p>
+    <ul>
+      <li><b>Visual Studio Code</b> (o su versión abierta <b>VSCodium</b>): el editor más popular entre quienes programan, para todos los sistemas. Muy potente, pero lleno de paneles y avisos, así que es mejor pasarse a él <b>después</b> del curso. En una Raspberry Pi va bastante más lento que Geany.</li>
+      <li><b>Notepad++</b> (solo Windows): ligero y parecido a Geany.</li>
+      <li><b>Kate</b> o <b>Editor de texto</b> (gedit, GNOME Text Editor) en Linux: colorean el código, pero son menos cómodos.</li>
+      <li><b>CotEditor</b> (solo macOS): un editor de código sencillo y gratuito.</li>
+    </ul>
+    <p><b>No sirven:</b> el Bloc de notas de Windows y TextEdit de macOS: no colorean el código ni numeran las líneas, y TextEdit guarda por defecto texto con formato, que el navegador no entiende. Tampoco sirven Word ni otros procesadores de texto.</p>
   </div>
 
-  <h2>6. Colocamos las ventanas</h2>
-  <p>Quien programa mira todo el rato el código y luego el resultado. Pon las ventanas una al lado de la otra: <b>Geany a la izquierda</b> y <b>el navegador a la derecha</b>. Arrástralas por la barra de título y mueve los bordes para que cada una ocupe media pantalla.</p>
+  <h2>4. Colocamos las ventanas</h2>
+  <p>Nuestros programas los ejecutará <b>Firefox</b>, el mismo programa con el que se visitan páginas web. Quien programa mira todo el rato el código y luego el resultado. Pon las ventanas una al lado de la otra: <b>Geany a la izquierda</b> y <b>Firefox a la derecha</b>. Arrástralas por la barra de título y mueve los bordes para que cada una ocupe media pantalla.</p>
+  <div class="box tip">
+    <span class="title">💡 Forma rápida</span>
+    En Windows y Ubuntu puedes pegar una ventana a media pantalla con <kbd>Win</kbd> (<kbd>Super</kbd>) + <kbd>←</kbd> o <kbd>→</kbd>. En un Mac, deja el puntero sobre el botón verde de la esquina de la ventana y elige una distribución.
+  </div>
   <figure>
     <svg viewBox="0 0 640 330" width="640" role="img" aria-label="Pantalla: a la izquierda la ventana de Geany con código, a la derecha la ventana del navegador">
       <rect x="10" y="10" width="620" height="310" rx="14" class="svg-card"/>
-      <text x="30" y="30" class="svg-text" font-size="13">🍓  barra de tareas</text>
-      <line x1="10" y1="40" x2="630" y2="40" class="svg-grid" stroke-width="2"/>
-      <rect x="24" y="54" width="290" height="252" rx="8" class="svg-field"/>
-      <rect x="24" y="54" width="290" height="24" rx="8" class="svg-accent"/>
-      <text x="36" y="71" font-size="13" fill="#fff" font-weight="700">Geany — snake.html</text>
+      <rect x="24" y="24" width="290" height="282" rx="8" class="svg-field"/>
+      <rect x="24" y="24" width="290" height="24" rx="8" class="svg-accent"/>
+      <text x="36" y="41" font-size="13" fill="#fff" font-weight="700">Geany — snake.html</text>
       <g font-family="monospace" font-size="12">
-        <text x="36" y="100" fill="#6c6f85">1</text><text x="58" y="100" fill="#8be9fd">&lt;canvas&gt;</text>
-        <text x="36" y="120" fill="#6c6f85">2</text><text x="58" y="120" fill="#ff79c6">let</text><text x="88" y="120" fill="#ecebe8">score = 0;</text>
-        <text x="36" y="140" fill="#6c6f85">3</text><text x="58" y="140" fill="#ff79c6">function</text><text x="128" y="140" fill="#50fa7b">step</text><text x="160" y="140" fill="#ecebe8">() {</text>
-        <text x="36" y="160" fill="#6c6f85">4</text><text x="74" y="160" fill="#ecebe8">…</text>
+        <text x="36" y="72" fill="#6c6f85">1</text><text x="58" y="72" fill="#8be9fd">&lt;canvas&gt;</text>
+        <text x="36" y="92" fill="#6c6f85">2</text><text x="58" y="92" fill="#ff79c6">let</text><text x="88" y="92" fill="#ecebe8">score = 0;</text>
+        <text x="36" y="112" fill="#6c6f85">3</text><text x="58" y="112" fill="#ff79c6">function</text><text x="128" y="112" fill="#50fa7b">step</text><text x="160" y="112" fill="#ecebe8">() {</text>
+        <text x="36" y="132" fill="#6c6f85">4</text><text x="74" y="132" fill="#ecebe8">…</text>
       </g>
-      <text x="169" y="240" text-anchor="middle" font-size="15" fill="#ecebe8">aquí escribimos código</text>
-      <rect x="326" y="54" width="290" height="252" rx="8" class="svg-card"/>
-      <rect x="326" y="54" width="290" height="24" rx="8" class="svg-accent2"/>
-      <text x="338" y="71" font-size="13" fill="#fff" font-weight="700">Firefox</text>
-      <rect x="401" y="96" width="140" height="140" class="svg-field"/>
-      <rect x="461" y="156" width="12" height="12" fill="#50fa7b"/>
-      <rect x="449" y="156" width="12" height="12" fill="#2f9e44"/>
-      <rect x="437" y="156" width="12" height="12" fill="#2f9e44"/>
-      <rect x="505" y="120" width="12" height="12" fill="#ff5555"/>
-      <text x="471" y="270" text-anchor="middle" font-size="15" class="svg-text">aquí vemos el resultado</text>
+      <text x="169" y="230" text-anchor="middle" font-size="15" fill="#ecebe8">aquí escribimos código</text>
+      <rect x="326" y="24" width="290" height="282" rx="8" class="svg-card"/>
+      <rect x="326" y="24" width="290" height="24" rx="8" class="svg-accent2"/>
+      <text x="338" y="41" font-size="13" fill="#fff" font-weight="700">Firefox</text>
+      <rect x="401" y="76" width="140" height="140" class="svg-field"/>
+      <rect x="461" y="136" width="12" height="12" fill="#50fa7b"/>
+      <rect x="449" y="136" width="12" height="12" fill="#2f9e44"/>
+      <rect x="437" y="136" width="12" height="12" fill="#2f9e44"/>
+      <rect x="505" y="100" width="12" height="12" fill="#ff5555"/>
+      <text x="471" y="260" text-anchor="middle" font-size="15" class="svg-text">aquí vemos el resultado</text>
     </svg>
     <figcaption>Así se trabaja cómodo: el código a la izquierda, el resultado a la derecha.</figcaption>
   </figure>
 
   <h2>Compruébalo</h2>
   <ul class="check">
-    <li>Sé escribir <code>{ } ( ) ; "</code>.</li>
-    <li>En mi carpeta personal hay una carpeta llamada <code>codigo</code>.</li>
+    <li>Sé qué sistema tiene mi ordenador.</li>
+    <li>En Documentos hay una carpeta llamada <code>codigo</code>.</li>
     <li>Geany se abre, la letra es grande y la sangría es de 2 espacios.</li>
-    <li>Sé abrir Firefox y poner las ventanas una al lado de la otra.</li>
+    <li>Firefox está instalado y sé poner las ventanas una al lado de la otra.</li>
+    <li>Sé escribir <code>{ } ( ) ; "</code>.</li>
   </ul>
   <div class="box ok">
     <span class="title">🎉 ¡Tu sitio de trabajo está listo!</span>
-    Todo preparado. En la próxima lección escribiremos nuestro primer programa.
+    A partir de aquí, todas las lecciones son iguales en cualquier ordenador. En la próxima escribiremos nuestro primer programa.
   </div>
 
   <nav class="pager">
@@ -211,5 +269,6 @@
   </nav>
 </main>
 <script src="../assets/code.js?v=961ac153"></script>
+<script src="../assets/os.js?v=331c0263"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ import os
 import re
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-ASSETS = ("style.css", "code.js", "practice.js")
+ASSETS = ("style.css", "code.js", "practice.js", "os.js")
 
 
 def version(name):

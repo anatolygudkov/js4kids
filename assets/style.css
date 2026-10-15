@@ -511,3 +511,21 @@ details.hint summary, details.answer summary { cursor: pointer; font-weight: 700
 details.hint > div, details.answer > div { padding: 6px 0 4px; }
 details.answer pre.code { margin-top: 8px; }
 @media print { .practice-tools, .runner-bar { display: none; } details.answer { display: none; } }
+
+/* ---------- Урок 0: разделы для разных систем ---------- */
+details.os {
+  margin: 0.8em 0;
+  padding: 0 18px;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+}
+details.os > summary { cursor: pointer; padding: 12px 0; font-weight: 800; font-size: 1.12em; }
+details.os[open] { padding-bottom: 8px; }
+details.os[open] > summary { border-bottom: 2px dashed var(--line); margin-bottom: 4px; }
+details.os h3 { margin-top: 1em; }
+details.os.is-mine { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-weak); }
+details.os.is-mine > summary::after { margin-left: 10px; font-size: 0.75em; font-weight: 700; color: var(--accent); }
+:lang(ru) details.os.is-mine > summary::after { content: "← похоже, это твой компьютер"; }
+:lang(en) details.os.is-mine > summary::after { content: "← looks like your computer"; }
+:lang(es) details.os.is-mine > summary::after { content: "← parece que es tu ordenador"; }
