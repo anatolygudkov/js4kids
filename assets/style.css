@@ -439,12 +439,14 @@ figure.illus img {
   cursor: pointer;
 }
 .level-filter button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-.progress { display: flex; align-items: center; gap: 10px; flex: 1 1 220px; max-width: 340px; }
+.progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; flex: 1 1 260px; max-width: 420px; }
+.reset-progress { font: inherit; font-size: 0.8em; padding: 3px 10px; border-radius: 999px; border: 2px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.reset-progress:hover { color: var(--fg); border-color: var(--warn-b); }
 .progress-track { flex: 1; height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.3s; }
 .progress-label { font-size: 0.85em; font-weight: 700; white-space: nowrap; }
-nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1em; font-size: 0.9em; }
-nav.toc a { padding: 3px 10px; border-radius: 8px; background: var(--accent-weak); text-decoration: none; }
+ul.toc { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1em; font-size: 0.9em; }
+ul.toc a { display: inline-block; padding: 3px 10px; border-radius: 8px; background: var(--accent-weak); text-decoration: none; }
 .sec-lessons { font-size: 0.6em; font-weight: 400; color: var(--muted); margin-left: 8px; }
 
 .task {

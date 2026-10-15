@@ -125,6 +125,18 @@
   }
   update();
 
+  // Сбросить все отметки
+  var resetAll = document.querySelector(".reset-progress");
+  if (resetAll) {
+    resetAll.addEventListener("click", function () {
+      if (!window.confirm(resetAll.getAttribute("data-confirm"))) return;
+      done = {};
+      for (var k = 0; k < boxes.length; k++) boxes[k].checked = false;
+      try { localStorage.removeItem(KEY); } catch (e) { /* ничего страшного */ }
+      update();
+    });
+  }
+
   // Фильтр по сложности
   var filters = document.querySelectorAll(".level-filter button");
   for (var f = 0; f < filters.length; f++) {

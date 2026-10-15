@@ -28,6 +28,7 @@ UI = {
         lessons="Уроки", lesson="Урок",
         run="▶ Запустить", reset="↺ Сбросить", done="Решено", hint="💡 Подсказка", answer="✅ Показать ответ",
         out="Здесь появится результат",
+        reset_all="Сбросить прогресс", reset_confirm="Снять все отметки «Решено»?",
         norun="Эту задачу решай в своём файле в Geany — здесь её не запустить.",
         start="// Напиши код здесь\n",
         prev=("← Урок 16", "Игра в интернете"), next=("Всегда под рукой →", "Шпаргалка"),
@@ -49,6 +50,7 @@ UI = {
         lessons="Lessons", lesson="Lesson",
         run="▶ Run", reset="↺ Reset", done="Solved", hint="💡 Hint", answer="✅ Show answer",
         out="The result will appear here",
+        reset_all="Reset progress", reset_confirm="Clear all the \u201cSolved\u201d ticks?",
         norun="Solve this one in your own file in Geany — it can't run here.",
         start="// Write your code here\n",
         prev=("← Lesson 16", "The game on the internet"), next=("Always at hand →", "Cheat sheet"),
@@ -70,6 +72,7 @@ UI = {
         lessons="Lecciones", lesson="Lección",
         run="▶ Ejecutar", reset="↺ Restablecer", done="Resuelto", hint="💡 Pista", answer="✅ Ver la respuesta",
         out="Aquí aparecerá el resultado",
+        reset_all="Borrar el progreso", reset_confirm="¿Quitar todas las marcas de «Resuelto»?",
         norun="Este ejercicio resuélvelo en tu propio archivo en Geany: aquí no se puede ejecutar.",
         start="// Escribe tu código aquí\n",
         prev=("← Lección 16", "El juego en internet"), next=("Siempre a mano →", "Chuleta"),
@@ -111,9 +114,9 @@ def render_task(task, lang, ui):
     stars = "⭐" * task["level"]
     out = [f'  <section class="task" id="t-{tid}" data-level="{task["level"]}">']
     out.append(
-        f'    <div class="task-head"><span class="task-num">{tid}</span>'
-        f'<span class="task-kind kind-{task["kind"]}">{ui["kinds"][task["kind"]]}</span>'
-        f'<span class="task-level" title="{stars}">{stars}</span>'
+        f'    <div class="task-head"><span class="task-num">{tid}</span> '
+        f'<span class="task-kind kind-{task["kind"]}">{ui["kinds"][task["kind"]]}</span> '
+        f'<span class="task-level" title="{stars}">{stars}</span> '
         f'<label class="task-done"><input type="checkbox" data-task="{tid}"> {ui["done"]}</label></div>'
     )
     out.append(f'    <p>{pick(task["text"], lang)}</p>')
@@ -126,7 +129,7 @@ def render_task(task, lang, ui):
             f'    <div class="runner" data-id="{tid}" data-canvas="{1 if task.get("canvas") else 0}">'
             f'<textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="{rows}">{esc(code)}</textarea>'
             f'<div class="runner-bar"><button type="button" class="run">{ui["run"]}</button>'
-            f'<button type="button" class="reset">{ui["reset"]}</button></div>'
+            f' <button type="button" class="reset">{ui["reset"]}</button></div>'
             f'<div class="runner-view"><pre class="runner-out" data-placeholder="{ui["out"]}"></pre></div></div>'
         )
     else:
@@ -175,14 +178,14 @@ def render(lang):
     <div class="level-filter">"""]
     for value, text in zip(("all", "1", "2", "3"), ui["levels"]):
         active = ' class="active"' if value == "all" else ""
-        parts.append(f'<button type="button" data-level="{value}"{active}>{text}</button>')
+        parts.append(f'<button type="button" data-level="{value}"{active}>{text}</button> ')
     parts.append(f"""</div>
-    <div class="progress"><div class="progress-track"><div class="progress-fill"></div></div><span class="progress-label"></span></div>
+    <div class="progress"><div class="progress-track"><div class="progress-fill"></div></div> <span class="progress-label"></span> <button type="button" class="reset-progress" data-confirm="{ui["reset_confirm"]}">{ui["reset_all"]}</button></div>
   </div>
-  <nav class="toc">""")
+  <ul class="toc">""")
     for s in SECTIONS:
-        parts.append(f'<a href="#s-{s["key"]}">{pick(s["title"], lang)}</a>')
-    parts.append("</nav>")
+        parts.append(f'<li><a href="#s-{s["key"]}">{pick(s["title"], lang)}</a></li>')
+    parts.append("</ul>")
     for s in SECTIONS:
         links = ", ".join(f'<a href="lesson-{n:02d}.html">{n}</a>' for n in s["lessons"])
         label = ui["lesson"] if len(s["lessons"]) == 1 else ui["lessons"]
@@ -209,3 +212,5 @@ if __name__ == "__main__":
         with open(path, "w", encoding="utf-8") as f:
             f.write(render(lang))
         print("wrote", path)
+    import bust_cache
+    bust_cache.main()

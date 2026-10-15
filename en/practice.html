@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Practice Problems</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/style.css?v=e9ae573a">
 </head>
 <body>
 <header class="top">
@@ -22,115 +22,115 @@
   <div class="box adult"><span class="title">👨‍👩‍👧 For grown-ups</span>The code runs right on the page, in an isolated "sandbox", and can't break anything. Problems marked "Project" are for your own <code>snake.html</code> file.</div>
   <div class="practice-tools">
     <div class="level-filter">
-<button type="button" data-level="all" class="active">All</button>
-<button type="button" data-level="1">⭐ Easy</button>
-<button type="button" data-level="2">⭐⭐ Medium</button>
-<button type="button" data-level="3">⭐⭐⭐ Hard</button>
+<button type="button" data-level="all" class="active">All</button> 
+<button type="button" data-level="1">⭐ Easy</button> 
+<button type="button" data-level="2">⭐⭐ Medium</button> 
+<button type="button" data-level="3">⭐⭐⭐ Hard</button> 
 </div>
-    <div class="progress"><div class="progress-track"><div class="progress-fill"></div></div><span class="progress-label"></span></div>
+    <div class="progress"><div class="progress-track"><div class="progress-fill"></div></div> <span class="progress-label"></span> <button type="button" class="reset-progress" data-confirm="Clear all the “Solved” ticks?">Reset progress</button></div>
   </div>
-  <nav class="toc">
-<a href="#s-basics">First steps: console.log and errors</a>
-<a href="#s-vars">Variables</a>
-<a href="#s-canvas">Canvas and coordinates</a>
-<a href="#s-functions">Functions</a>
-<a href="#s-loops">Loops</a>
-<a href="#s-arrays">Arrays, objects and movement</a>
-<a href="#s-conditions">Conditions and the keyboard</a>
-<a href="#s-random">Random numbers and return</a>
-<a href="#s-game">Game over, while and the timer</a>
-<a href="#s-css">Styling (CSS)</a>
-<a href="#s-projects">Projects for your own Snake</a>
-</nav>
+  <ul class="toc">
+<li><a href="#s-basics">First steps: console.log and errors</a></li>
+<li><a href="#s-vars">Variables</a></li>
+<li><a href="#s-canvas">Canvas and coordinates</a></li>
+<li><a href="#s-functions">Functions</a></li>
+<li><a href="#s-loops">Loops</a></li>
+<li><a href="#s-arrays">Arrays, objects and movement</a></li>
+<li><a href="#s-conditions">Conditions and the keyboard</a></li>
+<li><a href="#s-random">Random numbers and return</a></li>
+<li><a href="#s-game">Game over, while and the timer</a></li>
+<li><a href="#s-css">Styling (CSS)</a></li>
+<li><a href="#s-projects">Projects for your own Snake</a></li>
+</ul>
 
   <h2 id="s-basics">First steps: console.log and errors <small class="sec-lessons">Lessons <a href="lesson-01.html">1</a>, <a href="lesson-02.html">2</a></small></h2>
   <section class="task" id="t-A1" data-level="1">
-    <div class="task-head"><span class="task-num">A1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="A1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">A1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="A1"> Solved</label></div>
     <p>What will the program print? Answer first, then run it.</p>
     <div class="runner" data-id="A1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">console.log(3 + 4);
 console.log("3 + 4");
-console.log("3" + 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log("3" + 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>7</code>, then <code>3 + 4</code>, then <code>34</code>. Anything in quotes is text: it's shown, not calculated. And text plus a number get <b>glued together</b>: <code>"3" + 4</code> gives <code>"34"</code>.</p></div></details>
   </section>
   <section class="task" id="t-A2" data-level="1">
-    <div class="task-head"><span class="task-num">A2</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="A2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">A2</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="A2"> Solved</label></div>
     <p>How many seconds are there in an hour? And in a week? Print both numbers — let the computer do the maths.</p>
     <div class="runner" data-id="A2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Write your code here
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>A minute has 60 seconds, an hour 60 minutes, a day 24 hours, a week 7 days. Multiplication is <code>*</code>.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>An hour has 3600 seconds, a week has 604800.</p><pre class="code">console.log(60 * 60);
 console.log(7 * 24 * 60 * 60);</pre></div></details>
   </section>
   <section class="task" id="t-A3" data-level="2">
-    <div class="task-head"><span class="task-num">A3</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="A3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">A3</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="A3"> Solved</label></div>
     <p>There are three mistakes in this program. Run it, read the message, fix the mistake — and repeat until every line works.</p>
     <div class="runner" data-id="A3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">consol.log("Hello");
 console.log("World);
-console.log(5 * 5;</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(5 * 5;</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>The computer complains about writing mistakes (<i>SyntaxError</i>) first — because of them it can't read the program at all. It notices the typo in the name last.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>consol</code> → <code>console</code>; the quote after <code>World</code> isn't closed; the last line is missing a <code>)</code>.</p><pre class="code">console.log("Hello");
 console.log("World");
 console.log(5 * 5);</pre></div></details>
   </section>
   <section class="task" id="t-A4" data-level="3">
-    <div class="task-head"><span class="task-num">A4</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="A4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">A4</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="A4"> Solved</label></div>
     <p>What will the program print? Think about the order of operations.</p>
     <div class="runner" data-id="A4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">console.log(2 + 3 * 4);
 console.log((2 + 3) * 4);
 console.log("2" + 3 * 4);
-console.log(10 / 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(10 / 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>14</code>, <code>20</code>, <code>212</code>, <code>2.5</code>. Multiplication happens before addition. In the third line <code>3 * 4 = 12</code> comes first, then the text <code>"2"</code> is glued to 12. Division gives a decimal with a dot.</p></div></details>
   </section>
 
   <h2 id="s-vars">Variables <small class="sec-lessons">Lesson <a href="lesson-03.html">3</a></small></h2>
   <section class="task" id="t-B1" data-level="1">
-    <div class="task-head"><span class="task-num">B1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="B1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">B1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="B1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="B1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">let apples = 5;
 apples = apples + 3;
 apples = apples * 2;
-console.log(apples);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(apples);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>16</code>: it was 5, then 5 + 3 = 8, then 8 × 2 = 16.</p></div></details>
   </section>
   <section class="task" id="t-B2" data-level="1">
-    <div class="task-head"><span class="task-num">B2</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="B2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">B2</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="B2"> Solved</label></div>
     <p>The program should print <code>1</code>, but it doesn't work. Find two mistakes.</p>
     <div class="runner" data-id="B2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let score = 0;
 let score = score + 1;
-console.log(Score);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(Score);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>let</code> is only written when a box is created — it's not needed on the second line. And <code>Score</code> with a capital letter is a different name; it should be <code>score</code>.</p><pre class="code">let score = 0;
 score = score + 1;
 console.log(score);</pre></div></details>
   </section>
   <section class="task" id="t-B3" data-level="2">
-    <div class="task-head"><span class="task-num">B3</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">B3</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="B3"> Solved</label></div>
     <p>What will the program print? Careful, it's a trap!</p>
     <div class="runner" data-id="B3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let a = 10;
 let b = a;
 a = 20;
 console.log(a);
-console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>20</code> and <code>10</code>. The line <code>let b = a;</code> puts a <b>copy</b> of the number 10 into <code>b</code>. When <code>a</code> changes later, box <code>b</code> still holds 10.</p></div></details>
   </section>
   <section class="task" id="t-B4" data-level="2">
-    <div class="task-head"><span class="task-num">B4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">B4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="B4"> Solved</label></div>
     <p>There are variables <code>name</code> and <code>age</code>. Print a sentence like "Ann, in 5 years you will be 15" — the computer must work out the age in 5 years.</p>
     <div class="runner" data-id="B4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let name = "Ann";
 let age = 10;
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>What happens without brackets: <code>"be " + age + 5</code>? Try it!</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The brackets are a must: without them the text is glued to 10 and then to 5, giving "105".</p><pre class="code">let name = "Ann";
 let age = 10;
 console.log(name + ", in 5 years you will be " + (age + 5));</pre></div></details>
   </section>
   <section class="task" id="t-B5" data-level="3">
-    <div class="task-head"><span class="task-num">B5</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B5"> Solved</label></div>
+    <div class="task-head"><span class="task-num">B5</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="B5"> Solved</label></div>
     <p>Swap the values of <code>a</code> and <code>b</code> so that the program prints <code>2</code> and <code>1</code>. You may not type the numbers 1 and 2 again!</p>
     <div class="runner" data-id="B5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let a = 1;
 let b = 2;
 // your code
 console.log(a);
-console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>How do you swap the juice in two glasses? You need a third, empty glass.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>A third variable, <code>temp</code>, holds the value of <code>a</code> for a moment while <code>b</code> is put into <code>a</code>.</p><pre class="code">let a = 1;
 let b = 2;
@@ -143,19 +143,19 @@ console.log(b);</pre></div></details>
 
   <h2 id="s-canvas">Canvas and coordinates <small class="sec-lessons">Lesson <a href="lesson-04.html">4</a></small></h2>
   <section class="task" id="t-C1" data-level="1">
-    <div class="task-head"><span class="task-num">C1</span><span class="task-kind kind-think">Think</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="C1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">C1</span> <span class="task-kind kind-think">Think</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="C1"> Solved</label></div>
     <p>The canvas is 400 × 400. Which corner will each square end up in?<br><code>ctx.fillRect(380, 0, 20, 20)</code><br><code>ctx.fillRect(0, 380, 20, 20)</code><br><code>ctx.fillRect(380, 380, 20, 20)</code></p>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Top right, bottom left, bottom right. Remember: y grows <b>downwards</b>.</p></div></details>
   </section>
   <section class="task" id="t-C2" data-level="1">
-    <div class="task-head"><span class="task-num">C2</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="C2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">C2</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="C2"> Solved</label></div>
     <p>There should be a green square on a black background, but there's only black. Why?</p>
     <div class="runner" data-id="C2" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 ctx.fillStyle = "lime";
 ctx.fillRect(100, 100, 50, 50);
 ctx.fillStyle = "black";
-ctx.fillRect(0, 0, 400, 400);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+ctx.fillRect(0, 0, 400, 400);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The black background is drawn <b>after</b> the square and covers it. The background goes first.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 ctx.fillStyle = "black";
@@ -164,13 +164,13 @@ ctx.fillStyle = "lime";
 ctx.fillRect(100, 100, 50, 50);</pre></div></details>
   </section>
   <section class="task" id="t-C3" data-level="2">
-    <div class="task-head"><span class="task-num">C3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="C3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">C3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="C3"> Solved</label></div>
     <p>Draw a "lying-down traffic light": three 40 × 40 squares in a row on a black background — red, yellow, green. The first is at (100, 180), with a gap of 10 between squares.</p>
     <div class="runner" data-id="C3" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, 400, 400);
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>Each square starts 40 + 10 = 50 pixels to the right of the previous one.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The squares' x values: 100, 150, 200. Change the colour before each <code>fillRect</code>.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -184,11 +184,11 @@ ctx.fillStyle = "lime";
 ctx.fillRect(200, 180, 40, 40);</pre></div></details>
   </section>
   <section class="task" id="t-C4" data-level="3">
-    <div class="task-head"><span class="task-num">C4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="C4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">C4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="C4"> Solved</label></div>
     <p>Draw a target: three squares one inside the other, all centred in the middle of the canvas (200, 200). Sizes 300, 200 and 100, colours red, white, red.</p>
     <div class="runner" data-id="C4" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>The top left corner of a square of size s centred at 200 is x = y = 200 − s / 2. And think about which square to draw first.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Draw from big to small, otherwise the big square covers the small ones. The corners are at 50, 100, 150.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -202,7 +202,7 @@ ctx.fillRect(150, 150, 100, 100);</pre></div></details>
 
   <h2 id="s-functions">Functions <small class="sec-lessons">Lesson <a href="lesson-05.html">5</a></small></h2>
   <section class="task" id="t-D1" data-level="1">
-    <div class="task-head"><span class="task-num">D1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="D1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">D1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="D1"> Solved</label></div>
     <p>What will the program print, and in what order?</p>
     <div class="runner" data-id="D1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="12">function a() {
   console.log("A");
@@ -214,11 +214,11 @@ function b() {
 }
 
 b();
-a();</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+a();</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>B</code>, <code>A</code>, <code>A</code>. Functions that are only written down do nothing. Work starts with the call <code>b()</code>: it prints B and calls <code>a()</code>. Then there's one more call to <code>a()</code>.</p></div></details>
   </section>
   <section class="task" id="t-D2" data-level="1">
-    <div class="task-head"><span class="task-num">D2</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="D2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">D2</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="D2"> Solved</label></div>
     <p>The cell isn't drawn. Run it and read the error.</p>
     <div class="runner" data-id="D2" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="10">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -228,7 +228,7 @@ function drawCell(x, y, color) {
   ctx.fillRect(x * 20, y * 20, 19, 19);
 }
 
-drawcell(2, 3, "red");</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+drawcell(2, 3, "red");</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>drawcell</code> and <code>drawCell</code> are different names. Capital letters matter.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 
@@ -240,11 +240,11 @@ function drawCell(x, y, color) {
 drawCell(2, 3, "red");</pre></div></details>
   </section>
   <section class="task" id="t-D3" data-level="2">
-    <div class="task-head"><span class="task-num">D3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="D3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">D3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="D3"> Solved</label></div>
     <p>Write a function <code>drawSquare(x, y, size, color)</code> that draws a square of any size, and use it to draw three squares of different sizes and colours.</p>
     <div class="runner" data-id="D3" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The <code>size</code> parameter is used twice — for both the width and the height.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 
@@ -258,11 +258,11 @@ drawSquare(100, 50, 100, "orange");
 drawSquare(230, 120, 150, "purple");</pre></div></details>
   </section>
   <section class="task" id="t-D4" data-level="3">
-    <div class="task-head"><span class="task-num">D4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="D4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">D4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="D4"> Solved</label></div>
     <p>Write a function <code>drawHouse(x, y)</code>: the wall is a 60 × 60 square with a "roof" on top — a red 80 × 20 rectangle a bit wider than the wall — and a yellow 20 × 20 window. Draw a street of three houses.</p>
     <div class="runner" data-id="D4" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>Work out every size inside the function from the point (x, y), the top left corner of the wall. The roof starts 10 to the left and 20 higher.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The key is that everything inside the function is counted from <code>x</code> and <code>y</code>. Then the same recipe draws a house anywhere.</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -283,34 +283,34 @@ drawHouse(280, 200);</pre></div></details>
 
   <h2 id="s-loops">Loops <small class="sec-lessons">Lesson <a href="lesson-06.html">6</a></small></h2>
   <section class="task" id="t-E1" data-level="1">
-    <div class="task-head"><span class="task-num">E1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="E1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">E1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="E1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="E1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">for (let i = 1; i &lt;= 5; i++) {
   console.log(i * i);
-}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The squares of 1 to 5: 1, 4, 9, 16, 25. Note that <code>i</code> starts at 1 and the condition <code>&lt;=</code> includes 5.</p></div></details>
   </section>
   <section class="task" id="t-E2" data-level="1">
-    <div class="task-head"><span class="task-num">E2</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="E2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">E2</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="E2"> Solved</label></div>
     <p>Print the 7 times table: from "7 x 1 = 7" to "7 x 10 = 70".</p>
     <div class="runner" data-id="E2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Write your code here
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Multiplication happens before gluing, so brackets around <code>7 * i</code> aren't needed (but they don't hurt).</p><pre class="code">for (let i = 1; i &lt;= 10; i++) {
   console.log("7 x " + i + " = " + 7 * i);
 }</pre></div></details>
   </section>
   <section class="task" id="t-E3" data-level="2">
-    <div class="task-head"><span class="task-num">E3</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">E3</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="E3"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="E3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let sum = 0;
 for (let i = 1; i &lt;= 10; i++) {
   sum = sum + i;
 }
-console.log(sum);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(sum);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>55</code> — the sum of the numbers 1 to 10. The <code>sum</code> variable collects the result, like a piggy bank.</p></div></details>
   </section>
   <section class="task" id="t-E4" data-level="2">
-    <div class="task-head"><span class="task-num">E4</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">E4</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="E4"> Solved</label></div>
     <p>This program freezes. <b>Don't run it!</b> Find the mistake by reading.</p>
     <pre class="code">for (let i = 0; i &lt; 5; i--) {
   console.log(i);
@@ -321,11 +321,11 @@ console.log(sum);</textarea><div class="runner-bar"><button type="button" class=
 }</pre></div></details>
   </section>
   <section class="task" id="t-E5" data-level="3">
-    <div class="task-head"><span class="task-num">E5</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E5"> Solved</label></div>
+    <div class="task-head"><span class="task-num">E5</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="E5"> Solved</label></div>
     <p>Draw an 8 × 8 chessboard of 50 × 50 squares — it fills the whole canvas.</p>
     <div class="runner" data-id="E5" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>Two loops, one inside the other: over y and over x. The <code>%</code> sign gives the remainder of a division: <code>(x + y) % 2</code> is 0 or 1 — that's the alternating colour.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The outer loop goes through the rows, the inner one through the squares in a row. Neighbouring squares differ by 1 in <code>x + y</code>, so the colours alternate. (If you haven't done <code>if</code> yet, come back after lesson 9.)</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -344,27 +344,27 @@ for (let y = 0; y &lt; 8; y++) {
 
   <h2 id="s-arrays">Arrays, objects and movement <small class="sec-lessons">Lessons <a href="lesson-07.html">7</a>, <a href="lesson-08.html">8</a></small></h2>
   <section class="task" id="t-F1" data-level="1">
-    <div class="task-head"><span class="task-num">F1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="F1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="F1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="F1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">let fruits = ["apple", "pear", "plum"];
 console.log(fruits[1]);
 console.log(fruits.length);
-console.log(fruits[fruits.length - 1]);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(fruits[fruits.length - 1]);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Numbering starts at zero, so <code>fruits[1]</code> is the second element. The last element is always <code>length - 1</code>.</p></div></details>
   </section>
   <section class="task" id="t-F2" data-level="1">
-    <div class="task-head"><span class="task-num">F2</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="F2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F2</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="F2"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="F2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let list = [1, 2, 3];
 list.unshift(0);
 list.push(4);
 list.pop();
 list.pop();
-console.log(list);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(list);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>[0, 1, 2]</code>. <code>unshift</code> added 0 at the start, <code>push</code> added 4 at the end, and the two <code>pop</code>s removed 4 and 3.</p></div></details>
   </section>
   <section class="task" id="t-F3" data-level="2">
-    <div class="task-head"><span class="task-num">F3</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F3</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="F3"> Solved</label></div>
     <p>The snake takes one step down. What will the program print?</p>
     <div class="runner" data-id="F3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="10">let snake = [{ x: 5, y: 5 }, { x: 4, y: 5 }, { x: 3, y: 5 }];
 let dx = 0;
@@ -374,14 +374,14 @@ snake.unshift(head);
 snake.pop();
 console.log(snake[0].x, snake[0].y);
 console.log(snake[2].x, snake[2].y);
-console.log(snake.length);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(snake.length);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The head is now at (5, 6), one cell lower. The old middle piece (4, 5) has become the tail. The length hasn't changed: one piece added, one removed.</p></div></details>
   </section>
   <section class="task" id="t-F4" data-level="2">
-    <div class="task-head"><span class="task-num">F4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="F4"> Solved</label></div>
     <p>Use a loop to find the sum of all the numbers in the <code>scores</code> array, and the average (the sum divided by how many there are).</p>
     <div class="runner" data-id="F4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let scores = [3, 7, 2, 9, 4];
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The sum is 25, the average 5. Write <code>i &lt; scores.length</code>, not <code>i &lt; 5</code>: then the code works for an array of any length.</p><pre class="code">let scores = [3, 7, 2, 9, 4];
 let sum = 0;
 for (let i = 0; i &lt; scores.length; i++) {
@@ -391,10 +391,10 @@ console.log(sum);
 console.log(sum / scores.length);</pre></div></details>
   </section>
   <section class="task" id="t-F5" data-level="3">
-    <div class="task-head"><span class="task-num">F5</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F5"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F5</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="F5"> Solved</label></div>
     <p>There's an array of points. Move <b>every</b> point 1 to the right (x + 1) and print all the points.</p>
     <div class="runner" data-id="F5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let points = [{ x: 1, y: 1 }, { x: 5, y: 2 }, { x: 9, y: 3 }];
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Inside the loop <code>points[i]</code> is the current object, and you can change its <code>x</code> property.</p><pre class="code">let points = [{ x: 1, y: 1 }, { x: 5, y: 2 }, { x: 9, y: 3 }];
 for (let i = 0; i &lt; points.length; i++) {
   points[i].x = points[i].x + 1;
@@ -402,14 +402,14 @@ for (let i = 0; i &lt; points.length; i++) {
 }</pre></div></details>
   </section>
   <section class="task" id="t-F6" data-level="2">
-    <div class="task-head"><span class="task-num">F6</span><span class="task-kind kind-think">Think</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F6"> Solved</label></div>
+    <div class="task-head"><span class="task-num">F6</span> <span class="task-kind kind-think">Think</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="F6"> Solved</label></div>
     <p>Someone wrote <code>setInterval(step(), 200);</code>, and the snake took only one step. Why?</p>
     <details class="answer"><summary>✅ Show answer</summary><div><p>With brackets, <code>step()</code> is called <b>straight away</b>, once, and the timer gets its result (nothing). The timer needs the function itself: <code>setInterval(step, 200)</code>.</p></div></details>
   </section>
 
   <h2 id="s-conditions">Conditions and the keyboard <small class="sec-lessons">Lessons <a href="lesson-09.html">9</a>, <a href="lesson-10.html">10</a></small></h2>
   <section class="task" id="t-H1" data-level="1">
-    <div class="task-head"><span class="task-num">H1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="H1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="H1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="H1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="13">let x = 7;
 if (x &gt; 5 &amp;&amp; x &lt; 10) {
@@ -422,14 +422,14 @@ if (x !== 7) {
   console.log("C");
 } else {
   console.log("D");
-}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>A</code> — both conditions are true. <code>B</code> — at least one is true. <code>D</code> — x is 7, so <code>x !== 7</code> is false and the <code>else</code> runs.</p></div></details>
   </section>
   <section class="task" id="t-H2" data-level="1">
-    <div class="task-head"><span class="task-num">H2</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="H2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H2</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="H2"> Solved</label></div>
     <p>Print "even" or "odd" for the number in <code>n</code>. Test it with 4 and with 7.</p>
     <div class="runner" data-id="H2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let n = 4;
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div><code>n % 2</code> is the remainder after dividing by 2. For even numbers it's 0.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The remainder after dividing by 2 can only be 0 or 1.</p><pre class="code">let n = 4;
 if (n % 2 === 0) {
@@ -439,10 +439,10 @@ if (n % 2 === 0) {
 }</pre></div></details>
   </section>
   <section class="task" id="t-H3" data-level="2">
-    <div class="task-head"><span class="task-num">H3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="H3"> Solved</label></div>
     <p>Find the biggest number in the array, using a loop and a condition — no ready-made commands.</p>
     <div class="runner" data-id="H3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let scores = [3, 7, 2, 9, 4];
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>Make a variable <code>max</code> holding the first element. Go through the array: if a number is bigger than <code>max</code>, put it in <code>max</code>.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>This is also how you'd find a high score. The loop can start at 1: element 0 is already in <code>max</code>.</p><pre class="code">let scores = [3, 7, 2, 9, 4];
 let max = scores[0];
@@ -454,7 +454,7 @@ for (let i = 1; i &lt; scores.length; i++) {
 console.log(max);</pre></div></details>
   </section>
   <section class="task" id="t-H4" data-level="2">
-    <div class="task-head"><span class="task-num">H4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="H4"> Solved</label></div>
     <p>Finish the <code>wrap(n)</code> function for the portals: if <code>n</code> has left the 0…19 field, bring it back on the other side. It should print 0, 19 and 7.</p>
     <div class="runner" data-id="H4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="11">let cells = 20;
 
@@ -465,7 +465,7 @@ function wrap(n) {
 
 console.log(wrap(20));
 console.log(wrap(-1));
-console.log(wrap(7));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(wrap(7));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The same two <code>if</code>s as the portals in lesson 9, just packed into a function. Now you can call it for both x and y.</p><pre class="code">let cells = 20;
 
 function wrap(n) {
@@ -483,7 +483,7 @@ console.log(wrap(-1));
 console.log(wrap(7));</pre></div></details>
   </section>
   <section class="task" id="t-H5" data-level="3">
-    <div class="task-head"><span class="task-num">H5</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H5"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H5</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="H5"> Solved</label></div>
     <p>Make the arrow keys move the square around the canvas by 20 pixels. Run it, <b>click on the picture</b>, and press the arrows.</p>
     <div class="runner" data-id="H5" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="21">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -504,7 +504,7 @@ function onKey(event) {
 }
 
 document.addEventListener("keydown", onKey);
-draw();</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+draw();</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Each arrow changes <code>x</code> or <code>y</code>, and then everything is redrawn. ⭐ Can you stop the square from leaving the field?</p><pre class="code">let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 
@@ -538,13 +538,13 @@ document.addEventListener("keydown", onKey);
 draw();</pre></div></details>
   </section>
   <section class="task" id="t-H6" data-level="3">
-    <div class="task-head"><span class="task-num">H6</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H6"> Solved</label></div>
+    <div class="task-head"><span class="task-num">H6</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="H6"> Solved</label></div>
     <p>Run the program and read the error. Why does it happen, when nobody has pressed a key yet?</p>
     <div class="runner" data-id="H6" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">function onKey(event) {
   console.log(event.key);
 }
 
-document.addEventListener("keydown", onKey());</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+document.addEventListener("keydown", onKey());</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Because of the brackets, <code>onKey()</code> is called straight away, without an event, so <code>event</code> is empty (<i>undefined</i>). The listener needs the function itself: <code>onKey</code> without brackets. It's the same mistake as with <code>setInterval</code>.</p><pre class="code">function onKey(event) {
   console.log(event.key);
 }
@@ -554,7 +554,7 @@ document.addEventListener("keydown", onKey);</pre></div></details>
 
   <h2 id="s-random">Random numbers and return <small class="sec-lessons">Lesson <a href="lesson-11.html">11</a></small></h2>
   <section class="task" id="t-J1" data-level="1">
-    <div class="task-head"><span class="task-num">J1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="J1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">J1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="J1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="J1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="8">function double(n) {
   return n * 2;
@@ -562,17 +562,17 @@ document.addEventListener("keydown", onKey);</pre></div></details>
 
 console.log(double(4));
 console.log(double(double(3)));
-console.log(double(1) + double(2));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(double(1) + double(2));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>8</code>, <code>12</code>, <code>6</code>. In the second line the inner call is worked out first: <code>double(3)</code> = 6, then <code>double(6)</code> = 12.</p></div></details>
   </section>
   <section class="task" id="t-J2" data-level="1">
-    <div class="task-head"><span class="task-num">J2</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="J2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">J2</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="J2"> Solved</label></div>
     <p>It should print 25, but it prints <code>undefined</code>. Why?</p>
     <div class="runner" data-id="J2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">function square(n) {
   n * n;
 }
 
-console.log(square(5));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(square(5));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The function worked out <code>n * n</code> but didn't give the answer back to anyone. Without <code>return</code> a function returns <code>undefined</code> — "nothing".</p><pre class="code">function square(n) {
   return n * n;
 }
@@ -580,10 +580,10 @@ console.log(square(5));</textarea><div class="runner-bar"><button type="button" 
 console.log(square(5));</pre></div></details>
   </section>
   <section class="task" id="t-J3" data-level="2">
-    <div class="task-head"><span class="task-num">J3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="J3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">J3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="J3"> Solved</label></div>
     <p>Write a function <code>dice()</code> that returns a random number from 1 to 6, like a real die. Roll it 10 times.</p>
     <div class="runner" data-id="J3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Write your code here
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div><code>Math.floor(Math.random() * 6)</code> gives 0 to 5. How do you shift it by one?</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Add 1 after rounding: 0…5 becomes 1…6.</p><pre class="code">function dice() {
   return Math.floor(Math.random() * 6) + 1;
@@ -594,12 +594,12 @@ for (let i = 0; i &lt; 10; i++) {
 }</pre></div></details>
   </section>
   <section class="task" id="t-J4" data-level="3">
-    <div class="task-head"><span class="task-num">J4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="J4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">J4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="J4"> Solved</label></div>
     <p>Roll a die 600 times and count how many sixes you get. Roughly how many should there be? Run it a few times.</p>
     <div class="runner" data-id="J4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">function dice() {
   return Math.floor(Math.random() * 6) + 1;
 }
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>Each number comes up about once in six rolls, so about 100 times out of 600. Each run gives a slightly different number: that's randomness.</p><pre class="code">function dice() {
   return Math.floor(Math.random() * 6) + 1;
 }
@@ -615,7 +615,7 @@ console.log(sixes);</pre></div></details>
 
   <h2 id="s-game">Game over, while and the timer <small class="sec-lessons">Lessons <a href="lesson-12.html">12</a>, <a href="lesson-13.html">13</a>, <a href="lesson-14.html">14</a></small></h2>
   <section class="task" id="t-K1" data-level="1">
-    <div class="task-head"><span class="task-num">K1</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="K1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K1</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="K1"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="K1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="14">function check(n) {
   if (n &lt; 0) {
@@ -629,28 +629,28 @@ console.log(sixes);</pre></div></details>
 
 console.log(check(-3));
 console.log(check(0));
-console.log(check(8));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(check(8));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>return</code> ends the function immediately. So for −3 the other checks are never reached.</p></div></details>
   </section>
   <section class="task" id="t-K2" data-level="2">
-    <div class="task-head"><span class="task-num">K2</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K2</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="K2"> Solved</label></div>
     <p>What will the program print?</p>
     <div class="runner" data-id="K2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let n = 1;
 while (n &lt; 100) {
   n = n * 2;
 }
-console.log(n);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log(n);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>128</code>. The number doubles: 1, 2, 4, …, 64, 128. Once it's 128, the condition <code>n &lt; 100</code> is false and the loop stops.</p></div></details>
   </section>
   <section class="task" id="t-K3" data-level="2">
-    <div class="task-head"><span class="task-num">K3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="K3"> Solved</label></div>
     <p>Write a function <code>contains(list, value)</code> that answers <code>true</code> if <code>value</code> is in the array and <code>false</code> if not. It's the same idea as <code>isOnSnake</code>.</p>
     <div class="runner" data-id="K3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let numbers = [3, 8, 5];
 
 // function contains(list, value) { … }
 
 // console.log(contains(numbers, 8));
-// console.log(contains(numbers, 4));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+// console.log(contains(numbers, 4));</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>return true</code> goes inside the loop, as soon as it's found. <code>return false</code> goes <b>after</b> the loop, once everything has been checked.</p><pre class="code">let numbers = [3, 8, 5];
 
 function contains(list, value) {
@@ -666,7 +666,7 @@ console.log(contains(numbers, 8));
 console.log(contains(numbers, 4));</pre></div></details>
   </section>
   <section class="task" id="t-K4" data-level="2">
-    <div class="task-head"><span class="task-num">K4</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K4"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K4</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="K4"> Solved</label></div>
     <p>Make a countdown: once a second print 3, 2, 1, then "Go!" — and stop the timer.</p>
     <div class="runner" data-id="K4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="8">let n = 3;
 let timer = setInterval(tick, 1000);
@@ -674,7 +674,7 @@ let timer = setInterval(tick, 1000);
 function tick() {
   console.log(n);
   n = n - 1;
-}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="hint"><summary>💡 Hint</summary><div>Check in <code>tick</code>: if <code>n</code> is already 0, print "Go!" and call <code>clearInterval(timer)</code>.</div></details>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>endGame</code> works the same way: <code>clearInterval</code> switches the timer off, and <code>return</code> stops the rest of the code from running.</p><pre class="code">let n = 3;
 let timer = setInterval(tick, 1000);
@@ -690,12 +690,12 @@ function tick() {
 }</pre></div></details>
   </section>
   <section class="task" id="t-K5" data-level="3">
-    <div class="task-head"><span class="task-num">K5</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K5"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K5</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="K5"> Solved</label></div>
     <p>Roll a die until you get a six. Print how many rolls it took. Use <code>while</code>.</p>
     <div class="runner" data-id="K5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">function dice() {
   return Math.floor(Math.random() * 6) + 1;
 }
-</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The first roll happens right inside the <code>while</code> condition. It's the same idea as <code>placeApple</code>: repeat <b>until it works out</b>.</p><pre class="code">function dice() {
   return Math.floor(Math.random() * 6) + 1;
 }
@@ -707,23 +707,23 @@ while (dice() !== 6) {
 console.log(throws);</pre></div></details>
   </section>
   <section class="task" id="t-K6" data-level="3">
-    <div class="task-head"><span class="task-num">K6</span><span class="task-kind kind-predict">What's printed?</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K6"> Solved</label></div>
+    <div class="task-head"><span class="task-num">K6</span> <span class="task-kind kind-predict">What's printed?</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="K6"> Solved</label></div>
     <p>What will the program print? (Handy for the high score.)</p>
     <div class="runner" data-id="K6" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">console.log("5" + 5);
 console.log(Number("5") + 5);
 console.log(Number(null));
-console.log("5" &gt; 10);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button><button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
+console.log("5" &gt; 10);</textarea><div class="runner-bar"><button type="button" class="run">▶ Run</button> <button type="button" class="reset">↺ Reset</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="The result will appear here"></pre></div></div>
     <details class="answer"><summary>✅ Show answer</summary><div><p><code>55</code> — the texts were glued together. <code>10</code> — <code>Number</code> turned the text into a number. <code>0</code> — that's what you get when there's no high score yet. <code>false</code> — when comparing, the text becomes the number 5 by itself, and 5 isn't greater than 10.</p></div></details>
   </section>
 
   <h2 id="s-css">Styling (CSS) <small class="sec-lessons">Lesson <a href="lesson-15.html">15</a></small></h2>
   <section class="task" id="t-L1" data-level="1">
-    <div class="task-head"><span class="task-num">L1</span><span class="task-kind kind-think">Think</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="L1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">L1</span> <span class="task-kind kind-think">Think</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="L1"> Solved</label></div>
     <p>Which selector picks what?<br>1) <code>p</code> 2) <code>#score</code> 3) <code>.help</code><br>a) only the element with <code>id="score"</code> &nbsp; b) all paragraphs &nbsp; c) every element with <code>class="help"</code></p>
     <details class="answer"><summary>✅ Show answer</summary><div><p>1 — b, 2 — a, 3 — c. A hash <code>#</code> means id, a dot <code>.</code> means class, a plain word means a tag.</p></div></details>
   </section>
   <section class="task" id="t-L2" data-level="2">
-    <div class="task-head"><span class="task-num">L2</span><span class="task-kind kind-fix">Find the bug</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="L2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">L2</span> <span class="task-kind kind-fix">Find the bug</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="L2"> Solved</label></div>
     <p>This CSS doesn't work. Find three mistakes.</p>
     <pre class="code">body {
   background = black;
@@ -738,7 +738,7 @@ console.log("5" &gt; 10);</textarea><div class="runner-bar"><button type="button
 }</pre></div></details>
   </section>
   <section class="task" id="t-L3" data-level="3">
-    <div class="task-head"><span class="task-num">L3</span><span class="task-kind kind-write">Write code</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="L3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">L3</span> <span class="task-kind kind-write">Write code</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="L3"> Solved</label></div>
     <p>Write CSS: every <code>button</code> is yellow, with round corners, big text and a 3-pixel black border. Try it in your <code>snake.html</code>.</p>
     <p class="norun">Solve this one in your own file in Geany — it can't run here.</p>
     <details class="answer"><summary>✅ Show answer</summary><div><p>The tag selector <code>button</code> picks every button at once.</p><pre class="code">button {
@@ -751,7 +751,7 @@ console.log("5" &gt; 10);</textarea><div class="runner-bar"><button type="button
 
   <h2 id="s-projects">Projects for your own Snake <small class="sec-lessons">Lesson <a href="lesson-16.html">16</a></small></h2>
   <section class="task" id="t-P1" data-level="1">
-    <div class="task-head"><span class="task-num">P1</span><span class="task-kind kind-project">Project</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="P1"> Solved</label></div>
+    <div class="task-head"><span class="task-num">P1</span> <span class="task-kind kind-project">Project</span> <span class="task-level" title="⭐">⭐</span> <label class="task-done"><input type="checkbox" data-task="P1"> Solved</label></div>
     <p>Pause: the <kbd>P</kbd> key stops and continues the game.</p>
     <p class="norun">Solve this one in your own file in Geany — it can't run here.</p>
     <details class="hint"><summary>💡 Hint</summary><div>A flag variable <code>paused</code>, the "not" sign <code>!</code>, and a <code>return</code> at the start of <code>step</code>.</div></details>
@@ -769,7 +769,7 @@ if (event.code === "KeyP" &amp;&amp; !gameOver) {
 }</pre></div></details>
   </section>
   <section class="task" id="t-P2" data-level="2">
-    <div class="task-head"><span class="task-num">P2</span><span class="task-kind kind-project">Project</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="P2"> Solved</label></div>
+    <div class="task-head"><span class="task-num">P2</span> <span class="task-kind kind-project">Project</span> <span class="task-level" title="⭐⭐">⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="P2"> Solved</label></div>
     <p>A rainbow snake: every piece is a different colour, and the colours repeat in a cycle.</p>
     <p class="norun">Solve this one in your own file in Geany — it can't run here.</p>
     <details class="hint"><summary>💡 Hint</summary><div>An array of colours and the remainder: <code>colors[i % colors.length]</code>.</div></details>
@@ -781,7 +781,7 @@ for (let i = 0; i &lt; snake.length; i++) {
 }</pre></div></details>
   </section>
   <section class="task" id="t-P3" data-level="3">
-    <div class="task-head"><span class="task-num">P3</span><span class="task-kind kind-project">Project</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="P3"> Solved</label></div>
+    <div class="task-head"><span class="task-num">P3</span> <span class="task-kind kind-project">Project</span> <span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span> <label class="task-done"><input type="checkbox" data-task="P3"> Solved</label></div>
     <p>A golden apple: sometimes (1 time in 5) a golden apple appears, worth 5 points.</p>
     <p class="norun">Solve this one in your own file in Geany — it can't run here.</p>
     <details class="hint"><summary>💡 Hint</summary><div>Give the <code>apple</code> object a <code>gold</code> property. Set it in <code>placeApple</code> and use it in <code>draw</code> and <code>step</code>.</div></details>
@@ -808,7 +808,7 @@ if (apple.gold) {
     <a class="next" href="cheatsheet.html"><small>Always at hand →</small>Cheat sheet</a>
   </nav>
 </main>
-<script src="../assets/code.js"></script>
-<script src="../assets/practice.js"></script>
+<script src="../assets/code.js?v=961ac153"></script>
+<script src="../assets/practice.js?v=9a9c685f"></script>
 </body>
 </html>
