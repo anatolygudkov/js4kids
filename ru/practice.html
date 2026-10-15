@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Задачник</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">🐍 JavaScript для детей</a>
+  <nav><a href="index.html">Оглавление</a><a href="practice.html">Задачник</a><a href="cheatsheet.html">Шпаргалка</a><a href="../index.html">🌐 Язык</a></nav>
+</header>
+<main class="practice">
+  <p class="kicker">После курса · 50 задач</p>
+  <h1>Задачник</h1>
+  <p class="lead">Задачи по всем темам курса — от совсем простых до хитрых. Решай в любом порядке и возвращайся к ним, чтобы потренироваться.</p>
+  <div class="goals">
+    <b>Как решать:</b>
+    <ul><li>прочитай условие и <b>сначала подумай</b> (или напиши код);</li><li>нажми <b>▶ Запустить</b> — результат появится под кодом (а ещё можно <kbd>Ctrl</kbd> + <kbd>Enter</kbd>);</li><li>код можно менять прямо здесь, <b>↺ Сбросить</b> вернёт исходный;</li><li>открывай <b>подсказку</b>, если застрял, и <b>ответ</b> — только когда решил или очень-очень застрял;</li><li>отмечай решённые задачи галочкой — прогресс сохраняется в браузере.</li></ul>
+  </div>
+  <div class="box adult"><span class="title">👨‍👩‍👧 Для взрослых</span>Код задач выполняется прямо на странице, в изолированной «песочнице», и ничего не может сломать. Задачи с пометкой «Проект» — для своего файла <code>snake.html</code>.</div>
+  <div class="practice-tools">
+    <div class="level-filter">
+<button type="button" data-level="all" class="active">Все</button>
+<button type="button" data-level="1">⭐ Простые</button>
+<button type="button" data-level="2">⭐⭐ Средние</button>
+<button type="button" data-level="3">⭐⭐⭐ Сложные</button>
+</div>
+    <div class="progress"><div class="progress-track"><div class="progress-fill"></div></div><span class="progress-label"></span></div>
+  </div>
+  <nav class="toc">
+<a href="#s-basics">Первые шаги: console.log и ошибки</a>
+<a href="#s-vars">Переменные</a>
+<a href="#s-canvas">Холст и координаты</a>
+<a href="#s-functions">Функции</a>
+<a href="#s-loops">Циклы</a>
+<a href="#s-arrays">Массивы, объекты и движение</a>
+<a href="#s-conditions">Условия и клавиатура</a>
+<a href="#s-random">Случайные числа и return</a>
+<a href="#s-game">Конец игры, while и таймер</a>
+<a href="#s-css">Оформление (CSS)</a>
+<a href="#s-projects">Проекты для своей Змейки</a>
+</nav>
+
+  <h2 id="s-basics">Первые шаги: console.log и ошибки <small class="sec-lessons">Уроки <a href="lesson-01.html">1</a>, <a href="lesson-02.html">2</a></small></h2>
+  <section class="task" id="t-A1" data-level="1">
+    <div class="task-head"><span class="task-num">A1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="A1"> Решено</label></div>
+    <p>Что выведет программа? Сначала ответь сам, потом запусти.</p>
+    <div class="runner" data-id="A1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">console.log(3 + 4);
+console.log("3 + 4");
+console.log("3" + 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>7</code>, потом <code>3 + 4</code>, потом <code>34</code>. В кавычках — текст: его не считают, а показывают. А текст плюс число <b>склеиваются</b>: <code>"3" + 4</code> даёт <code>"34"</code>.</p></div></details>
+  </section>
+  <section class="task" id="t-A2" data-level="1">
+    <div class="task-head"><span class="task-num">A2</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="A2"> Решено</label></div>
+    <p>Сколько секунд в одном часе? А в одной неделе? Выведи оба числа — пусть посчитает компьютер.</p>
+    <div class="runner" data-id="A2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Напиши код здесь
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>В минуте 60 секунд, в часе 60 минут, в сутках 24 часа, в неделе 7 суток. Умножение — <code>*</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>В часе 3600 секунд, в неделе 604800.</p><pre class="code">console.log(60 * 60);
+console.log(7 * 24 * 60 * 60);</pre></div></details>
+  </section>
+  <section class="task" id="t-A3" data-level="2">
+    <div class="task-head"><span class="task-num">A3</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="A3"> Решено</label></div>
+    <p>В программе три ошибки. Запусти её, прочитай сообщение, исправь ошибку — и так, пока все строки не заработают.</p>
+    <div class="runner" data-id="A3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">consol.log("Привет");
+console.log("Мир);
+console.log(5 * 5;</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Сначала компьютер жалуется на ошибки написания (<i>SyntaxError</i>) — из-за них он не может прочитать программу целиком. Опечатку в имени он заметит последней.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>consol</code> → <code>console</code>; не закрыта кавычка после <code>Мир</code>; не хватает <code>)</code> в последней строке.</p><pre class="code">console.log("Привет");
+console.log("Мир");
+console.log(5 * 5);</pre></div></details>
+  </section>
+  <section class="task" id="t-A4" data-level="3">
+    <div class="task-head"><span class="task-num">A4</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="A4"> Решено</label></div>
+    <p>Что выведет программа? Подумай про порядок действий.</p>
+    <div class="runner" data-id="A4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">console.log(2 + 3 * 4);
+console.log((2 + 3) * 4);
+console.log("2" + 3 * 4);
+console.log(10 / 4);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>14</code>, <code>20</code>, <code>212</code>, <code>2.5</code>. Умножение выполняется раньше сложения. В третьей строке сначала <code>3 * 4 = 12</code>, а потом текст <code>"2"</code> склеивается с 12. Деление даёт дробь через точку.</p></div></details>
+  </section>
+
+  <h2 id="s-vars">Переменные <small class="sec-lessons">Урок <a href="lesson-03.html">3</a></small></h2>
+  <section class="task" id="t-B1" data-level="1">
+    <div class="task-head"><span class="task-num">B1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="B1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="B1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">let apples = 5;
+apples = apples + 3;
+apples = apples * 2;
+console.log(apples);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>16</code>: было 5, стало 5 + 3 = 8, потом 8 × 2 = 16.</p></div></details>
+  </section>
+  <section class="task" id="t-B2" data-level="1">
+    <div class="task-head"><span class="task-num">B2</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="B2"> Решено</label></div>
+    <p>Программа должна вывести <code>1</code>, но не работает. Найди две ошибки.</p>
+    <div class="runner" data-id="B2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let score = 0;
+let score = score + 1;
+console.log(Score);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>let</code> пишут только при создании коробки — во второй строке он лишний. И <code>Score</code> с большой буквы — это другое имя, нужно <code>score</code>.</p><pre class="code">let score = 0;
+score = score + 1;
+console.log(score);</pre></div></details>
+  </section>
+  <section class="task" id="t-B3" data-level="2">
+    <div class="task-head"><span class="task-num">B3</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B3"> Решено</label></div>
+    <p>Что выведет программа? Осторожно, ловушка!</p>
+    <div class="runner" data-id="B3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let a = 10;
+let b = a;
+a = 20;
+console.log(a);
+console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>20</code> и <code>10</code>. Строка <code>let b = a;</code> кладёт в <code>b</code> <b>копию</b> числа 10. Когда потом <code>a</code> меняется, в коробке <code>b</code> так и лежит 10.</p></div></details>
+  </section>
+  <section class="task" id="t-B4" data-level="2">
+    <div class="task-head"><span class="task-num">B4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B4"> Решено</label></div>
+    <p>Есть переменные <code>name</code> и <code>age</code>. Выведи фразу вида «Аня, через 5 лет тебе будет 15» — возраст через 5 лет должен посчитать компьютер.</p>
+    <div class="runner" data-id="B4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let name = "Аня";
+let age = 10;
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Что получится без скобок: <code>"будет " + age + 5</code>? Попробуй!</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Скобки обязательны: без них текст склеится с 10, а потом с 5, и получится «105».</p><pre class="code">let name = "Аня";
+let age = 10;
+console.log(name + ", через 5 лет тебе будет " + (age + 5));</pre></div></details>
+  </section>
+  <section class="task" id="t-B5" data-level="3">
+    <div class="task-head"><span class="task-num">B5</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="B5"> Решено</label></div>
+    <p>Поменяй значения переменных <code>a</code> и <code>b</code> местами, чтобы программа вывела <code>2</code> и <code>1</code>. Писать числа 1 и 2 ещё раз нельзя!</p>
+    <div class="runner" data-id="B5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let a = 1;
+let b = 2;
+// твой код
+console.log(a);
+console.log(b);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Как поменять местами сок в двух стаканах? Нужен третий, пустой стакан.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Третья переменная <code>temp</code> временно хранит значение <code>a</code>, пока в <code>a</code> кладут <code>b</code>.</p><pre class="code">let a = 1;
+let b = 2;
+let temp = a;
+a = b;
+b = temp;
+console.log(a);
+console.log(b);</pre></div></details>
+  </section>
+
+  <h2 id="s-canvas">Холст и координаты <small class="sec-lessons">Урок <a href="lesson-04.html">4</a></small></h2>
+  <section class="task" id="t-C1" data-level="1">
+    <div class="task-head"><span class="task-num">C1</span><span class="task-kind kind-think">Подумай</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="C1"> Решено</label></div>
+    <p>Холст 400 × 400. В каком углу окажется каждый квадрат?<br><code>ctx.fillRect(380, 0, 20, 20)</code><br><code>ctx.fillRect(0, 380, 20, 20)</code><br><code>ctx.fillRect(380, 380, 20, 20)</code></p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Правый верхний, левый нижний, правый нижний. Помни: y растёт <b>вниз</b>.</p></div></details>
+  </section>
+  <section class="task" id="t-C2" data-level="1">
+    <div class="task-head"><span class="task-num">C2</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="C2"> Решено</label></div>
+    <p>Должен получиться зелёный квадрат на чёрном фоне, но видно только чёрное. Почему?</p>
+    <div class="runner" data-id="C2" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "lime";
+ctx.fillRect(100, 100, 50, 50);
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, 400, 400);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Чёрный фон нарисован <b>после</b> квадрата и закрыл его. Фон рисуют первым.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, 400, 400);
+ctx.fillStyle = "lime";
+ctx.fillRect(100, 100, 50, 50);</pre></div></details>
+  </section>
+  <section class="task" id="t-C3" data-level="2">
+    <div class="task-head"><span class="task-num">C3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="C3"> Решено</label></div>
+    <p>Нарисуй «лежачий светофор»: на чёрном фоне три квадрата 40 × 40 в ряд — красный, жёлтый, зелёный. Первый в точке (100, 180), между квадратами промежуток 10.</p>
+    <div class="runner" data-id="C3" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, 400, 400);
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Следующий квадрат начинается на 40 + 10 = 50 пикселей правее предыдущего.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>x квадратов: 100, 150, 200. Цвет меняют перед каждым <code>fillRect</code>.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, 400, 400);
+ctx.fillStyle = "red";
+ctx.fillRect(100, 180, 40, 40);
+ctx.fillStyle = "yellow";
+ctx.fillRect(150, 180, 40, 40);
+ctx.fillStyle = "lime";
+ctx.fillRect(200, 180, 40, 40);</pre></div></details>
+  </section>
+  <section class="task" id="t-C4" data-level="3">
+    <div class="task-head"><span class="task-num">C4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="C4"> Решено</label></div>
+    <p>Нарисуй мишень: три квадрата один в другом, все с центром в середине холста (200, 200). Размеры 300, 200 и 100, цвета красный, белый, красный.</p>
+    <div class="runner" data-id="C4" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Левый верхний угол квадрата размером s с центром в 200: x = y = 200 − s / 2. И подумай, какой квадрат рисовать первым.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Рисуем от большого к маленькому, иначе большой квадрат закроет маленькие. Углы: 50, 100, 150.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+ctx.fillStyle = "red";
+ctx.fillRect(50, 50, 300, 300);
+ctx.fillStyle = "white";
+ctx.fillRect(100, 100, 200, 200);
+ctx.fillStyle = "red";
+ctx.fillRect(150, 150, 100, 100);</pre></div></details>
+  </section>
+
+  <h2 id="s-functions">Функции <small class="sec-lessons">Урок <a href="lesson-05.html">5</a></small></h2>
+  <section class="task" id="t-D1" data-level="1">
+    <div class="task-head"><span class="task-num">D1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="D1"> Решено</label></div>
+    <p>Что выведет программа и в каком порядке?</p>
+    <div class="runner" data-id="D1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="12">function a() {
+  console.log("A");
+}
+
+function b() {
+  console.log("B");
+  a();
+}
+
+b();
+a();</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>B</code>, <code>A</code>, <code>A</code>. Записанные функции сами ничего не делают. Работа начинается с вызова <code>b()</code>: он печатает B и вызывает <code>a()</code>. Потом ещё один вызов <code>a()</code>.</p></div></details>
+  </section>
+  <section class="task" id="t-D2" data-level="1">
+    <div class="task-head"><span class="task-num">D2</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="D2"> Решено</label></div>
+    <p>Клетка не рисуется. Запусти и прочитай ошибку.</p>
+    <div class="runner" data-id="D2" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="10">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * 20, y * 20, 19, 19);
+}
+
+drawcell(2, 3, "red");</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>drawcell</code> и <code>drawCell</code> — разные имена. Большие и маленькие буквы важны.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+function drawCell(x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * 20, y * 20, 19, 19);
+}
+
+drawCell(2, 3, "red");</pre></div></details>
+  </section>
+  <section class="task" id="t-D3" data-level="2">
+    <div class="task-head"><span class="task-num">D3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="D3"> Решено</label></div>
+    <p>Напиши функцию <code>drawSquare(x, y, size, color)</code>, которая рисует квадрат любого размера, и нарисуй ею три квадрата разного размера и цвета.</p>
+    <div class="runner" data-id="D3" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Параметр <code>size</code> используется дважды — и для ширины, и для высоты.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+function drawSquare(x, y, size, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, size, size);
+}
+
+drawSquare(20, 20, 50, "red");
+drawSquare(100, 50, 100, "orange");
+drawSquare(230, 120, 150, "purple");</pre></div></details>
+  </section>
+  <section class="task" id="t-D4" data-level="3">
+    <div class="task-head"><span class="task-num">D4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="D4"> Решено</label></div>
+    <p>Напиши функцию <code>drawHouse(x, y)</code>: стена — квадрат 60 × 60, на ней «крыша» — красный прямоугольник 80 × 20 чуть шире стены, и жёлтое окно 20 × 20. Нарисуй улицу из трёх домиков.</p>
+    <div class="runner" data-id="D4" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Все размеры внутри функции считай от точки (x, y) — левого верхнего угла стены. Крыша начинается на 10 левее и на 20 выше.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Главное — всё внутри функции считается от <code>x</code> и <code>y</code>. Тогда один и тот же рецепт рисует домик в любом месте.</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+function drawHouse(x, y) {
+  ctx.fillStyle = "tan";
+  ctx.fillRect(x, y, 60, 60);
+  ctx.fillStyle = "red";
+  ctx.fillRect(x - 10, y - 20, 80, 20);
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(x + 20, y + 20, 20, 20);
+}
+
+drawHouse(40, 200);
+drawHouse(160, 200);
+drawHouse(280, 200);</pre></div></details>
+  </section>
+
+  <h2 id="s-loops">Циклы <small class="sec-lessons">Урок <a href="lesson-06.html">6</a></small></h2>
+  <section class="task" id="t-E1" data-level="1">
+    <div class="task-head"><span class="task-num">E1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="E1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="E1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">for (let i = 1; i &lt;= 5; i++) {
+  console.log(i * i);
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Квадраты чисел от 1 до 5: 1, 4, 9, 16, 25. Обрати внимание: <code>i</code> начинается с 1, а условие <code>&lt;=</code> включает 5.</p></div></details>
+  </section>
+  <section class="task" id="t-E2" data-level="1">
+    <div class="task-head"><span class="task-num">E2</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="E2"> Решено</label></div>
+    <p>Выведи таблицу умножения на 7: от «7 x 1 = 7» до «7 x 10 = 70».</p>
+    <div class="runner" data-id="E2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Напиши код здесь
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Умножение выполняется раньше склеивания, поэтому скобки вокруг <code>7 * i</code> не нужны (но и не помешают).</p><pre class="code">for (let i = 1; i &lt;= 10; i++) {
+  console.log("7 x " + i + " = " + 7 * i);
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-E3" data-level="2">
+    <div class="task-head"><span class="task-num">E3</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E3"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="E3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let sum = 0;
+for (let i = 1; i &lt;= 10; i++) {
+  sum = sum + i;
+}
+console.log(sum);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>55</code> — сумма чисел от 1 до 10. Переменная <code>sum</code> копит результат, как копилка.</p></div></details>
+  </section>
+  <section class="task" id="t-E4" data-level="2">
+    <div class="task-head"><span class="task-num">E4</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E4"> Решено</label></div>
+    <p>Эта программа зависает. <b>Не запускай её!</b> Найди ошибку глазами.</p>
+    <pre class="code">for (let i = 0; i &lt; 5; i--) {
+  console.log(i);
+}</pre>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>i--</code> <b>уменьшает</b> i: 0, −1, −2… Условие <code>i &lt; 5</code> всегда правда, и цикл бесконечный. Нужно <code>i++</code>.</p><pre class="code">for (let i = 0; i &lt; 5; i++) {
+  console.log(i);
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-E5" data-level="3">
+    <div class="task-head"><span class="task-num">E5</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="E5"> Решено</label></div>
+    <p>Нарисуй шахматную доску 8 × 8 из клеток 50 × 50 — она займёт весь холст.</p>
+    <div class="runner" data-id="E5" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="4">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Два цикла, один внутри другого: по y и по x. Знак <code>%</code> даёт остаток от деления: <code>(x + y) % 2</code> равно 0 или 1 — вот и чередование цветов.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Внешний цикл перебирает ряды, внутренний — клетки в ряду. У соседних клеток сумма <code>x + y</code> отличается на 1, поэтому цвета чередуются. (Если <code>if</code> ещё не пройден — вернись к этой задаче после урока 9.)</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+for (let y = 0; y &lt; 8; y++) {
+  for (let x = 0; x &lt; 8; x++) {
+    if ((x + y) % 2 === 0) {
+      ctx.fillStyle = "white";
+    } else {
+      ctx.fillStyle = "black";
+    }
+    ctx.fillRect(x * 50, y * 50, 50, 50);
+  }
+}</pre></div></details>
+  </section>
+
+  <h2 id="s-arrays">Массивы, объекты и движение <small class="sec-lessons">Уроки <a href="lesson-07.html">7</a>, <a href="lesson-08.html">8</a></small></h2>
+  <section class="task" id="t-F1" data-level="1">
+    <div class="task-head"><span class="task-num">F1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="F1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="F1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">let fruits = ["яблоко", "груша", "слива"];
+console.log(fruits[1]);
+console.log(fruits.length);
+console.log(fruits[fruits.length - 1]);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Номера начинаются с нуля, поэтому <code>fruits[1]</code> — второй элемент. Последний элемент всегда <code>length - 1</code>.</p></div></details>
+  </section>
+  <section class="task" id="t-F2" data-level="1">
+    <div class="task-head"><span class="task-num">F2</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="F2"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="F2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let list = [1, 2, 3];
+list.unshift(0);
+list.push(4);
+list.pop();
+list.pop();
+console.log(list);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>[0, 1, 2]</code>. <code>unshift</code> добавил 0 в начало, <code>push</code> — 4 в конец, а два <code>pop</code> убрали 4 и 3.</p></div></details>
+  </section>
+  <section class="task" id="t-F3" data-level="2">
+    <div class="task-head"><span class="task-num">F3</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F3"> Решено</label></div>
+    <p>Змейка делает один шаг вниз. Что выведет программа?</p>
+    <div class="runner" data-id="F3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="10">let snake = [{ x: 5, y: 5 }, { x: 4, y: 5 }, { x: 3, y: 5 }];
+let dx = 0;
+let dy = 1;
+let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+snake.unshift(head);
+snake.pop();
+console.log(snake[0].x, snake[0].y);
+console.log(snake[2].x, snake[2].y);
+console.log(snake.length);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Голова теперь в (5, 6) — на клетку ниже. Хвостом стал бывший средний кусочек (4, 5). Длина не изменилась: один кусочек добавили, один убрали.</p></div></details>
+  </section>
+  <section class="task" id="t-F4" data-level="2">
+    <div class="task-head"><span class="task-num">F4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F4"> Решено</label></div>
+    <p>Посчитай циклом сумму всех чисел в массиве <code>scores</code> и среднее арифметическое (сумма, делённая на количество).</p>
+    <div class="runner" data-id="F4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let scores = [3, 7, 2, 9, 4];
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Сумма 25, среднее 5. Пиши <code>i &lt; scores.length</code>, а не <code>i &lt; 5</code>: тогда код работает для массива любой длины.</p><pre class="code">let scores = [3, 7, 2, 9, 4];
+let sum = 0;
+for (let i = 0; i &lt; scores.length; i++) {
+  sum = sum + scores[i];
+}
+console.log(sum);
+console.log(sum / scores.length);</pre></div></details>
+  </section>
+  <section class="task" id="t-F5" data-level="3">
+    <div class="task-head"><span class="task-num">F5</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F5"> Решено</label></div>
+    <p>Есть массив точек. Сдвинь <b>каждую</b> точку на 1 вправо (x + 1) и выведи все точки.</p>
+    <div class="runner" data-id="F5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let points = [{ x: 1, y: 1 }, { x: 5, y: 2 }, { x: 9, y: 3 }];
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Внутри цикла <code>points[i]</code> — очередной объект, и у него можно менять свойство <code>x</code>.</p><pre class="code">let points = [{ x: 1, y: 1 }, { x: 5, y: 2 }, { x: 9, y: 3 }];
+for (let i = 0; i &lt; points.length; i++) {
+  points[i].x = points[i].x + 1;
+  console.log(points[i].x, points[i].y);
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-F6" data-level="2">
+    <div class="task-head"><span class="task-num">F6</span><span class="task-kind kind-think">Подумай</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="F6"> Решено</label></div>
+    <p>Ребёнок написал <code>setInterval(step(), 200);</code>, и змейка сделала только один шаг. Почему?</p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Со скобками <code>step()</code> функция вызывается <b>сразу</b>, один раз, а таймеру достаётся её результат (ничего). Таймеру нужно отдать саму функцию: <code>setInterval(step, 200)</code>.</p></div></details>
+  </section>
+
+  <h2 id="s-conditions">Условия и клавиатура <small class="sec-lessons">Уроки <a href="lesson-09.html">9</a>, <a href="lesson-10.html">10</a></small></h2>
+  <section class="task" id="t-H1" data-level="1">
+    <div class="task-head"><span class="task-num">H1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="H1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="H1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="13">let x = 7;
+if (x &gt; 5 &amp;&amp; x &lt; 10) {
+  console.log("A");
+}
+if (x &lt; 5 || x === 7) {
+  console.log("B");
+}
+if (x !== 7) {
+  console.log("C");
+} else {
+  console.log("D");
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>A</code> — оба условия верны. <code>B</code> — верно хотя бы одно. <code>D</code> — x равен 7, поэтому <code>x !== 7</code> ложь и выполняется <code>else</code>.</p></div></details>
+  </section>
+  <section class="task" id="t-H2" data-level="1">
+    <div class="task-head"><span class="task-num">H2</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="H2"> Решено</label></div>
+    <p>Выведи «чётное» или «нечётное» для числа в переменной <code>n</code>. Проверь на 4 и на 7.</p>
+    <div class="runner" data-id="H2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let n = 4;
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div><code>n % 2</code> — остаток от деления на 2. У чётных чисел он равен 0.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Остаток от деления на 2 бывает только 0 или 1.</p><pre class="code">let n = 4;
+if (n % 2 === 0) {
+  console.log("чётное");
+} else {
+  console.log("нечётное");
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-H3" data-level="2">
+    <div class="task-head"><span class="task-num">H3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H3"> Решено</label></div>
+    <p>Найди самое большое число в массиве — циклом и условием, без готовых команд.</p>
+    <div class="runner" data-id="H3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">let scores = [3, 7, 2, 9, 4];
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Заведи переменную <code>max</code> с первым элементом. Иди по массиву: если число больше <code>max</code>, клади его в <code>max</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Так же ищут рекорд среди результатов. Цикл можно начинать с 1: элемент 0 уже лежит в <code>max</code>.</p><pre class="code">let scores = [3, 7, 2, 9, 4];
+let max = scores[0];
+for (let i = 1; i &lt; scores.length; i++) {
+  if (scores[i] &gt; max) {
+    max = scores[i];
+  }
+}
+console.log(max);</pre></div></details>
+  </section>
+  <section class="task" id="t-H4" data-level="2">
+    <div class="task-head"><span class="task-num">H4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H4"> Решено</label></div>
+    <p>Допиши функцию <code>wrap(n)</code> для порталов: если <code>n</code> вышло за поле 0…19, верни его с другой стороны. Должно вывести 0, 19 и 7.</p>
+    <div class="runner" data-id="H4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="11">let cells = 20;
+
+function wrap(n) {
+  // твой код
+  return n;
+}
+
+console.log(wrap(20));
+console.log(wrap(-1));
+console.log(wrap(7));</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Те же два <code>if</code>, что в порталах урока 9, только упакованные в функцию. Теперь её можно вызывать и для x, и для y.</p><pre class="code">let cells = 20;
+
+function wrap(n) {
+  if (n &gt;= cells) {
+    n = 0;
+  }
+  if (n &lt; 0) {
+    n = cells - 1;
+  }
+  return n;
+}
+
+console.log(wrap(20));
+console.log(wrap(-1));
+console.log(wrap(7));</pre></div></details>
+  </section>
+  <section class="task" id="t-H5" data-level="3">
+    <div class="task-head"><span class="task-num">H5</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H5"> Решено</label></div>
+    <p>Сделай, чтобы стрелки двигали квадрат по холсту на 20 пикселей. Запусти, <b>щёлкни по картинке</b> и нажимай стрелки.</p>
+    <div class="runner" data-id="H5" data-canvas="1"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="21">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+let x = 180;
+let y = 180;
+
+function draw() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+  ctx.fillStyle = "lime";
+  ctx.fillRect(x, y, 40, 40);
+}
+
+function onKey(event) {
+  // …
+  draw();
+}
+
+document.addEventListener("keydown", onKey);
+draw();</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Каждая стрелка меняет <code>x</code> или <code>y</code>, а потом всё перерисовывается. ⭐ Сможешь не выпускать квадрат за край поля?</p><pre class="code">let canvas = document.getElementById("game");
+let ctx = canvas.getContext("2d");
+
+let x = 180;
+let y = 180;
+
+function draw() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 400, 400);
+  ctx.fillStyle = "lime";
+  ctx.fillRect(x, y, 40, 40);
+}
+
+function onKey(event) {
+  if (event.key === "ArrowUp") {
+    y = y - 20;
+  }
+  if (event.key === "ArrowDown") {
+    y = y + 20;
+  }
+  if (event.key === "ArrowLeft") {
+    x = x - 20;
+  }
+  if (event.key === "ArrowRight") {
+    x = x + 20;
+  }
+  draw();
+}
+
+document.addEventListener("keydown", onKey);
+draw();</pre></div></details>
+  </section>
+  <section class="task" id="t-H6" data-level="3">
+    <div class="task-head"><span class="task-num">H6</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="H6"> Решено</label></div>
+    <p>Запусти программу и прочитай ошибку. Почему она случилась, ведь клавиши ещё никто не нажимал?</p>
+    <div class="runner" data-id="H6" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">function onKey(event) {
+  console.log(event.key);
+}
+
+document.addEventListener("keydown", onKey());</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Из-за скобок <code>onKey()</code> вызывается сразу, без события, и <code>event</code> пустой (<i>undefined</i>). Слушателю нужно отдать саму функцию: <code>onKey</code> без скобок. Та же ошибка, что с <code>setInterval</code>.</p><pre class="code">function onKey(event) {
+  console.log(event.key);
+}
+
+document.addEventListener("keydown", onKey);</pre></div></details>
+  </section>
+
+  <h2 id="s-random">Случайные числа и return <small class="sec-lessons">Урок <a href="lesson-11.html">11</a></small></h2>
+  <section class="task" id="t-J1" data-level="1">
+    <div class="task-head"><span class="task-num">J1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="J1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="J1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="8">function double(n) {
+  return n * 2;
+}
+
+console.log(double(4));
+console.log(double(double(3)));
+console.log(double(1) + double(2));</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>8</code>, <code>12</code>, <code>6</code>. Во второй строке сначала считается внутренний вызов: <code>double(3)</code> = 6, потом <code>double(6)</code> = 12.</p></div></details>
+  </section>
+  <section class="task" id="t-J2" data-level="1">
+    <div class="task-head"><span class="task-num">J2</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="J2"> Решено</label></div>
+    <p>Должно вывести 25, а выводит <code>undefined</code>. Почему?</p>
+    <div class="runner" data-id="J2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">function square(n) {
+  n * n;
+}
+
+console.log(square(5));</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Функция посчитала <code>n * n</code>, но никому не отдала ответ. Без <code>return</code> функция возвращает <code>undefined</code> — «ничего».</p><pre class="code">function square(n) {
+  return n * n;
+}
+
+console.log(square(5));</pre></div></details>
+  </section>
+  <section class="task" id="t-J3" data-level="2">
+    <div class="task-head"><span class="task-num">J3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="J3"> Решено</label></div>
+    <p>Напиши функцию <code>dice()</code>, которая возвращает случайное число от 1 до 6, как настоящий кубик. Брось его 10 раз.</p>
+    <div class="runner" data-id="J3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="3">// Напиши код здесь
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div><code>Math.floor(Math.random() * 6)</code> даёт от 0 до 5. Как сдвинуть на единицу?</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Прибавляем 1 после округления: 0…5 превращается в 1…6.</p><pre class="code">function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+for (let i = 0; i &lt; 10; i++) {
+  console.log(dice());
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-J4" data-level="3">
+    <div class="task-head"><span class="task-num">J4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="J4"> Решено</label></div>
+    <p>Брось кубик 600 раз и посчитай, сколько раз выпала шестёрка. Сколько примерно должно получиться? Запусти несколько раз.</p>
+    <div class="runner" data-id="J4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Каждое число выпадает примерно в одном случае из шести, то есть около 100 раз из 600. Каждый запуск даёт чуть другое число: это и есть случайность.</p><pre class="code">function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+let sixes = 0;
+for (let i = 0; i &lt; 600; i++) {
+  if (dice() === 6) {
+    sixes = sixes + 1;
+  }
+}
+console.log(sixes);</pre></div></details>
+  </section>
+
+  <h2 id="s-game">Конец игры, while и таймер <small class="sec-lessons">Уроки <a href="lesson-12.html">12</a>, <a href="lesson-13.html">13</a>, <a href="lesson-14.html">14</a></small></h2>
+  <section class="task" id="t-K1" data-level="1">
+    <div class="task-head"><span class="task-num">K1</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="K1"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="K1" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="14">function check(n) {
+  if (n &lt; 0) {
+    return "минус";
+  }
+  if (n === 0) {
+    return "ноль";
+  }
+  return "плюс";
+}
+
+console.log(check(-3));
+console.log(check(0));
+console.log(check(8));</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>return</code> сразу завершает функцию. Поэтому для −3 до остальных проверок дело не доходит.</p></div></details>
+  </section>
+  <section class="task" id="t-K2" data-level="2">
+    <div class="task-head"><span class="task-num">K2</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K2"> Решено</label></div>
+    <p>Что выведет программа?</p>
+    <div class="runner" data-id="K2" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="6">let n = 1;
+while (n &lt; 100) {
+  n = n * 2;
+}
+console.log(n);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>128</code>. Число удваивается: 1, 2, 4, …, 64, 128. Когда стало 128, условие <code>n &lt; 100</code> ложно, и цикл остановился.</p></div></details>
+  </section>
+  <section class="task" id="t-K3" data-level="2">
+    <div class="task-head"><span class="task-num">K3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K3"> Решено</label></div>
+    <p>Напиши функцию <code>contains(list, value)</code>, которая отвечает <code>true</code>, если <code>value</code> есть в массиве, и <code>false</code>, если нет. Это та же идея, что <code>isOnSnake</code>.</p>
+    <div class="runner" data-id="K3" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="7">let numbers = [3, 8, 5];
+
+// function contains(list, value) { … }
+
+// console.log(contains(numbers, 8));
+// console.log(contains(numbers, 4));</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>return true</code> — внутри цикла, как только нашли. <code>return false</code> — <b>после</b> цикла, когда проверили всех.</p><pre class="code">let numbers = [3, 8, 5];
+
+function contains(list, value) {
+  for (let i = 0; i &lt; list.length; i++) {
+    if (list[i] === value) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(contains(numbers, 8));
+console.log(contains(numbers, 4));</pre></div></details>
+  </section>
+  <section class="task" id="t-K4" data-level="2">
+    <div class="task-head"><span class="task-num">K4</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K4"> Решено</label></div>
+    <p>Сделай обратный отсчёт: раз в секунду выводи 3, 2, 1, а потом «Старт!» — и останови таймер.</p>
+    <div class="runner" data-id="K4" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="8">let n = 3;
+let timer = setInterval(tick, 1000);
+
+function tick() {
+  console.log(n);
+  n = n - 1;
+}</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Проверь в <code>tick</code>: если <code>n</code> уже 0 — выведи «Старт!» и вызови <code>clearInterval(timer)</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Так же устроен <code>endGame</code>: <code>clearInterval</code> выключает таймер, а <code>return</code> не даёт выполниться остальному коду.</p><pre class="code">let n = 3;
+let timer = setInterval(tick, 1000);
+
+function tick() {
+  if (n === 0) {
+    console.log("Старт!");
+    clearInterval(timer);
+    return;
+  }
+  console.log(n);
+  n = n - 1;
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-K5" data-level="3">
+    <div class="task-head"><span class="task-num">K5</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K5"> Решено</label></div>
+    <p>Бросай кубик, пока не выпадет шестёрка. Выведи, сколько бросков понадобилось. Используй <code>while</code>.</p>
+    <div class="runner" data-id="K5" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Первый бросок делается прямо в условии <code>while</code>. Это та же идея, что <code>placeApple</code>: повторяем, <b>пока не получится</b>.</p><pre class="code">function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+let throws = 1;
+while (dice() !== 6) {
+  throws = throws + 1;
+}
+console.log(throws);</pre></div></details>
+  </section>
+  <section class="task" id="t-K6" data-level="3">
+    <div class="task-head"><span class="task-num">K6</span><span class="task-kind kind-predict">Что выведет?</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="K6"> Решено</label></div>
+    <p>Что выведет программа? (Это пригодится для рекорда.)</p>
+    <div class="runner" data-id="K6" data-canvas="0"><textarea spellcheck="false" autocapitalize="off" autocomplete="off" rows="5">console.log("5" + 5);
+console.log(Number("5") + 5);
+console.log(Number(null));
+console.log("5" &gt; 10);</textarea><div class="runner-bar"><button type="button" class="run">▶ Запустить</button><button type="button" class="reset">↺ Сбросить</button></div><div class="runner-view"><pre class="runner-out" data-placeholder="Здесь появится результат"></pre></div></div>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>55</code> — склеились тексты. <code>10</code> — <code>Number</code> превратил текст в число. <code>0</code> — так получается, когда рекорда ещё нет. <code>false</code> — при сравнении текст сам превращается в число 5, а 5 не больше 10.</p></div></details>
+  </section>
+
+  <h2 id="s-css">Оформление (CSS) <small class="sec-lessons">Урок <a href="lesson-15.html">15</a></small></h2>
+  <section class="task" id="t-L1" data-level="1">
+    <div class="task-head"><span class="task-num">L1</span><span class="task-kind kind-think">Подумай</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="L1"> Решено</label></div>
+    <p>Какой селектор выбирает что?<br>1) <code>p</code> 2) <code>#score</code> 3) <code>.help</code><br>а) только элемент с <code>id="score"</code> &nbsp; б) все абзацы &nbsp; в) все элементы с <code>class="help"</code></p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>1 — б, 2 — а, 3 — в. Решётка <code>#</code> — это id, точка <code>.</code> — класс, просто слово — тег.</p></div></details>
+  </section>
+  <section class="task" id="t-L2" data-level="2">
+    <div class="task-head"><span class="task-num">L2</span><span class="task-kind kind-fix">Найди ошибку</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="L2"> Решено</label></div>
+    <p>Этот CSS не работает. Найди три ошибки.</p>
+    <pre class="code">body {
+  background = black;
+  color: white
+  font-size: 20;
+}</pre>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>В CSS после свойства ставят двоеточие, а не <code>=</code>. В конце каждой строки — точка с запятой. У размеров нужны единицы: <code>20px</code>.</p><pre class="code">body {
+  background: black;
+  color: white;
+  font-size: 20px;
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-L3" data-level="3">
+    <div class="task-head"><span class="task-num">L3</span><span class="task-kind kind-write">Напиши код</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="L3"> Решено</label></div>
+    <p>Напиши CSS: все кнопки <code>button</code> — жёлтые, с круглыми углами, крупным текстом и чёрной рамкой 3 пикселя. Проверь в своём <code>snake.html</code>.</p>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Селектор по тегу <code>button</code> выбирает все кнопки сразу.</p><pre class="code">button {
+  background: yellow;
+  border: 3px solid black;
+  border-radius: 20px;
+  font-size: 24px;
+}</pre></div></details>
+  </section>
+
+  <h2 id="s-projects">Проекты для своей Змейки <small class="sec-lessons">Урок <a href="lesson-16.html">16</a></small></h2>
+  <section class="task" id="t-P1" data-level="1">
+    <div class="task-head"><span class="task-num">P1</span><span class="task-kind kind-project">Проект</span><span class="task-level" title="⭐">⭐</span><label class="task-done"><input type="checkbox" data-task="P1"> Решено</label></div>
+    <p>Пауза: клавиша <kbd>P</kbd> останавливает и продолжает игру.</p>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Переменная-флажок <code>paused</code>, знак «не» <code>!</code> и <code>return</code> в начале <code>step</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>paused = !paused</code> переключает флажок: было <code>false</code> — станет <code>true</code>, и наоборот. Не забудь в <code>startGame</code> ставить <code>paused = false</code>.</p><pre class="code">// наверху, к остальным переменным
+let paused = false;
+
+// в начале step()
+if (paused) {
+  return;
+}
+
+// в onKey()
+if (event.code === "KeyP" &amp;&amp; !gameOver) {
+  paused = !paused;
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-P2" data-level="2">
+    <div class="task-head"><span class="task-num">P2</span><span class="task-kind kind-project">Проект</span><span class="task-level" title="⭐⭐">⭐⭐</span><label class="task-done"><input type="checkbox" data-task="P2"> Решено</label></div>
+    <p>Змейка-радуга: каждый кусочек своего цвета, цвета повторяются по кругу.</p>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Массив цветов и остаток от деления: <code>colors[i % colors.length]</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p>Когда <code>i</code> дорастает до 7, <code>i % 7</code> снова даёт 0, и радуга начинается сначала.</p><pre class="code">let colors = ["red", "orange", "yellow", "lime", "cyan", "blue", "violet"];
+
+// в draw(), вместо зелёного цвета
+for (let i = 0; i &lt; snake.length; i++) {
+  drawCell(snake[i].x, snake[i].y, colors[i % colors.length]);
+}</pre></div></details>
+  </section>
+  <section class="task" id="t-P3" data-level="3">
+    <div class="task-head"><span class="task-num">P3</span><span class="task-kind kind-project">Проект</span><span class="task-level" title="⭐⭐⭐">⭐⭐⭐</span><label class="task-done"><input type="checkbox" data-task="P3"> Решено</label></div>
+    <p>Золотое яблоко: иногда (в 1 случае из 5) появляется золотое яблоко, и оно даёт 5 очков.</p>
+    <p class="norun">Эту задачу решай в своём файле в Geany — здесь её не запустить.</p>
+    <details class="hint"><summary>💡 Подсказка</summary><div>Добавь объекту <code>apple</code> свойство <code>gold</code>. Задавай его в <code>placeApple</code>, используй в <code>draw</code> и в <code>step</code>.</div></details>
+    <details class="answer"><summary>✅ Показать ответ</summary><div><p><code>Math.random() &lt; 0.2</code> — правда примерно в 20% случаев, то есть в 1 из 5. Сравнение само даёт <code>true</code> или <code>false</code>, поэтому его можно сразу положить в свойство.</p><pre class="code">// в конце placeApple()
+apple.gold = Math.random() &lt; 0.2;
+
+// в draw(), вместо drawApple()
+if (apple.gold) {
+  drawCell(apple.x, apple.y, "gold");
+} else {
+  drawApple();
+}
+
+// в step(), когда змейка съела яблоко
+if (apple.gold) {
+  score = score + 5;
+} else {
+  score = score + 1;
+}</pre></div></details>
+  </section>
+
+  <nav class="pager">
+    <a class="prev" href="lesson-16.html"><small>← Урок 16</small>Игра в интернете</a>
+    <a class="next" href="cheatsheet.html"><small>Всегда под рукой →</small>Шпаргалка</a>
+  </nav>
+</main>
+<script src="../assets/code.js"></script>
+<script src="../assets/practice.js"></script>
+</body>
+</html>
